@@ -1,0 +1,141 @@
+@font-face {
+  font-family: "iAWriter Quattro";
+  src: url("/typeface/iAWriterQuattroS-Regular.woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "iAWriter Quattro";
+  src: url("/typeface/iAWriterQuattroS-Italic.woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "iAWriter Quattro";
+  src: url("/typeface/iAWriterQuattroS-Bold.woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "iAWriter Quattro";
+  src: url("/typeface/iAWriterQuattroS-BoldItalic.woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+html,
+.root {
+  font-size: 21px;
+  line-height: 32px;
+}
+
+body,
+.article {
+  font-family: "iAWriter Quattro", monospace;
+  font-size: 1rem;
+  line-height: 1.5238095rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.3809524rem;
+  line-height: 3.047619rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 3.047619rem;
+}
+
+h2,
+.h2 {
+  font-size: 1.7619048rem;
+  line-height: 3.047619rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 1.5238095rem;
+}
+h3,
+.h3 {
+  font-size: 1.3333333rem;
+  line-height: 1.5238095rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 0rem;
+}
+h4,
+.h4 {
+  font-size: 1rem;
+  line-height: 1.5238095rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 0rem;
+}
+h5,
+.h5 {
+  font-size: 1rem;
+  line-height: 1.5238095rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 0rem;
+}
+h6,
+.h6 {
+  font-size: 1rem;
+  line-height: 1.5238095rem;
+  margin-top: 1.5238095rem;
+  margin-bottom: 0rem;
+}
+
+p,
+ul,
+ol,
+pre,
+table,
+blockquote {
+  margin-top: 0rem;
+  margin-bottom: 1.5238095rem;
+}
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+/* Let's make sure all's aligned */
+hr,
+.hr {
+  border: 1px solid;
+  margin: -1px 0;
+}
+
+a,
+b,
+i,
+strong,
+em,
+small,
+code {
+  margin-bottom: 1.5238095rem;
+}
+
+sub,
+sup {
+  margin-bottom: 1.5238095rem;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+small {
+  font-size: 0.71428571428rem;
+  line-height: 1.14285714286rem;
+}
