@@ -118,6 +118,8 @@ small {
   line-height: 1.14285714286rem;
 }
 
+/* Video Stuff */
+
 .video-background-holder {
   position: relative;
   background-color: black;
@@ -156,3 +158,13 @@ small {
   opacity: 0.5;
   z-index: 1;
 }
+/* End */
+
+/* Video Stuff 2 */
+#v0 {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+/* End */
