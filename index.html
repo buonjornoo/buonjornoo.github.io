@@ -11,18 +11,14 @@
     />
     <!-- main.css has all the bootstrap code -->
     <link rel="stylesheet" href="main.css" />
-    <!-- Roboto Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <!-- Space Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <!-- Public Sans -->
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    /> -->
+
     <!-- Typography CSS -->
     <link rel="stylesheet" href="typography.css" />
   </head>
@@ -30,74 +26,92 @@
   <body>
     <header>
       <!--bootstrap navbar  -->
-      <nav class="navbar navbar-expand-sm navbar-light bg-white">
-        <div class="container-fluid">
-          <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarSupportedContent"
-          >
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a href="index.html" class="nav-link"
-                  >Home<span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="case-studies.html" class="nav-link">Case Studies</a>
-              </li>
-              <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-              </li>
-            </ul>
-          </div>
+      <nav
+        class="navbar navbar-light navbar-expand-sm border-bottom border-dark py-0"
+      >
+        <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a href="index.html" class="nav-link"
+                >Home<span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="case-studies.html" class="nav-link">Case Studies</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
         </div>
       </nav>
+      <!-- End -->
     </header>
 
     <main>
       <!-- HERO -->
-
-      <div
-        class="container bg-orange border border-dark mb-5"
-        style="min-height: 50vh"
-      >
-        <div class="row p-5">
-          <div class="col-12">
-            <h1>Experience Design, Product, UX, Reseach</h1>
-          </div>
-          <div class="col-md-8 pr-5">
-            <p>
-              Hi. I’m Jorne. <br />Experience Designer and aspiring legendary
-              pnp druid 🧙‍♂️+🐗. <br />I am a lifelong learner, especially
-              interested in the intersection between psychology and tech.
-              <br />My life in emojis:👨‍🍼👨‍💻🏋️‍♀️🍱🧆🎧🥾⛰️🇵🇭🇩🇪
-            </p>
-          </div>
-          <div class="col-md-4 bg-white border border-dark p-4">
-          <h6>Highlighted Case Study</h6>
-            <p>Rental Condition Reporting</p>
-              <a href="case-rental-condition-reporting.html">View Case Study</a>
-              
+      <!-- Background video -->
+      <div class="video-background-holder">
+        <!-- <div class="video-background-overlay"></div> -->
+        <video
+          playsinline="playsinline"
+          autoplay="autoplay"
+          muted="muted"
+          loop="loop"
+        >
+          <source src="images/MOSHED-Jorne2.webm" type="video/webm" />
+        </video>
+        <div class="video-background-content container h-100">
+          <div
+            class="container border border-dark my-5"
+            style="min-height: 50vh"
+          >
+            <div class="row p-5">
+              <div class="col-12">
+                <h1>Experience Designer – Product, UX, Reseach</h1>
+              </div>
+              <div class="col-md-8 pr-5">
+                <p>
+                  I’m Jorne. <br />Experience Designer and aspiring legendary
+                  duid in my pen and paper group. <br />I am a lifelong learner,
+                  especially interested in the intersection between psychology
+                  and tech.
+                </p>
+              </div>
+              <div class="col-md-4 bg-white border border-dark">
+                <h6>Highlighted Case Study</h6>
+                <p>Rental Condition Reporting</p>
+                <a href="case-rental-condition-reporting.html"
+                  >View Case Study</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- End -->
+      <!-- End -->
 
-      <div class="container-fluid bg-purple py-5">
-        <div class="container border border-dark">
-          <div class="row p-5">
+      <!-- Sectaion 1 -->
+      <div class="container-fluid py-5">
+        <div class="container border border-dark p-5">
+          <div class="row">
             <div class="col">
               <h2>Activities</h2>
               <h3>User Research</h3>
@@ -134,10 +148,12 @@
           </div>
         </div>
       </div>
+      <!-- End -->
 
-      <div class="container-fluid bg-white py-5">
-        <div class="container border border-dark">
-          <div class="row p-5">
+      <!-- Section 2 -->
+      <div class="container-fluid py-5">
+        <div class="container border border-dark p-5">
+          <div class="row">
             <div class="col">
               <h2>Approach</h2>
               <h3>Understand</h3>
@@ -178,10 +194,12 @@
           </div>
         </div>
       </div>
+      <!-- End -->
 
-      <div class="container-fluid bg-orange py-5">
-        <div class="container border border-dark">
-          <div class="row p-5">
+      <!-- Section 3 -->
+      <div class="container-fluid py-5">
+        <div class="container border border-dark p-5">
+          <div class="row">
             <div class="col">
               <h2>Principles</h2>
               <h3>Outcomes over output</h3>
@@ -215,11 +233,12 @@
           </div>
         </div>
       </div>
+      <!-- End -->
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid bg-indigo text-white">
-      <div class="container py-5">
+    <footer class="container-fluid border-top border-dark">
+      <div class="container pt-5">
         <div class="row">
           <div class="col-md-4">
             <h6>Jorne Siebrands</h6>
@@ -259,6 +278,7 @@
         </div>
       </div>
     </footer>
+    <!-- End -->
 
     <!-- BOOTSTRAP JS -->
     <script
@@ -276,5 +296,6 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
+    <!-- End -->
   </body>
 </html>

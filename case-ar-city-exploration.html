@@ -11,76 +11,92 @@
     />
     <!-- main.css has all the bootstrap code -->
     <link rel="stylesheet" href="main.css" />
-    <!-- Roboto Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <!-- Space Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+
     <!-- Typography CSS -->
     <link rel="stylesheet" href="typography.css" />
   </head>
   <body>
     <header>
       <!--bootstrap navbar  -->
-      <nav class="navbar navbar-expand-sm navbar-light bg-white">
-        <div class="container-fluid">
-          <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarSupportedContent"
-          >
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link">Home </a>
-              </li>
-              <li class="nav-item active">
-                <a href="case-studies.html" class="nav-link">Case Studies</a>
-              </li>
-              <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-              </li>
-            </ul>
-          </div>
+      <nav
+        class="navbar navbar-light navbar-expand-sm bg-white border-bottom border-dark py-0"
+      >
+        <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">Home </a>
+            </li>
+            <li class="nav-item active">
+              <a href="case-studies.html" class="nav-link">Case Studies</a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
         </div>
       </nav>
+      <!-- End -->
     </header>
 
     <main>
       <!-- HERO -->
       <div
-        class="container bg-orange border border-dark mb-5"
-        style="min-height: 50vh"
+        class="container-fluid vh-100 pt-5"
+        style="
+          background-image: url('images/case-ar-city-exploration/raubkunst_cover.gif');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        "
       >
-        <div class="row p-5">
-          <div class="col">
-            <h1>AR City Exploration</h1>
-            <p>An Augmented Reality application called <em>Raubkunst</em>.</p>
-            <p>
-              For tech savvy tourists who want to get to know a city in a new
-              way.
-            </p>
-            <p>
-              Interaction Design, storytelling, Unity3d prototyping, sound
-              design, master thesis.
-            </p>
+        <div
+          class="container border border-white text-white"
+          style="min-height: 50vh"
+        >
+          <div class="row p-5">
+            <div class="col">
+              <h1>AR City Exploration</h1>
+              <p>An Augmented Reality application called <em>Raubkunst</em>.</p>
+              <p>
+                For tech savvy tourists who want to get to know a city in a new
+                way.
+              </p>
+              <p>
+                Interaction Design, storytelling, Unity3d prototyping, sound
+                design, master thesis.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- End -->
+
       <!-- SUMMARY -->
-      <div class="container-fluid bg-purple py-5">
+      <div class="container-fluid py-5">
         <div class="container py-5">
           <div class="row">
             <div class="col-md-6">
@@ -92,7 +108,7 @@
                 >
               </p>
             </div>
-            <div class="col-md-6 mt-4 pl-4 border border-dark bg-orange">
+            <div class="col-md-6 mt-4 pl-4 border border-dark bg-yellow">
               <h6>Disclaimer</h6>
               <p>
                 <small>
@@ -140,9 +156,10 @@
           </div>
         </div>
       </div>
+      <!-- End -->
 
       <!--02  DISCOVERY -->
-      <div class="container-fluid bg-white py-5">
+      <div class="container-fluid py-5">
         <div class="container py-5">
           <div class="row">
             <div class="col">
@@ -164,7 +181,6 @@
                   project.
                 </p>
               </div>
-              
             </div>
             <div class="col-md-6">
               <div class="border border-dark p-4 h-100">
@@ -177,37 +193,28 @@
                 </p>
               </div>
             </div>
-            
-              
-                <div class="col-md-6">
-                  <div class="border border-dark p-4 h-100"> 
-                    <h3>Idea Portfolio and Feasibility Maps</h3>
-                    <p>
-                      We conducted mini workshops whenever we needed to solve
-                      design problems. We kept our idea portfolios on the Research
-                      Wall and later on digital, as you can see on the right. We
-                      also created personas, stakeholder maps, interaction tables
-                      and many more design artifacts.
-                    </p>
-                    
-                      
-                  
-                  </div>
-                
+
+            <div class="col-md-6">
+              <div class="border border-dark p-4 h-100">
+                <h3>Idea Portfolio and Feasibility Maps</h3>
+                <p>
+                  We conducted mini workshops whenever we needed to solve design
+                  problems. We kept our idea portfolios on the Research Wall and
+                  later on digital, as you can see on the right. We also created
+                  personas, stakeholder maps, interaction tables and many more
+                  design artifacts.
+                </p>
               </div>
-
-                <div class="col-12 my-5">
-                  <img
-                        src="images/case-ar-city-exploration/raubkunst_feasibilityMatrix.jpg"
-                        class="img-fluid w-100"
-                        alt="Feasibility Map"
-                      />
-                  
-                </div>
-
-                
             </div>
-          
+
+            <div class="col-12 my-5">
+              <img
+                src="images/case-ar-city-exploration/raubkunst_feasibilityMatrix.jpg"
+                class="img-fluid w-100"
+                alt="Feasibility Map"
+              />
+            </div>
+          </div>
 
           <div class="row pb-5">
             <div class="col-12 mb-5">
@@ -215,14 +222,14 @@
                 <h3>Early and Regular Testings</h3>
                 <p>
                   We tried to use every opportunity to test our ideas before
-                  committing to them. We built paper prototypes to test our haptic
-                  experiences. We did a lot of white-boxing in Unity3D to test
-                  soundscapes and invited our university colleagues to give us
-                  feedback whenever possible. We also invited actors to act out
-                  our screenplays live on a stage to get a feeling of the mood in
-                  our story pieces.
-                </p></div>
-              
+                  committing to them. We built paper prototypes to test our
+                  haptic experiences. We did a lot of white-boxing in Unity3D to
+                  test soundscapes and invited our university colleagues to give
+                  us feedback whenever possible. We also invited actors to act
+                  out our screenplays live on a stage to get a feeling of the
+                  mood in our story pieces.
+                </p>
+              </div>
             </div>
             <div class="col-md-6 h-100">
               <img
@@ -247,19 +254,20 @@
               <div class="border border-dark p-4 h-100">
                 <h3>End to End Experience Design</h3>
                 <p>
-                  Experience design is about the whole process and all senses. We
-                  tried to make every design decision for Raubkunst as intentional
-                  as possible. We picked a starting place for our experience that
-                  has a lot of cafes around so tourists could not only buy
-                  themselves a beverage when needed but also enjoy the small of
-                  fresh coffee beans when they start our experience. Our app used
-                  vibration for haptic feedback and we kept our sound design at a
-                  level that blended into the environment. We kept the on screen
-                  interactions on a minimal level so tourists can enjoy looking
-                  around in the real world and our app would also remind our users
-                  to take a break and enjoy some snack on a local store nearby.
-                </p></div>
-              
+                  Experience design is about the whole process and all senses.
+                  We tried to make every design decision for Raubkunst as
+                  intentional as possible. We picked a starting place for our
+                  experience that has a lot of cafes around so tourists could
+                  not only buy themselves a beverage when needed but also enjoy
+                  the small of fresh coffee beans when they start our
+                  experience. Our app used vibration for haptic feedback and we
+                  kept our sound design at a level that blended into the
+                  environment. We kept the on screen interactions on a minimal
+                  level so tourists can enjoy looking around in the real world
+                  and our app would also remind our users to take a break and
+                  enjoy some snack on a local store nearby.
+                </p>
+              </div>
             </div>
             <div class="col-12 pb-5">
               <img
@@ -269,7 +277,7 @@
               />
             </div>
             <div class="col-12">
-              <div class="border border-dark p-4 h-100"> 
+              <div class="border border-dark p-4 h-100">
                 <h3>Holistic Design</h3>
                 <p>
                   Raubkunst aims to serve tech savvy tourists but there are tons
@@ -278,27 +286,25 @@
                   overly crowded places depending of the time during the day and
                   tracking check-ins on other services like Google and Facebook.
                   We also wanted to support local businesses by reminding our
-                  users to take a break when they are close to a local store. Even
-                  our haptic objects were planned to be shared with other
+                  users to take a break when they are close to a local store.
+                  Even our haptic objects were planned to be shared with other
                   potential users as an invitation to "join the game".
-                </p></div>
-             
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
+      <!-- End -->
 
       <!-- SOLUTION -->
-      
-        <img
-                src="images/case-ar-city-exploration/raubkunst_cover.gif"
-                class="img-fluid w-100"
-                alt="Raubkunst animated cover."
-              />
-      
+      <!-- <img
+        src="images/case-ar-city-exploration/raubkunst_cover.gif"
+        class="img-fluid w-100"
+        alt="Raubkunst animated cover."
+      /> -->
 
-      <div class="container-fluid bg-orange pb-5">
+      <div class="container-fluid pb-5">
         <div class="container">
           <div class="row">
             <div class="col">
@@ -309,101 +315,88 @@
             </div>
           </div>
 
-
           <div class="row mb-5">
-          <div class="col-12">
-            <div class="border border-dark p-4 h-100">
-              <h3>Experience Framework</h3>
-              <p>
-                We created a conceptual framework called <em>Memorama</em> to
-                help producing experiences that are location based and bring
-                together fiction, historical and cultural knowledge about the
-                location and utilise contempo- rary technology to communicate
-                information. This Memorama framework serves as a guideline for a
-                coherent experience. Our Memorama framework consists of three
-                abstract spaces: Navigation Spaces, Discovery Spaces and the
-                Home Space. This separation is necessary to be understandable
-                and consistent. We utilize playful orientation in Navigation
-                Spaces, tell the engaging story in Discovery Spaces and wind
-                down in the Home Space.
-              </p>
-            
-            
-          </div>
-          </div>
-              
+            <div class="col-12">
+              <div class="border border-dark p-4 h-100">
+                <h3>Experience Framework</h3>
+                <p>
+                  We created a conceptual framework called <em>Memorama</em> to
+                  help producing experiences that are location based and bring
+                  together fiction, historical and cultural knowledge about the
+                  location and utilise contempo- rary technology to communicate
+                  information. This Memorama framework serves as a guideline for
+                  a coherent experience. Our Memorama framework consists of
+                  three abstract spaces: Navigation Spaces, Discovery Spaces and
+                  the Home Space. This separation is necessary to be
+                  understandable and consistent. We utilize playful orientation
+                  in Navigation Spaces, tell the engaging story in Discovery
+                  Spaces and wind down in the Home Space.
+                </p>
+              </div>
+            </div>
           </div>
 
-            <div>
-              
-                <img
-                src="images/case-ar-city-exploration/raubkunst_memorama.png"
-                class="img-fluid w-100"
-                alt="Memorama framework visualisation"
-              />
-              
-              
-            </div>
-          
+          <div>
+            <img
+              src="images/case-ar-city-exploration/raubkunst_memorama.png"
+              class="img-fluid w-100"
+              alt="Memorama framework visualisation"
+            />
+          </div>
 
           <div class="row py-5">
-              <div class="col-12">
-                <div class="border border-dark p-4 h-100">
-                  <h3>Our 5E’s of Experience Design</h3>
-                  <p>
-                    We used the 5-E framework to include all senses into our
-                    experience. It also helped us to make the end to end experience
-                    more elegant.
+            <div class="col-12">
+              <div class="border border-dark p-4 h-100">
+                <h3>Our 5E’s of Experience Design</h3>
+                <p>
+                  We used the 5-E framework to include all senses into our
+                  experience. It also helped us to make the end to end
+                  experience more elegant.
+                </p>
+                <blockquote class="blockquote pt-5">
+                  <p class="mb-0">
+                    The <em>5E Experience Design Model</em> helps to communicate
+                    an experience design concept. It is a framework for creating
+                    holistic, meaningful expe- riences and is an inclusive model
+                    which can add excitement, coherence and elegance to a
+                    service or an experience.
                   </p>
-                  <blockquote class="blockquote pt-5">
-                    <p class="mb-0">
-                      The <em>5E Experience Design Model</em> helps to communicate
-                      an experience design concept. It is a framework for creating
-                      holistic, meaningful expe- riences and is an inclusive model
-                      which can add excitement, coherence and elegance to a service
-                      or an experience.
-                    </p>
-                    <footer class="blockquote-footer">
-                      Andy Sontag in
-                      <cite title="Source Title"
-                        ><a
-                          href="https://medium.theuxblog.com/the-5e-experience-design-model-7852324d46c"
-                          >The 5E Experience Design Model</a
-                        ></cite
-                      >
-                    </footer>
-                  </blockquote>
-                </div>
-                
+                  <footer class="blockquote-footer">
+                    Andy Sontag in
+                    <cite title="Source Title"
+                      ><a
+                        href="https://medium.theuxblog.com/the-5e-experience-design-model-7852324d46c"
+                        >The 5E Experience Design Model</a
+                      ></cite
+                    >
+                  </footer>
+                </blockquote>
               </div>
             </div>
-              <div class="mb-5">
-                <img
-                  src="images/case-ar-city-exploration/raubkunst_experience_framework.png"
-                  class="img-fluid w-100"
-                  alt="Memorama framework visualisation"
-                  style="object-fit: cover"
-                />
-              </div>
-              
-            
-           
-          
+          </div>
+          <div class="mb-5">
+            <img
+              src="images/case-ar-city-exploration/raubkunst_experience_framework.png"
+              class="img-fluid w-100"
+              alt="Memorama framework visualisation"
+              style="object-fit: cover"
+            />
+          </div>
 
           <div class="row">
             <div class="coxl-12 mb-5">
-            <div class="border border-dark p-4 h-100">
+              <div class="border border-dark p-4 h-100">
                 <h3>Application Design</h3>
                 <p>
                   We originally wanted <em>Raubkunst</em> to take place on
                   wearable devices to fully immerse the user. But we decided to
                   build our proof of concept on devices that are available to us
                   <b>now</b>. Following examples from <em>Pokemon Go</em> and
-                  others, we used handheld devices. We limited ourselves to visual
-                  and sonic communication and aimed to reduce the time on screen
-                  to a minimum so users can fully experience the city.
+                  others, we used handheld devices. We limited ourselves to
+                  visual and sonic communication and aimed to reduce the time on
+                  screen to a minimum so users can fully experience the city.
                 </p>
-              </div>              
+              </div>
             </div>
 
             <div class="col-md-6 pb-5">
@@ -423,7 +416,6 @@
                 style="object-fit: cover; height: 360px"
               />
             </div>
-            
           </div>
 
           <div class="row">
@@ -438,24 +430,23 @@
                   positioning.
                 </p>
               </div>
-              
             </div>
           </div>
-            <div class="text-center">
-              <iframe
-                src="https://player.vimeo.com/video/345842582"
-                frameborder="0"
-                height="564"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-              ></iframe>
-            </div>
-          
+          <div class="text-center">
+            <iframe
+              src="https://player.vimeo.com/video/345842582"
+              frameborder="0"
+              height="564"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
+      <!-- End -->
 
       <!-- Outcomes -->
-      <div class="container-fluid bg-pink">
+      <div class="container-fluid">
         <div class="container py-5">
           <div class="row">
             <div class="col-12">
@@ -469,25 +460,23 @@
               <div class="border border-dark p-4 h-100">
                 <h3>Learnings</h3>
                 <p>
-                  This project helped me to dive deeper into coding in Unity3d and
-                  Interaction Design. Using Design Thinking methods in real
-                  situations was eye opening. Finally it also showed me the impact
-                  a good team chemistry can have on a project.
+                  This project helped me to dive deeper into coding in Unity3d
+                  and Interaction Design. Using Design Thinking methods in real
+                  situations was eye opening. Finally it also showed me the
+                  impact a good team chemistry can have on a project.
                 </p>
               </div>
-              
             </div>
             <div class="col-sm-6">
               <div class="border border-dark p-4 h-100">
                 <h3>Public presentations</h3>
-              <p>
-                We were proud to get the opportunity to present Raubkunst at the
-                book fair 2018. We got a lot of encouraging feedback from
-                visitors who used our prototype. I remember an older woman
-                telling me that <em>…this is the future</em>.
-              </p>
+                <p>
+                  We were proud to get the opportunity to present Raubkunst at
+                  the book fair 2018. We got a lot of encouraging feedback from
+                  visitors who used our prototype. I remember an older woman
+                  telling me that <em>…this is the future</em>.
+                </p>
               </div>
-              
             </div>
           </div>
           <div class="row">
@@ -497,20 +486,17 @@
                 <p>
                   Beyond lasting friendships and an exciting project, Raubkunst
                   also gave all of us great job opportunities to start our
-                  careers. While I started at Cheil, a global creative agency, my
-                  team went on to start at interesting tech start ups and famous
-                  consultancies.
+                  careers. While I started at Cheil, a global creative agency,
+                  my team went on to start at interesting tech start ups and
+                  famous consultancies.
                 </p>
               </div>
-              
             </div>
           </div>
-            
-            
-          
-         
         </div>
       </div>
+      <!-- End -->
+      <!-- Media -->
       <div class="embed-responsive embed-responsive-16by9">
         <iframe
           class="embed-responsive-item"
@@ -519,9 +505,10 @@
           allowfullscreen
         ></iframe>
       </div>
+      <!-- End -->
 
       <!-- ENDING SECTION -->
-      <div class="container-fluid bg-white">
+      <div class="container-fluid">
         <div class="container py-5">
           <div class="row">
             <div class="col">
@@ -536,7 +523,7 @@
           </div>
           <div class="row d-flex justify-content-between">
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-white">
+              <div class="card h-100 border-dark">
                 <div class="card-body d-flex flex-column">
                   <h4>This Case Study</h4>
                   <p><big>AR City Exploration</big></p>
@@ -545,7 +532,7 @@
                     technology in tourism.
                   </p>
                   <a
-                    href="/case-ar-city-exploration.html"
+                    href="case-ar-city-exploration.html"
                     class="btn btn-outline-primary mt-auto"
                     role="button"
                     >Back To Top</a
@@ -555,7 +542,7 @@
             </div>
 
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-white">
+              <div class="card h-100 border-dark">
                 <div class="card-body d-flex flex-column">
                   <h4>Previous Case Study</h4>
                   <p><big>Rental Condition Reporting</big></p>
@@ -564,7 +551,7 @@
                     in the whole EMEA region.
                   </p>
                   <a
-                    href="/case-rental-condition-reporting.html"
+                    href="case-rental-condition-reporting.html"
                     class="btn btn-outline-primary mt-auto"
                     role="button"
                     >Read Case Study</a
@@ -575,11 +562,12 @@
           </div>
         </div>
       </div>
+      <!-- End -->
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid bg-indigo text-white">
-      <div class="container py-5">
+    <footer class="container-fluid border-top border-dark">
+      <div class="container pt-5">
         <div class="row">
           <div class="col-md-4">
             <h6>Jorne Siebrands</h6>
@@ -619,6 +607,7 @@
         </div>
       </div>
     </footer>
+    <!-- End -->
 
     <!-- BOOTSTRAP JS -->
     <script
@@ -636,5 +625,6 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
+    <!-- End -->
   </body>
 </html>
