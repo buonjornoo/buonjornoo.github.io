@@ -1,26 +1,61 @@
+// own colow variables -> auto mapped
+$color-primary: #8e79d9;
+$color-blue: #007bff;
+$color-red: #dc3545;
+$color-green: #038c65;
+$color-teal: #20c997;
+$color-cyan: #17a2b8;
+$color-yellow: #f2d8a7;
+$color-orange: #fee1c7;
+$color-indigo: #6f518c;
+$color-purple: #8e79d9;
+$color-pink: #e7dcf2;
+$color-gray: #6c757d;
+$color-gray-dark: #343a40;
+$color-black: #222222;
+$color-white: #fdfefd;
+$color-light: #ebf0f4;
+
+// "white": $color-white,
+//   "blue": $color-blue,
+//   "indigo": $color-indigo,
+//   "purple": $color-purple,
+//   "pink": $color-pink,
+//   "red": $color-red,
+//   "orange": $color-orange,
+//   "yellow": $color-yellow,
+//   "green": $color-green,
+//   "teal": $color-teal,
+//   "cyan": $color-cyan,
+//   "gray": $color-gray,
+//   "gray-dark": $color-gray-dark,
+
 $theme-colors: (
-  "primary": #8e79d9,
-  "secondary": #607c80,
-  "success": #038c65,
-  "danger": #bf0436,
-  "warning": #f29863,
-  "info": #143c8c,
-  "light": #ebf0f4,
-  "dark": #222222,
-  "white": #fdfefd,
-  "blue": #007bff,
-  "indigo": #6f518c,
-  "purple": #8f77a6,
-  "pink": #e7dcf2,
-  "red": #dc3545,
-  "orange": #fee1c7,
-  "yellow": #f2d8a7,
-  "green": #28a745,
-  "teal": #20c997,
-  "cyan": #17a2b8,
-  "gray": #6c757d,
-  "gray-dark": #343a40,
+  "primary": $color-purple,
+  "secondary": $color-yellow,
+  "success": $color-green,
+  "danger": $color-red,
+  "warning": $color-orange,
+  "info": $color-blue,
+  "light": $color-light,
+  "dark": $color-black,
 );
+
+// $colors: (
+//   "blue":       $blue,
+//   "indigo":     $indigo,
+//   "purple":     $purple,
+//   "pink":       $pink,
+//   "red":        $red,
+//   "orange":     $orange,
+//   "yellow":     $yellow,
+//   "green":      $green,
+//   "teal":       $teal,
+//   "cyan":       $cyan,
+//   "white":      $white,
+//   "gray":       $gray-600,
+//   "gray-dark":  $gray-800
+// )
 
 $border-width: 2px;
 $border-widths: (

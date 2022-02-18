@@ -1,7 +1,6 @@
 {
   "name": "userjorne",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +8,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.6.0"
-  }
+    "bootstrap": "^4.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/userjorne/userjorne.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/userjorne/userjorne.github.io/issues"
+  },
+  "homepage": "https://github.com/userjorne/userjorne.github.io#readme",
+  "description": ""
 }
