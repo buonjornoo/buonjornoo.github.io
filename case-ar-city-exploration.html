@@ -12,14 +12,14 @@
     <!-- main.css has all the bootstrap code -->
     <link rel="stylesheet" href="main.css" />
 
-    <!-- Space Font -->
+    <!-- Space and Spectral -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Spectral:ital,wght@0,800;1,800&display=swap"
       rel="stylesheet"
     />
-
+    <!-- End -->
     <!-- Typography CSS -->
     <link rel="stylesheet" href="typography.css" />
     <!-- End -->
@@ -67,22 +67,11 @@
 
     <main>
       <!-- HERO -->
-      <div
-        class="container-fluid py-5"
-        style="
-          background-image: url('images/case-ar-city-exploration/raubkunst_cover.gif');
-          background-repeat: no-repeat;
-          background-attachment: local;
-          background-size: cover;
-        "
-      >
-        <div
-          class="container border border-white text-white"
-          style="min-height: 50vh"
-        >
-          <div class="row p-xl-5 p-lg-5 p-md-2 p-sm-2 p-xs-2">
-            <div class="col">
-              <h1>AR City Exploration</h1>
+      <div class="container-fluid p-0">
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <h1 class="display-3 text-center">AR City Exploration</h1>
               <p>An Augmented Reality application called <em>Raubkunst</em>.</p>
               <p>
                 For tech savvy tourists who want to get to know a city in a new
@@ -96,15 +85,27 @@
           </div>
         </div>
       </div>
+      <!-- End -->
 
+      <!-- GIF -->
+      <div class="container-fluid p-0">
+        <img
+          src="images/case-ar-city-exploration/raubkunst_cover.gif"
+          class="img-fluid w-100"
+          alt="Raubkunst animated cover."
+        />
+      </div>
       <!-- End -->
 
       <!-- SUMMARY -->
       <div class="container-fluid py-5">
-        <div class="container py-5">
+        <div class="container">
           <div class="row">
-            <div class="col-md-6">
-              <h2><span class="text-primary">01</span> Summary</h2>
+            <div class="col">
+              <h2 class="display-3 text-center">
+                <span class="text-primary">01</span> <br />
+                Summary
+              </h2>
               <p>
                 <b
                   >Finding a new approach for location based storytelling in
@@ -112,8 +113,10 @@
                 >
               </p>
             </div>
-            <div class="col-md-6 mt-4 pl-4 border border-dark bg-yellow">
-              <h6>Disclaimer</h6>
+          </div>
+          <div class="row">
+            <div class="col bg-secondary text-white m-auto">
+              <h5>Disclaimer</h5>
               <p>
                 <small>
                   This is a collaborative project. I closely partnered with my
@@ -125,7 +128,7 @@
             </div>
           </div>
 
-          <div class="row border border-dark mt-5 p-4">
+          <div class="row small">
             <div class="col-md-4">
               <h3>Activities</h3>
               <ul>
@@ -167,7 +170,10 @@
         <div class="container py-5">
           <div class="row">
             <div class="col">
-              <h2><span class="text-primary">02</span> Discovery</h2>
+              <h2 class="display-3 text-center">
+                <span class="text-primary">02</span> <br />
+                Discovery
+              </h2>
               <p><b>It started with understanding the problem.</b></p>
             </div>
           </div>
@@ -302,17 +308,15 @@
       <!-- End -->
 
       <!-- SOLUTION -->
-      <!-- <img
-        src="images/case-ar-city-exploration/raubkunst_cover.gif"
-        class="img-fluid w-100"
-        alt="Raubkunst animated cover."
-      /> -->
 
-      <div class="container-fluid pb-5">
-        <div class="container">
+      <div class="container-fluid py-5">
+        <div class="container py-5">
           <div class="row">
             <div class="col">
-              <h2><span class="text-primary">03</span> Solution</h2>
+              <h2 class="display-3 text-center">
+                <span class="text-primary">03</span> <br />
+                Design
+              </h2>
               <p>
                 <b>Our creations.</b>
               </p>
@@ -450,11 +454,14 @@
       <!-- End -->
 
       <!-- Outcomes -->
-      <div class="container-fluid">
+      <div class="container-fluid py-5">
         <div class="container py-5">
           <div class="row">
             <div class="col-12">
-              <h2>04 Outcomes</h2>
+              <h2 class="display-3 text-center">
+                <span class="text-primary"> 04</span> <br />
+                Outcomes
+              </h2>
               <p><b>Beyond deliverables.</b></p>
             </div>
           </div>
@@ -516,7 +523,10 @@
         <div class="container py-5">
           <div class="row">
             <div class="col">
-              <h2><span class="text-primary">05</span> More Case Studies</h2>
+              <h2 class="display-3 text-center">
+                <span class="text-primary">05</span> <br />
+                More Case Studies
+              </h2>
               <p>
                 <b
                   >Keep on reading about my projects. How I approach them and
@@ -527,7 +537,7 @@
           </div>
           <div class="row d-flex justify-content-between">
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-dark">
+              <div class="card h-100 border-dark rounded-0">
                 <div class="card-body d-flex flex-column">
                   <h4>This Case Study</h4>
                   <p><big>AR City Exploration</big></p>
@@ -537,7 +547,7 @@
                   </p>
                   <a
                     href="case-ar-city-exploration.html"
-                    class="btn btn-outline-primary mt-auto"
+                    class="btn btn-outline-primary mt-auto rounded-0"
                     role="button"
                     >Back To Top</a
                   >
@@ -546,7 +556,7 @@
             </div>
 
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-dark">
+              <div class="card h-100 border-dark rounded-0">
                 <div class="card-body d-flex flex-column">
                   <h4>Previous Case Study</h4>
                   <p><big>Rental Condition Reporting</big></p>
@@ -556,7 +566,7 @@
                   </p>
                   <a
                     href="case-rental-condition-reporting.html"
-                    class="btn btn-outline-primary mt-auto"
+                    class="btn btn-outline-primary mt-auto rounded-0"
                     role="button"
                     >Read Case Study</a
                   >
@@ -570,7 +580,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid border-top border-dark">
+    <footer class="container-fluid bg-dark text-light">
       <div class="container pt-5">
         <div class="row">
           <div class="col-md-4">

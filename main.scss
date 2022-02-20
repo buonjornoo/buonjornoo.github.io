@@ -1,44 +1,12 @@
-// own colow variables -> auto mapped
-$color-primary: #8e79d9;
-$color-blue: #007bff;
-$color-red: #dc3545;
-$color-green: #038c65;
-$color-teal: #20c997;
-$color-cyan: #17a2b8;
-$color-yellow: #f2d8a7;
-$color-orange: #fee1c7;
-$color-indigo: #6f518c;
-$color-purple: #8e79d9;
-$color-pink: #e7dcf2;
-$color-gray: #6c757d;
-$color-gray-dark: #343a40;
-$color-black: #222222;
-$color-white: #fdfefd;
-$color-light: #ebf0f4;
-
-// "white": $color-white,
-//   "blue": $color-blue,
-//   "indigo": $color-indigo,
-//   "purple": $color-purple,
-//   "pink": $color-pink,
-//   "red": $color-red,
-//   "orange": $color-orange,
-//   "yellow": $color-yellow,
-//   "green": $color-green,
-//   "teal": $color-teal,
-//   "cyan": $color-cyan,
-//   "gray": $color-gray,
-//   "gray-dark": $color-gray-dark,
-
 $theme-colors: (
-  "primary": $color-purple,
-  "secondary": $color-yellow,
-  "success": $color-green,
-  "danger": $color-red,
-  "warning": $color-orange,
-  "info": $color-blue,
-  "light": $color-light,
-  "dark": $color-black,
+  "primary": #d21e1e,
+  "secondary": #363636,
+  "success": #62bfaf,
+  "danger": #df2935,
+  "warning": #ff521b,
+  "info": #3c91e6,
+  "light": #fff,
+  "dark": #181618,
 );
 
 // $colors: (

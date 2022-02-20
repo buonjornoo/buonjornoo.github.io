@@ -12,13 +12,14 @@
     <!-- main.css has all the bootstrap code -->
     <link rel="stylesheet" href="main.css" />
 
-    <!-- Space Font -->
+    <!-- Space and Spectral -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Spectral:ital,wght@0,800;1,800&display=swap"
       rel="stylesheet"
     />
+    <!-- End -->
     <!-- Typography CSS -->
     <link rel="stylesheet" href="typography.css" />
     <!-- End -->
@@ -26,11 +27,12 @@
     <link rel="stylesheet" href="utility.css" />
     <!-- End -->
   </head>
-  <body class="bg-white">
+  <body>
     <header>
       <!--bootstrap navbar  -->
+      <div class="container p-0">
       <nav
-        class="navbar navbar-light navbar-expand-sm bg-white border-bottom border-dark py-0"
+        class="navbar navbar-light navbar-expand-sm border-bottom border-dark p-0"
       >
         <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
         <button
@@ -61,32 +63,34 @@
           </ul>
         </div>
       </nav>
+    </div>
       <!-- End -->
     </header>
 
     <main>
       <!-- HERO -->
+      <div class="container-fluid p-0">
       <div
-        class="container border border-dark my-5 bg-pink"
-        style="min-height: 50vh"
+        class="container"
       >
-        <div class="row p-xl-5 p-lg-5 p-md-2 p-sm-2 p-xs-2">
-          <div class="col">
-            <h1>Rental Condition Reporting</h1>
+        <div class="row">
+          <div class="col text-center">
+            <h1 class="display-3 text-center">Rental Condition Reporting</h1>
             <p>Using data to make informed decisions.</p>
             <p>Long term business value over short term pain relief.</p>
             <p>User research, wireframes, workshops, strategy.</p>
           </div>
         </div>
       </div>
+    </div>
       <!-- End -->
 
       <!-- SUMMARY -->
       <div class="container-fluid py-5">
-        <div class="container py-5">
-          <div class="row align-items-start">
-            <div class="col-md-6">
-              <h2><span class="text-primary">01</span> Summary</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h2 class="display-3 text-center"><span class="text-primary">01</span> <br> Summary</h2>
               <p>
                 <b
                   >Standardizing the way rental truck conditions are documented
@@ -94,8 +98,10 @@
                 >
               </p>
             </div>
-            <div class="col-md-6 mt-4 pl-4 border border-dark bg-yellow">
-              <h6>Disclaimer</h6>
+          </div>
+          <div class="row">
+            <div class="col bg-secondary text-white m-auto">
+              <h5>Disclaimer</h5>
               <p>
                 <small>
                   I have omitted and obfuscated confidential information. All
@@ -105,8 +111,9 @@
               </p>
             </div>
           </div>
+          
 
-          <div class="row border border-dark mt-5 p-4">
+          <div class="row small">
             <div class="col-md-4">
               <h3>Services</h3>
               <ul>
@@ -147,7 +154,7 @@
         <div class="container py-5">
           <div class="row">
             <div class="col">
-              <h2><span class="text-primary">02</span> Discovery</h2>
+              <h2 class="display-3 text-center"><span class="text-primary">02</span> <br> Discovery</h2>
               <p><b>It started with understanding the problem.</b></p>
             </div>
           </div>
@@ -264,7 +271,7 @@
         <div class="container py-5">
           <div class="row">
             <div class="col">
-              <h2><span class="text-primary">03</span> Solution</h2>
+              <h2 class="display-3 text-center"><span class="text-primary">03</span> <br> Design</h2>
               <p>
                 <b
                   >How we approached the solution space and what influenced
@@ -356,7 +363,7 @@
       <!-- End -->
 
       <!-- Outcomes -->
-      <div class="container-fluid">
+      <div class="container-fluid py-5">
         <div class="container py-5">
           <div class="row">
             <div class="col">
@@ -367,7 +374,7 @@
 
           <div class="row">
             <div class="col-md-6 pb-5">
-              <div class="card h-100 bg-white border-dark d-flex flex-column">
+              <div class="card h-100 bg-white border-dark d-flex flex-column rounded-0">
                 <div class="card-body">
                   <h3 class="card-title">Deep Process Insights</h3>
                 </div>
@@ -391,7 +398,7 @@
             </div>
 
             <div class="col-md-6 pb-5">
-              <div class="card h-100 bg-white border-dark d-flex flex-column">
+              <div class="card h-100 bg-white border-dark d-flex flex-column rounded-0">
                 <div class="card-body">
                   <h3 class="card-title">Project Momentum</h3>
                 </div>
@@ -418,7 +425,7 @@
 
           <div class="row">
             <div class="col-md-6 pb-5">
-              <div class="card h-100 bg-white border-dark d-flex flex-column">
+              <div class="card h-100 bg-white border-dark d-flex flex-column rounded-0">
                 <div class="card-body">
                   <h3 class="card-title">Data Informed Personas</h3>
                 </div>
@@ -441,7 +448,7 @@
               </div>
             </div>
             <div class="col-md-6 pb-5">
-              <div class="card h-100 bg-white border-dark d-flex flex-column">
+              <div class="card h-100 bg-white border-dark d-flex flex-column rounded-0">
                 <div class="card-body">
                   <h3 class="card-title">A Clear Path Forward</h3>
                 </div>
@@ -483,7 +490,7 @@
           </div>
           <div class="row d-flex justify-content-between">
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-dark">
+              <div class="card h-100 border-dark rounded-0">
                 <div class="card-body d-flex flex-column">
                   <h4>This Case Study</h4>
                   <p><big>Rental Condition Reporting</big></p>
@@ -493,7 +500,7 @@
                   </p>
                   <a
                     href="case-rental-condition-reporting.html"
-                    class="btn btn-outline-primary mt-auto"
+                    class="btn btn-outline-primary mt-auto rounded-0"
                     role="button"
                     >Back To Top</a
                   >
@@ -502,7 +509,7 @@
             </div>
 
             <div class="col-sm-4 pb-5">
-              <div class="card h-100 border-dark">
+              <div class="card h-100 border-dark rounded-0">
                 <div class="card-body d-flex flex-column">
                   <h4>Next Case Study</h4>
                   <p><big>AR City Exploration</big></p>
@@ -512,7 +519,7 @@
                   </p>
                   <a
                     href="case-ar-city-exploration.html"
-                    class="btn btn-primary mt-auto"
+                    class="btn btn-primary mt-auto rounded-0"
                     role="button"
                     >Read Case Study</a
                   >
@@ -526,7 +533,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid border-top border-dark">
+    <footer class="container-fluid bg-dark text-light">
       <div class="container pt-5">
         <div class="row">
           <div class="col-md-4">

@@ -12,11 +12,11 @@
     <!-- main.css has all the bootstrap code -->
     <link rel="stylesheet" href="main.css" />
     <!-- End -->
-    <!-- Space Font -->
+    <!-- Space and Spectral -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Spectral:ital,wght@0,800;1,800&display=swap"
       rel="stylesheet"
     />
     <!-- End -->
@@ -29,104 +29,86 @@
     <!-- End -->
   </head>
 
-  <body class="bg-white">
+  <body>
     <header>
       <!--bootstrap navbar  -->
-      <nav
-        class="navbar navbar-light navbar-expand-sm border-bottom border-dark py-0"
-      >
-        <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
+      <div class="container p-0">
+        <nav
+          class="navbar navbar-light navbar-expand-sm border-bottom border-dark p-0"
+        >
+          <a href="index.html" class="navbar-brand">Jorne Siebrands</a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a href="index.html" class="nav-link"
-                >Home<span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="case-studies.html" class="nav-link">Case Studies</a>
-            </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarSupportedContent"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a href="index.html" class="nav-link"
+                  >Home<span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="case-studies.html" class="nav-link">Case Studies</a>
+              </li>
+              <li class="nav-item">
+                <a href="contact.html" class="nav-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
       <!-- End -->
     </header>
 
     <main>
-      <!-- HERO -->
       <div class="container-fluid p-0">
-        <!-- Video -->
-        <div class="video-wrapper" style="min-height: 90vh; width: 100vw">
-          <video
-            playsinline
-            autoplay
-            muted
-            loop
-            poster="images/MOSHED-Jorne12.jpeg"
-          >
-            <source src="images/MOSHED-Jorne12.webm" type="video/webm" />
-            <source src="images/MOSHED-Jorne12.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-
-          <div
-            class="container video-overlay border border-dark p-xl-5 p-lg-5 p-md-4 p-sm-2 p-xs-1 m-auto"
-            style="min-height: 50vh"
-          >
-            <div class="row">
-              <div class="col-12">
-                <h1>Experience Designer – Product, UX, Reseach</h1>
-              </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="display-2 text-center">
+                Experience Designer. Research, UX, Product.
+              </h1>
             </div>
-            <div class="row">
-              <div class="col-md-8">
-                <p>
-                  I’m Jorne. <br />Experience Designer and aspiring legendary
-                  duid in my pen and paper group. <br />I am a lifelong learner,
-                  especially interested in the intersection between psychology
-                  and tech.
-                </p>
-              </div>
-              <div class="col-md-4 bg-white border border-dark mb-4">
-                <h6>Highlighted Case Study</h6>
-                <p>Rental Condition Reporting</p>
-                <a href="case-rental-condition-reporting.html"
-                  >View Case Study</a
-                >
-              </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>
+                I’m Jorne. <br />Experience Designer and aspiring legendary duid
+                in my pen and paper group. <br />I am a lifelong learner,
+                especially interested in the intersection between psychology and
+                tech.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col border border-dark m-auto pb-3">
+              <h5>Highlighted Case Study</h5>
+              <p>Rental Condition Reporting</p>
+              <a href="case-rental-condition-reporting.html">View Case Study</a>
             </div>
           </div>
         </div>
-        <!-- Video End -->
       </div>
-      <!-- End -->
 
       <!-- Section 1 -->
       <div class="container-fluid py-5">
-        <div
-          class="container border border-dark p-xl-5 p-lg-5 p-md-4 p-sm-2 p-xs-1"
-        >
+        <div class="container">
           <div class="row">
             <div class="col">
-              <h2>Activities</h2>
+              <h2 class="display-3 text-center">Activities</h2>
               <h3>User Research</h3>
               <p>
                 I’m used to do qualitative and quantitative user research across
@@ -165,12 +147,10 @@
 
       <!-- Section 2 -->
       <div class="container-fluid py-5">
-        <div
-          class="container border border-dark bg-pink p-xl-5 p-lg-5 p-md-4 p-sm-2 p-xs-1"
-        >
+        <div class="container">
           <div class="row">
             <div class="col">
-              <h2>Approach</h2>
+              <h2 class="display-3 text-center">Approach</h2>
               <h3>Understand</h3>
               <p>
                 I start every project by trying to understand the problem,
@@ -213,12 +193,10 @@
 
       <!-- Section 3 -->
       <div class="container-fluid py-5">
-        <div
-          class="container border border-dark bg-yellow p-xl-5 p-lg-5 p-md-4 p-sm-2 p-xs-1"
-        >
+        <div class="container">
           <div class="row">
             <div class="col">
-              <h2>Principles</h2>
+              <h2 class="display-3 text-center">Principles</h2>
               <h3>Outcomes over output</h3>
               <p>
                 I value long term outcomes over short term output. I don’t
@@ -254,7 +232,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid border-top border-dark">
+    <footer class="container-fluid bg-dark text-light">
       <div class="container pt-5">
         <div class="row">
           <div class="col-md-4">
