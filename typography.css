@@ -1,8 +1,5 @@
 html,
 .root {
-  /* font-size: 21px;
-    line-height: 32px; */
-  /* Responsive */
   font-size: clamp(1rem, 0.5385rem + 1.2821vw, 1.5rem);
   line-height: clamp(1.5rem, 1.0385rem + 1.2821vw, 2rem);
 }
@@ -20,8 +17,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Spectral", "Roboto", sans-serif;
-  /* font-family: "Public Sans", sans-serif; */
+  font-family: "Spectral", serif;
   font-weight: 800;
 }
 h1,
@@ -109,5 +105,5 @@ sub {
   line-height: 1.14285714286rem;
 } */
 .navbar {
-  font-family: "Spectral", "Roboto", sans-serif !important;
+  font-family: "Spectral", serif !important;
 }
