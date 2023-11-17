@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
 // Navbar and Footer
 // Function to load the navigation bar and footer
 function setActiveLink() {
-  // Get the current path
+  // Get the current URL path
   const path = window.location.pathname;
+
   // Extract the last directory name from the path
-  const pageId = path.split("/").filter(Boolean).slice(-1)[0];
+  const segments = path.split("/").filter(Boolean);
+  let pageId = segments.length === 0 ? "index" : segments.slice(-1)[0];
 
   // Set the active class on the current navigation link
   $(`a[data-page-id=${pageId}]`).addClass("active");
