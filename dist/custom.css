@@ -1,16 +1,3 @@
-/* Custom Colors */
-.bg-dopamine-bg {
-  background-color: #5c2a54; /* #5c2a54 - Dopamine Background Color */
-}
-
-.text-dopamine-text {
-  color: #a0d2a8; /* #a0d2a8 - Dopamine Text Color */
-}
-
-.border-dopamine-text {
-  border-color: #a0d2a8; /* #a0d2a8 - Dopamine Border Color */
-}
-
 /* Additional styling for the callout section */
 .callout-section {
   /* background-color: #a0d2a8; /* Dopamine Text Color */
@@ -37,6 +24,13 @@
 @font-face {
   font-family: "Formera Regular"; /* Replace with your font name */
   src: url("/fonts/Formera-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Formera Light"; /* Replace with your font name */
+  src: url("/fonts/Formera-Light.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }

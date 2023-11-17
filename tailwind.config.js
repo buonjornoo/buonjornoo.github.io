@@ -7,7 +7,8 @@ module.exports = {
         "hero-pattern": "url('/img/Route Planner Hero.png')",
       }),
       fontFamily: {
-        custom: ["Formera Regular", "sans-serif"], // Add your font name here
+        formeraRegular: ["Formera Regular", "sans-serif"], // Add your font name here
+        formeraLight: ["Formera Light", "sans-serif"], // Add your font name here
       },
       colors: {
         "custom-white": "#FAFBFB",

@@ -22,13 +22,19 @@
     <!-- meta data-->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jorne Marc Siebrands - UX Designer and Product Manager</title>
+    <title>
+      AR City Exploration by Jorne Marc Siebrands - Augmented Reality
+      Storytelling
+    </title>
     <meta
       name="description"
-      content="Experienced UX Designer and Product Manager crafting user-centered digital experiences. Actively seeking new opportunities. Let's collaborate on innovative projects. Contact me at jorne@siebrands.com."
+      content="Dive into the AR City Exploration project by Jorne Marc Siebrands, blending augmented reality with city storytelling. An innovative approach to urban exploration and interactive design."
     />
 
-    <meta name="keywords" content="UX Designer, Product Manager, Portfolio" />
+    <meta
+      name="keywords"
+      content="Augmented Reality, AR City Exploration, UX Design, Interactive Storytelling, Urban Exploration, Tech Innovation"
+    />
     <meta name="author" content="Jorne Marc Siebrands" />
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/dist/output.css" />
@@ -38,7 +44,7 @@
     <script src="/dist/scripts.js" defer></script>
   </head>
 
-  <body>
+  <body class="bg-custom-white">
     <!-- Navigation -->
     <div id="nav-placeholder"></div>
 
@@ -151,12 +157,13 @@
             <!-- Image -->
             <img
               src="/img/arCityExploration/raubkunst_guerilla_testing.jpg"
-              alt="Picture of a woman with a smartphone looking through it at a well and triggering an Augmented Reality installation."
+              alt="Usability test participant using a smartphone to activate an augmented reality event at a monument in Frankfurt."
               class="rounded-none"
             />
             <figcaption class="text-gray-400 text-sm">
-              A test perticipant trying out one of our AR installations in the
-              city.
+              Blending Realities: A participant engages with a monument in
+              Frankfurt, triggering an augmented reality installation that
+              bridges the digital with the historical.
             </figcaption>
           </figure>
         </section>
@@ -311,6 +318,68 @@
             />
             <figcaption class="text-gray-400 text-sm">
               App Wireframes.
+            </figcaption>
+          </figure>
+
+          <h3>Prototype Videos</h3>
+          <h4>Story Introduction</h4>
+          <p>
+            Our goal was to bring users to real places and experience stories
+            where they really happened. But to get users hooked we wanted to
+            allow them to experience introduction elements anywhere so we
+            prototyped this introduction installation which can be triggered
+            anywhere.
+          </p>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/sccf2EZheEw?si=dJNG6XKwMQsPqsub"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="text-gray-400 text-sm">
+              Augmented Reality installation that can be triggered anywhere.
+            </figcaption>
+          </figure>
+
+          <h4>Navigation Experience</h4>
+          <p>
+            Here you can watch how the navigation experience plays out in our
+            prototype. We want people to spend as much time as possible looking
+            at the real world and limit the time looking at the screen. This is
+            why we only showed illustrated representations of real world
+            elements to search. User would look around in the real world to find
+            them and get the next visual hint. At this point we had no mechanism
+            to check if users really found the thing we want them to find but we
+            had multiple possible methods in mind: Checking for the GPS
+            location, which would need a lot of testing because of the GPS
+            inacuracies of up to 100m depending on device and service. And a
+            visual check where users point their cameras to the object and our
+            system visually confirms that they are at the right place. We
+            prefered the latter method but this would be a lot of effort to
+            implement for the MVP style prototype.
+          </p>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/zotKldUVY_w?si=6hdxiETJTof70R9-"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="text-gray-400 text-sm">
+              Navigation Experience Prototype.
             </figcaption>
           </figure>
         </section>
