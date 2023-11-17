@@ -1,7 +1,32 @@
+/* Custom CSS for Full Page Menu */
+#navMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: white; /* Or any color you prefer */
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for medium screens and up */
+@media (min-width: 768px) {
+  #navMenu {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
 /* Additional styling for the callout section */
 .callout-section {
-  /* background-color: #a0d2a8; /* Dopamine Text Color */
-  /*color: #5c2a54; /* Dopamine Background Color */
   border-color: #a0d2a8; /* Dopamine Border Color */
   border-radius: 0; /* No rounded corners */
 }
@@ -22,14 +47,14 @@
 }
 
 @font-face {
-  font-family: "Formera Regular"; /* Replace with your font name */
+  font-family: "Formera Regular";
   src: url("/fonts/Formera-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Formera Light"; /* Replace with your font name */
+  font-family: "Formera Light";
   src: url("/fonts/Formera-Light.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;

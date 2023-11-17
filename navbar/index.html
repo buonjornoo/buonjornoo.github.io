@@ -1,6 +1,6 @@
 <nav class="flex justify-between items-center p-6 font-formeraRegular">
   <!-- Left aligned content -->
-  <div>
+  <div id="leftContent">
     <a href="/">
       <span class="text-lg text-sunset-orange font-formeraRegular"
         >Jorne Marc Siebrands</span
@@ -11,35 +11,76 @@
     </a>
   </div>
 
+  <!-- Menu Button for small screens -->
+  <button id="menuButton" class="md:hidden">
+    <span>Menu</span>
+  </button>
+
   <!-- Right aligned content -->
-  <div class="hidden md:flex space-x-6 items-center">
-    <a href="/" data-page-id="index">Home</a>
-    <a href="/about/" data-page-id="about">About me</a>
-    <div class="group relative">
-      <a href="/projects/" data-page-id="projects">Projects</a>
-      <div
-        class="absolute z-10 mt-2 bg-custom-white p-2 space-y-2 rounded-none border border-black min-w-max right-0"
-      >
-        <a
-          href="/projects/routeplanner/"
-          class="block px-4 py-2"
-          data-page-id="projectBikemapRoutePlanner"
-          >Bikemap Route Planner</a
+  <div
+    id="navMenu"
+    class="absolute inset-0 flex flex-col items-center justify-between bg-white md:relative md:flex md:flex-row md:items-center md:bg-transparent"
+  >
+    <!-- Include the left content in the full-page menu for small screens -->
+    <div class="md:hidden mb-6 text-center">
+      <a href="/">
+        <span class="text-lg text-sunset-orange font-formeraRegular"
+          >Jorne Marc Siebrands</span
+        ><br />
+        <span class="text-sm font-formeraLight"
+          >UX Designer and Product Manager</span
         >
-        <a
-          href="/projects/pausemode/"
-          class="block px-4 py-2"
-          data-page-id="projectBikemapPauseMode"
-          >Pause Mode</a
-        >
-        <a
-          href="/projects/arcityexploration/"
-          class="block px-4 py-2"
-          data-page-id="projectArCityExploration"
-          >AR City Exploration</a
-        >
-      </div>
+      </a>
     </div>
-    <a href="mailto:jorne@siebrands.com">Email me: jorne@siebrands.com</a>
+
+    <!-- Original right aligned content for small screens -->
+    <div class="md:hidden flex flex-col items-center space-y-4">
+      <a href="/" data-page-id="index">Home</a>
+      <a href="/about/" data-page-id="about">About me</a>
+      <div class="group relative">
+        <a href="/projects/" data-page-id="projects">Projects</a>
+        <!-- Dropdown content -->
+        <div
+          class="absolute z-10 mt-2 bg-custom-white p-2 space-y-2 rounded-none border border-black min-w-max right-0"
+        >
+          <a
+            href="/projects/routeplanner/"
+            class="block px-4 py-2"
+            data-page-id="projectBikemapRoutePlanner"
+            >Bikemap Route Planner</a
+          >
+          <a
+            href="/projects/pausemode/"
+            class="block px-4 py-2"
+            data-page-id="projectBikemapPauseMode"
+            >Pause Mode</a
+          >
+          <a
+            href="/projects/arcityexploration/"
+            class="block px-4 py-2"
+            data-page-id="projectArCityExploration"
+            >AR City Exploration</a
+          >
+        </div>
+      </div>
+      <a href="mailto:jorne@siebrands.com">Email me: jorne@siebrands.com</a>
+    </div>
+
+    <!-- Close Button for full-screen menu -->
+    <div class="flex pb-4 w-full justify-center md:hidden">
+      <button id="closeMenuButton" class="m-6">
+        <span>Close</span>
+      </button>
+    </div>
+
+    <!-- Right aligned content for larger screens -->
+    <div class="hidden md:flex space-x-4 items-center">
+      <a href="/" data-page-id="index" class="mx-2">Home</a>
+      <a href="/about/" data-page-id="about" class="mx-2">About me</a>
+      <a href="/projects/" data-page-id="projects" class="mx-2">Projects</a>
+      <a href="mailto:jorne@siebrands.com" class="mx-2"
+        >Email me: jorne@siebrands.com</a
+      >
+    </div>
   </div>
 </nav>
