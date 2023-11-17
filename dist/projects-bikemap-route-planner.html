@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9T9M59GHTP"
+    ></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-9T9M59GHTP");
+    </script>
+
+    <!--Load Navbar and Footer-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- meta data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bikemap Route Planner Development by Jorne Marc Siebrands</title>
+    <meta
+      name="description"
+      content="Explore the Bikemap Route Planner project, led by Jorne Marc Siebrands. A testament to innovative UX Design and Product Management in creating advanced cycling application tools."
+    />
+
+    <meta
+      name="keywords"
+      content="Bikemap Route Planner, Cycling Application, UX Design, Product Management, Tech Development, User Experience"
+    />
+    <meta name="author" content="Jorne Marc Siebrands" />
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/dist/output.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/dist/custom.css" />
+    <!-- JS -->
+    <script src="/dist/scripts.js" defer></script>
+  </head>
+
+  <body class="bg-custom-white">
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!--Hero-->
+    <div
+      class="hero-section bg-no-repeat bg-contain bg-center h-80 flex justify-center items-start text-center"
+      style="background-image: url('/img/Route\ Planner\ Hero.png')"
+    >
+      <div class="container mx-auto">
+        <!--<p class="text-sunset-orange">Bikemap Route Planner</p>-->
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-12 mb-20 text-left max-w-prose">
+      <!-- Page-specific content goes here -->
+      <article class="my-10">
+        <h1>Bikemap Route Planner</h1>
+        <section class="my-4">
+          <h2>Introduction</h2>
+          <p>
+            In the realm of cycling apps, Bikemap encountered a challenge with
+            its web-based route planning tools. The "AB-Planner" and "Route
+            Editor" offered similar functionalities, leading to user confusion.
+            Additionally, both relied on external services, hindering
+            innovation. The initiative to create a unified route planner began
+            in Q3 2021 and evolved through my roles as both Product Designer and
+            Product Manager.
+          </p>
+        </section>
+        <section class="my-4">
+          <h2>Project Goals</h2>
+          <h3>Business and Innovation</h3>
+          <p>
+            The primary goal was to break free from an expensive service
+            provider, facilitating faster innovation. Simultaneously, we aimed
+            to streamline the user experience by offering a single, intuitive
+            tool for route creation and editing.
+          </p>
+          <h3>UX Enhancement</h3>
+          <p>
+            Reducing user confusion and aligning our web and mobile tools
+            visually were key UX objectives. Our strategy involved focusing on
+            commuters, addressing the legacy AB Planner's outdated appearance,
+            and ensuring cross-platform consistency.
+          </p>
+        </section>
+        <section class="my-4">
+          <h2>Research and Discovery</h2>
+          <p>
+            Our research delved into technical constraints, user needs, and
+            competitive analysis. Key insights included:
+          </p>
+          <ul>
+            <li>
+              <strong>Third-Party Dependencies:</strong> <br />
+              External providers hindered quick innovation, limiting
+              customization options.
+            </li>
+            <li>
+              <strong>User Preferences Across Tools:</strong> <br />
+              Users of the AB Planner missed features available in the Route
+              Editor, and vice versa.
+            </li>
+            <li>
+              <strong>Outdated AB Planner Perception:</strong> <br />
+              The AB Planner's appearance led users to perceive the map data as
+              outdated, affecting trust.
+            </li>
+            <li>
+              <strong>Geocoding Challenges:</strong> <br />
+              Users faced issues with the inflexible geocoder, preferring the
+              superior experience of tools like Google Maps.
+            </li>
+            <li>
+              <strong>Map Style Discrepancies:</strong> <br />
+              Users missed map styles from mobile apps in the legacy AB Planner,
+              causing inconsistency.
+            </li>
+          </ul>
+        </section>
+
+        <section class="my-4">
+          <h2>Target Audience</h2>
+
+          <p>
+            We know that only a small, but very engaged, part of our user base
+            is using the Web Route Planners frequently. Most of them use the
+            Route Editor since the legacy AB Planner has much more options on
+            the mobile app than the Web Version. Generally speaking, we found
+            that most users who use the legacy AB Planner, are people who enjoy
+            long tours. Some even plan routes through whole countries and split
+            those huge routes into digestible segments for a multi-day trip.
+            Users who use the Route Editor like to cycle through forests and
+            trails. They go on shorter rides and like to plan by manually
+            drawing a route through a forest without any official road going
+            through it. This way they can load the GPX file into their Bike
+            Computer Device and use it for navigation.
+          </p>
+
+          <p>
+            Even though the below Persona was not created for this project in
+            particular, it showcases that we actively thought about our target
+            audiences for each feature and platform.
+          </p>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <img
+              src="/img/Persona Example.png"
+              alt="Image of an exemplary Persona document"
+              class="rounded-none"
+            />
+            <figcaption class="text-gray-400 text-sm">
+              Example Persona. At Bikemap, we found that personas helped new
+              employees to get an initial understanding of our user base but we
+              also found that as soon as we understood our main personas, we
+              actually never really used the assets in our conversations and
+              presentations. So please keep in mind when reviewing this, that we
+              actively decided to not put too much effort in designing and
+              customizing them.
+            </figcaption>
+          </figure>
+
+          <p>
+            With the first iteration of our web app, we targeted users who plan
+            longer tours and need a bit more overview, screen space and control
+            than our mobile apps can provide.
+          </p>
+          <p>
+            The overall user flow would look like this: <br />
+
+            A user gets inspired to do a longer cycling trip, the inspiration
+            could come from anywhere: A friend, a blog, our content or even
+            competitor content. They would then plan for a general location and
+            time and use our web app to make their plan more concrete. When done
+            with planning, they would save the route and use their mobile
+            devices or other Bike Computers to navigate it when they finally
+            start their trip.
+          </p>
+        </section>
+        <section>
+          <h2>Ideation and Design</h2>
+          <h3>AB Planner</h3>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/cBHFEdTflWk?si=dJdoxw0TSZPdnXLt"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="text-gray-400 text-sm">
+              Legacy AB Planner for planning routes with addresses.
+            </figcaption>
+          </figure>
+
+          <p>
+            Examining the old AB Planner reveals distinctive elements. Notably,
+            a top navigation bar stands out for its visual clash with the
+            content beneath, exuding a more modern aesthetic than the tool
+            itself. Positioned on the left, a substantial block hosts two input
+            fields for address entry, while the right showcases a map centered
+            on Frankfurt am Main. Three buttons, labeled “Bike Paths,”
+            “Heatmap,” and “Bikemap Basic ▾,” grace the top right corner of the
+            map. The chevron on the last button hints at a menu with additional
+            options, encompassing various map styles. Activating the "Heatmap"
+            button generates a visualization of the most frequented roads by
+            Bikemap users, with the "Bike Paths" button highlighting cycling
+            paths in red.
+          </p>
+          <p>
+            The focus for the new web app centered on addressing specific
+            issues:
+          </p>
+          <ol>
+            <li>
+              The top navigation bar's excessive space usage without substantial
+              utility required optimization.
+            </li>
+            <li>
+              The "Search for routes in…" input field's potential to cause
+              confusion by diverting users away from the planner tool.
+            </li>
+            <li>The dated UI colors demanded a refresh.</li>
+            <li>
+              The lack of control over map styles, preventing customization or
+              updates, needed attention.
+            </li>
+          </ol>
+
+          <h3>The Legacy Route Editor</h3>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/sl4JWplZNAQ?si=ut9dpA2h9vZ9ap7e"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="text-gray-400 text-sm">
+              Legacy Route Editor for manually drawing routes on the map.
+            </figcaption>
+          </figure>
+
+          <p>
+            Now, shifting focus to the Route Editor – it's not as seasoned as
+            the AB Planner, boasting a more modern UI. The map flaunts muted
+            colors, lending a cleaner overall appearance. Positioned on the left
+            is a vertical row of buttons, each serving multiple functions: a
+            geolocate button to center the map on the device's location, toggles
+            for generating routes along roads or drawing manually, an eraser,
+            options to return to the origin, reverse the route, undo and redo
+            actions, and a button for adding Points-of-Interest. Adjacent to
+            these buttons, there's an input field facilitating movement of the
+            map view to any global location. At the bottom left, zoom, rotate,
+            and full-screen buttons wrap up the toolset.
+          </p>
+
+          <p>
+            The center of attention is the map. Crafting a route involves a
+            simple click on map locations. This feature shines, especially when
+            planning a trail ride in nature, far from the beaten path. Just zoom
+            in, drop points manually, and you're good to go.
+          </p>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <img
+              src="/img/map styles.png"
+              alt="Screenshot of the Map Style Component showing multiple Map Styles"
+              class="rounded-none w-80"
+            />
+            <figcaption class="text-gray-400 text-sm">
+              Map Style Selector in the legacy Route Editor. You can see the the
+              map style selector on the right side shows different styles
+              compared to the one from the AB Planner. These are the map styles
+              that are also available on the mobile apps. They are created and
+              hosted by us.
+            </figcaption>
+          </figure>
+          <p>
+            Now, let's dive into what we aimed to tweak with the new web app:
+          </p>
+          <ol>
+            <li>
+              The input field – it's missing the magic of turning into a
+              waypoint, just relocating the map to the entered spot.
+            </li>
+            <li>Editor map styles – they're ours, and they're staying put.</li>
+            <li>
+              Those vertical buttons – not as obvious as we'd like them to be.
+            </li>
+            <li>
+              Toggling between drawing mode and “follow streets” – easy for the
+              experienced, but new users need a clearer grasp of the differences
+              and use cases for each mode.
+            </li>
+          </ol>
+        </section>
+        <section>
+          <h2>Initial Designs</h2>
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <img
+              src="/img/Initial Design 1.png"
+              alt="Image of a Mac Book mockup with a Wireframe design of the Route Planning Application for cycling."
+              class="rounded-none w-fit"
+            />
+            <figcaption class="text-gray-400 text-sm">
+              Initial Wireframe of a route planner that combines all features of
+              the Editor and the AB Planner.
+            </figcaption>
+          </figure>
+
+          <p>
+            Let's delve into the initial designs exploration. We were
+            essentially testing the waters, considering the feasibility of
+            merging all features into one tool. On the left, you'll find the
+            address input fields borrowed from the AB Planner. Directly below,
+            there's the reverse route and a "back to origin" button inherited
+            from the Route Editor. Additionally, a plus button allows users to
+            add more waypoints to the route. Now, the noteworthy addition – the
+            routing profile, or as labeled, "Routing Options." This feature
+            assists users in customizing their route generation based on
+            preferences and constraints. For instance, road cyclists may want to
+            steer clear of gravel, parents might prefer routes with minimal
+            traffic, and commuters may opt for the fastest route.
+          </p>
+
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <img
+              src="/img/Initial Design 2.png"
+              alt="Image of a Mac Book mockup with a Wireframe design of the Route Planning Application for cycling."
+              class="rounded-none w-fit"
+            />
+            <figcaption class="text-gray-400 text-sm">
+              Initial Wireframe of a route planner that combines all features of
+              the Editor and the AB Planner with expanded sections inside the
+              left sidebar.
+            </figcaption>
+          </figure>
+
+          <h3>Stats Section</h3>
+          <p>
+            The Stats section provides data about the route, including distance,
+            ETAs, average speed, and elevation data. Essentially, it functions
+            as a fitness tracker for biking adventures.
+          </p>
+
+          <h3>Interesting Places Along the Way</h3>
+          <p>
+            This section presents a list of Points of Interest near the planned
+            route. Some users expressed difficulties in finding interesting
+            spots between their starting point and destination. They had diverse
+            needs, ranging from including supermarkets or water sources for
+            hydration to seeking inspiration for scenic detours, food options,
+            and accommodations.
+          </p>
+          <p>
+            Lastly, there's the "Search Place or Address" input – a minor typo
+            slipped through. It was adopted from the Route Editor, but after
+            realizing its limited utility, we decided to remove it. Users
+            generally preferred using the waypoint input fields for place
+            searches, anticipating the map to respond accordingly. Simple and
+            efficient.
+          </p>
+        </section>
+
+        <section>
+          <h2>Testing and Validation</h2>
+          <ul>
+            <li>We tested every design iteration with internal users</li>
+            <li>Some designs were tested external users</li>
+            <li>
+              We used “Maze” to test our prototypes with others. The tool helped
+              us to understand the paths our users would take, moments where
+              they would get stuck and we would even see how long it would take
+              them to complete a task.
+            </li>
+            <li>
+              We had a beta phase in which users could use the old AB Planner
+              and the new Web App in parallel before we would sunset the old
+              route planner
+            </li>
+            <li>
+              We found in our early prototypes that people really appreciated
+              the idea of seeing points of interests along the route. We also
+              found that it would be a bigger effort to implement. As a product
+              manager, I had to remove it from the project scope since it was
+              not essential to the core functionality of the tool and the
+              original vision was to become independent from third party APIs.
+            </li>
+            <li>
+              We found that users like to see the stats of their route but the
+              would not open the accordion to see the data if it’s minimized on
+              default.
+            </li>
+            <li>
+              Some features like reordering the waypoints, deleting and changing
+              the routing from “Follow Streets” to “Beeline” and back were only
+              visible when users would hover over or click on certain elements
+              on the interface. Users were able to intuitively discover those
+              features when they were presented with the related task.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Implementation and Development Journey</h2>
+          <p>
+            Given the extensive scope of the overall project and commitments
+            from both backend and frontend development teams, I strategically
+            divided this initiative into several epics:
+          </p>
+
+          <ol>
+            <li>
+              <strong>Initial Epic - Web App Setup: </strong> <br />
+              The first epic aimed to establish the development of the web app
+              under a new domain (<a href="web.bikemap.net">web.bikemap.net</a
+              >), incorporating a frontend component library and necessary
+              technical groundwork. We iteratively collaborated between design
+              and development for the component library, identifying, defining,
+              and implementing components with thorough checks and approvals.
+            </li>
+            <li>
+              <strong>Legacy AB Planner Reconstruction:</strong> <br />
+              Another epic focused on rebuilding the legacy AB Planner without
+              introducing new features. This was a vital step as the legacy AB
+              Planner had significant dependencies on external services. To
+              swiftly address this, we chose to eliminate these dependencies
+              promptly. The initial web app iteration intentionally mirrored the
+              existing AB Planner features.
+            </li>
+            <li>
+              <strong>Import Tool Transition:</strong> <br />
+              A task within an ongoing epic involved moving the import tool,
+              already in development, to the new design and the new web app
+              domain. With a pre-established component library and user flows,
+              this transition was seamless.
+            </li>
+            <li>
+              <strong>AB Planner Replacement:</strong> <br />
+              An epic centered on replacing the legacy AB Planner with the new
+              web app. This move was crucial, not only for introducing new
+              editing capabilities but also for ensuring that newly created
+              routes could be re-edited within the new tool. The transition also
+              addressed the confusion caused by the previous system, where
+              routes could only be re-edited using the Route Editor.
+            </li>
+            <li>
+              <strong>Routing Profiles Addition - A Quick Win:</strong> <br />
+              A "quick win" epic aimed at adding routing profiles to the new web
+              app. This was strategically important for enticing users to opt
+              for a premium subscription. We recognized the value of providing
+              users with routing profiles tailored to their preferences and
+              constraints, such as the road bike profile.
+            </li>
+            <li>
+              <strong>Route Detail Page Migration:</strong> <br />
+              An epic involved moving our "Route Detail" pages to the new web
+              app. This streamlining process aimed to simplify user
+              interactions, enabling them to edit metadata directly on the route
+              detail view, eliminating the need to access a separate editor.
+            </li>
+            <li>
+              <strong>Capability Migration and Legacy Editor Shutdown:</strong>
+              <br />
+              With the saving process streamlined, subsequent epics involved
+              migrating capabilities, like drawing routes by hand, from the
+              legacy Route Editor to the new web app. The ultimate goal was to
+              phase out the old Editor.
+            </li>
+          </ol>
+
+          <p>
+            The overarching vision for this initiative was to empower faster
+            innovation without reliance on external providers.
+          </p>
+        </section>
+
+        <section>
+          <h2>Results and Impact</h2>
+
+          <!-- Image Container -->
+          <figure class="flex flex-col items-center my-8">
+            <!-- Image -->
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/puc0gKEJy4E?si=YWIA7xbHpXXO-yD1"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <figcaption class="text-gray-400 text-sm">
+              The new Web App.
+            </figcaption>
+          </figure>
+
+          <h3>Web App Release and User Engagement</h3>
+          <p>
+            My tenure at Bikemap concluded with the successful launch of the
+            initial version of the Web App. The legacy AB Planner remains
+            operational, and you can explore the new web app firsthand at
+            <a href="https://web.bikemap.net/plan"
+              >https://web.bikemap.net/plan</a
+            >. The user response was positive, underscoring the engagement of
+            our user base with the route editor. Accidentally turning off the
+            legacy editor and AB Planner revealed the depth of user involvement,
+            reinforcing my commitment to rigorously test features transitioning
+            to the new web app, ensuring a seamless experience for our dedicated
+            users.
+          </p>
+          <h3>User Retention and Usage Patterns</h3>
+          <p>
+            Despite the significant changes, overall usage metrics remained
+            consistent, aligning with our primary goal of retaining users
+            throughout the transition. We successfully eliminated almost all
+            dependencies on third-party providers, with only the route detail
+            pages, including map previews, still utilizing them—a challenge
+            addressed in the subsequent epic.
+          </p>
+          <h3>Enhanced User Insights through Data</h3>
+          <p>
+            Implementation of additional events will provide valuable insights
+            into user behavior, enhancing Bikemap’s ability to comprehend
+            general usage patterns. This newfound understanding enables Bikemap
+            to track various aspects, including:
+          </p>
+          <ul>
+            <li>
+              User Engagement Metrics:
+              <ul>
+                <li>Daily and Monthly Active Users (DAU and MAU)</li>
+                <li>Session duration</li>
+                <li>Number of routes created</li>
+              </ul>
+            </li>
+            <li>
+              Retention Metrics:
+              <ul>
+                <li>Churn rate</li>
+                <li>Retention rate</li>
+              </ul>
+            </li>
+            <li>
+              Conversion Metrics:
+              <ul>
+                <li>Premium conversion</li>
+                <li>Sign-ups</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>In-Depth Feature Analysis</h3>
+          <p>
+            Furthermore, the implemented events facilitated detailed feature
+            analysis, allowing Bikemap to track user interactions, such as the
+            number of users planning routes without saving, identifying points
+            of process abandonment, user authentication status, preferred
+            routing profiles, and more.
+          </p>
+          <p>
+            This comprehensive data-driven approach empowered Bikemap to make
+            informed decisions, address user needs proactively, and continuously
+            enhance the web app to align with user expectations and preferences.
+          </p>
+        </section>
+        <section>
+          <h2>Lessons Learned</h2>
+          <h3>Navigating Resource Constraints</h3>
+          <p>
+            The rapid progress of our initiative faced hurdles due to a busy
+            backend team. Navigating around this constraint, I strategically
+            determined tasks that could proceed independently and judiciously
+            timed their integration with the backend team. This adaptive
+            approach ensured optimal resource utilization and allowed the
+            backend team to focus on critical projects.
+          </p>
+
+          <h3>Qualitative Decision Making Amid Data Gaps</h3>
+          <p>
+            Lack of robust user behavior tracking posed a challenge in
+            prioritizing features. Decisions were largely based on qualitative
+            user insights and stakeholder discussions, demanding a careful
+            allocation of time and effort. While the outcome was satisfactory,
+            the process underscored the need for more data-driven insights. In
+            hindsight, accelerating the project timeline to gather more data and
+            refine insights earlier would have been beneficial.
+          </p>
+
+          <h3>Communicating Value Amidst Technical Focus</h3>
+          <p>
+            In planning and negotiations, emphasis centered on the primary
+            objective: eliminating costs and dependencies on third-party service
+            providers. While stakeholders acknowledged the importance of this
+            endeavor, I observed a subdued enthusiasm to propel the initiative
+            forward. This highlighted the necessity for a more compelling
+            communication strategy, elucidating the advantages at each step and
+            epic. Ensuring alignment between technical milestones and broader
+            organizational goals is crucial for sustained momentum.
+          </p>
+
+          <h3>Unexplored Tracking Metrics</h3>
+          <p>
+            Capacity constraints limited the implementation of comprehensive
+            tracking metrics throughout the initiative. Desired metrics
+            included:
+          </p>
+
+          <ul>
+            <li>
+              User Satisfaction Metrics:
+              <ul>
+                <li>
+                  Net Promoter Score (NPS) and Customer Satisfaction (CSAT) for
+                  the web app or specific features.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Route Planning Effectiveness Metrics:
+              <ul>
+                <li>
+                  Completion Rate: Percentage of planned routes successfully
+                  executed by users.
+                </li>
+                <li>
+                  Route Customization Rate: Tracking user modifications to
+                  suggested routes.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Conversion Funnel Analysis:
+              <ul>
+                <li>Understanding user journey from planning to conversion.</li>
+              </ul>
+            </li>
+            <li>
+              Social Sharing Metrics:
+              <ul>
+                <li>Assessing the web app's social engagement and outreach.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>
+            The incorporation of these metrics would have provided a more
+            comprehensive understanding of user satisfaction, route planning
+            efficacy, and the overall impact of the initiative on user behavior.
+          </p>
+        </section>
+
+        <section>
+          <h2>Future Roadmap</h2>
+          <p>
+            I can’t speak as a Bikemap employee anymore but I’m really excited
+            participated in paving the way for faster development and innovation
+            of the Bikemap Web products. If I could decide what was next, my
+            personal roadmap would look somewhat like this:
+          </p>
+          <h3>Finish the unification as fast as possible</h3>
+          <p>
+            The next important step is to get rid of the duplicate tool
+            situation, so I would team up with a web developer and another
+            designer to talk to our frequent Route Editor users. I’d expect to
+            find that the most important feature they will need from the Editor
+            is the manual drawing tool. I would then work on finding a way to
+            include this tool into the new web app an a way that is easily
+            discoverable and easy to understand for new users. We already have
+            some design drafts and some vision designs for this so we could even
+            directly test our vision with our super users.
+          </p>
+          <h3>Support Bikepackers</h3>
+          <p>
+            We had a strong signal in our user base to support multi day trips
+            but we struggled to address this need because there were too many
+            tools and our external providers were slowing us down. I personally
+            see that addressing this user need could open up our user base for
+            hardcore bikepackers. We already were able to generate longer routes
+            (e.g. through the whole USA) than our competition, enabling users to
+            make those routes more digestible and support their multi day trip
+            planning could increase our user base and open up a lot of
+            opportunities for monetization.
+          </p>
+
+          <h3>Route Generator</h3>
+          <p>
+            Me and Sebi, our lead Web Developer, always dreamt of utilizing the
+            data we already have to figure out what kind of trips our users like
+            to take. As a cyclist myself, I dream of a tool that takes my
+            preferences and constraints and generate a route for me. I would
+            love to create a route generator that takes data points like a
+            preferred distance, general location, preferred duration, athletic
+            intensity, scenic POIs and other factors and creates a route that
+            users can navigate along. I would prefer that over scrolling through
+            Komoot’s discovery for ages, trying to find a route that matches my
+            needs.
+          </p>
+        </section>
+
+        <section>
+          <h2>Conclusion</h2>
+          <p>
+            The Bikemap Route Planner project successfully addressed user
+            confusion, reduced external dependencies, and enhanced the overall
+            user experience. Despite challenges in tracking certain metrics and
+            navigating backend constraints, the initiative achieved its primary
+            goals, setting the stage for Bikemap's continued innovation in the
+            cycling app space.
+          </p>
+          <p>
+            I am very glad to have worked on this project with a wonderful team.
+            Especially our Designer Dominic, who always had my back and helped
+            me to think out of my box, when I was stuck designing some
+            components. He always brought a new perspective and helped to make
+            the whole thing visually appealing. Another key person is Sebi, our
+            lead Web developer. We collaborated very closely on this project and
+            I really appreciate every time he took over when I got swamped
+            extinguishing fires as a Product Manager.
+          </p>
+        </section>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+  </body>
+</html>

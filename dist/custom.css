@@ -1,0 +1,36 @@
+/* Additional styling for the callout section */
+.callout-section {
+  /* background-color: #a0d2a8; /* Dopamine Text Color */
+  /*color: #5c2a54; /* Dopamine Background Color */
+  border-color: #a0d2a8; /* Dopamine Border Color */
+  border-radius: 0; /* No rounded corners */
+}
+
+.active {
+  text-decoration: underline;
+  color: #9ca3af;
+}
+
+/* Add this style for the dropdown */
+.group .absolute {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.group:hover .absolute {
+  opacity: 1;
+}
+
+@font-face {
+  font-family: "Formera Regular"; /* Replace with your font name */
+  src: url("/fonts/Formera-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Formera Light"; /* Replace with your font name */
+  src: url("/fonts/Formera-Light.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
