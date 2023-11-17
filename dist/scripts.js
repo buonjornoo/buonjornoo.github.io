@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function setActiveLink() {
   // Get the current path
   const path = window.location.pathname;
-  // Extract the page id from the filename
-  const pageId = path.split("/").pop().split(".")[0];
+  // Extract the last directory name from the path
+  const pageId = path.split("/").filter(Boolean).slice(-1)[0];
 
   // Set the active class on the current navigation link
   $(`a[data-page-id=${pageId}]`).addClass("active");
@@ -23,10 +23,10 @@ function setActiveLink() {
 
 // Load the navbar and footer, then set the active link
 function loadNavAndFooter() {
-  $("#nav-placeholder").load("navbar.html", function () {
+  $("#nav-placeholder").load("/navbar/index.html", function () {
     setActiveLink(); // Set active link after navbar is loaded
   });
-  $("#footer-placeholder").load("footer.html");
+  $("#footer-placeholder").load("/footer/index.html");
 }
 
 // Call the function on page load
