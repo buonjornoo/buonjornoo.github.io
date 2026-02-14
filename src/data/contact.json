@@ -1,0 +1,36 @@
+{
+  "intro": "Let's connect. I'm always happy to chat about design, product, or new opportunities.",
+  "links": [
+    {
+      "label": "Email",
+      "value": "jorne@siebrands.com",
+      "url": "mailto:jorne@siebrands.com"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/jornemarc",
+      "url": "https://www.linkedin.com/in/jornemarc/"
+    },
+    {
+      "label": "GitHub",
+      "value": "github.com/buonjornoo",
+      "url": "https://github.com/buonjornoo"
+    },
+    {
+      "label": "Instagram",
+      "value": "@buonjornoo",
+      "url": "https://instagram.com/buonjornoo"
+    },
+    {
+      "label": "Strava",
+      "value": "strava.com/athletes/115727288",
+      "url": "https://www.strava.com/athletes/115727288"
+    },
+    {
+      "label": "Komoot",
+      "value": "komoot.de/user/1065377371788",
+      "url": "https://www.komoot.de/user/1065377371788"
+    }
+  ],
+  "footer": "Based in Frankfurt am Main, Germany."
+}

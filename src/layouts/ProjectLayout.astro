@@ -1,0 +1,112 @@
+---
+import PageLayout from './PageLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import Separator from '../components/teletext/Separator.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    subtitle?: string;
+    heroImage?: string;
+    pageNumber?: string;
+    archive?: boolean;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<PageLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  pageNumber={frontmatter.pageNumber ?? '200'}
+  headerBg="bg-teletext-green"
+  headerText="text-teletext-black"
+>
+  <article>
+    <section class="mb-[2ch]">
+      <DoubleHeight as="h1" color="text-teletext-yellow">{frontmatter.title}</DoubleHeight>
+      {frontmatter.subtitle && (
+        <p class="text-teletext-cyan mt-[1ch]">{frontmatter.subtitle}</p>
+      )}
+      {frontmatter.archive && (
+        <p class="text-teletext-white/60 text-teletext-sm mt-[0.5ch]">(Archive)</p>
+      )}
+    </section>
+
+    {frontmatter.heroImage && (
+      <img src={frontmatter.heroImage} alt={frontmatter.title} class="w-full mb-[2ch]" loading="lazy" />
+    )}
+
+    <Separator color="text-teletext-green" char="─" />
+
+    <div class="prose-teletext my-[2ch]">
+      <slot />
+    </div>
+
+    <Separator color="text-teletext-green" char="─" />
+
+    <nav class="mt-[2ch]">
+      <a href="/projects/" class="text-teletext-cyan hover:text-teletext-yellow">← Back to Projects</a>
+    </nav>
+  </article>
+</PageLayout>
+
+<style>
+  .prose-teletext :global(h2) {
+    color: var(--color-teletext-yellow);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+  .prose-teletext :global(h3) {
+    color: var(--color-teletext-cyan);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  .prose-teletext :global(p) {
+    margin-bottom: 1em;
+    line-height: 1.5;
+  }
+  .prose-teletext :global(ul),
+  .prose-teletext :global(ol) {
+    margin-bottom: 1em;
+    padding-left: 2ch;
+  }
+  .prose-teletext :global(li) {
+    margin-bottom: 0.25em;
+  }
+  .prose-teletext :global(li::marker) {
+    color: var(--color-teletext-green);
+  }
+  .prose-teletext :global(strong) {
+    color: var(--color-teletext-yellow);
+    font-weight: 700;
+  }
+  .prose-teletext :global(img) {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+  }
+  .prose-teletext :global(figure) {
+    margin: 2em 0;
+  }
+  .prose-teletext :global(figcaption) {
+    color: var(--color-teletext-green);
+    font-size: 0.875rem;
+    margin-top: 0.5em;
+  }
+  .prose-teletext :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-teletext-white);
+    opacity: 0.3;
+    margin: 2em 0;
+  }
+  .prose-teletext :global(iframe) {
+    max-width: 100%;
+  }
+</style>

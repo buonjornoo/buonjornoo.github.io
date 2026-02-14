@@ -2,12 +2,17 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 import Separator from '../components/teletext/Separator.astro';
+import { getEntry, render } from 'astro:content';
+
+const about = await getEntry('pages', 'about');
+if (!about) throw new Error('About page content not found');
+const { Content } = await render(about);
 ---
 
 <PageLayout
-  title="Home"
-  description="Jorne Marc Siebrands — UX Designer & Product Manager crafting user-centered digital experiences from Frankfurt."
-  pageNumber="100"
+  title={about.data.title}
+  description={about.data.description}
+  pageNumber={about.data.pageNumber}
 >
   <!-- Welcome -->
   <section class="mb-[2ch]">
@@ -19,41 +24,33 @@ import Separator from '../components/teletext/Separator.astro';
 
   <Separator color="text-teletext-cyan" char="─" />
 
-  <!-- About -->
-  <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow font-bold mb-[1ch]">About Me</h2>
-
-    <p class="mb-[1ch]">
-      Hi, I'm Jorne. In my dual roles as a UX Designer and Product Manager, I bridge the gap between technology, user needs, and business goals.
-    </p>
-
-    <p class="mb-[1ch]">
-      I've shaped significant features like Bikemap's Pause Mode and unified disparate web tools into a singular, user-friendly app. At KION, a proposed robot became a simple, cost-saving scanner — thanks to targeted user research.
-    </p>
-
-    <p class="mb-[1ch]">
-      My Master's thesis blended storytelling with augmented reality to create an immersive exploration of Frankfurt, turning the city into a canvas for hidden art and narratives.
-    </p>
-
-    <p class="mb-[1ch]">
-      I'm driven by a vision to create humane technology — crafting experiences that not only meet needs but bring smiles to users' faces.
-    </p>
-
-    <p class="mb-[1ch]">
-      Away from the screen, I'm on rugby fields, lifting weights, or cycling endurance rides over 100km.
-    </p>
-  </section>
-
-  <Separator color="text-teletext-green" char="─" />
-
-  <!-- CTA -->
-  <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow font-bold mb-[1ch]">Get in Touch</h2>
-    <p class="mb-[1ch]">
-      Let's start a conversation on
-      <a href="https://www.linkedin.com/in/jornemarc/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      or at
-      <a href="mailto:jorne@siebrands.com">jorne@siebrands.com</a>.
-    </p>
-  </section>
+  <div class="prose-teletext my-[2ch]">
+    <Content />
+  </div>
 </PageLayout>
+
+<style>
+  .prose-teletext :global(h2) {
+    color: var(--color-teletext-yellow);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+  .prose-teletext :global(p) {
+    margin-bottom: 1em;
+    line-height: 1.5;
+  }
+  .prose-teletext :global(a) {
+    color: var(--color-teletext-cyan);
+  }
+  .prose-teletext :global(a:hover) {
+    color: var(--color-teletext-yellow);
+  }
+  .prose-teletext :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-teletext-green);
+    opacity: 0.5;
+    margin: 2em 0;
+  }
+</style>
