@@ -1,0 +1,42 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PostCard from '../../components/blog/PostCard.astro';
+import DoubleHeight from '../../components/teletext/DoubleHeight.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<PageLayout
+  title="Blog"
+  description="Thoughts on UX design, product management, and technology by Jorne Marc Siebrands."
+  pageNumber="300"
+  headerBg="bg-teletext-cyan"
+  headerText="text-teletext-black"
+>
+  <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-yellow">Blog</DoubleHeight>
+    <p class="text-teletext-cyan mt-[1ch]">
+      Thoughts on design, product, and technology.
+    </p>
+  </section>
+
+  {sortedPosts.length > 0 ? (
+    <div>
+      {sortedPosts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  ) : (
+    <p class="text-teletext-white/60">No posts yet. Check back soon.</p>
+  )}
+</PageLayout>

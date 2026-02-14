@@ -1,0 +1,12 @@
+---
+const { as: Tag = 'span', color = '', class: className = '' } = Astro.props as {
+  as?: string;
+  color?: string;
+  class?: string;
+};
+const Element = Tag as any;
+---
+
+<Element class:list={['teletext-double-height font-bold', color, className]}>
+  <slot />
+</Element>

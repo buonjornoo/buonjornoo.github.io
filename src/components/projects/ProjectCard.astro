@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  techStack: string[];
+  coverImage?: string;
+  slug: string;
+}
+
+const { title, description, techStack, coverImage, slug } = Astro.props;
+---
+
+<a href={`/projects/${slug}/`} class="block group">
+  <article class="border border-teletext-white/30 p-[1ch] hover:border-teletext-yellow transition-colors">
+    {coverImage && (
+      <img
+        src={coverImage}
+        alt={title}
+        class="w-full h-32 object-cover mb-[1ch] teletext-pixelated"
+        loading="lazy"
+      />
+    )}
+    <h3 class="text-teletext-cyan font-bold group-hover:text-teletext-yellow transition-colors">
+      {title}
+    </h3>
+    <p class="text-teletext-white mt-[0.5ch] text-teletext-sm">{description}</p>
+    <div class="flex flex-wrap gap-[1ch] mt-[1ch]">
+      {techStack.map((tech) => (
+        <span class="text-teletext-magenta text-teletext-sm">[{tech}]</span>
+      ))}
+    </div>
+  </article>
+</a>

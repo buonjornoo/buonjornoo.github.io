@@ -1,0 +1,30 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  coverImage?: string;
+  slug: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-[2ch]">
+  {projects.map((project) => (
+    <ProjectCard
+      title={project.title}
+      description={project.description}
+      techStack={project.techStack}
+      coverImage={project.coverImage}
+      slug={project.slug}
+    />
+  ))}
+</div>

@@ -1,0 +1,65 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import Separator from '../components/teletext/Separator.astro';
+---
+
+<PageLayout
+  title="Contact"
+  description="Get in touch with Jorne Marc Siebrands — UX Designer & Product Manager based in Frankfurt."
+  pageNumber="400"
+  headerBg="bg-teletext-cyan"
+  headerText="text-teletext-black"
+>
+  <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-yellow">Contact</DoubleHeight>
+    <p class="text-teletext-cyan mt-[1ch]">
+      Let's connect. I'm always happy to chat about design, product, or new opportunities.
+    </p>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <ul class="list-none space-y-[1ch]">
+      <li>
+        <span class="text-teletext-green font-bold">Email</span>
+        <br />
+        <a href="mailto:jorne@siebrands.com">jorne@siebrands.com</a>
+      </li>
+      <li>
+        <span class="text-teletext-green font-bold">LinkedIn</span>
+        <br />
+        <a href="https://www.linkedin.com/in/jornemarc/" target="_blank" rel="noopener noreferrer">linkedin.com/in/jornemarc</a>
+      </li>
+      <li>
+        <span class="text-teletext-green font-bold">GitHub</span>
+        <br />
+        <a href="https://github.com/buonjornoo" target="_blank" rel="noopener noreferrer">github.com/buonjornoo</a>
+      </li>
+      <li>
+        <span class="text-teletext-green font-bold">Instagram</span>
+        <br />
+        <a href="https://instagram.com/buonjornoo" target="_blank" rel="noopener noreferrer">@buonjornoo</a>
+      </li>
+      <li>
+        <span class="text-teletext-green font-bold">Strava</span>
+        <br />
+        <a href="https://www.strava.com/athletes/115727288" target="_blank" rel="noopener noreferrer">strava.com/athletes/115727288</a>
+      </li>
+      <li>
+        <span class="text-teletext-green font-bold">Komoot</span>
+        <br />
+        <a href="https://www.komoot.de/user/1065377371788" target="_blank" rel="noopener noreferrer">komoot.de/user/1065377371788</a>
+      </li>
+    </ul>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <p class="text-teletext-white/80">
+      Based in Frankfurt am Main, Germany.
+    </p>
+  </section>
+</PageLayout>

@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const { title, description, ogImage, canonicalURL } = Astro.props;
+const siteTitle = `${title} | Jorne Marc Siebrands`;
+const canonical = canonicalURL || new URL(Astro.url.pathname, Astro.site).href;
+const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{siteTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content="Jorne Marc Siebrands" />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={siteTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="Jorne Marc Siebrands" />
+{ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={siteTitle} />
+<meta name="twitter:description" content={description} />
+{ogImageURL && <meta name="twitter:image" content={ogImageURL} />}

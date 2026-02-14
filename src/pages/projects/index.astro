@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ProjectGrid from '../../components/projects/ProjectGrid.astro';
+import DoubleHeight from '../../components/teletext/DoubleHeight.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects
+  .map((p) => p.data)
+  .sort((a, b) => a.order - b.order);
+---
+
+<PageLayout
+  title="Projects"
+  description="Explore UX Design and Product Management projects by Jorne Marc Siebrands — cycling apps, AR technology, and more."
+  pageNumber="200"
+  headerBg="bg-teletext-green"
+  headerText="text-teletext-black"
+>
+  <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-yellow">My Projects</DoubleHeight>
+    <p class="text-teletext-cyan mt-[1ch]">
+      A selection of projects in UX Design and Product Management.
+    </p>
+  </section>
+
+  <ProjectGrid projects={sortedProjects} />
+</PageLayout>

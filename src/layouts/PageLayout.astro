@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import MainNav from '../components/navigation/MainNav.astro';
+import PageHeader from '../components/teletext/PageHeader.astro';
+import PageFooter from '../components/teletext/PageFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pageNumber?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  headerBg?: string;
+  headerText?: string;
+}
+
+const {
+  title,
+  description,
+  pageNumber,
+  ogImage,
+  canonicalURL,
+  headerBg = 'bg-teletext-yellow',
+  headerText = 'text-teletext-black',
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} ogImage={ogImage} canonicalURL={canonicalURL}>
+  <MainNav />
+  <PageHeader title={title} pageNumber={pageNumber} bgColor={headerBg} textColor={headerText} />
+
+  <main id="main-content" class="flex-1 w-full max-w-[60ch] mx-auto px-[1ch] py-[2ch]">
+    <slot />
+  </main>
+
+  <PageFooter />
+</BaseLayout>

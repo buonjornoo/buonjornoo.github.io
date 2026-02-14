@@ -1,0 +1,118 @@
+---
+import PageLayout from './PageLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    updatedDate?: Date;
+    tags?: string[];
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+const formattedUpdated = frontmatter.updatedDate
+  ? new Date(frontmatter.updatedDate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    })
+  : null;
+---
+
+<PageLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  pageNumber="300"
+  headerBg="bg-teletext-cyan"
+  headerText="text-teletext-black"
+>
+  <article>
+    <div class="mb-[2ch]">
+      <p class="text-teletext-green text-teletext-sm">{formattedDate}</p>
+      {formattedUpdated && (
+        <p class="text-teletext-green text-teletext-sm">Updated: {formattedUpdated}</p>
+      )}
+      {frontmatter.tags && frontmatter.tags.length > 0 && (
+        <div class="flex flex-wrap gap-[1ch] mt-[1ch]">
+          {frontmatter.tags.map((tag) => (
+            <span class="text-teletext-magenta text-teletext-sm">[{tag}]</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="prose-teletext">
+      <slot />
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .prose-teletext :global(h2) {
+    color: var(--color-teletext-yellow);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+  .prose-teletext :global(h3) {
+    color: var(--color-teletext-cyan);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  .prose-teletext :global(p) {
+    margin-bottom: 1em;
+    line-height: 1.5;
+  }
+  .prose-teletext :global(ul),
+  .prose-teletext :global(ol) {
+    margin-bottom: 1em;
+    padding-left: 2ch;
+  }
+  .prose-teletext :global(li) {
+    margin-bottom: 0.25em;
+  }
+  .prose-teletext :global(li::marker) {
+    color: var(--color-teletext-green);
+  }
+  .prose-teletext :global(code) {
+    color: var(--color-teletext-green);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0 0.5ch;
+  }
+  .prose-teletext :global(pre) {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1ch;
+    margin-bottom: 1em;
+    overflow-x: auto;
+  }
+  .prose-teletext :global(blockquote) {
+    border-left: 2px solid var(--color-teletext-yellow);
+    padding-left: 2ch;
+    color: var(--color-teletext-cyan);
+    margin-bottom: 1em;
+  }
+  .prose-teletext :global(strong) {
+    color: var(--color-teletext-yellow);
+    font-weight: 700;
+  }
+  .prose-teletext :global(img) {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+  }
+  .prose-teletext :global(figcaption) {
+    color: var(--color-teletext-green);
+    font-size: 0.875rem;
+    margin-top: 0.5em;
+  }
+</style>

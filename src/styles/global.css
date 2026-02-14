@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ===== TELETEXT FONT ===== */
+@font-face {
+  font-family: "Bedstead";
+  src: url("/fonts/bedstead.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bedstead";
+  src: url("/fonts/bedstead-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== TAILWIND v4 THEME ===== */
+@theme {
+  --color-teletext-black: #000000;
+  --color-teletext-red: #FF0000;
+  --color-teletext-green: #00FF00;
+  --color-teletext-yellow: #FFFF00;
+  --color-teletext-blue: #0000FF;
+  --color-teletext-magenta: #FF00FF;
+  --color-teletext-cyan: #00FFFF;
+  --color-teletext-white: #FFFFFF;
+
+  --font-teletext: "Bedstead", "Courier New", "Courier", monospace;
+
+  --font-size-teletext-sm: 0.875rem;
+  --font-size-teletext-base: 1rem;
+  --font-size-teletext-lg: 1.25rem;
+  --font-size-teletext-double: 2rem;
+
+  --animate-blink: blink 1s step-start infinite;
+  --animate-page-in: page-in 0.3s steps(4) forwards;
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes page-in {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}
+
+/* ===== BASE STYLES ===== */
+@layer base {
+  html {
+    font-family: var(--font-teletext);
+    background-color: var(--color-teletext-black);
+    color: var(--color-teletext-white);
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    font-smooth: never;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+
+  ::selection {
+    background-color: var(--color-teletext-cyan);
+    color: var(--color-teletext-black);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teletext-yellow);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: var(--color-teletext-cyan);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-teletext-yellow);
+  }
+}
+
+/* ===== CUSTOM UTILITIES ===== */
+@utility teletext-double-height {
+  font-size: 2em;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+@utility teletext-pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@utility teletext-scanline {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.15) 2px
+  );
+  pointer-events: none;
+}

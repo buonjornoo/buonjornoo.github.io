@@ -1,0 +1,33 @@
+---
+interface FooterLink {
+  label: string;
+  href: string;
+  color: string;
+}
+
+interface Props {
+  links?: FooterLink[];
+}
+
+const defaultLinks: FooterLink[] = [
+  { label: 'Home', href: '/', color: 'bg-teletext-red' },
+  { label: 'Projects', href: '/projects/', color: 'bg-teletext-green' },
+  { label: 'Blog', href: '/blog/', color: 'bg-teletext-yellow' },
+  { label: 'Contact', href: '/contact/', color: 'bg-teletext-cyan' },
+];
+
+const { links = defaultLinks } = Astro.props;
+---
+
+<footer class="w-full mt-auto">
+  <nav aria-label="Page navigation" class="flex">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class={`flex-1 text-center px-[1ch] py-1 font-teletext font-bold text-teletext-black ${link.color} hover:opacity-80 transition-opacity`}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</footer>

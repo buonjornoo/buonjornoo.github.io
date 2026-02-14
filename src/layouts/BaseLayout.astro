@@ -1,0 +1,45 @@
+---
+import '../styles/global.css';
+import SEOHead from '../components/seo/SEOHead.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const { title, description, ogImage, canonicalURL } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      canonicalURL={canonicalURL}
+    />
+    <JsonLd />
+
+    <!-- Google Analytics -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-9T9M59GHTP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9T9M59GHTP');
+    </script>
+
+    <!-- Preload font -->
+    <link rel="preload" href="/fonts/bedstead.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body class="min-h-screen flex flex-col bg-teletext-black text-teletext-white font-teletext">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-[2ch] focus:py-2 focus:bg-teletext-yellow focus:text-teletext-black font-bold">
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>

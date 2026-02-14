@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import PageFooter from '../components/teletext/PageFooter.astro';
+---
+
+<BaseLayout title="Page Not Found" description="The requested page could not be found.">
+  <main class="flex-1 flex flex-col items-center justify-center px-[1ch] py-[4ch] text-center">
+    <DoubleHeight as="p" color="text-teletext-red">PAGE NOT FOUND</DoubleHeight>
+
+    <p class="text-teletext-yellow mt-[2ch] text-teletext-lg font-bold">
+      Error 404
+    </p>
+
+    <p class="text-teletext-white mt-[2ch] max-w-[40ch]">
+      The page you requested is not available. It may have been moved or no longer exists.
+    </p>
+
+    <p class="text-teletext-cyan mt-[2ch]">
+      Please try one of the pages below.
+    </p>
+  </main>
+
+  <PageFooter />
+</BaseLayout>

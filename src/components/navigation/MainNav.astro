@@ -1,0 +1,53 @@
+---
+import NavLink from './NavLink.astro';
+---
+
+<nav aria-label="Main navigation" class="w-full bg-teletext-black border-b border-teletext-white/20">
+  <div class="max-w-[60ch] mx-auto flex flex-wrap items-center justify-between px-[1ch] py-1">
+    <a href="/" class="font-teletext font-bold text-teletext-white hover:text-teletext-yellow transition-colors">
+      Jorne Marc Siebrands
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-0">
+      <NavLink href="/" color="text-teletext-red">Home</NavLink>
+      <NavLink href="/projects/" color="text-teletext-green">Projects</NavLink>
+      <NavLink href="/blog/" color="text-teletext-yellow">Blog</NavLink>
+      <NavLink href="/contact/" color="text-teletext-cyan">Contact</NavLink>
+    </div>
+
+    <!-- Mobile toggle button -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden font-teletext text-teletext-white hover:text-teletext-yellow p-1"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle navigation menu"
+    >
+      ☰ Menu
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden flex-col items-center gap-2 pb-4"
+  >
+    <NavLink href="/" color="text-teletext-red">Home</NavLink>
+    <NavLink href="/projects/" color="text-teletext-green">Projects</NavLink>
+    <NavLink href="/blog/" color="text-teletext-yellow">Blog</NavLink>
+    <NavLink href="/contact/" color="text-teletext-cyan">Contact</NavLink>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('flex');
+    menu?.classList.toggle('hidden', isOpen);
+    menu?.classList.toggle('flex', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

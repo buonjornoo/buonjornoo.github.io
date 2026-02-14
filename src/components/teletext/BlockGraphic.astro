@@ -1,0 +1,15 @@
+---
+interface Props {
+  pattern?: string;
+  color?: string;
+  class?: string;
+}
+
+const {
+  pattern = '▀▄█▌▐░▒▓',
+  color = 'text-teletext-white',
+  class: className = '',
+} = Astro.props;
+---
+
+<span class:list={['font-teletext select-none', color, className]} aria-hidden="true">{pattern}</span>

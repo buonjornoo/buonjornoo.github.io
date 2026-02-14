@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://siebrands.com/sitemap-index.xml

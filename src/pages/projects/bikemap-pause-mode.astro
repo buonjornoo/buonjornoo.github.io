@@ -1,0 +1,110 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DoubleHeight from '../../components/teletext/DoubleHeight.astro';
+import Separator from '../../components/teletext/Separator.astro';
+---
+
+<PageLayout
+  title="Bikemap Pause Mode"
+  description="Adding pause functionality to cycling recordings — a UX Design and Product Management case study."
+  pageNumber="202"
+  headerBg="bg-teletext-green"
+  headerText="text-teletext-black"
+>
+  <article>
+    <section class="mb-[2ch]">
+      <DoubleHeight as="h1" color="text-teletext-yellow">Pause Mode</DoubleHeight>
+      <p class="text-teletext-cyan mt-[1ch]">
+        Enabling users to pause recordings during cycling breaks for better data quality.
+      </p>
+    </section>
+
+    <img src="/img/pauseMode/pauseModeHero.png" alt="Bikemap Pause Mode hero" class="w-full mb-[2ch]" loading="lazy" />
+
+    <Separator color="text-teletext-green" char="─" />
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Introduction</h2>
+      <p class="mb-[1ch]">
+        As Product Manager at Bikemap, I undertook the "Pause Mode" project — the most requested feature from our users. The absence of pause functionality led to inaccuracies in ride recordings, resulting in unrealistic performance data and visible GPS spikes on routes.
+      </p>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Timeline & Team</h2>
+      <p class="mb-[1ch]">
+        Kicked off in December 2022 with planning and pitching. Successfully shipped in February 2023. Collaborated with designers, iOS/Android developers, backend developers, and business stakeholders.
+      </p>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Goals</h2>
+      <ul class="list-none space-y-[0.5ch]">
+        <li><span class="text-teletext-green">▸</span> Improve recorded route data quality</li>
+        <li><span class="text-teletext-green">▸</span> Keep scope minimal given time constraints</li>
+        <li><span class="text-teletext-green">▸</span> Reduce support requests about missing pause</li>
+        <li><span class="text-teletext-green">▸</span> Boost user satisfaction (most requested feature)</li>
+        <li><span class="text-teletext-green">▸</span> Target 20% adoption rate</li>
+      </ul>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Research</h2>
+      <p class="mb-[1ch]">
+        Monitored customer requests through Canny. Guerilla user interviews and stakeholder discussions validated the need. Users wanted to pause for eating, resting, and exploring. Accurate performance data and battery conservation were key concerns.
+      </p>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Design Iteration</h2>
+      <figure class="my-[2ch]">
+        <img src="/img/pauseMode/Legacy Bike Computer.png" alt="Legacy Bike Computer before Pause Mode" class="w-full" loading="lazy" />
+        <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+          The legacy Bike Computer before Pause Mode.
+        </figcaption>
+      </figure>
+      <figure class="my-[2ch]">
+        <img src="/img/pauseMode/Pause Mode Wireframes.png" alt="Early wireframes of Pause Button designs" class="w-full" loading="lazy" />
+        <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+          Early wireframes exploring Pause Button placement and size.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Testing</h2>
+      <p class="mb-[1ch]">
+        Validated user flows using Overflow. Usability testing with high-fidelity Figma prototypes refined the design. Adjustments based on feedback: refined copywriting, extended notification timeout, deferred auto-pause for roadmap.
+      </p>
+      <figure class="my-[2ch]">
+        <img src="/img/pauseMode/Pause Mode Prototype.gif" alt="Animated prototype of Pause Mode" class="w-full" loading="lazy" />
+        <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+          Complete flow prototype: pausing, resuming, and ending.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Results</h2>
+      <ul class="list-none space-y-[0.5ch]">
+        <li><span class="text-teletext-green">▸</span> Positive user reactions and app reinstalls</li>
+        <li><span class="text-teletext-green">▸</span> Significant decrease in support requests</li>
+        <li><span class="text-teletext-green">▸</span> ~20% adoption rate as expected</li>
+        <li><span class="text-teletext-green">▸</span> Plans for auto-pause in future iterations</li>
+      </ul>
+    </section>
+
+    <section class="my-[2ch]">
+      <h2 class="text-teletext-yellow font-bold mb-[1ch]">Lessons Learned</h2>
+      <p class="mb-[1ch]">
+        Shipping with some limitations can be better than delaying perfection. Getting engineers excited about challenging features requires strong communication and C-Level support. The seemingly simple feature hid underlying complexities.
+      </p>
+    </section>
+
+    <Separator color="text-teletext-green" char="─" />
+
+    <nav class="mt-[2ch]">
+      <a href="/projects/" class="text-teletext-cyan hover:text-teletext-yellow">← Back to Projects</a>
+    </nav>
+  </article>
+</PageLayout>

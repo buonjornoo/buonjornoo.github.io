@@ -1,0 +1,59 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import Separator from '../components/teletext/Separator.astro';
+---
+
+<PageLayout
+  title="Home"
+  description="Jorne Marc Siebrands — UX Designer & Product Manager crafting user-centered digital experiences from Frankfurt."
+  pageNumber="100"
+>
+  <!-- Welcome -->
+  <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-yellow">Jorne</DoubleHeight>
+    <p class="text-teletext-cyan mt-[1ch]">
+      Empathic UX Designer,<br />Pragmatic Product Manager
+    </p>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- About -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold mb-[1ch]">About Me</h2>
+
+    <p class="mb-[1ch]">
+      Hi, I'm Jorne. In my dual roles as a UX Designer and Product Manager, I bridge the gap between technology, user needs, and business goals.
+    </p>
+
+    <p class="mb-[1ch]">
+      I've shaped significant features like Bikemap's Pause Mode and unified disparate web tools into a singular, user-friendly app. At KION, a proposed robot became a simple, cost-saving scanner — thanks to targeted user research.
+    </p>
+
+    <p class="mb-[1ch]">
+      My Master's thesis blended storytelling with augmented reality to create an immersive exploration of Frankfurt, turning the city into a canvas for hidden art and narratives.
+    </p>
+
+    <p class="mb-[1ch]">
+      I'm driven by a vision to create humane technology — crafting experiences that not only meet needs but bring smiles to users' faces.
+    </p>
+
+    <p class="mb-[1ch]">
+      Away from the screen, I'm on rugby fields, lifting weights, or cycling endurance rides over 100km.
+    </p>
+  </section>
+
+  <Separator color="text-teletext-green" char="─" />
+
+  <!-- CTA -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold mb-[1ch]">Get in Touch</h2>
+    <p class="mb-[1ch]">
+      Let's start a conversation on
+      <a href="https://www.linkedin.com/in/jornemarc/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      or at
+      <a href="mailto:jorne@siebrands.com">jorne@siebrands.com</a>.
+    </p>
+  </section>
+</PageLayout>

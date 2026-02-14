@@ -1,0 +1,22 @@
+---
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jorne Marc Siebrands",
+  "url": "https://siebrands.com",
+  "email": "jorne@siebrands.com",
+  "jobTitle": "UX Designer & Product Manager",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Frankfurt",
+    "addressCountry": "DE"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/jornemarc/",
+    "https://github.com/buonjornoo",
+    "https://instagram.com/buonjornoo"
+  ]
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

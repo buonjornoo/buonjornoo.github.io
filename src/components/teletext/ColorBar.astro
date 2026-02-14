@@ -1,0 +1,10 @@
+---
+interface Props {
+  color?: string;
+  height?: string;
+}
+
+const { color = 'bg-teletext-white', height = 'h-0.5' } = Astro.props;
+---
+
+<div class={`w-full ${color} ${height}`} role="separator" aria-hidden="true"></div>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  color?: string;
+  char?: string;
+}
+
+const { color = 'text-teletext-white', char = '━' } = Astro.props;
+---
+
+<div class={`w-full overflow-hidden ${color} font-teletext select-none`} role="separator" aria-hidden="true">
+  {char.repeat(80)}
+</div>
