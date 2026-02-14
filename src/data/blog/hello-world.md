@@ -3,6 +3,7 @@ title: "Hello World"
 description: "Welcome to my new teletext-styled blog. A fresh start with a retro aesthetic."
 pubDate: 2026-02-14
 tags: ["meta", "teletext", "design"]
+pageNumber: "301"
 ---
 
 ## Welcome

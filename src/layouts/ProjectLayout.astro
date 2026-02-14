@@ -21,8 +21,6 @@ const { frontmatter } = Astro.props;
   title={frontmatter.title}
   description={frontmatter.description}
   pageNumber={frontmatter.pageNumber ?? '200'}
-  headerBg="bg-teletext-green"
-  headerText="text-teletext-black"
 >
   <article>
     <section class="mb-[2ch]">
@@ -44,12 +42,6 @@ const { frontmatter } = Astro.props;
     <div class="prose-teletext my-[2ch]">
       <slot />
     </div>
-
-    <Separator color="text-teletext-green" char="─" />
-
-    <nav class="mt-[2ch]">
-      <a href="/projects/" class="text-teletext-cyan hover:text-teletext-yellow">← Back to Projects</a>
-    </nav>
   </article>
 </PageLayout>
 

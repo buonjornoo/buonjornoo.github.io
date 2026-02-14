@@ -114,3 +114,198 @@
   );
   pointer-events: none;
 }
+
+/* ===== CEEFAX HEADER ===== */
+.ceefax-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.25rem 1ch;
+  background-color: var(--color-teletext-black);
+  border-bottom: 2px solid var(--color-teletext-white);
+  font-family: var(--font-teletext);
+  font-weight: 700;
+}
+
+.ceefax-service-name {
+  color: var(--color-teletext-cyan);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.ceefax-page-number {
+  all: unset;
+  cursor: pointer;
+  color: var(--color-teletext-white);
+  font-family: var(--font-teletext);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 0 1ch;
+}
+
+.ceefax-page-number:hover {
+  color: var(--color-teletext-yellow);
+}
+
+#page-number-display.typing {
+  color: var(--color-teletext-green);
+}
+
+#page-number-display.navigating {
+  color: var(--color-teletext-yellow);
+}
+
+.ceefax-clock {
+  color: var(--color-teletext-yellow);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===== FASTEXT FOOTER ===== */
+.ceefax-fastext {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  width: 100%;
+}
+
+.fastext-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5ch;
+  padding: 0.3rem 0.5ch;
+  font-family: var(--font-teletext);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-teletext-black);
+  text-decoration: none;
+  transition: opacity 0.1s;
+}
+
+.fastext-btn:hover {
+  opacity: 0.85;
+  color: var(--color-teletext-black);
+}
+
+.fastext-red { background-color: var(--color-teletext-red); }
+.fastext-green { background-color: var(--color-teletext-green); }
+.fastext-yellow { background-color: var(--color-teletext-yellow); }
+.fastext-cyan { background-color: var(--color-teletext-cyan); }
+
+.fastext-label {
+  display: inline;
+}
+
+.fastext-number {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .fastext-number { display: none; }
+  .fastext-btn { font-size: 0.75rem; }
+}
+
+/* ===== CRT SCANLINE OVERLAY ===== */
+.crt-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-scanlines { display: none; }
+}
+
+/* ===== MOBILE PAGE INPUT DIALOG ===== */
+.page-input-dialog {
+  background: var(--color-teletext-black);
+  border: 2px solid var(--color-teletext-yellow);
+  color: var(--color-teletext-white);
+  font-family: var(--font-teletext);
+  padding: 2ch;
+  max-width: 20ch;
+}
+
+.page-input-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.page-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1ch;
+  align-items: center;
+}
+
+.page-input-field {
+  background: var(--color-teletext-black);
+  border: 1px solid var(--color-teletext-white);
+  color: var(--color-teletext-green);
+  font-family: var(--font-teletext);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  width: 6ch;
+  padding: 0.5ch;
+  letter-spacing: 0.2em;
+}
+
+.page-input-field:focus {
+  outline: 2px solid var(--color-teletext-yellow);
+  outline-offset: 2px;
+}
+
+.page-input-field::placeholder {
+  color: var(--color-teletext-white);
+  opacity: 0.3;
+}
+
+.page-input-actions {
+  display: flex;
+  gap: 2ch;
+}
+
+.page-input-go {
+  background: var(--color-teletext-green);
+  color: var(--color-teletext-black);
+  font-family: var(--font-teletext);
+  font-weight: 700;
+  padding: 0.25rem 2ch;
+  border: none;
+  cursor: pointer;
+}
+
+.page-input-go:hover {
+  background: var(--color-teletext-yellow);
+}
+
+.page-input-cancel {
+  background: transparent;
+  color: var(--color-teletext-red);
+  font-family: var(--font-teletext);
+  font-weight: 700;
+  padding: 0.25rem 2ch;
+  border: 1px solid var(--color-teletext-red);
+  cursor: pointer;
+}
+
+.page-input-cancel:hover {
+  background: var(--color-teletext-red);
+  color: var(--color-teletext-black);
+}

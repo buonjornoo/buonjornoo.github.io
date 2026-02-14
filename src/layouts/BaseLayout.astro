@@ -2,15 +2,18 @@
 import '../styles/global.css';
 import SEOHead from '../components/seo/SEOHead.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
+import pageRoutes from '../data/pageRoutes.json';
 
 interface Props {
   title: string;
   description: string;
+  pageNumber?: string;
   ogImage?: string;
   canonicalURL?: string;
 }
 
-const { title, description, ogImage, canonicalURL } = Astro.props;
+const { title, description, pageNumber = '100', ogImage, canonicalURL } = Astro.props;
+const routesJson = JSON.stringify(pageRoutes);
 ---
 
 <!doctype html>
@@ -40,6 +43,137 @@ const { title, description, ogImage, canonicalURL } = Astro.props;
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-[2ch] focus:py-2 focus:bg-teletext-yellow focus:text-teletext-black font-bold">
       Skip to content
     </a>
-    <slot />
+
+    <!-- Ceefax header row -->
+    <header class="ceefax-header">
+      <span class="ceefax-service-name">SIEBRANDS</span>
+      <button id="page-number-btn" class="ceefax-page-number" aria-label="Enter page number">
+        P<span id="page-number-display">{pageNumber}</span>
+      </button>
+      <span id="clock" class="ceefax-clock"></span>
+    </header>
+
+    <!-- Page content -->
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Fastext footer -->
+    <nav class="ceefax-fastext" aria-label="Quick navigation">
+      <a href="/" class="fastext-btn fastext-red">
+        <span class="fastext-label">Home</span>
+        <span class="fastext-number">100</span>
+      </a>
+      <a href="/projects/" class="fastext-btn fastext-green">
+        <span class="fastext-label">Projects</span>
+        <span class="fastext-number">200</span>
+      </a>
+      <a href="/blog/" class="fastext-btn fastext-yellow">
+        <span class="fastext-label">Blog</span>
+        <span class="fastext-number">300</span>
+      </a>
+      <a href="/contact/" class="fastext-btn fastext-cyan">
+        <span class="fastext-label">Contact</span>
+        <span class="fastext-number">400</span>
+      </a>
+    </nav>
+
+    <!-- CRT scanline overlay -->
+    <div class="crt-scanlines" aria-hidden="true"></div>
+
+    <!-- Mobile page number input dialog -->
+    <dialog id="page-input-dialog" class="page-input-dialog">
+      <form method="dialog" class="page-input-form">
+        <label for="page-input" class="text-teletext-yellow font-bold">Enter page number</label>
+        <input
+          id="page-input"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]{3}"
+          maxlength="3"
+          placeholder="___"
+          autocomplete="off"
+          class="page-input-field"
+        />
+        <div class="page-input-actions">
+          <button type="submit" class="page-input-go">Go</button>
+          <button type="button" id="page-input-cancel" class="page-input-cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Keyboard navigation + Clock -->
+    <script is:inline define:vars={{ routesJson, pageNumber }}>
+      var ROUTES = JSON.parse(routesJson);
+      var typed = '';
+      var typingTimeout;
+      var display = document.getElementById('page-number-display');
+      var currentPage = pageNumber;
+
+      // Keyboard number input
+      document.addEventListener('keydown', function(e) {
+        if (e.target.closest('input, textarea, [contenteditable]')) return;
+        if (document.getElementById('page-input-dialog').open) return;
+
+        if (e.key >= '0' && e.key <= '9') {
+          e.preventDefault();
+          typed += e.key;
+          display.textContent = typed.padEnd(3, '_');
+          display.classList.add('typing');
+          clearTimeout(typingTimeout);
+
+          if (typed.length === 3) {
+            var url = ROUTES[typed] || '/404';
+            display.classList.remove('typing');
+            display.classList.add('navigating');
+            typed = '';
+            setTimeout(function() { window.location.href = url; }, 200);
+          } else {
+            typingTimeout = setTimeout(function() {
+              typed = '';
+              display.textContent = currentPage;
+              display.classList.remove('typing');
+            }, 2000);
+          }
+        }
+      });
+
+      // Live clock
+      function updateClock() {
+        var el = document.getElementById('clock');
+        if (!el) return;
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2, '0');
+        var m = String(now.getMinutes()).padStart(2, '0');
+        var s = String(now.getSeconds()).padStart(2, '0');
+        el.textContent = h + ':' + m + ':' + s;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Mobile: tap page number to open dialog
+      document.getElementById('page-number-btn').addEventListener('click', function() {
+        var dialog = document.getElementById('page-input-dialog');
+        dialog.showModal();
+        var input = document.getElementById('page-input');
+        input.value = '';
+        input.focus();
+      });
+
+      // Dialog: submit navigates
+      document.getElementById('page-input-dialog').addEventListener('submit', function() {
+        var input = document.getElementById('page-input');
+        var val = input.value.trim();
+        if (val.length === 3 && /^\d{3}$/.test(val)) {
+          var url = ROUTES[val] || '/404';
+          window.location.href = url;
+        }
+      });
+
+      // Dialog: cancel
+      document.getElementById('page-input-cancel').addEventListener('click', function() {
+        document.getElementById('page-input-dialog').close();
+      });
+    </script>
   </body>
 </html>

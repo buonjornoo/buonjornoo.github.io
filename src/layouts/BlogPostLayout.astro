@@ -1,5 +1,6 @@
 ---
 import PageLayout from './PageLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 
 interface Props {
   frontmatter: {
@@ -8,6 +9,7 @@ interface Props {
     pubDate: Date;
     updatedDate?: Date;
     tags?: string[];
+    pageNumber?: string;
   };
 }
 
@@ -29,24 +31,25 @@ const formattedUpdated = frontmatter.updatedDate
 <PageLayout
   title={frontmatter.title}
   description={frontmatter.description}
-  pageNumber="300"
-  headerBg="bg-teletext-cyan"
-  headerText="text-teletext-black"
+  pageNumber={frontmatter.pageNumber ?? '300'}
 >
   <article>
-    <div class="mb-[2ch]">
-      <p class="text-teletext-green text-teletext-sm">{formattedDate}</p>
-      {formattedUpdated && (
-        <p class="text-teletext-green text-teletext-sm">Updated: {formattedUpdated}</p>
-      )}
-      {frontmatter.tags && frontmatter.tags.length > 0 && (
-        <div class="flex flex-wrap gap-[1ch] mt-[1ch]">
-          {frontmatter.tags.map((tag) => (
-            <span class="text-teletext-magenta text-teletext-sm">[{tag}]</span>
-          ))}
-        </div>
-      )}
-    </div>
+    <section class="mb-[2ch]">
+      <DoubleHeight as="h1" color="text-teletext-yellow">{frontmatter.title}</DoubleHeight>
+      <div class="mt-[1ch]">
+        <p class="text-teletext-green text-teletext-sm">{formattedDate}</p>
+        {formattedUpdated && (
+          <p class="text-teletext-green text-teletext-sm">Updated: {formattedUpdated}</p>
+        )}
+        {frontmatter.tags && frontmatter.tags.length > 0 && (
+          <div class="flex flex-wrap gap-[1ch] mt-[0.5ch]">
+            {frontmatter.tags.map((tag) => (
+              <span class="text-teletext-magenta text-teletext-sm">[{tag}]</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
 
     <div class="prose-teletext">
       <slot />
