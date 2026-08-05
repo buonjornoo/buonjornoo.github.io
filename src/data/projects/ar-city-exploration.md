@@ -6,8 +6,7 @@ techStack: ["Unity3D", "AR", "UX Design", "Experience Design", "Research"]
 coverImage: "/img/projects/arCityCover.png"
 heroImage: "/img/arCityExploration/raubkunst_cover.gif"
 slug: "ar-city-exploration"
-featured: true
-order: 3
+order: 91
 pageNumber: "203"
 archive: true
 ---
