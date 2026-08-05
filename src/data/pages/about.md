@@ -1,6 +1,6 @@
 ---
-title: "Senior Product Designer"
-description: "Jorne Marc Siebrands — Senior Product Designer in Frankfurt. Design craft plus product-direction authority. Bikemap, digital office 24, KION."
+title: "Senior Product Designer and Product Manager"
+description: "Jorne Marc Siebrands — Senior Product Designer and Product Manager in Frankfurt. Design craft plus product-direction authority. Bikemap, digital office 24, KION."
 pageNumber: "100"
 ---
 
