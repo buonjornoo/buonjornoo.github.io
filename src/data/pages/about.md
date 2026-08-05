@@ -1,23 +1,21 @@
 ---
-title: "Home"
-description: "Jorne Marc Siebrands — UX Designer & Product Manager crafting user-centered digital experiences from Frankfurt."
+title: "Senior Product Designer"
+description: "Jorne Marc Siebrands — Senior Product Designer in Frankfurt. Design craft plus product-direction authority. Bikemap, digital office 24, KION."
 pageNumber: "100"
 ---
 
-## About Me
+## About
 
-Hi, I'm Jorne. In my dual roles as a UX Designer and Product Manager, I bridge the gap between technology, user needs, and business goals.
+I join as a designer, find the structural problem nobody named, and end up driving the product. That has now happened at three companies.
 
-I've shaped significant features like Bikemap's Pause Mode and unified disparate web tools into a singular, user-friendly app. At KION, a proposed robot became a simple, cost-saving scanner — thanks to targeted user research.
+At KION a proposed warehouse robot turned into a simple scanner, because I recruited over a hundred users by cold outreach and watched them work before anyone designed anything. At Bikemap I took Pause Mode from support threads to release, the feature our users asked for most. At digital office 24 I was the only product manager for two years, across roughly 80 client workspaces and seven document types, and I built the design system before migrating the live app onto it.
 
-My Master's thesis blended storytelling with augmented reality to create an immersive exploration of Frankfurt, turning the city into a canvas for hidden art and narratives.
+I build things for myself too. A map of the public table-tennis tables in Frankfurt, where a three-person test killed my primary button. A coaching system that audits its own numbers before it gives advice, written after five of my own documented "facts" collapsed in a single day. This site, built by seven agents I directed, which you can navigate by typing a three-digit page number.
 
-I'm driven by a vision to create humane technology — crafting experiences that not only meet needs but bring smiles to users' faces.
-
-Away from the screen, I'm on rugby fields, lifting weights, or cycling endurance rides over 100km.
+Frankfurt, remote, available now.
 
 ---
 
 ## Get in Touch
 
-Let's start a conversation on [LinkedIn](https://www.linkedin.com/in/jornemarc/) or at [jorne@siebrands.com](mailto:jorne@siebrands.com).
+[jorne@siebrands.com](mailto:jorne@siebrands.com) · [LinkedIn](https://www.linkedin.com/in/jornemarc/) · [CV (EN)](/cv/jorne-siebrands-cv-en.pdf)
