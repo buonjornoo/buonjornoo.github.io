@@ -135,6 +135,11 @@
   color: var(--color-teletext-cyan);
   font-size: 1rem;
   letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.ceefax-service-name:hover {
+  color: var(--color-teletext-yellow);
 }
 
 .ceefax-page-number {

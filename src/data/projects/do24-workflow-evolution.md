@@ -42,7 +42,7 @@ fifteen. Every epic, spec and product decision went through me, and I kept the d
 title changed. Specs lived in Jira epic descriptions rather than formal PRDs, a company philosophy
 that traded faster shipping against a heavy reliance on judgement being right.
 
-Scale: around 80 client workspaces, seven document types in the workflow, and a Jira archive of 932
+Scale: around 100 client workspaces, seven document types in the workflow, and a Jira archive of 932
 tickets by the time I left in July 2026.
 
 ## Milestone one: the modal that bought the mandate

@@ -3,6 +3,7 @@ title: "Ari und der Drache"
 description: "A three-agent team (PM, developer, QA) building a platformer my six-year-old invented. One afternoon."
 subtitle: "The rule that made it work: the agent that diagnoses must not be the agent that repairs."
 techStack: ["AI Agents", "Product Management", "Prototyping", "Personal Project"]
+coverImage: "/img/projects/ariCover.png"
 slug: "ari-und-der-drache"
 order: 7
 pageNumber: "209"
@@ -21,6 +22,14 @@ I had one afternoon.
 
 I set up three agents with defined roles and ran a real development process in front of him. One
 afternoon, 6 March 2026, about 500 lines of Kaboom.js.
+
+<figure class="my-[2ch]">
+  <img src="/img/ari-und-der-drache/start-screen.png" alt="The Ari und der Drache start screen, showing the two playable characters and the keyboard controls" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    The start screen. Two playable characters, controls in German, and a title my son spelled
+    himself. The character cards and the goal line were his calls, not mine.
+  </figcaption>
+</figure>
 
 ## The team and my role
 

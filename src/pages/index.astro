@@ -15,11 +15,20 @@ const { Content } = await render(about);
   pageNumber={about.data.pageNumber}
 >
   <!-- Welcome -->
-  <section class="mb-[2ch]">
-    <DoubleHeight as="h1" color="text-teletext-yellow">Jorne</DoubleHeight>
-    <p class="text-teletext-cyan mt-[1ch]">
-      Senior Product Designer.<br />Design craft plus product direction.
-    </p>
+  <section class="mb-[2ch] flex items-center gap-[2ch]">
+    <img
+      src="/img/Avatar.png"
+      alt="Jorne Marc Siebrands"
+      width="420"
+      height="420"
+      class="w-[10ch] md:w-[14ch] aspect-square object-cover shrink-0 border-2 border-teletext-cyan teletext-pixelated"
+    />
+    <div>
+      <DoubleHeight as="h1" color="text-teletext-yellow">Jorne</DoubleHeight>
+      <p class="text-teletext-cyan mt-[1ch]">
+        Senior Product Designer.<br />Design craft plus product direction.
+      </p>
+    </div>
   </section>
 
   <Separator color="text-teletext-cyan" char="─" />

@@ -3,6 +3,7 @@ title: "This Site"
 description: "A Ceefax simulator built by a seven-agent team with written authority. The page you are reading is the artefact."
 subtitle: "Eight colours, one font, three-digit page numbers, and seven agents that can each say no."
 techStack: ["AI Agents", "Design Systems", "Astro", "Constraint Design"]
+coverImage: "/img/projects/thisSiteCover.png"
 url: "https://github.com/buonjornoo/buonjornoo.github.io"
 slug: "this-site"
 order: 6

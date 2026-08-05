@@ -10,8 +10,8 @@ interface Props {
 const { title, description, techStack, coverImage, slug } = Astro.props;
 ---
 
-<a href={`/projects/${slug}/`} class="block group">
-  <article class="border border-teletext-white/30 p-[1ch] hover:border-teletext-yellow transition-colors">
+<a href={`/projects/${slug}/`} class="block group h-full">
+  <article class="flex h-full flex-col border border-teletext-white/30 p-[1ch] hover:border-teletext-yellow transition-colors">
     {coverImage && (
       <img
         src={coverImage}
@@ -24,7 +24,7 @@ const { title, description, techStack, coverImage, slug } = Astro.props;
       {title}
     </h3>
     <p class="text-teletext-white mt-[0.5ch] text-teletext-sm">{description}</p>
-    <div class="flex flex-wrap gap-[1ch] mt-[1ch]">
+    <div class="flex flex-wrap gap-[1ch] mt-auto pt-[1ch]">
       {techStack.map((tech) => (
         <span class="text-teletext-magenta text-teletext-sm">[{tech}]</span>
       ))}
