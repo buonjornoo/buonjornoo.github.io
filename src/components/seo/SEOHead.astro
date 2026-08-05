@@ -9,7 +9,7 @@ interface Props {
 const { title, description, ogImage, canonicalURL } = Astro.props;
 const siteTitle = `${title} | Jorne Marc Siebrands`;
 const canonical = canonicalURL || new URL(Astro.url.pathname, Astro.site).href;
-const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+const ogImageURL = new URL(ogImage ?? '/img/og-default.png', Astro.site).href;
 ---
 
 <meta charset="UTF-8" />
@@ -25,10 +25,10 @@ const ogImageURL = ogImage ? new URL(ogImage, Astro.site).href : undefined;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:site_name" content="Jorne Marc Siebrands" />
-{ogImageURL && <meta property="og:image" content={ogImageURL} />}
+<meta property="og:image" content={ogImageURL} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={siteTitle} />
 <meta name="twitter:description" content={description} />
-{ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+<meta name="twitter:image" content={ogImageURL} />

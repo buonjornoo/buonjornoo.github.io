@@ -12,14 +12,19 @@
       "url": "https://www.linkedin.com/in/jornemarc/"
     },
     {
+      "label": "CV (EN)",
+      "value": "Download PDF",
+      "url": "/cv/jorne-siebrands-cv-en.pdf"
+    },
+    {
+      "label": "CV (DE)",
+      "value": "Lebenslauf als PDF",
+      "url": "/cv/jorne-siebrands-cv-de.pdf"
+    },
+    {
       "label": "GitHub",
       "value": "github.com/buonjornoo",
       "url": "https://github.com/buonjornoo"
-    },
-    {
-      "label": "Instagram",
-      "value": "@buonjornoo",
-      "url": "https://instagram.com/buonjornoo"
     },
     {
       "label": "Strava",
@@ -32,5 +37,5 @@
       "url": "https://www.komoot.de/user/1065377371788"
     }
   ],
-  "footer": "Based in Frankfurt am Main, Germany."
+  "footer": "Based in Frankfurt am Main, Germany. Available now, remote or Rhein-Main."
 }
