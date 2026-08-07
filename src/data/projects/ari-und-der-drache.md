@@ -1,8 +1,8 @@
 ---
 title: "Ari und der Drache"
-description: "A three-agent team (PM, developer, QA) building a platformer my six-year-old invented. One afternoon."
+description: "A three-agent team built a platformer my six-year-old invented in one afternoon. Five months later, one real bug needed an actual player to find."
 subtitle: "The rule that made it work: the agent that diagnoses must not be the agent that repairs."
-techStack: ["AI Agents", "Product Management", "Prototyping", "Personal Project"]
+techStack: ["AI Agents", "Product Management", "Design Systems", "Prototyping", "Personal Project"]
 coverImage: "/img/projects/ariCover.png"
 slug: "ari-und-der-drache"
 order: 7
@@ -117,3 +117,122 @@ down for somebody else is a better finding.
 
 The other thing travels smaller and I did not expect it. Explaining a spec to a six-year-old is the
 fastest test of whether the spec is any good.
+
+## Five months later
+
+The game from March worked. Run, jump, land on an enemy to beat it, collect stars, reach the flag:
+all of it functioned. It also looked like debug output. Every character, tile and hazard was one
+flat rectangle on a dead navy background. One afternoon had room for logic. It had none left for how
+any of it looked.
+
+Five months on I came back to it and set a new brief: four Studio Ghibli reference images, a meadow
+under snow peaks, a turquoise tulip field, a gouache house under blossom trees at dusk, a lantern-lit
+bathhouse alley. No two of them share a time of day. Turn what they have in common into rules
+precise enough that a later session, possibly with no memory of the pictures, could extend the game
+and still land in the same world.
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-[2ch]">
+  <figure class="my-[2ch]">
+    <img src="/img/ari-und-der-drache/start-screen.png" alt="The character-select screen in March, both characters drawn as flat coloured rectangles on a navy background" class="w-full" loading="lazy" />
+    <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+      Before. March: the character-select screen the game opened with, one flat rectangle per
+      character.
+    </figcaption>
+  </figure>
+  <figure class="my-[2ch]">
+    <img src="/img/ari-und-der-drache/auswahl.png" alt="The same character-select screen repainted with mountains, parchment-style panels and a new title treatment" class="w-full" loading="lazy" />
+    <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+      After. The mountains, the parchment panels and the title are new. The choice between Arin,
+      faster, and the dragon, which jumps higher, is not.
+    </figcaption>
+  </figure>
+</div>
+
+## A styleguide instead of a memory
+
+Five rules don't answer what colour grass is. A styleguide does, but only if a later phase can read
+it instead of trusting a description of pictures it never saw. Two files went in before any game
+code changed. `STYLEGUIDE.md` holds the five rules, a named colour palette in place of raw hex
+values, and a checklist a phase can run against its own work before calling something finished.
+`style.js` turns the palette and sixteen shared drawing functions into code, so every phase after the
+first draws mountains, glow and idle breathing the same way instead of reinventing them.
+
+> **Key learning: the point of writing a styleguide to disk isn't outliving the calendar.**
+> It's outliving the next context window. Each phase starts with no memory of the last one. The file
+> is what carries the direction forward, not the model.
+
+## The level only a six-year-old could approve
+
+The build ran in five phases inside one continuous session: a straight recolour first, then a
+parallax sky with drifting cloud layers, then the level itself. A dense maze got rebuilt into an
+open, rolling landscape with jump gaps sized against the game's actual jump-height and speed
+constants instead of eyeballed. That third phase is the one change nothing in the session could
+fully check on its own. A level either feels fun to a six-year-old or it doesn't. We played the new
+layout together before the next phase touched anything else.
+
+The last two phases redrew both characters with rounded shapes, idle breathing and a directional
+glance, then rebuilt every remaining screen, start, victory, defeat, on the same sky-and-parallax
+system as the game itself.
+
+<figure class="my-[2ch]">
+  <img src="/img/ari-und-der-drache/gameplay.png" alt="Mid-level gameplay with painted mountains, terrain and a glowing-eyed enemy" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    Mid-level. The enemy's eyes are the only new detail with a bug hiding inside them.
+  </figcaption>
+</figure>
+
+## The bug that needed a player, not a script
+
+Two phases after the visual work wrapped, actually playing it turned up two things that looked
+unrelated. The whole world jittered slightly, and landing on an enemy to beat it felt like a coin
+flip instead of a skill.
+
+They shared one cause. The character phase had wired a breathing, squash-and-stretch animation
+straight onto the player's scale, including a constant idle pulse while just standing still. The
+game engine computes its actual collision shape from an object's full transform: position, angle
+and scale together. The player's hitbox had been quietly resizing every frame, even at rest, and
+finding that meant reading the engine's own source rather than guessing from the symptoms.
+
+> **Key learning: two symptoms that look unrelated are worth checking against one shared cause
+> before you go fix two separate things.**
+
+The fix split the player into an invisible hitbox that stays permanently unscaled for physics, and a
+separate drawing pass that applies the squash and stretch to pixels only. A camera-smoothing pass
+went in as a second line of defence. Verified against the engine's own per-frame update loop, not by
+eye: zero pixels of frame-to-frame drift across ninety frames at rest, down from a jump of almost
+two pixels before the fix. Five repeated top-hits on an enemy, five clean kills. Five repeated
+side-hits, five clean hits taken.
+
+<figure class="my-[2ch]">
+  <img src="/img/ari-und-der-drache/gewonnen.png" alt="The victory screen with falling petals over a painted background" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    The victory screen. Petals now, coloured rectangles before.
+  </figcaption>
+</figure>
+
+## What ran differently this time
+
+March ran on three role-played agents with a diagnose/repair split built into the roles on purpose:
+QA finds the cause, the developer fixes it, never the same one doing both. This pass ran on one
+continuous session instead, with a different rule doing roughly the same job: plan on one model,
+build on another. One model read all four reference images and the existing code, checked the game
+engine's API against its real source rather than trusting memory, and wrote the styleguide and the
+five-phase plan for approval before a line of game code changed. The other built all five phases,
+then investigated the bug two phases later by reading the engine's minified source directly instead
+of patching around the symptom.
+
+My part stayed the same shape as March, one level down. I chose the four reference images and called
+what they had in common the direction. I approved the plan before any code moved. I played the new
+level layout with my son before the next phase started, and I'm the one who played the finished
+build and reported a jitter and an unfair-feeling fight in the same message. Those turned out to be
+one bug, not two. No line of the visual system or the fix is mine. Which four pictures said this and
+not that, and which of two symptoms were worth chasing as one cause: both of those were.
+
+## Outcome, five months on
+
+The game runs, looks like somewhere rather than nowhere, and the bug that made combat feel random is
+gone, checked against ninety frames of measurement rather than a few rounds of "seems fine now." The
+honest scope: this pass wasn't the three-agent structure the March write-up describes, and it wasn't
+"weeks apart" either. Styleguide to fix ran inside a single sitting. What carried over from March
+wasn't the org chart. It was the habit underneath it: put the thing that has to survive between
+sessions into a file, and check it against the source before you believe it.
