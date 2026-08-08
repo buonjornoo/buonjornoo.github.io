@@ -1,17 +1,17 @@
 ---
-title: "Ari und der Drache"
+title: "Arin und der Drache"
 description: "A three-agent team built a platformer my six-year-old invented in one afternoon. Five months later, one real bug needed an actual player to find."
 subtitle: "The rule that made it work: the agent that diagnoses must not be the agent that repairs."
 techStack: ["AI Agents", "Product Management", "Design Systems", "Prototyping", "Personal Project"]
-coverImage: "/img/projects/ariCover.png"
-slug: "ari-und-der-drache"
+coverImage: "/img/projects/arinCover.png"
+slug: "arin-und-der-drache"
 order: 7
 pageNumber: "209"
 ---
 
 ## Challenge
 
-My son is six. He invented a game, a platformer with a character called Ari, a dragon, and enemies
+My son is six. He invented a game, a platformer with a character called Arin, a dragon, and enemies
 borrowed from the cartoon he was watching that month. He wanted to play it rather than look at a
 drawing of it.
 
@@ -23,8 +23,13 @@ I had one afternoon.
 I set up three agents with defined roles and ran a real development process in front of him. One
 afternoon, 6 March 2026, about 500 lines of Kaboom.js.
 
+<p>
+  <a href="/game/arin-und-der-drache/" target="_blank" rel="noopener noreferrer">Play Arin und der Drache</a>
+  — opens in a new tab, keyboard controls, desktop only.
+</p>
+
 <figure class="my-[2ch]">
-  <img src="/img/ari-und-der-drache/start-screen.png" alt="The Ari und der Drache start screen, showing the two playable characters and the keyboard controls" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/start-screen.png" alt="The Arin und der Drache start screen, showing the two playable characters and the keyboard controls" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The start screen. Two playable characters, controls in German, and a title my son spelled
     himself. The character cards and the goal line were his calls, not mine.
@@ -133,14 +138,14 @@ and still land in the same world.
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-[2ch]">
   <figure class="my-[2ch]">
-    <img src="/img/ari-und-der-drache/start-screen.png" alt="The character-select screen in March, both characters drawn as flat coloured rectangles on a navy background" class="w-full" loading="lazy" />
+    <img src="/img/arin-und-der-drache/start-screen.png" alt="The character-select screen in March, both characters drawn as flat coloured rectangles on a navy background" class="w-full" loading="lazy" />
     <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
       Before. March: the character-select screen the game opened with, one flat rectangle per
       character.
     </figcaption>
   </figure>
   <figure class="my-[2ch]">
-    <img src="/img/ari-und-der-drache/auswahl.png" alt="The same character-select screen repainted with mountains, parchment-style panels and a new title treatment" class="w-full" loading="lazy" />
+    <img src="/img/arin-und-der-drache/auswahl.png" alt="The same character-select screen repainted with mountains, parchment-style panels and a new title treatment" class="w-full" loading="lazy" />
     <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
       After. The mountains, the parchment panels and the title are new. The choice between Arin,
       faster, and the dragon, which jumps higher, is not.
@@ -175,7 +180,7 @@ glance, then rebuilt every remaining screen, start, victory, defeat, on the same
 system as the game itself.
 
 <figure class="my-[2ch]">
-  <img src="/img/ari-und-der-drache/gameplay.png" alt="Mid-level gameplay with painted mountains, terrain and a glowing-eyed enemy" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/gameplay.png" alt="Mid-level gameplay with painted mountains, terrain and a glowing-eyed enemy" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Mid-level. The enemy's eyes are the only new detail with a bug hiding inside them.
   </figcaption>
@@ -204,7 +209,7 @@ two pixels before the fix. Five repeated top-hits on an enemy, five clean kills.
 side-hits, five clean hits taken.
 
 <figure class="my-[2ch]">
-  <img src="/img/ari-und-der-drache/gewonnen.png" alt="The victory screen with falling petals over a painted background" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/gewonnen.png" alt="The victory screen with falling petals over a painted background" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The victory screen. Petals now, coloured rectangles before.
   </figcaption>

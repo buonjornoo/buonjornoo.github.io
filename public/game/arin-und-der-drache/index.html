@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arin und der Drache</title>
+    <style>
+        /* Seite komplett schwarz, kein Rand */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Warmer, dunkler Rahmen statt kaltem Sci-Fi-Navy (siehe STYLEGUIDE.md) */
+            background-color: #241c14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Canvas soll die ganze Seite fuellen */
+        canvas {
+            display: block;
+            border-radius: 8px;
+            /* Warmes Gold-Gluehen statt kaltem Cyan (siehe STYLEGUIDE.md Palette: gold) */
+            box-shadow: 0 0 30px rgba(245, 197, 66, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Kaboom.js von CDN laden (Version 3000 - stabil und gut dokumentiert) -->
+    <script src="https://unpkg.com/kaboom@3000.1.17/dist/kaboom.js"></script>
+    <!-- Styleguide: Farb-Tokens und Zeichen-Helfer (siehe STYLEGUIDE.md) -->
+    <script src="style.js"></script>
+    <!-- Spiellogik laden -->
+    <script src="game.js"></script>
+</body>
+</html>
