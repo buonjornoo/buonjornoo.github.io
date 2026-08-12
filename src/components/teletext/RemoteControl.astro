@@ -1,0 +1,73 @@
+---
+interface Props {
+  pageNumber: string;
+}
+
+const { pageNumber } = Astro.props as Props;
+
+const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+const colors = [
+  { href: '/', label: 'Home, page 100', letter: 'H', color: 'red' },
+  { href: '/projects/', label: 'Projects, page 200', letter: 'P', color: 'green' },
+  { href: '/blog/', label: 'Blog, page 300', letter: 'B', color: 'yellow' },
+  { href: '/contact/', label: 'Contact, page 400', letter: 'C', color: 'cyan' },
+];
+---
+
+<aside id="remote-rail" class="remote-rail" aria-label="Ceefax remote control">
+  <div class="remote-display" aria-live="polite" aria-atomic="true">
+    P<span class="remote-page-display">{pageNumber}</span>
+  </div>
+  <div class="remote-keypad">
+    {digits.map((digit) => (
+      <button
+        type="button"
+        class:list={['remote-key', digit === '0' && 'remote-key-zero']}
+        data-digit={digit}
+        aria-label={`Digit ${digit}`}
+      >
+        {digit}
+      </button>
+    ))}
+  </div>
+  <div class="remote-divider" aria-hidden="true"></div>
+  <div class="remote-colors">
+    {colors.map((c) => (
+      <a href={c.href} class={`remote-color remote-color-${c.color}`} aria-label={c.label}>
+        {c.letter}
+      </a>
+    ))}
+  </div>
+</aside>
+
+<dialog id="remote-dialog" class="remote-dialog" aria-label="Ceefax remote control">
+  <div class="remote-dialog-header">
+    <span class="remote-display" aria-live="polite" aria-atomic="true">
+      P<span class="remote-page-display">{pageNumber}</span>
+    </span>
+    <button type="button" id="remote-dialog-close" class="remote-dialog-close" aria-label="Close remote control">
+      Close
+    </button>
+  </div>
+  <div class="remote-keypad remote-keypad--touch">
+    {digits.map((digit) => (
+      <button
+        type="button"
+        class:list={['remote-key', digit === '0' && 'remote-key-zero']}
+        data-digit={digit}
+        aria-label={`Digit ${digit}`}
+      >
+        {digit}
+      </button>
+    ))}
+  </div>
+  <div class="remote-divider" aria-hidden="true"></div>
+  <div class="remote-colors remote-colors--touch">
+    {colors.map((c) => (
+      <a href={c.href} class={`remote-color remote-color-${c.color}`} aria-label={c.label}>
+        {c.letter}
+      </a>
+    ))}
+  </div>
+</dialog>
