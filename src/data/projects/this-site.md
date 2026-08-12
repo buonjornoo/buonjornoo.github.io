@@ -96,5 +96,12 @@ by anyone except me, so what I can claim is that the separation of powers produc
 enough to publish, not that it scales to a team of humans who did not write the role definitions.
 And the eight-colour palette has a blue in it that I have never been able to use.
 
+Working in the open here isn't a cadence of Slack updates or Loom videos to leadership, because
+no such record exists. It's that each case study names what wasn't measured next to what was: the
+bridge to engineering the [token system](/projects/do24-teal-ui/) never built, the targets in
+[Workflow Evolution](/projects/do24-workflow-evolution/) I wrote but never checked against a
+result, and the case [the route planner](/projects/bikemap-route-planner/) admits I failed to
+make rather than stakeholders failed to hear. That's the real version of it here.
+
 The part that travels is smaller and duller than the aesthetic: give the reviewer authority, and
 take away its ability to act on what it finds.

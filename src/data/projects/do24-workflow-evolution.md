@@ -1,6 +1,6 @@
 ---
 title: "Workflow Evolution"
-description: "Two years from a design insight to a task-based architecture. Started as a designer, ended owning the product."
+description: "Breaking up a linear workflow into a parallelized task system unblocking two user groups to do their work."
 subtitle: "digital office, 2024 to 2026. How a conversation with an assistant became an architecture decision."
 techStack: ["Product Management", "UX Design", "Research", "Fintech", "B2B"]
 coverImage: "/img/projects/workflowEvolutionCover.png"

@@ -72,6 +72,13 @@ beats a street address. OpenStreetMap already holds both ingredients.
 
 The whole study was three people in one round.
 
+Three people in an afternoon is my default test size, and it's less a method I chose than a gap
+I've learned to fill: Bikemap had a real analytics team, but it was built to feed the CEO's
+dashboard rather than close the loop on any one project, and my PM tenure there ended before I
+could wire the two together, the same gap behind
+[the tracking regret at Bikemap](/projects/bikemap-route-planner/). Solo here, with nobody to
+close that loop for me, three people in a room is the version I can run myself.
+
 The finding arrived unprompted, from more than one of them: the plus button looks like a primary
 action although it is not, because the primary action is to find a good table at the place you are
 going. Several also said the teal floating action button blended into the map and they had nearly

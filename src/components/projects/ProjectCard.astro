@@ -5,29 +5,73 @@ interface Props {
   techStack: string[];
   coverImage?: string;
   slug: string;
+  pageNumber: string;
+  featured?: boolean;
+  layout?: 'vertical' | 'horizontal';
 }
 
-const { title, description, techStack, coverImage, slug } = Astro.props;
+const {
+  title,
+  description,
+  techStack,
+  coverImage,
+  slug,
+  pageNumber,
+  featured = false,
+  layout = 'vertical',
+} = Astro.props;
+
+const isHorizontal = layout === 'horizontal';
 ---
 
 <a href={`/projects/${slug}/`} class="block group h-full">
-  <article class="flex h-full flex-col border border-teletext-white/30 p-[1ch] hover:border-teletext-yellow transition-colors">
+  <article
+    class:list={[
+      'flex flex-col border p-[1ch] hover:border-teletext-yellow transition-colors',
+      isHorizontal
+        ? 'md:flex-row md:gap-[2ch] border-2 border-teletext-white/30'
+        : 'h-full border-teletext-white/30',
+    ]}
+  >
     {coverImage && (
       <img
         src={coverImage}
         alt={title}
-        class="w-full h-32 object-cover mb-[1ch] teletext-pixelated"
         loading="lazy"
+        class:list={[
+          'w-full object-cover object-center mb-[1ch] teletext-pixelated',
+          isHorizontal ? 'h-48 md:h-full md:w-[32ch] md:mb-0 shrink-0' : 'h-32',
+        ]}
       />
     )}
-    <h3 class="text-teletext-cyan font-bold group-hover:text-teletext-yellow transition-colors">
-      {title}
-    </h3>
-    <p class="text-teletext-white mt-[0.5ch] text-teletext-sm">{description}</p>
-    <div class="flex flex-wrap gap-[1ch] mt-auto pt-[1ch]">
-      {techStack.map((tech) => (
-        <span class="text-teletext-magenta text-teletext-sm">[{tech}]</span>
-      ))}
+    <div class:list={['flex flex-col', isHorizontal && 'flex-1']}>
+      <div class="flex items-start justify-between gap-[1ch]">
+        <div class="flex flex-col">
+          {featured && (
+            <span class="text-teletext-magenta text-teletext-sm font-bold mb-[0.5ch]">FEATURED</span>
+          )}
+          <h3
+            class:list={[
+              'text-teletext-cyan font-bold group-hover:text-teletext-yellow transition-colors',
+              isHorizontal && 'text-teletext-lg',
+            ]}
+          >
+            {title}
+          </h3>
+        </div>
+        <span
+          class="font-teletext font-bold text-teletext-white text-teletext-sm tracking-[0.05em] shrink-0"
+          aria-hidden="true"
+        >
+          P{pageNumber}
+        </span>
+      </div>
+      <p class:list={['text-teletext-white mt-[0.5ch]', isHorizontal ? '' : 'text-teletext-sm']}>
+        {description}
+      </p>
+      <div class:list={['flex flex-wrap gap-[1ch]', isHorizontal ? 'mt-[1ch]' : 'mt-auto pt-[1ch]']}>
+        {techStack.map((tech) => <span class="text-teletext-magenta text-teletext-sm">[{tech}]</span>)}
+      </div>
     </div>
   </article>
 </a>

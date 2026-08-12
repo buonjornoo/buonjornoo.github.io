@@ -1,6 +1,6 @@
 ---
 title: "Bikemap Pause Mode"
-description: "Bikemap's most requested feature. Shipped in ten weeks with a limitation we chose on purpose."
+description: "Bikemap's most requested feature. Shipped in ten weeks in spite of technical constraints."
 subtitle: "The bike computer had no pause button, and 1.7 million recordings a year never became a route anyone kept."
 techStack: ["Product Management", "UX Design", "User Research", "iOS", "Android"]
 coverImage: "/img/projects/pauseModeCover.png"

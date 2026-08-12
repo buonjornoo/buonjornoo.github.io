@@ -7,6 +7,7 @@ interface Project {
   techStack: string[];
   coverImage?: string;
   slug: string;
+  pageNumber: string;
 }
 
 interface Props {
@@ -24,6 +25,7 @@ const { projects } = Astro.props;
       techStack={project.techStack}
       coverImage={project.coverImage}
       slug={project.slug}
+      pageNumber={project.pageNumber}
     />
   ))}
 </div>
