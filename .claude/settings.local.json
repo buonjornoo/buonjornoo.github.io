@@ -6,7 +6,14 @@
       "WebFetch(domain:viznut.fi)",
       "WebFetch(domain:www.npmjs.com)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:en.wikipedia.org)"
+      "WebFetch(domain:en.wikipedia.org)",
+      "Bash(grep -r \"canvas\\\\|animation\\\\|filter\\\\|effect\\\\|svg\\\\|pixel\" /Users/jornemarcsiebrands/projects/siebrandsdotcom/src --include=*.astro --include=*.tsx --include=*.css)",
+      "Bash(xargs ls:*)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__use_figma",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.get\\(''''mcpServers'''',{}\\).items\\(\\) if ''''figma'''' in k.lower\\(\\) or ''''Figma'''' in k]\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k, json.dumps\\(v, indent=2\\)\\) for k,v in d.get\\(''''mcpServers'''',{}\\).items\\(\\) if ''''figma'''' in k.lower\\(\\) or ''''Figma'''' in k]\")"
     ]
   }
 }
