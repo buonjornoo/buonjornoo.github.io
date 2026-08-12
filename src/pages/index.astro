@@ -2,20 +2,27 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 import Separator from '../components/teletext/Separator.astro';
-import { getEntry, render } from 'astro:content';
+import ProjectCard from '../components/projects/ProjectCard.astro';
+import { getEntry, getCollection, render } from 'astro:content';
 
 const about = await getEntry('pages', 'about');
 if (!about) throw new Error('About page content not found');
 const { Content } = await render(about);
+
+const curatedSlugs = [
+  'bikemap-pause-mode',
+  'do24-workflow-evolution',
+  'do24-teal-ui',
+  'cycling-coach',
+  'arin-und-der-drache',
+];
+const allProjects = await getCollection('projects');
+const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug === s)!.data);
 ---
 
-<PageLayout
-  title={about.data.title}
-  description={about.data.description}
-  pageNumber={about.data.pageNumber}
->
-  <!-- Welcome -->
-  <section class="mb-[2ch] flex items-center gap-[2ch]">
+<PageLayout title={about.data.title} description={about.data.description} pageNumber={about.data.pageNumber}>
+  <!-- Hero -->
+  <section class="mb-[2ch] flex flex-col sm:flex-row sm:items-start gap-[2ch]">
     <img
       src="/img/Avatar.png"
       alt="Jorne Marc Siebrands"
@@ -23,16 +30,131 @@ const { Content } = await render(about);
       height="420"
       class="w-[10ch] md:w-[14ch] aspect-square object-cover shrink-0 border-2 border-teletext-cyan teletext-pixelated"
     />
-    <div>
+    <div class="flex flex-col gap-[0.5ch]">
       <DoubleHeight as="h1" color="text-teletext-yellow">Jorne</DoubleHeight>
-      <p class="text-teletext-cyan mt-[1ch]">
-        Senior Product Designer and Product Manager.<br />Design craft plus product direction.
+      <p class="text-teletext-cyan">
+        Senior Product Designer who owns product direction as well as craft. Currently exploring AI and
+        developer tools.
+      </p>
+      <p class="text-teletext-white">Frankfurt am Main, Germany and remote. Available now.</p>
+    </div>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- About -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold text-teletext-lg mb-[1ch]">About</h2>
+    <p class="text-teletext-white leading-relaxed mt-[2ch]">
+      As a designer, I am driven to solve the root of the problem, not just the symptom. My drive
+      resulted in taking over product direction at digital office and Bikemap. As you see on this site:
+      I grew up in the times before everyone had internet in their pockets and I enjoy interesting
+      interactions. Navigate my website using the remote control. If you remember 'Teletext', this will
+      feel familiar to you.
+    </p>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- Curated Case Studies -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold text-teletext-lg mb-[1ch]">Curated Case Studies</h2>
+    <div class="flex flex-col gap-[2ch] mt-[2ch]">
+      {caseStudies.map((project, i) => (
+        <ProjectCard {...project} layout="horizontal" featured={i === 0} />
+      ))}
+    </div>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- How I Work -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold text-teletext-lg mb-[1ch]">How I Work</h2>
+    <div class="mt-[2ch]">
+      <h3 class="text-teletext-cyan font-bold">Business and UX are a single equation</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        I think about business outcomes before I think in the screen.
+      </p>
+
+      <h3 class="text-teletext-cyan font-bold mt-[2ch]">Build the right thing &gt; Build the thing right</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        I don't design solutions for a poorly defined problem. Using observational studies at KION, I
+        uncovered problems behind the initial request and saved the company from building an expensive
+        robot — replacing the plan with a simple scanner and an SAP plugin instead.
+      </p>
+
+      <h3 class="text-teletext-cyan font-bold mt-[2ch]">A shipped good enough thing always beats an unshipped perfect solution</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        I'd rather ship something that works and addresses user pains instead of holding a release until
+        it's perfect and too late. At Bikemap, I decided to ship our Pause Mode that only worked for
+        recording routes, not yet for navigation. It was a deliberate tradeoff: addressing an important
+        user group's problem now, rather than waiting until we could address it for everyone.
+      </p>
+
+      <h3 class="text-teletext-cyan font-bold mt-[2ch]">Opinionated Defaults, Reversible Paths</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        On Pingpong Map, working solo, I made the call and wrote down the exact condition that would
+        make me reverse it — keeping momentum without waiting for certainty. That decision log is the
+        real artefact, not the map.
+      </p>
+
+      <h3 class="text-teletext-cyan font-bold mt-[2ch]">Designing the System, Not the Screen</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        At digital office, the Workflow Evolution redesign moved task definitions to the backend rather
+        than the frontend — solving it at the platform level instead of patching each screen. It
+        produced three service models (user, AI agent, operator) I hadn't designed for.
+      </p>
+
+      <h3 class="text-teletext-cyan font-bold mt-[2ch]">Continuous Validation, Not Upfront Research</h3>
+      <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
+        At digital office's Workflow Evolution, there was no research programme — so I sat next to
+        assistants and watched them work, until one told me, 'I wasn't trained for this, and I'm
+        unhappy in my job because of it.' Continuous, informal sessions beat waiting for a research team
+        that wasn't coming.
       </p>
     </div>
   </section>
 
   <Separator color="text-teletext-cyan" char="─" />
 
+  <!-- Social Proof -->
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow font-bold text-teletext-lg mb-[1ch]">What my colleagues say about me</h2>
+    <div class="flex flex-col gap-[2ch] mt-[2ch]">
+      <figure class="border-l-2 border-teletext-yellow pl-[2ch] py-[0.5ch]">
+        <blockquote class="text-teletext-cyan leading-relaxed">
+          &ldquo;Jorne is a dedicated product manager. During our time working together on various
+          initiatives at Bikemap, I have particularly appreciated that he puts the user at the centre of
+          everything we do and his can-do attitude in tackling problems. What sets him apart is his
+          optimism and holistic way of thinking, which ensures that he provides great solutions to all
+          stakeholders.&rdquo;
+        </blockquote>
+        <figcaption class="text-teletext-green text-teletext-sm mt-[1ch]">— Head of Marketing, Bikemap</figcaption>
+      </figure>
+      <figure class="border-l-2 border-teletext-yellow pl-[2ch] py-[0.5ch]">
+        <blockquote class="text-teletext-cyan leading-relaxed">
+          &ldquo;You made an important impact with your way to always take a step back and think about
+          different aspects from various angles in order to make really informed decisions. I think this
+          really brought us to a new level of professionalism in UX and product management.&rdquo;
+        </blockquote>
+        <figcaption class="text-teletext-green text-teletext-sm mt-[1ch]">— Lead Web Developer, Bikemap</figcaption>
+      </figure>
+      <figure class="border-l-2 border-teletext-yellow pl-[2ch] py-[0.5ch]">
+        <blockquote class="text-teletext-cyan leading-relaxed">
+          &ldquo;His attention to detail, analytical mindset, and ability to approach problems from
+          different angles have had a significant impact on our projects. His projects have covered
+          various aspects, including technical details, which has allowed our software developers to
+          understand the concepts quickly and proceed efficiently.&rdquo;
+        </blockquote>
+        <figcaption class="text-teletext-green text-teletext-sm mt-[1ch]">— Agile Coach, Bikemap</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- Trimmed About blurb + Get in Touch (rendered together, from about.md) -->
   <div class="prose-teletext my-[2ch]">
     <Content />
   </div>

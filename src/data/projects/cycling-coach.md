@@ -1,6 +1,6 @@
 ---
 title: "Cycling Coach"
-description: "Five documented facts collapsed in one day. The fix was a rule about what the system may believe."
+description: "Building, iterating on, and learning from my personal AI cycling coach."
 subtitle: "An evidence standard for an AI's inputs, written after my own coaching system reasoned confidently from five wrong numbers."
 techStack: ["AI Systems", "Product Design", "Claude Code", "Personal Project"]
 coverImage: "/img/projects/cyclingCoachCover.png"

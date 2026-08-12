@@ -1,6 +1,6 @@
 ---
 title: "teal-ui Design System"
-description: "136 primitives, 54 semantic tokens, and an honest account of what happened to them afterwards."
+description: "Building digital office's first Design System and Storybook UI library based on what is live, tokenizing for quick adaptation, standardization, machine- and LLM readability."
 subtitle: "A two-tier token architecture at digital office, and the bridge to engineering I never built."
 techStack: ["Design Systems", "Design Tokens", "Figma", "Storybook", "Tailwind"]
 coverImage: "/img/projects/tealUiCover.png"

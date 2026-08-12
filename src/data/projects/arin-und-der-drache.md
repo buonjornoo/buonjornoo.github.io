@@ -1,6 +1,6 @@
 ---
 title: "Arin und der Drache"
-description: "A three-agent team built a platformer my six-year-old invented in one afternoon. Five months later, one real bug needed an actual player to find."
+description: "Letting my six-year-old be the CEO of an agent team that builds his dream game."
 subtitle: "The rule that made it work: the agent that diagnoses must not be the agent that repairs."
 techStack:
   [
