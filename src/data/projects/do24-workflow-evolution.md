@@ -12,11 +12,7 @@ pageNumber: "204"
 
 ## Challenge
 
-Every invoice position going through digital office required somebody to pick an accounting code
-from a chart of several hundred, built on the German SK04 standard. The people doing it were
-assistants, the app's highest-volume and most active users, and the ones with no accounting
-training. On the other side sat the accountants, who reviewed and corrected whatever was submitted
-regardless of how carefully it had been done.
+The “Workflow” (literal name of the feature) is the central feature of the digital office web application. Users upload documents, assign them to their operating units (can be a person, a business, or a real estate object), enter information from the document (most documents are invoices), and assign an accounting code (SK04) from a chart of several hundred.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-workflow-evolution/legacy-workflow.png" alt="The legacy digital office workflow: one linear four-step wizard" class="w-full" loading="lazy" />
@@ -26,38 +22,31 @@ regardless of how carefully it had been done.
   </figcaption>
 </figure>
 
-The problem reached me in my early days as a designer, in a small team with no product manager. We
-had no research programme, but we had constant sessions where I sat next to assistants and watched
-them use the product. One told me, roughly, "I wasn't trained for this, and I'm unhappy in my job
-because of it." An accountant told me, "I have to repair everything every time. It'd be cleaner if I
-just did it from scratch."
+The users doing it were assistants, the app’s highest-volume and most active users. Assistants are not trained in accounting. On the other side of the assistants and the “Workflow” sat the accountants, who reviewed and corrected whatever was submitted. For this they have a dedicated and optimized view (“Booking Review”). The feature itself is not in scope of this study but the insight is: Regardless of how carefully the assistants did the accounting code assignments (some of them even got extra training and onboarding for it), the accountants always had to review and correct every single position.
 
-Two groups of people were frustrated by the same product, which was asking the wrong person to do
-the work.
+Talking to them, I saw that both of the user groups were frustrated because assistants had to do something they weren’t trained to do. The accountants had to correct everything, which was more effort than just doing the task themselves in the first place. We had no formal research programme but as a designer (and later product manager) I gathered users I got to know and had constant sessions with them where I sat next to assistants and accountants watching them use the product. One told me, roughly, "I wasn't trained for this, and I'm unhappy in my job because of it." An accountant told me, "I have to repair everything every time. It'd be cleaner if I just did it from scratch."
+
+Talking to another user group, the HNWI end customers, I found they were frustrated because they could not pay on time when assistants were blocked from entering account codes. Another architectural restriction was in play: only documents with finished accounting were allowed to move to the payment page. The frustrating part for them was that they already hired assistants and accountants but instead of making them collaborate, the product caused unnecessary frustration and blockers leading to overdue payment charges in the worst case.
+
+Everything because the product was asking the wrong person to do the work.
+
+Addressing this was a tough challenge. The legacy “Workflow” was built around a rigid linear process with arbitrary backend rules, states, and dependencies. Those were defined in the early days before I joined. The decisions might have been sensible and good back then, but they didn’t hold anymore. One specific example: The backend did not allow for an invoice position (e.g. “4h Consulting”) to have an empty accounting code field. Lifting these kinds of restrictions would be complicated, according to our backend team, and likely cause other unwanted effects downstream. The backend team considered rebuilding to get rid of years of tech debt and be more flexible, stable, and scalable for future changes. It was something that had to be done anyways, but it was not something we could do right now. Given the sentiment and amount of negative user feedback, I had to find a solution that would ease the pain asap, giving us runway to build a better architecture.
 
 ## The team and my role
 
-I joined for design and left as the only product manager the company had, in a team of around
-fifteen. Every epic, spec and product decision went through me, and I kept the design work when the
-title changed. Specs lived in Jira epic descriptions rather than formal PRDs, a company philosophy
-that traded faster shipping against a heavy reliance on judgement being right.
+In the two-year span of this initiative, I moved from doing only design to also owning the product direction as the sole product manager of the company. I worked together with another designer, multiple frontend and backend engineers. Everything we worked on was collaborative but in the end I owned every epic, spec and product decision. The company philosophy was to trade a heavy reliance on formal processes for faster shipping. No traditional PRDs. Epics, stories, tasks, design specs. We would rather collaborate live (during coding and design) than wait for a perfectly specced ticket to be assigned.
 
 Scale: around 100 client workspaces, seven document types in the workflow, and a Jira archive of 932
 tickets by the time I left in July 2026.
 
-## Milestone one: the modal that bought the mandate
+## Milestone one: the “Speedflow” modal - *what if assistants stopped doing accounting*
 
-The obvious first move was a simpler accounting interface, or better training. Both were wrong for
-the same reason: accountants were already correcting every submission. Correction was existing work
-that nobody had made visible. So the question changed from *how do we help assistants do accounting*
-to *what if assistants stopped doing accounting*.
+The obvious first ideas were to make account selection easier to understand, add supporting text, make the UI simpler, make better training, provide training videos (like the old WISO Steuer Videos). I found that they were all framed around keeping the status quo. The product would still ask the wrong person to do the job. I pushed towards eliminating the need for assistants to pick accounts in the first place.
 
-The legacy workflow was architecturally locked and I could not touch it, so I built on top of it.
-Speedflow was a focused modal that replaced the full accounting interface for the assistant's part
-of the job: confirm the partner from a pre-filtered list, confirm the dates, enter the amount and
-the invoice number. The system filled in the rest. Behind it sat custom intermediate accounting
-accounts, assigned automatically per document category, so the assistant never met the chart of
-accounts at all.
+Since the legacy “Workflow” was architecturally locked for the moment, we had to find other ways to eliminate this step. The backend needed a value in the accounting code field no matter what, so I asked: *What if the system enters the code automatically?* Initial answers centered around the sentiment that this would be a hard thing to get right. So I reframed: *What if we could have a “correct enough” option, so payments, dashboard numbers, and other things down the line still work?* That got our accounting experts thinking. The solution was to introduce custom clearing accounts for each operating unit type, document type, and direction (incoming or outgoing).
+
+This gave me a way to build an optional focused modal which could live alongside the legacy Workflow but would replace its full accounting path. Assistants would only confirm a partner (who sent/received that document), confirm dates, amounts, and invoice numbers (one thing I could not get rid of even though I tried hard). Assistants would never have to see the accounting chart again. Everything else would be assigned automatically and accountants could do the rest later.
+
 
 <figure class="my-[2ch]">
   <img src="/img/do24-workflow-evolution/speedflow-modal.png" alt="The Speedflow modal, a short path laid over the legacy workflow" class="w-full" loading="lazy" />
@@ -67,35 +56,21 @@ accounts at all.
   </figcaption>
 </figure>
 
-The scope calls mattered as much as the design. I specified a modal rather than a new page, so
-nobody left the context they were in, and selection from a list rather than free text, which removed
-a whole class of typo errors. The first version handled invoices only, one document at a time, with
-OCR deferred.
+The modal was a sensible way of dealing with tech debt in the frontend as well. Changing the existing view would be very challenging for the frontend team because the legacy frontend had many dependencies which were leading to unexpected behaviors across the app every time we made a change. Rebuilding this would only make sense along with the new backend (otherwise we would have to rebuild twice), so we built a modal on top of the legacy view. Users did not have to leave the context they were in.
 
-> **Key learning: "correct enough" is a real standard when the correction already exists.**
-> The intermediate accounts were not accounting-perfect and I knew it when I specified them. The
-> default booking account became both the most-used selection in the system and the most-corrected
-> one on the accountants' review page, which reads like a failure until you look at what it
-> replaced. Accountants were correcting the assistants' work anyway, case by case; now they did it
-> in bulk, on entries arriving in a predictable shape. The tradeoff was explicit, the cost landed on
-> the group best equipped to absorb it, and it bought the time to fix the architecture underneath.
+OCR was doing most of the heavy lifting for the users as well: not only did we reduce the necessary inputs and selections, but most of them could be pre-filled and pre-selected using OCR. Assistants would only need to verify and correct.
 
-Speedflow became the most-used feature in the app. I know that indirectly rather than from
-analytics, which we did not have: the new clearing accounts turned up everywhere, and our in-house
-tax advisors told me their job had got simpler, because instead of running through each invoice they
-could look straight at the clearing accounts.
+> **Key learning: Reframing stakeholders and experts into a “what if” mentality opened new possibilities**
+> Stakeholders, accountants, backend kept circulating around the fact that it was architecturally not possible to proceed without accounting codes. So when confronted with “This can’t be empty”, I responded with “What if we fill it?”. When told “We can’t possibly automatically find the right/correct/optimal account for each invoice position”, I responded with “What if we had something that is correct enough?” Which got the team thinking about what correct enough means, and resulted in the idea of the clearing accounts. Accountants had to correct everything anyways. If everything is parked in those clearing accounts, they would be able to find and process them easier. And it would give them a “done” state as well: They are done when the clearing accounts show a zero balance.
 
-## Milestone two: breaking the dependency
 
-Speedflow solved the assistant's pain while leaving the process underneath exactly as it was.
-Payment was still blocked by accounting classification, so an assistant wanting to pay an invoice
-waited on an accountant with no reason to hurry.
+Speedflow became the most-used feature in the app. Although we had no real analytics system set up, we knew it because the clearing accounts turned up everywhere we looked. The assistants told me that they much preferred using this over the legacy feature. Accountants told me that their part was easier because they knew where to look and they knew when they were done.
 
-That dependency was invented rather than inevitable, and the redesign removed it. The workflow broke
-into independent tasks running in parallel, each status-driven rather than sequentially chained,
-with task definitions held in the backend so the frontend renders whatever tasks exist without
-knowing what they are. An assistant opens a queue and sees discrete jobs, such as preparing a
-payment or classifying a document, each completable on its own.
+## Milestone two: parallelized tasks
+
+The Speedflow superficially solved the assistant’s pain. The process underneath stayed as it was. Payment was blocked by accounting classification, and other invented dependencies kept giving us headaches as well. We wanted to break up the linear flow into tasks that could run independently. Instead of one task, waiting for another task to be finished, we decided to base readiness on individual field status. For example: The legacy Workflow blocked payment because the accounting was not done. Only when this was done, the document status would change to „Ready for Payment”. But what information do we actually need in order to make a payment in reality? Bank information and an amount. That’s it. So in our new architecture we allowed payments when there was a name, IBAN, and an amount. The system does not care in which task the users would enter/select that information (during upload, early processing, accounting, or in the payment task itself). Making the payment would lock the total amount of the document in the system. Other tasks would just get the data and adapt their state accordingly. Everything was more flexible and users did not block each other anymore. Accounting could happen before payment, after payment, or even in parallel.
+
+Our users also got a new view that included a document table with filtering options. The table would adapt to whatever item was selected. On selection, the view would adapt into a three-column view: Table, Document Preview, Tasks. Filtering by task would show all documents that have that task unfinished. Finishing a task would remove it from the filtered list and open the next available item. Users could filter by task and plow through their tasks until the list is empty. Before the change, I saw workspaces with hundreds of unfinished documents because something was missing (e.g. a contract with recurring costs). Users had limited filtering capabilities. Everything was cluttered and they never knew when they were done. Now they could filter by month and task and work on emptying the list they see.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-workflow-evolution/open-tasks-per-document.png" alt="Open tasks per document across the workflow queue" class="w-full" loading="lazy" />
@@ -105,33 +80,14 @@ payment or classifying a document, each completable on its own.
   </figcaption>
 </figure>
 
-I ran the spec sessions with the accounting lead and customer success to validate what counted as a
-task, led the architecture review, and made the coexistence call that let the new workflow run
-alongside the old one instead of replacing it in a single cut. Through the rebuild I kept two
-engineers on live user-facing bugs, because a foundational change that degrades the running product
-costs more than it delivers.
+I ran spec sessions with the team, the founder, and accounting experts to validate what counted as a task, led the architecture review, and made the coexistence call that let the new Workflow run alongside the old one instead of replacing it in a single cut. We had to reverse the call later because backend found no way to make the architecture change without breaking the old one. The rebuild took most of our resources for a limited amount of time and I kept two engineers on live user-facing bugs.
 
-> **Key learning: small enough tasks gave us three service models we had not designed for.**
-> The team had wanted AI in the product for a year and could not find a way in, because no single
-> agent could take on the full workflow. Once each task was small and self-contained, a user, an AI
-> agent or an operator working on a client's behalf could complete it. Three service models came out
-> of one architecture, from a decomposition I had made for user-experience reasons. Putting task
-> definitions in the backend rather than the frontend is a governance decision more than a UX one,
-> and it is the piece I would defend hardest.
-
-## What I scoped it against
-
-The redesign epic states two targets: a 40% reduction in document processing time and a 90%
-reduction in permission-related support tickets. **Both are targets I wrote, not results I
-measured.** No measurement was taken while I was there and I have no way to check them now. They are
-here to show the practice of scoping a change against explicit numbers.
+> **Key learning: small enough tasks gave us three service models.**
+> We’d been trying to find a way to introduce more AI into the product for a year (we shipped a secret AI Chat Assistant which we were still testing with some users). The hard challenge was that we wanted specialized agents to only do what we wanted them to do. Not one thing that does everything. The old architecture was too fragile and one agent who fails could break the entire document and the workspace. Making the tasks small in scope and self-contained gave us three service models: users pay one price and do everything themselves, the cheapest tier; users pay our tax consultancy partner, whose experts take over some or all tasks while the user just supplies documents; or users pay for AI features that take over some tasks. Price on the last two was still undefined.
 
 ## Outcome
 
-It shipped, after I left. The task architecture is live: the workflow list shows tasks per document
-as independent chips, and the document view carries an accordion where SmartFill, assignment,
-payment preparation, payment approval, execution and accounting each hold their own status.
-Speedflow's modal is gone, replaced by the pipeline it existed to make possible.
+The new Workflow shipped in my last months at digital office. We’d already gained positive feedback. Users took a few weeks to adapt to the new experience but that was expected. The legacy Workflow is gone, the Speedflow modal as well. The positive feedback stays anecdotal. We were committed to shipping the new Workflow with an analytics solution but could not commit to one due to privacy and budgeting concerns.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-workflow-evolution/pipeline-shipped.png" alt="The shipped task pipeline: one document as a set of independent tasks" class="w-full" loading="lazy" />
@@ -142,10 +98,4 @@ Speedflow's modal is gone, replaced by the pipeline it existed to make possible.
 </figure>
 
 > **Key learning: escalating a strategic misalignment is product work.**
-> The redesign served the founder's mission directly, which was to let tax consultancies take on
-> more clients as accountants become scarce. A different vision for the company was being pursued in
-> parallel, and I kept optimising the thing in front of me on the assumption that a good enough
-> product would settle the argument. Execution was strong and adoption was real, and neither saved
-> the work's position, because the two directions were never reconciled and I never forced them into
-> the open. Starting over, forcing the two clashing product directions between founder and CEO into
-> one room would be my first priority.
+> The redesign served the founder's mission directly, which was to let tax consultancies take on more clients as accountants become scarce. A different vision for the company with different use cases and a more exclusive customer profile was being pursued in parallel. Both visions were compatible but were competing on the roadmap. It was my priority to keep pushing the founder and CEO to commit to one roadmap priority. That seemed to work, but the roadmap itself kept leaving a bitter taste for one of the two. Starting over, I would make it my first priority to push for one unified vision and direction because two compatible directions are still one too many.
