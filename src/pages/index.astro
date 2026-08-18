@@ -10,11 +10,10 @@ if (!about) throw new Error('About page content not found');
 const { Content } = await render(about);
 
 const curatedSlugs = [
-  'bikemap-pause-mode',
+  'table-hunter',
   'do24-workflow-evolution',
   'do24-teal-ui',
-  'cycling-coach',
-  'arin-und-der-drache',
+  'bikemap-pause-mode',
 ];
 const allProjects = await getCollection('projects');
 const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug === s)!.data);
@@ -94,7 +93,7 @@ const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug 
 
       <h3 class="text-teletext-cyan font-bold mt-[2ch]">Opinionated Defaults, Reversible Paths</h3>
       <p class="text-teletext-white leading-relaxed mt-[0.5ch]">
-        On Pingpong Map, working solo, I made the call and wrote down the exact condition that would
+        On Table Hunter, working solo, I made the call and wrote down the exact condition that would
         make me reverse it — keeping momentum without waiting for certainty. That decision log is the
         real artefact, not the map.
       </p>

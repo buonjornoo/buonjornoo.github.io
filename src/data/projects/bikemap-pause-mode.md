@@ -1,6 +1,6 @@
 ---
 title: "Bikemap Pause Mode"
-description: "Bikemap's most requested feature. Shipped in ten weeks in spite of technical constraints."
+description: "Bikemap's most requested feature. Shipped in ten weeks with a limitation we chose on purpose."
 subtitle: "The bike computer had no pause button, and 1.7 million recordings a year never became a route anyone kept."
 techStack: ["Product Management", "UX Design", "User Research", "iOS", "Android"]
 coverImage: "/img/projects/pauseModeCover.png"
@@ -13,9 +13,8 @@ pageNumber: "202"
 
 ## Challenge
 
-In 2022 riders started 2.6 million recordings in the Bikemap app. 2.2 million of those were ended,
-and 875,000 became a route saved to a profile. 1.7 million recordings never became a route anyone
-kept.
+In 2022 riders started 2.6 million recordings in the Bikemap app. They ended 2.2 million of those,
+and saved 875,000 as a route to a profile. 1.7 million recordings never became a route anyone kept.
 
 The bike computer had no pause button. Riders stop for coffee, wait at level crossings and catch
 their breath at the top of climbs. Without a pause, a break landed in the recording as a spiky clump
@@ -104,7 +103,7 @@ decision the whole project rested on. So was shipping manual pause with the gap 
 waiting for the backend work, and running marketing in parallel so the release reached people who
 had already stopped using the app.
 
-Against that: we defined the success metric and did not get to measure it. The notification timeout
+Against that: I defined the success metric and did not get to measure it. The notification timeout
 was too short in the first prototype and only user testing caught it. And battery-conscious riders
 got nothing from this release, though they were a real third of the request.
 

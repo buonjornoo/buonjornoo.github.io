@@ -54,11 +54,10 @@ actively thought about our target audiences for each feature and platform.
 <figure class="my-[2ch]">
   <img src="/img/routePlanner/Persona Example.png" alt="Example persona from the Bikemap persona set" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
-    Example Persona. At Bikemap, we found that personas helped new employees to get an initial
-    understanding of our user base but we also found that as soon as we understood our main personas,
-    we actually never really used the assets in our conversations and presentations. So please keep
-    in mind when reviewing this, that we actively decided to not put too much effort in designing and
-    customizing them.
+    Example persona from the set, not built for this project specifically. Personas like this helped
+    new hires get oriented, but the team rarely returned to them in day-to-day conversations or
+    presentations once everyone understood the main user types. We didn't invest much in customising
+    this one beyond that first use.
   </figcaption>
 </figure>
 
@@ -110,7 +109,7 @@ for them.
 
 The initiative ran as seven epics, and the ordering was the product decision. Anything that could
 progress without backend capacity got pulled forward, and backend-dependent work was timed into the
-windows the team actually had. The spine was to rebuild the AB Planner on a new domain with no new
+windows the team had. The spine was to rebuild the AB Planner on a new domain with no new
 features at all, purely to cut the external dependency, and only then add what the two tools had
 been missing.
 
@@ -135,7 +134,7 @@ epic, and the legacy AB Planner was still running alongside the new tool.
 > **Key learning: we found out how much the legacy tools mattered by switching them off by accident.**
 > Partway through the migration the legacy editor and AB Planner went dark in production, by mistake
 > and not by plan. The response was immediate and loud, and it told us in a few hours what our
-> analytics never had: a small, deeply engaged group depended on those tools daily. Nothing in the
+> analytics never had: a small group depended on those tools every day. Nothing in the
 > research had shown it, because we had no meaningful behavioural tracking and were prioritising on
 > qualitative input and stakeholder opinion. It changed how I ran the rest of the migration, and
 > from then on we tested every capability moving to the new app before touching the old one. The
