@@ -1,7 +1,7 @@
 ---
 title: "teal-ui Design System"
-description: "Building digital office's first Design System and Storybook UI library based on what is live, tokenizing for quick adaptation, standardization, machine- and LLM readability."
-subtitle: "A two-tier token architecture at digital office, and the bridge to engineering I never built."
+description: "A Design System built from scratch, with the goal to unlock machine readability and faster prototyping and building."
+subtitle: "A two-tier token architecture at digital office, and the bridge to engineering."
 techStack: ["Design Systems", "Design Tokens", "Figma", "Storybook", "Tailwind"]
 coverImage: "/img/projects/tealUiCover.png"
 slug: "do24-teal-ui"
@@ -17,21 +17,13 @@ Many pages, few components, little reusability. Engineers reached for Material U
 Angular, and in many cases did not adhere to the design, because Material UI was not flexible enough
 to match it.
 
-I advocated for a Figma Team plan to get the room to build a design system. The problems it had to
-solve were concrete: a high-maintenance set of one-shot components, and frontend rebuilding the same
-thing again and again, which brought inconsistency into design and interaction and made bug fixing
-painful.
+I advocated for a Figma Team plan to get the room to build a design system. The problems it had to solve were concrete: a high-maintenance set of one-shot components, and frontend rebuilding the same thing again and again, which brought inconsistency into design and interaction and made bug fixing painful.
 
-As more frontend engineers joined, I could get the team to move to Tailwind, build our own library
-piece by piece rather than from scratch, and use Storybook for faster design QA.
+As more frontend engineers joined, I could get the team to move to Tailwind, build our own frontend library piece by piece rather than from scratch, and use Storybook for faster design QA.
 
 ## The team and my role
 
-I started the system with a designer who joined at the same time. Neither of us had to convince the
-other. I took on more product responsibility while she kept improving the system; I stayed on it
-alongside the product-manager role, tokenising and replacing one-shot components whenever one turned
-up in a prioritised ticket. I set governance for two other designers who came through the company
-later. Being both design lead and PM gave the rules teeth, and left the system with a single point
+I started the system with a designer who joined at the same time. Neither of us had to convince the other. I took on more product responsibility while she kept improving the system; I stayed on it alongside the product-manager role, tokenising and replacing one-shot components whenever one turned up in a prioritised ticket. I set governance for another designer who came through the company later. Being both design lead and PM gave the rules teeth, but left the system with a single point
 of failure.
 
 ## Building from what was already on screen
@@ -49,12 +41,12 @@ variants. From there I could argue about what should change while the product ke
   </figcaption>
 </figure>
 
-Figma alone was never going to hold the line. We needed a coded representation, so Storybook became
-the source of truth for design and frontend together: design could review components and
-interactions, and engineering could check proper usage, meaning whether somebody had built something
-that looked like the design without using the component behind it.
+Figma alone couldn't hold the line, so I pushed for a coded representation: Storybook became the
+source of truth for design and frontend together. Design could review components and interactions
+there; engineering could check whether someone had built something that looked right without using
+the actual component behind it.
 
-> **The team migrated onto the library because they had already built the components.**
+> **Key learning: the team migrated because the library was built from what they'd already shipped.**
 > I have designed several design systems, two of them multi-brand and top-down. A library derived
 > from first principles can be correct and still be unrecognisable to the people holding the current
 > implementation. Many teams never migrate onto one, because migration is a rewrite, and rewriting
@@ -98,12 +90,13 @@ more characters.
 
 ## Giving the machine access
 
-Tokenising also made the system readable to a language model. I could get Claude Code to produce
-prototypes that used our components, and quick design generation started to look like our product,
-which let stakeholders see what we were aiming at instead of imagining it. That work became a
-`design-context` skill plus machine-readable token JSON covering primitives, semantic tokens and the
-light/dark mapping, in a form an agent can apply without me translating a Figma screenshot into a
-prompt.
+Tokenising also made the system readable to a language model. Claude Code could read the token JSON
+and produce prototypes that used our components, without me translating a Figma screenshot into a
+prompt first, and stakeholders could see what we were aiming at instead of imagining it. The agent
+assembled the prototypes; I had already decided the token architecture and which primitives were
+allowed to surface as semantic options. That work became a `design-context` skill plus
+machine-readable token JSON covering primitives, semantic tokens and the light/dark mapping, in a
+form an agent can apply directly.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/design-context-skill.png" alt="The design-context skill and the token JSON an agent reads" class="w-full" loading="lazy" />
@@ -113,28 +106,24 @@ prompt.
   </figcaption>
 </figure>
 
-## Governance, and what we left out
+## Governance, and what I left out
 
 Governance was four rules rather than a document. teal-ui components are mandatory for new UI, new
 variants get documented in Storybook, new components are requested rather than invented, and
 one-shot custom components need approval. A consistency checklist covered the states designers skip,
 hover, active, disabled, loading, error and empty, plus keyboard navigation and WCAG AA contrast.
 
-The third tier of the token model, component-level tokens, was specified and deliberately not built.
-We had not run into enough components with real edge cases to justify it.
+I specified the third tier of the token model, component-level tokens, then chose not to build it.
+We hadn't run into enough components with real edge cases to justify it.
 
-## Outcome
+## What broke
 
-The product came out more consistent across everything we touched, with a coherent spacing system
-and components the frontend can configure rather than rebuild. Frontend implementation got faster: a
-bug fix took hours instead of days, and new features could be prototyped in the frontend quicker
-than design could build them in Figma. That is my recollection rather than a measured number, since
-nobody was tracking it.
+Dark mode was designed end to end and never shipped.
 
 <figure class="my-[2ch]">
-  <img src="/img/do24-teal-ui/light-dark-mapping.png" alt="The light and dark mode token mapping, fully specified" class="w-full" loading="lazy" />
+  <img src="/img/do24-teal-ui/light-dark-mapping.png" alt="The light and dark mode token mapping, specified end to end" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
-    Dark mode, fully specified and never built. Every value in the hatched column was designed; none
+    Dark mode, specified and never built. Every value in the hatched column was designed; none
     of it was ever bound to a Figma variable.
   </figcaption>
 </figure>
@@ -148,10 +137,18 @@ nobody was tracking it.
 > Figma has to speak the code's language or it stays documentation. Next time I will not touch
 > tokenisation before engineering and I agree how the tokens land in their daily work.
 
-Dark mode was fully designed and never shipped. The library and the Storybook work are still in the
-product. The token architecture is good work that was never load-bearing, and when I left, the
-initiative lost the person driving it.
+The library and the Storybook work are still in the product. The token architecture is good work
+that was never load-bearing, and when I left, the initiative lost the person driving it.
 
-I would do plenty differently. I would not decide against having a source of truth between design
+## Outcome
+
+The product came out more consistent across everything the team touched, with a coherent spacing
+system and components frontend can configure rather than rebuild. Frontend implementation got
+faster: a bug fix took hours instead of days, and new features could be prototyped in the frontend
+quicker than design could build them in Figma. Those two claims are recollection. Nobody was
+tracking either one. The 136 primitives and 54 semantic tokens above are the only counts in this
+piece I can point to.
+
+I would change plenty. I would not decide against having a source of truth between design
 and frontend. Whatever form it takes, it has to be something engineering already recognises and
 design can maintain.

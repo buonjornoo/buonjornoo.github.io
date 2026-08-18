@@ -11,6 +11,7 @@ interface Props {
     heroImage?: string;
     pageNumber?: string;
     archive?: boolean;
+    url?: string;
   };
 }
 
@@ -27,6 +28,18 @@ const { frontmatter } = Astro.props;
       <DoubleHeight as="h1" color="text-teletext-yellow">{frontmatter.title}</DoubleHeight>
       {frontmatter.subtitle && (
         <p class="text-teletext-cyan mt-[1ch]">{frontmatter.subtitle}</p>
+      )}
+      {frontmatter.url && (
+        <p class="mt-[1ch]">
+          <a
+            href={frontmatter.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-teletext-cyan hover:text-teletext-yellow"
+          >
+            → Live at {frontmatter.url.replace(/^https?:\/\//, '')}
+          </a>
+        </p>
       )}
       {frontmatter.archive && (
         <p class="text-teletext-white/60 text-teletext-sm mt-[0.5ch]">(Archive)</p>

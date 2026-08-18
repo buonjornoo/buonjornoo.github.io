@@ -30,6 +30,9 @@ function rehypeNewTabLinks() {
 export default defineConfig({
   site: 'https://siebrands.com',
   integrations: [react(), sitemap()],
+  redirects: {
+    '/projects/pingpong-map/': '/projects/table-hunter/',
+  },
   markdown: {
     rehypePlugins: [rehypeNewTabLinks],
   },
