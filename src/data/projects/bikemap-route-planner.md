@@ -7,9 +7,8 @@ coverImage: "/img/projects/routePlannerCover.png"
 heroImage: "/img/routePlanner/Route Planner Hero.png"
 url: "https://web.bikemap.net/plan"
 slug: "bikemap-route-planner"
-order: 90
+order: 2
 pageNumber: "201"
-archive: true
 ---
 
 ## Challenge

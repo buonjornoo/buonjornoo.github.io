@@ -5,7 +5,7 @@ subtitle: "An evidence standard for an AI's inputs, written after my own coachin
 techStack: ["AI Systems", "Product Design", "Claude Code", "Personal Project"]
 coverImage: "/img/projects/cyclingCoachCover.png"
 slug: "cycling-coach"
-order: 5
+order: 9
 pageNumber: "207"
 ---
 

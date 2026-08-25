@@ -10,10 +10,11 @@ if (!about) throw new Error('About page content not found');
 const { Content } = await render(about);
 
 const curatedSlugs = [
+  'do24-workflow-evolution', // FEATURED treatment = position 0
+  'bikemap-route-planner',
   'table-hunter',
-  'do24-workflow-evolution',
-  'do24-teal-ui',
   'bikemap-pause-mode',
+  'do24-teal-ui',
 ];
 const allProjects = await getCollection('projects');
 const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug === s)!.data);
@@ -32,14 +33,41 @@ const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug 
     <div class="flex flex-col gap-[0.5ch]">
       <DoubleHeight as="h1" color="text-teletext-yellow">Jorne</DoubleHeight>
       <p class="text-teletext-cyan">
-        Senior Product Designer who owns product direction as well as craft. Currently exploring AI and
-        developer tools.
+        Senior Product Designer &amp; Product Manager. I find the structural problem nobody has named,
+        design the answer, and follow through past release. I work with AI in both directions: designing
+        it into products, and building with it hands-on.
       </p>
       <p class="text-teletext-white">Frankfurt am Main, Germany and remote. Available now.</p>
     </div>
   </section>
 
   <Separator color="text-teletext-cyan" char="─" />
+
+  <!-- At-a-glance highlights -->
+  <section class="my-[2ch]">
+    <ul class="flex flex-col gap-[1ch]">
+      <li>
+        <span class="block text-teletext-yellow font-bold">ONE PERSON, MANY HATS</span>
+        <span class="block text-teletext-white">owned product direction and design mentoring at digital office 24 and Bikemap; did QA and support too, wherever the product needed hands</span>
+      </li>
+      <li>
+        <span class="block text-teletext-yellow font-bold">CONSUMER SCALE</span>
+        <span class="block text-teletext-white">Bikemap's rider base grew from 5.1M to 8.6M between mid-2021 and late 2023, while I was making product calls to improve premium conversion and engagement with features like the Bike Computer</span>
+      </li>
+      <li>
+        <span class="block text-teletext-yellow font-bold">B2B PLATFORM</span>
+        <span class="block text-teletext-white">decoupled two frustrated user groups: one linear invoice workflow became parallel, independent tasks; the rigid two-column wizard became a flexible three-column workspace</span>
+      </li>
+      <li>
+        <span class="block text-teletext-yellow font-bold">SYSTEMS ×2</span>
+        <span class="block text-teletext-white">token-based design systems at digital office 24, Bikemap, multi-brand systems for KION and Cheil — machine-readable tokens meant prototyping with real production components, closing the design–dev gap</span>
+      </li>
+      <li>
+        <span class="block text-teletext-yellow font-bold">SOLO BUILDER, AGENT TEAMS</span>
+        <span class="block text-teletext-white">set up and directed the agents behind a live pingpong table map, an AI cycling coach, and a platformer by order of my six-year-old</span>
+      </li>
+    </ul>
+  </section>
 
   <!-- About -->
   <section class="my-[2ch]">

@@ -1,24 +1,22 @@
 ---
 title: "This Site"
-description: "A Ceefax simulator built by a seven-agent team with written authority. The page you are reading is the artefact."
-subtitle: "Eight colours, one font, three-digit page numbers, and seven agents that can each say no."
+description: "A portfolio inspired by Ceefax/Teletext."
+subtitle: "Testing agent workflows by letting them build this site. My art direction, my content."
 techStack: ["AI Agents", "Design Systems", "Astro", "Constraint Design"]
 coverImage: "/img/projects/thisSiteCover.png"
 url: "https://github.com/buonjornoo/buonjornoo.github.io"
 slug: "this-site"
-order: 6
+order: 8
 pageNumber: "208"
 ---
 
 ## Challenge
 
-Every other case study here is a report about work you cannot inspect. This one is different: the
-artefact is the page you are looking at, and the process that produced it is checked into the repo
-next to it.
-
 I wanted a personal site that was distinctive without being decorated, and I wanted to find out
 whether a team of agents with real authority produces better work than a single agent taking
 instructions. Both questions have the same answer, and it is about constraint.
+
+You can check the repo for fun, or jump on a conversation with me.
 
 ## Constraint as the design
 

@@ -3,12 +3,11 @@ title: "AR City Exploration"
 description: "A master's thesis testing whether AR could tell Frankfurt's looted-art history better than a plaque or a walking-tour app."
 subtitle: "Location-based AR storytelling for Frankfurt's Raubkunst history, built with a five-person team and shown at the Frankfurt Book Fair 2018."
 techStack: ["Unity3D", "AR", "UX Design", "Experience Design", "Research"]
-coverImage: "/img/projects/arCityCover.png"
+coverImage: "/img/arCityExploration/raubkunst_cover-small.gif"
 heroImage: "/img/arCityExploration/raubkunst_cover.gif"
 slug: "ar-city-exploration"
-order: 91
+order: 7
 pageNumber: "203"
-archive: true
 ---
 
 ## Challenge

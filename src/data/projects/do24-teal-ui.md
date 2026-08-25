@@ -6,7 +6,7 @@ techStack: ["Design Systems", "Design Tokens", "Figma", "Storybook", "Tailwind"]
 coverImage: "/img/projects/tealUiCover.png"
 slug: "do24-teal-ui"
 featured: true
-order: 1
+order: 5
 pageNumber: "205"
 ---
 

@@ -12,7 +12,7 @@ techStack:
   ]
 coverImage: "/img/projects/arinCover.png"
 slug: "arin-und-der-drache"
-order: 7
+order: 10
 pageNumber: "209"
 ---
 
