@@ -51,3 +51,17 @@ npm run check      # Astro type check + TypeScript validation
 GitHub Actions (`.github/workflows/deploy.yml`) builds on push to `main` and deploys to GitHub Pages at `siebrands.com`. **Never push to main without explicit user approval.**
 
 GA tracking ID: `G-9T9M59GHTP` (in BaseLayout).
+
+## Agent skills
+
+### Issue tracker
+
+Local markdown under `issues/` (one file per ticket, dependency-numbered). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-role vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` + `docs/adr/` at repo root (created lazily by `/domain-modeling`). See `docs/agents/domain.md`.
