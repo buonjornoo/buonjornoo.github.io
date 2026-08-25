@@ -83,6 +83,239 @@ const LEVEL_KARTE = [
 const LEVEL_BREITE = LEVEL_KARTE[0].length * BLOCK;
 
 // ============================================
+// WELT-ZEICHNER (Handgemachte Boden-, Brett- und Lava-Formen)
+// ============================================
+// Diese drei Helfer ersetzen die gekachelten 3D-Blockmodelle des Levels
+// durch weiche, handgezeichnete Formen (STYLEGUIDE.md Abschnitt 5 und
+// 11: keine nackten Rechtecke, mindestens 3 Wertstufen, Silhouetten
+// duerfen nie glatt sein). Sie werden NUR innerhalb von onDraw()-Pfaden
+// aufgerufen, arbeiten ausschliesslich deterministisch (sin + hashZahl,
+// NIEMALS rand()) und buendeln ihre Formen im Sammler bzw. in wenigen
+// zeichneFlaeche-Streifen.
+
+// EIN durchgehendes Holzbrett fuer einen ganzen Plattform-Lauf: leicht
+// wellige Ober-/Unterkante, gerundete Endkappen, 2-3 Maserungslinien,
+// warmes Streiflicht oben und ein Eigenkontur-Aufkleber dahinter.
+// Ersetzt die vier Einzelrechtecke pro Block, an deren Grenzen frueher
+// sichtbare Fugen entstanden. Die Silhouette bleibt bewusst nahe an der
+// Kollisionsbox (12 px hoch, +/- 2 px Wurf), damit Spruenge gleich
+// bleiben und Treffer lesbar sind (Hausregel 3).
+function zeichneHolzbrett(x, breite, top) {
+    const hoehe = 12;
+    const kopfMitteY = top + hoehe / 2;
+
+    // Wellige Ober-/Unterkante (nie eine gerade Kante, Abschnitt 11)
+    const schritt = 10;
+    const n = Math.max(2, Math.ceil(breite / schritt) + 1);
+    const ober = [];
+    const unter = [];
+    for (let i = 0; i < n; i++) {
+        const bx = x + (i / (n - 1)) * breite;
+        ober.push({
+            x: bx,
+            y: top + 1.6 + Math.sin(bx * 0.045) * 1.2 + Math.sin(bx * 0.113) * 0.6,
+        });
+        unter.push({
+            x: bx,
+            y: top + hoehe - 1.4 + Math.sin(bx * 0.06 + 2.1) * 1.1,
+        });
+    }
+
+    // 1 - Eigenkontur-Aufkleber HINTER dem Brett (etwas groesser,
+    //     dasselbe Muster wie bei Gegner und Ziel-Plattform)
+    const konturFarbe = rgb(...konturArr(PALETTE.holz, 0.38));
+    zeichneFlaeche(
+        [{ x: x - 2.5, y: top - 0.5 }]
+            .concat(ober.map((p) => ({ x: p.x, y: p.y - 2 })))
+            .concat([{ x: x + breite + 2.5, y: top - 0.5 }]),
+        [{ x: x - 2.5, y: top + hoehe + 0.5 }]
+            .concat(unter.map((p) => ({ x: p.x, y: p.y + 2 })))
+            .concat([{ x: x + breite + 2.5, y: top + hoehe + 0.5 }]),
+        konturFarbe,
+        konturFarbe
+    );
+    const aufkleberS = neuerSammler();
+    sammleForm(aufkleberS, kreisPunkte(x + 3.5, kopfMitteY, 8, 8), konturFarbe);
+    sammleForm(aufkleberS, kreisPunkte(x + breite - 3.5, kopfMitteY, 8, 8), konturFarbe);
+    zeichneSammler(aufkleberS);
+
+    // 2 - Brettkoerper mit Wertverlauf (warmes Holz oben, dunkler unten)
+    const kappeFarbe = rgb(...mische(PALETTE.holz, PALETTE.holzDunkel, 0.45));
+    zeichneFlaeche(
+        ober,
+        unter,
+        rgb(...PALETTE.holz),
+        rgb(...mische(PALETTE.holz, PALETTE.holzDunkel, 0.45))
+    );
+    const brettS = neuerSammler();
+    // Gerundete Endkappen - etwas dunkler, wie Schnitt-Holz am Brettende
+    sammleForm(brettS, kreisPunkte(x + 3.5, kopfMitteY, 6.2, 8), kappeFarbe);
+    sammleForm(brettS, kreisPunkte(x + breite - 3.5, kopfMitteY, 6.2, 8), kappeFarbe);
+
+    // 3 - 2-3 Maserungslaengen: gewellte Dunkelstriche, Saat aus der
+    //     Lauf-Position, damit jedes Brett fest sein Muster behaelt
+    const maserungFarbe = rgb(...konturArr(PALETTE.holz, 0.42));
+    const linien = breite > 140 ? 3 : 2;
+    const saat = Math.round(x * 0.71 + top * 0.23);
+    for (let j = 0; j < linien; j++) {
+        const basisY = top + 3.2 + (j * (hoehe - 6.4)) / (linien - 1);
+        const phase = hashZahl(saat + j * 31) * 6;
+        let prevX = null;
+        let prevY = null;
+        for (let bx = x + 7; bx <= x + breite - 7; bx += 14) {
+            const by =
+                basisY +
+                Math.sin(bx * 0.05 + phase) * 1.1 +
+                (hashZahl(Math.round(bx) + j * 57) - 0.5) * 1.2;
+            // Kleine Luecken lassen die Maserung handgemalt wirken
+            if (
+                prevX !== null &&
+                hashZahl(j * 101 + Math.round(bx) * 13 + saat) > 0.22
+            ) {
+                sammleForm(
+                    brettS,
+                    [
+                        { x: prevX, y: prevY - 0.9 },
+                        { x: bx, y: by - 0.9 },
+                        { x: bx, y: by + 0.9 },
+                        { x: prevX, y: prevY + 0.9 },
+                    ],
+                    maserungFarbe
+                );
+            }
+            prevX = bx;
+            prevY = by;
+        }
+    }
+    zeichneSammler(brettS);
+
+    // 4 - Warmes Streiflicht auf der welligen Oberkante (Licht von oben)
+    zeichneKantenband(
+        ober,
+        2.2,
+        rgb(...mische(PALETTE.holz, PALETTE.gold, 0.45)),
+        0.75
+    );
+}
+
+// Durchgehende, handgezeichnete Erd-Textur unter einem Bodenlauf:
+// sanfte horizontale Schichtenstriche, vereinzelte Steine und
+// Wurzelpunkte. Ersetzt die fruehere Farbstreuung je Block (erdTon),
+// die ein Kachelmuster erzeugte. Gezeichnet wird nur der Bereich, in
+// dem man wirklich hineinsieht (top + 34 bis maximal ~120 px Tiefe).
+function zeichneErdTextur(x, breite, top) {
+    const basis = top + 34;
+    const tief = Math.min(top + 120, LEVEL_KARTE.length * BLOCK) - 6;
+    if (tief <= basis + 6) return;
+    const saat = Math.round(x * 0.37 + top * 1.11);
+    const s = neuerSammler();
+
+    // 1 - Schichtenstriche: wellige, unterbrochene Horizontalbaender
+    const dunkelStrich = rgb(...konturArr(PALETTE.erdeDunkel, 0.3));
+    const hellStrich = rgb(...mische(PALETTE.erde, PALETTE.holz, 0.32));
+    let yy = basis + hashZahl(saat) * 8;
+    while (yy < tief) {
+        const farbe =
+            hashZahl(Math.round(yy) + saat * 3) < 0.62 ? dunkelStrich : hellStrich;
+        const phase = hashZahl(Math.round(yy) * 5 + saat) * 6;
+        let prevX = null;
+        let prevY = null;
+        for (let bx = x + 4; bx <= x + breite - 4; bx += 24) {
+            const by =
+                yy +
+                Math.sin(bx * 0.03 + phase) * 2.2 +
+                (hashZahl(Math.round(bx) + Math.round(yy) * 7) - 0.5) * 2;
+            if (prevX !== null && hashZahl(prevX + yy) > 0.16) {
+                const d = 1.5 + hashZahl(Math.round(bx) * 3 + Math.round(yy)) * 1.1;
+                sammleForm(
+                    s,
+                    [
+                        { x: prevX, y: prevY - d },
+                        { x: bx, y: by - d },
+                        { x: bx, y: by + d },
+                        { x: prevX, y: prevY + d },
+                    ],
+                    farbe
+                );
+            }
+            prevX = bx;
+            prevY = by;
+        }
+        yy += 13 + hashZahl(Math.round(yy) * 11 + saat) * 9;
+    }
+
+    // 2 - Steine: dunkler Sockel, hellerer Kern, Lichtpunkt oben links
+    const steinKontur = rgb(...konturArr(PALETTE.erdeDunkel, 0.4));
+    const steinKern = rgb(...PALETTE.erde);
+    const steinLicht = rgb(...mische(PALETTE.erde, PALETTE.wolkeHell, 0.35));
+    let sx = x + 16 + hashZahl(saat + 91) * 30;
+    while (sx < x + breite - 12) {
+        const sy = basis + 4 + hashZahl(Math.round(sx) + saat) * (tief - basis - 10);
+        const r = 2.6 + hashZahl(Math.round(sx) * 3 + saat) * 3.4;
+        sammleForm(s, kreisPunkte(sx, sy, r + 1.3, 7), steinKontur);
+        sammleForm(s, kreisPunkte(sx, sy, r, 7), steinKern);
+        sammleForm(s, kreisPunkte(sx - r * 0.3, sy - r * 0.35, r * 0.5, 6), steinLicht);
+        sx += 52 + hashZahl(Math.round(sx) * 7 + saat) * 58;
+    }
+
+    // 3 - Wurzelpunkte: kleine dunkle Tupfen, vereinzelt gestreut
+    const wurzelFarbe = rgb(...konturArr(PALETTE.erdeDunkel, 0.22));
+    let wx = x + 8 + hashZahl(saat + 47) * 22;
+    while (wx < x + breite - 6) {
+        const wy =
+            basis + hashZahl(Math.round(wx) * 2 + saat + 5) * (tief - basis - 4);
+        sammleForm(
+            s,
+            kreisPunkte(
+                wx,
+                wy,
+                1.4 + hashZahl(Math.round(wx) + saat * 2) * 1.4,
+                5
+            ),
+            wurzelFarbe
+        );
+        wx += 34 + hashZahl(Math.round(wx) * 5 + saat + 3) * 40;
+    }
+
+    zeichneSammler(s);
+}
+
+// Welliger, runder Lava-Pool: ersetzt die harte Rechteck-Oberkante des
+// lavaDunkel-Grundblocks durch eine organische Pool-Form mit vielen
+// kleinen Wellenbuckeln. Das pulsierende Gluehen und die Flammenzungen
+// des Aufrufers bleiben NICHT veraendert darueber liegen. Lokales
+// Koordinatensystem: (0,0) = Block-Ecke oben links.
+function zeichneLavaPool(breite) {
+    const schritt = 6;
+    const kante = [];
+    for (let bx = 0; bx <= breite; bx += schritt) {
+        kante.push({
+            x: bx,
+            y:
+                9 +
+                Math.sin(bx * 0.16) * 2.2 +
+                (hashZahl(Math.round(bx) * 7 + 5) - 0.5) * 2,
+        });
+    }
+    kante.push({ x: breite, y: 9 + Math.sin(breite * 0.16) * 2.2 });
+
+    // Dunkler Unterbau mit Wertverlauf nach unten
+    zeichneFlaeche(
+        kante,
+        breite + 1,
+        rgb(...PALETTE.lavaDunkel),
+        kontur(PALETTE.lavaDunkel, 0.35)
+    );
+    // Glut-Streif direkt unter der Oberflaeche (Wertstufe Richtung Hell)
+    zeichneKantenband(
+        kante,
+        3,
+        rgb(...mische(PALETTE.lavaDunkel, PALETTE.lavaHell, 0.5)),
+        0.8
+    );
+}
+
+// ============================================
 // SZENE: STARTBILDSCHIRM / CHARAKTER-AUSWAHL
 // ============================================
 
@@ -161,25 +394,10 @@ scene("auswahl", () => {
         z(Z.ui),
     ]);
 
-    // --- Statische Mini-Vorschau der Charaktere (gleicher Stil wie im
-    // Spiel, siehe Session 4) ---
-    function zeichneVorschauArin(mx, my) {
-        drawRect({ pos: vec2(mx - 20, my - 25), width: 40, height: 50, radius: 8, color: rgb(...PALETTE.arinIndigo) });
-        drawRect({ pos: vec2(mx - 24, my - 19), width: 48, height: 6, radius: 2, color: rgb(...PALETTE.arinAkzent) });
-        for (const ex of [mx - 10, mx + 6]) {
-            drawCircle({ pos: vec2(ex, my - 8), radius: 3.5, color: rgb(...PALETTE.blueteWeiss) });
-            drawCircle({ pos: vec2(ex + 1, my - 8), radius: 1.6, color: rgb(...PALETTE.tintenbraun) });
-        }
-    }
-    function zeichneVorschauDrache(mx, my) {
-        drawRect({ pos: vec2(mx - 25, my - 27), width: 50, height: 55, radius: 10, color: rgb(...PALETTE.dracheOrange) });
-        drawEllipse({ pos: vec2(mx, my + 12), radiusX: 17, radiusY: 11, color: rgb(...PALETTE.dracheBauch) });
-        drawPolygon({ pts: [vec2(mx - 15, my - 27), vec2(mx - 9, my - 27), vec2(mx - 12, my - 42)], color: rgb(...PALETTE.dracheHorn) });
-        drawPolygon({ pts: [vec2(mx + 9, my - 27), vec2(mx + 15, my - 27), vec2(mx + 12, my - 42)], color: rgb(...PALETTE.dracheHorn) });
-        for (const ex of [mx - 9, mx + 9]) {
-            zeichneGluehen(vec2(ex, my - 10), 4, PALETTE.gold);
-        }
-    }
+    // --- Statische Mini-Vorschau der Charaktere ---
+    // Die Figuren kommen jetzt aus figuren.js (dieselben Zeichnungen wie
+    // im Spiel, nur vergroessert) — Auswahl und Spiel koennen sich so
+    // gar nicht mehr unterscheiden.
 
     // --- Arin-Box (links) ---
     const arinMitteX = width() / 2 - 160;
@@ -194,7 +412,7 @@ scene("auswahl", () => {
         z(Z.ui),
     ]);
     const arinVorschau = add([pos(arinMitteX, 195), fixed(), z(Z.ui)]);
-    arinVorschau.onDraw(() => zeichneVorschauArin(0, 0));
+    arinVorschau.onDraw(() => zeichneArinVorschau(0, 0, 1.7));
 
     add([
         text("ARIN", { size: 22 }),
@@ -242,7 +460,7 @@ scene("auswahl", () => {
         z(Z.ui),
     ]);
     const dracheVorschau = add([pos(dracheMitteX, 195), fixed(), z(Z.ui)]);
-    dracheVorschau.onDraw(() => zeichneVorschauDrache(0, 0));
+    dracheVorschau.onDraw(() => zeichneDracheVorschau(0, 0, 1.6));
 
     add([
         text("DRACHE", { size: 22 }),
@@ -546,6 +764,10 @@ scene("spiel", () => {
     // durchgehenden Baendern verschmolzen (siehe unten) - frueher bekam
     // JEDER Block sein eigenes onDraw-Objekt fuer die Grasfranse.
     const oberflaechen = [];
+    // Plattform-Bloecke werden ebenso gesammelt und zu Laeufen
+    // verschmolzen (siehe plattformLaeufe unten) - frueher zeichnete
+    // jeder Block sein eigenes Brettstueck mit sichtbaren Fugen.
+    const plattformBloecke = [];
 
     for (let zeile = 0; zeile < LEVEL_KARTE.length; zeile++) {
         for (let spalte = 0; spalte < LEVEL_KARTE[zeile].length; spalte++) {
@@ -562,17 +784,16 @@ scene("spiel", () => {
                     // spaeter gebuendelt gezeichnet (siehe bodenLaeufe).
                     const zeichenOben = zeile > 0 ? LEVEL_KARTE[zeile - 1][spalte] : ".";
                     const istOberflaeche = zeichenOben !== "=";
-                    // Leichte, feste Farbstreuung je Block statt einer
-                    // toten Einheitsflaeche - kostet keinen einzigen
-                    // zusaetzlichen Zeichenaufruf. hashZahl() statt rand():
-                    // beim Neustart sieht die Erde wieder genauso aus.
-                    const erdTon = hashZahl(spalte * 7 + zeile * 13) * 0.22;
+                    // Einheitliche Erdtoene statt Streuung je Block: die
+                    // alte per-Block-Streuung (erdTon) ergab ein Kachel-
+                    // muster. Die lebendige, DURCHGEHEND handgezeichnete
+                    // Erdtextur (Schichtenstriche, Steine, Wurzelpunkte)
+                    // kommt jetzt gebuendelt von zeichneErdTextur() im
+                    // bodenDeko-Objekt unten.
                     add([
                         rect(BLOCK, BLOCK),
                         pos(x, y),
-                        color(...(istOberflaeche
-                            ? mische(PALETTE.erde, PALETTE.holz, erdTon)
-                            : mische(PALETTE.erdeDunkel, PALETTE.erde, erdTon))),
+                        color(...(istOberflaeche ? PALETTE.erde : PALETTE.erdeDunkel)),
                         area(),
                         body({ isStatic: true }),
                         z(Z.bodenBlock),
@@ -584,49 +805,40 @@ scene("spiel", () => {
 
                 // Plattform (durchlaessig von unten)
                 case "-": {
-                    // Eigenkontur als dunkler "Aufkleber" HINTER dem Brett
-                    // (billiger und weicher als ein Linien-Umriss).
+                    // Pro Block bleibt nur das unsichtbare Kollisionsobjekt
+                    // - exakt gleiche Lage und Hoehe wie frueher (12 px,
+                    // Oberkante bei y + BLOCK - 12), damit alle Spruenge
+                    // identisch bleiben. Das sichtbare Holz wird pro Lauf
+                    // zu EINEM durchgehenden Brett verschmolzen und
+                    // gebuendelt gezeichnet (siehe plattformDeko unten).
                     add([
-                        rect(BLOCK + 4, 17, { radius: 6 }),
-                        pos(x - 2, y + BLOCK - 14),
-                        color(...konturArr(PALETTE.holz, 0.38)),
-                        z(Z.bodenBlock),
-                    ]);
-                    add([
-                        rect(BLOCK, 12, { radius: 5 }),
+                        rect(BLOCK, 12, { fill: false }),
                         pos(x, y + BLOCK - 12),
-                        color(...PALETTE.holz),
                         area(),
                         body({ isStatic: true }),
                         "plattform",
                     ]);
-                    // Warmes Streiflicht oben (Licht kommt von oben rechts)
-                    add([
-                        rect(BLOCK - 10, 3, { radius: 1.5 }),
-                        pos(x + 5, y + BLOCK - 11),
-                        color(...mische(PALETTE.holz, PALETTE.gold, 0.4)),
-                        opacity(0.7),
-                    ]);
-                    // Dunklere Unterkante fuer etwas Tiefe
-                    add([
-                        rect(BLOCK, 3),
-                        pos(x, y + BLOCK - 3),
-                        color(...PALETTE.holzDunkel),
-                    ]);
+                    plattformBloecke.push({ x: x, y: y });
                     break;
                 }
 
                 // Stacheln / Lava (toedlich)
                 case "^": {
+                    // Kollisionsobjekt unveraendert (gleiche Groesse, Lage,
+                    // area/body/Tag) - nur unsichtbar gemacht. Die Sicht-
+                    // barkeit entsteht im welligen Lava-Pool darunter.
                     add([
-                        rect(BLOCK, BLOCK, { radius: 5 }),
+                        rect(BLOCK, BLOCK, { radius: 5, fill: false }),
                         pos(x, y),
-                        color(...PALETTE.lavaDunkel),
-                        outline(2, kontur(PALETTE.lavaDunkel, 0.35)),
                         area(),
                         body({ isStatic: true }),
                         "gefahr",
                     ]);
+                    // Welliger, runder Pool statt harter Blockkante
+                    // (zeichneLavaPool, siehe oben) - das Gluehen und die
+                    // Flammenzungen bleiben NICHT veraendert darueber.
+                    const poolObj = add([pos(x, y)]);
+                    poolObj.onDraw(() => zeichneLavaPool(BLOCK));
                     // Weiches, pulsierendes Gluehen plus drei Flammenzungen
                     // statt harter Stachel-Spitzen (siehe STYLEGUIDE.md -
                     // "weichere Gefahren-Zone")
@@ -670,26 +882,13 @@ scene("spiel", () => {
                             reichweite: 100,
                         },
                     ]);
-                    const gegnerKontur = kontur(PALETTE.gegnerSchiefer, 0.4);
-                    const gegnerLicht = mische(PALETTE.gegnerSchiefer, PALETTE.wolkeHell, 0.32);
-                    const gegnerSchatten = konturArr(PALETTE.gegnerSchiefer, 0.35);
-                    // Eigenkontur, Streiflicht und weich gluehende Glut-Augen
-                    // (alles im eigenen onDraw() - siehe STYLEGUIDE.md
-                    // Abschnitt 5: niemals follow() fuer Charakter-Details)
+                    // Der lila Waldgeist kommt aus figuren.js — die
+                    // Zeichnung haengt komplett am eigenen onDraw() (siehe
+                    // STYLEGUIDE.md Abschnitt 5: niemals follow() fuer
+                    // Charakter-Details). Die Glut-Augen bleiben das
+                    // spielbare Signal "Gegner".
                     gegner.onDraw(() => {
-                        zeichneKontaktschatten(16, 33, 32);
-                        drawRect({
-                            pos: vec2(-2, -2), width: 36, height: 36,
-                            radius: 8, color: gegnerKontur,
-                        });
-                        drawRect({
-                            pos: vec2(0, 0), width: 32, height: 32,
-                            radius: 6, color: rgb(...PALETTE.gegnerSchiefer),
-                        });
-                        zeichneKoerperLicht(32, 32, gegnerLicht, gegnerSchatten);
-                        const versatz = gegner.richtung * 3;
-                        zeichneGluehen(vec2(10 + versatz, 14), 3.5, PALETTE.gegnerGlut);
-                        zeichneGluehen(vec2(20 + versatz, 14), 3.5, PALETTE.gegnerGlut);
+                        zeichneGeist(32, 32, { blickrichtung: gegner.richtung });
                     });
                     break;
                 }
@@ -731,13 +930,53 @@ scene("spiel", () => {
                         color(...mastFarbe),
                         outline(2, kontur(mastFarbe, 0.4)),
                     ]);
-                    // Fahne mit weicher Ecke und Eigenkontur
-                    add([
-                        rect(30, 20, { radius: 4 }),
-                        pos(x + 16, y - BLOCK * 2),
-                        color(...PALETTE.zinnober),
-                        outline(2, kontur(PALETTE.zinnober, 0.35)),
-                    ]);
+                    // Wehende Fahne: gewellte Pennant-Form statt statischem
+                    // Rechteck. Ober- und Unterkante werden mit
+                    // sin(time()*3 + i*0.8) moduliert, als ob Wind ueber die
+                    // Zielfahne streicht (Animation nur ueber time() + sin,
+                    // siehe Hausregeln). Mast/Schild/Plattform bleiben.
+                    const fahneObj = add([pos(x + 16, y - BLOCK * 2)]);
+                    fahneObj.onDraw(() => {
+                        const t = time();
+                        const laenge = 30;
+                        const fahnenHoehe = 20;
+                        const n = 7;
+                        const obenK = [];
+                        const untenK = [];
+                        for (let i = 0; i <= n; i++) {
+                            const fx = (i / n) * laenge;
+                            obenK.push({
+                                x: fx,
+                                y: Math.sin(t * 3 + i * 0.8) * 2.5,
+                            });
+                            untenK.push({
+                                x: fx,
+                                y:
+                                    fahnenHoehe +
+                                    Math.sin(t * 3 + i * 0.8 + 0.9) * 2.5,
+                            });
+                        }
+                        // Eigenkontur-Aufkleber dahinter (leicht vergroessert,
+                        // dasselbe Muster wie bei den Holzbrettern)
+                        const fahnenKontur = rgb(...konturArr(PALETTE.zinnober, 0.35));
+                        zeichneFlaeche(
+                            [{ x: -1.5, y: -1.5 }]
+                                .concat(obenK.map((p) => ({ x: p.x, y: p.y - 1.5 })))
+                                .concat([{ x: laenge + 1.5, y: -1.5 }]),
+                            [{ x: -1.5, y: fahnenHoehe + 1.5 }]
+                                .concat(untenK.map((p) => ({ x: p.x, y: p.y + 1.5 })))
+                                .concat([{ x: laenge + 1.5, y: fahnenHoehe + 1.5 }]),
+                            fahnenKontur,
+                            fahnenKontur
+                        );
+                        // Tuch: zinnober oben, zur Unterseite etwas dunkler
+                        zeichneFlaeche(
+                            obenK,
+                            untenK,
+                            rgb(...PALETTE.zinnober),
+                            rgb(...mische(PALETTE.zinnober, konturArr(PALETTE.zinnober, 0.4), 0.55))
+                        );
+                    });
                     // "ZIEL" auf einer kleinen Pergament-Pille (dasselbe
                     // Muster wie zeigeNachricht(), nur in Miniatur). Gold auf
                     // blaugrauem Berghimmel war zu kontrastarm, und der
@@ -815,6 +1054,37 @@ scene("spiel", () => {
     }
     bodenLaeufe.sort((a, b) => a.x - b.x);
 
+    // ============================================
+    // HOLZPLATTFORMEN (gebuendelt, handgezeichnet)
+    // ============================================
+    // Benachbarte Plattform-Bloecke zu Laeufen verschmelzen (gleiches
+    // Muster wie bodenLaeufe) und pro Lauf EIN durchgehendes Holzbrett
+    // zeichnen - statt vier Rechtecken je Block mit sichtbaren Fugen.
+    plattformBloecke.sort((a, b) => (a.y - b.y) || (a.x - b.x));
+    const plattformLaeufe = [];
+    for (const p of plattformBloecke) {
+        const letzter = plattformLaeufe[plattformLaeufe.length - 1];
+        if (letzter && letzter.y === p.y && letzter.x + letzter.breite === p.x) {
+            letzter.breite += BLOCK;
+        } else {
+            plattformLaeufe.push({ x: p.x, breite: BLOCK, y: p.y });
+        }
+    }
+    plattformLaeufe.sort((a, b) => a.x - b.x);
+
+    // EIN Objekt fuer alle Holzbretter, mit Culling gegen die Kamera
+    // (STYLEGUIDE.md Abschnitt 12). Z = bodenBlock, damit Bretter wie
+    // frueher unter Grasfranse und Spieler liegen.
+    const plattformDeko = add([z(Z.bodenBlock)]);
+    plattformDeko.onDraw(() => {
+        const f = sichtFensterWelt();
+        for (const l of plattformLaeufe) {
+            if (l.x + l.breite < f.von) continue;
+            if (l.x > f.bis) break;
+            zeichneHolzbrett(l.x, l.breite, l.y + BLOCK - 12);
+        }
+    });
+
     // Blueten EINMALIG in Nestern vorberechnen - niemals rand() im
     // onDraw() (das wuerde jedes Bild neu wuerfeln und flackern).
     let bodenBlueten = [];
@@ -827,13 +1097,16 @@ scene("spiel", () => {
     }
     bodenBlueten.sort((a, b) => a.x - b.x);
 
-    // EIN Objekt fuer Bodenband + Grasfranse
+    // EIN Objekt fuer Erdtextur + Bodenband + Grasfranse
     const bodenDeko = add([z(Z.bodenDeko)]);
     bodenDeko.onDraw(() => {
         const f = sichtFensterWelt();
         for (const l of bodenLaeufe) {
             if (l.x + l.breite < f.von) continue;
             if (l.x > f.bis) break;
+            // Durchgehende handgezeichnete Erdtextur unter dem Grasband
+            // (Schichtenstriche, Steine, Wurzelpunkte - siehe oben)
+            zeichneErdTextur(l.x, l.breite, l.top);
             zeichneBodenband(l.x, l.breite, l.top);
             zeichneGrasFranse(l.x, l.top, l.breite);
         }
@@ -873,137 +1146,30 @@ scene("spiel", () => {
     let animScaleX = 1;
     let animScaleY = 1;
 
-    // Farben und Konturen einmal vorbereiten (nicht jedes Bild neu).
-    // Eigenkontur = eigene Farbe um 42 % abgedunkelt, nie Schwarz
-    // (STYLEGUIDE.md Abschnitt 11 - Comic-Regel).
-    const spielerKontur = kontur(spielerFarbe, 0.42);
-    const hornKontur = kontur(PALETTE.dracheHorn, 0.3);
-    const fluegelFarbe = rgb(...PALETTE.dracheTief);
-    const fluegelKontur = kontur(PALETTE.dracheTief, 0.3);
+    // Die Figuren zeichnet figuren.js (handgezeichneter Ghibli-Stil) —
+    // hier bleibt nur der Aufruf mit dem Zustand, den die Zeichnung
+    // braucht: Blickrichtung, Luft/Am-Boden und Laufanteil. Squash &
+    // Stretch bleibt wie bisher beim Aufrufer (siehe unten).
 
     if (gewaehlterCharakter === "arin") {
         spieler.onDraw(() => {
             pushTransform();
             pushScale(animScaleX, animScaleY);
-            // Kontaktschatten - verankert Arin im Boden
-            zeichneKontaktschatten(spielerBreite / 2, spielerHoehe + 2, spielerBreite);
-            // Eigenkontur als dunklerer "Aufkleber" hinter dem Koerper
-            drawRect({
-                pos: vec2(-2, -2),
-                width: spielerBreite + 4,
-                height: spielerHoehe + 4,
-                radius: 10,
-                color: spielerKontur,
+            zeichneArin(spielerBreite, spielerHoehe, {
+                blickrichtung: spieler.blickrichtung,
+                inLuft: !spieler.isGrounded(),
+                laufen: Math.min(1, Math.abs(spieler.vel.x) / ARIN_SPEED),
             });
-            // Koerper
-            drawRect({
-                pos: vec2(0, 0),
-                width: spielerBreite,
-                height: spielerHoehe,
-                radius: 8,
-                color: rgb(...spielerFarbe),
-            });
-            // Streiflicht oben rechts, Schatten unten links
-            zeichneKoerperLicht(spielerBreite, spielerHoehe, PALETTE.arinLicht, PALETTE.arinTief);
-            // Stirnband mit Eigenkontur (sitzt bewusst oberhalb der Augen)
-            drawRect({
-                pos: vec2(-5, 2),
-                width: spielerBreite + 10,
-                height: 8,
-                radius: 2,
-                color: kontur(PALETTE.arinAkzent, 0.35),
-            });
-            drawRect({
-                pos: vec2(-4, 3),
-                width: spielerBreite + 8,
-                height: 6,
-                radius: 2,
-                color: rgb(...PALETTE.arinAkzent),
-            });
-            // Flatternde Stirnband-Baender hinten
-            const v = spieler.blickrichtung;
-            const flatter = Math.sin(time() * 6) * 3;
-            drawPolygon({
-                pts: [
-                    vec2(v > 0 ? -4 : spielerBreite + 4, 4),
-                    vec2(v > 0 ? -16 : spielerBreite + 16, 11 + flatter),
-                    vec2(v > 0 ? -13 : spielerBreite + 13, 17 + flatter),
-                    vec2(v > 0 ? -4 : spielerBreite + 4, 9),
-                ],
-                color: rgb(...PALETTE.arinAkzent),
-            });
-            // Augen - Pupillen ruecken leicht in Blickrichtung
-            for (const ex of [spielerBreite * 0.25, spielerBreite * 0.7]) {
-                drawCircle({ pos: vec2(ex, spielerHoehe * 0.35), radius: 3.5, color: rgb(...PALETTE.blueteWeiss) });
-                drawCircle({ pos: vec2(ex + v, spielerHoehe * 0.35), radius: 1.6, color: rgb(...PALETTE.tintenbraun) });
-            }
             popTransform();
         });
     } else {
         spieler.onDraw(() => {
             pushTransform();
             pushScale(animScaleX, animScaleY);
-            const v = spieler.blickrichtung;
-            // Kontaktschatten
-            zeichneKontaktschatten(spielerBreite / 2, spielerHoehe + 2, spielerBreite);
-            // Fluegel HINTER dem Koerper, an der Hinterkante, mit
-            // leichtem Flattern (Faecher ab der Schulter - deshalb
-            // darf die Form ruhig ausgebuchtet sein)
-            const sx = v > 0 ? -1 : 1;
-            const ax = v > 0 ? spielerBreite * 0.25 : spielerBreite * 0.75;
-            const schlag = Math.sin(time() * 4) * 3;
-            drawPolygon({
-                pts: [
-                    vec2(ax, spielerHoehe * 0.28),
-                    vec2(ax + sx * 14, spielerHoehe * 0.28 - 16 - schlag),
-                    vec2(ax + sx * 29, spielerHoehe * 0.3 - 6 - schlag),
-                    vec2(ax + sx * 27, spielerHoehe * 0.3 + 7),
-                    vec2(ax + sx * 17, spielerHoehe * 0.3 + 3),
-                    vec2(ax + sx * 8, spielerHoehe * 0.3 + 6),
-                ],
-                color: fluegelFarbe,
-                outline: { width: 1.5, color: fluegelKontur },
+            zeichneDrache(spielerBreite, spielerHoehe, {
+                blickrichtung: spieler.blickrichtung,
+                inLuft: !spieler.isGrounded(),
             });
-            // Hoerner (mit Eigenkontur)
-            drawPolygon({
-                pts: [vec2(4, 0), vec2(10, 0), vec2(7, -13)],
-                color: rgb(...PALETTE.dracheHorn),
-                outline: { width: 1.2, color: hornKontur },
-            });
-            drawPolygon({
-                pts: [vec2(spielerBreite - 10, 0), vec2(spielerBreite - 4, 0), vec2(spielerBreite - 7, -13)],
-                color: rgb(...PALETTE.dracheHorn),
-                outline: { width: 1.2, color: hornKontur },
-            });
-            // Eigenkontur als "Aufkleber" hinter dem Koerper
-            drawRect({
-                pos: vec2(-2, -2),
-                width: spielerBreite + 4,
-                height: spielerHoehe + 4,
-                radius: 12,
-                color: spielerKontur,
-            });
-            // Koerper
-            drawRect({
-                pos: vec2(0, 0),
-                width: spielerBreite,
-                height: spielerHoehe,
-                radius: 10,
-                color: rgb(...spielerFarbe),
-            });
-            // Streiflicht oben rechts, Schatten unten links
-            zeichneKoerperLicht(spielerBreite, spielerHoehe, PALETTE.dracheLicht, PALETTE.dracheTief);
-            // Helle Bauch-Unterseite
-            drawEllipse({
-                pos: vec2(spielerBreite / 2, spielerHoehe * 0.75),
-                radiusX: spielerBreite * 0.35,
-                radiusY: spielerHoehe * 0.22,
-                color: rgb(...PALETTE.dracheBauch),
-            });
-            // Goldig gluehende Feuerdrachen-Augen
-            for (const ex of [spielerBreite * 0.28, spielerBreite * 0.68]) {
-                zeichneGluehen(vec2(ex, spielerHoehe * 0.32), 4, PALETTE.gold);
-            }
             popTransform();
         });
     }
