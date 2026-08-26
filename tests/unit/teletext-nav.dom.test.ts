@@ -1,5 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import pageRoutes from '../../src/data/pageRoutes.json';
 import { initTeletextNav } from '../../src/lib/teletext-nav';
 
 /**
@@ -155,5 +156,28 @@ describe('unmapped number handling (F1)', () => {
     expect(locationWrites.length).toBeGreaterThanOrEqual(1);
     expect(locationWrites.every((url) => url === '/projects/table-hunter/')).toBe(true);
     expect(window.location.href).toBe('/projects/table-hunter/');
+  });
+});
+
+/**
+ * Spec source: issues/08 AC 1 — "typing 102 navigates to /experience/".
+ * Asserted here against the real route map, through the keyboard seam, so the
+ * claim is covered end to end rather than at payload level only (F9).
+ */
+describe('experience matrix, page 102 (issues/08)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({
+      toFake: ['setTimeout', 'clearTimeout', 'clearInterval', 'Date', 'requestAnimationFrame'],
+    });
+  });
+
+  it('navigates to /experience/ when 1-0-2 is typed', () => {
+    initTeletextNav({ routes: pageRoutes, currentPage: CURRENT_PAGE });
+    pressKeys(['1', '0', '2']);
+    vi.advanceTimersByTime(500); // roll duration is 400ms
+
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/experience/')).toBe(true);
+    expect(headerDisplay().classList.contains('invalid')).toBe(false);
   });
 });

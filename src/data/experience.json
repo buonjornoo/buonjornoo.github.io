@@ -1,0 +1,92 @@
+{
+  "intro": "The shape of a career in product — no PDF required.",
+  "headings": {
+    "employment": "Employment",
+    "personalProjects": "Personal projects",
+    "education": "Education",
+    "skills": "Skills"
+  },
+  "copy": {
+    "projectRefLead": "— full case study on",
+    "pageLinkLabel": "page",
+    "thesisLabel": "Thesis:",
+    "thesisRefLead": "— now page"
+  },
+  "employers": [
+    {
+      "employer": "digital office 24",
+      "role": "Product Designer → Product Manager",
+      "years": "2024–2026"
+    },
+    {
+      "employer": "Bikemap",
+      "role": "Product Designer → Product Manager",
+      "years": "2021–2023"
+    },
+    {
+      "employer": "KION Group | Digital Campus",
+      "role": "UX Designer",
+      "years": "Nov 2019 – Jun 2021"
+    },
+    {
+      "employer": "Cheil Germany | Samsung",
+      "role": "UX Designer",
+      "years": "2018–2019"
+    }
+  ],
+  "education": [
+    {
+      "degree": "MA, with distinction",
+      "subject": "Leadership in the Creative Industries",
+      "school": "Darmstadt University of Applied Sciences",
+      "years": "2018",
+      "thesis": {
+        "title": "Story-Driven City Exploration in Expanded Realities",
+        "number": "203"
+      }
+    },
+    {
+      "degree": "BA",
+      "subject": "Sound and Music Production",
+      "school": "Darmstadt University of Applied Sciences",
+      "years": "2017",
+      "thesis": null
+    }
+  ],
+  "personalProjects": [
+    {
+      "name": "Cycling Coach",
+      "number": "207"
+    },
+    {
+      "name": "Table Hunter",
+      "number": "206"
+    }
+  ],
+  "skills": [
+    {
+      "label": "Design & execution",
+      "value": "Figma (component libraries, design systems, design tokens), interaction design, information architecture, user research, accessibility (WCAG/BITV), prototyping in code (HTML/CSS)"
+    },
+    {
+      "label": "AI",
+      "value": "designing AI into products responsibly (anonymized-data matching agent, consulting chat bot), curious about and hands-on with AI-assisted design; building with AI daily"
+    },
+    {
+      "label": "Requirements & process",
+      "value": "requirements analysis and prioritization, process analysis and modeling, specifications the engineering team can build from with minimal overhead"
+    },
+    {
+      "label": "Workshops",
+      "value": "preparing and running workshops and interviews, close coordination with engineering, internal and external stakeholders"
+    },
+    {
+      "label": "Tools",
+      "value": "Figma, FigJam/Miro, Jira/Linear, Confluence, Notion, GitHub, VS Code, Claude Code with MCPs"
+    },
+    {
+      "label": "Languages",
+      "value": "German (native), English (fluent)"
+    }
+  ]
+}

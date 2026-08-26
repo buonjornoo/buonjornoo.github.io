@@ -1,0 +1,107 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import Separator from '../components/teletext/Separator.astro';
+import experienceData from '../data/experience.json';
+import pageRoutes from '../data/pageRoutes.json';
+
+const copy = experienceData.copy;
+
+/**
+ * pageRoutes.json is the one number→URL map (CLAUDE.md). This page references
+ * other pages by number only and resolves the URL here, so a route that moves
+ * cannot leave a stale link behind — the build fails instead.
+ */
+const routes: Record<string, string> = pageRoutes;
+function urlFor(pageNumber: string): string {
+  const url = routes[pageNumber];
+  if (!url) throw new Error(`experience.json references unmapped page ${pageNumber}`);
+  return url;
+}
+---
+
+<PageLayout
+  title="Experience"
+  description="Jorne Siebrands' career at a glance — product design and product management across digital office 24, Bikemap, KION Group and Cheil Germany."
+  pageNumber="102"
+>
+  <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-yellow">Experience</DoubleHeight>
+    <p class="text-teletext-cyan mt-[1ch]">
+      {experienceData.intro}
+    </p>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.employment}</h2>
+    <ul class="list-none space-y-[1ch]">
+      {experienceData.employers.map((job) => (
+        <li>
+          <span class="text-teletext-white font-bold">{job.employer}</span>
+          <br />
+          <span class="text-teletext-cyan">{job.role}</span>
+          <br />
+          <span class="text-teletext-green">{job.years}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.personalProjects}</h2>
+    <ul class="list-none space-y-[1ch]">
+      {experienceData.personalProjects.map((project) => (
+        <li>
+          <span class="text-teletext-white font-bold">{project.name}</span>
+          {' '}{copy.projectRefLead}{' '}
+          <a href={urlFor(project.number)}>{copy.pageLinkLabel} {project.number}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.education}</h2>
+    <ul class="list-none space-y-[1ch]">
+      {experienceData.education.map((edu) => (
+        <li>
+          <span class="text-teletext-white font-bold">
+            {edu.degree}, {edu.subject}
+          </span>
+          <br />
+          <span class="text-teletext-cyan">{edu.school}</span>
+          <br />
+          <span class="text-teletext-green">{edu.years}</span>
+          {edu.thesis && (
+            <span class="block text-teletext-white/80 mt-[0.5ch]">
+              {copy.thesisLabel}{' '}
+              <a href={urlFor(edu.thesis.number)}>{edu.thesis.title}</a>{' '}
+              {copy.thesisRefLead} {edu.thesis.number}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Separator color="text-teletext-cyan" char="─" />
+
+  <section class="my-[2ch]">
+    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.skills}</h2>
+    <dl class="space-y-[1ch]">
+      {experienceData.skills.map((skill) => (
+        <div>
+          <dt class="text-teletext-green font-bold">{skill.label}</dt>
+          <dd class="text-teletext-white/80">{skill.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+</PageLayout>

@@ -4,7 +4,7 @@ Domain vocabulary for siebrands.com. One line per term; maintained lazily
 via `/domain-modeling`. See [CONCEPT.md](CONCEPT.md) for what the site is.
 
 - **Fastext**: the four colour-key links fixed to the bottom of every page (red=Home 100, green=Projects 200, yellow=Blog 300, cyan=Contact 400), mirroring a real teletext remote.
-- **Page number**: the three-digit address of a page (100=Home, 200=Projects, 201–210 individual projects, 300=Blog, 400=Contact); typed anywhere to navigate; mapped in `src/data/pageRoutes.json`.
+- **Page number**: the three-digit address of a page (100=Home, 102=Experience, 200=Projects, 201–210 individual projects, 300=Blog, 400=Contact); typed anywhere to navigate; mapped in `src/data/pageRoutes.json`.
 - **Magazine**: teletext term for a top-level section grouping pages by number range (2xx projects, 3xx blog); the site's equivalent of a section.
 - **Chrome**: everything that frames the simulator — Ceefax header, Fastext bar, remote control, scanline overlay; maximalist by design.
 - **Content**: the prose and media a page delivers; set in an 80ch measure on black, must get out of the way (prime rule).

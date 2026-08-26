@@ -49,6 +49,14 @@ describe('CONTEXT.md glossary seed', () => {
     'roll',
   ] as const;
 
+  it('keeps the page-number entry current with the route map', () => {
+    const md = readFileSync(join(root, 'CONTEXT.md'), 'utf-8');
+    const entry = md.split('\n').find((line) => line.includes('**Page number**')) ?? '';
+    // 102 (Experience) joined the map in issues/08; the glossary enumerates
+    // the site's landmark numbers and a gap here is a signal (docs/agents/domain.md).
+    expect(entry).toContain('102');
+  });
+
   it('defines every seed term', () => {
     const md = readFileSync(join(root, 'CONTEXT.md'), 'utf-8').toLowerCase();
     for (const term of TERMS) {
