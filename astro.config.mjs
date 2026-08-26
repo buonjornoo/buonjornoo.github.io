@@ -1,8 +1,47 @@
 // @ts-check
+import { existsSync } from 'node:fs';
+import { posix } from 'node:path';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+
+/**
+ * Dev parity for public/ directory URLs: `astro dev` serves public/ files by
+ * exact path, so a URL like /game/arin-und-der-drache/ 404s even though the
+ * production build (and `astro preview`, and GitHub Pages) resolves it to
+ * index.html. Rewrites trailing-slash URLs to their index.html when that file
+ * exists in public/, and only in the dev server (apply: 'serve') — production
+ * behaviour is untouched.
+ * @returns {import('vite').Plugin}
+ */
+function publicDirectoryIndex() {
+  return {
+    name: 'dev-public-directory-index',
+    apply: 'serve',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const rawUrl = req.url ?? '';
+        const queryIndex = rawUrl.indexOf('?');
+        const pathname = queryIndex === -1 ? rawUrl : rawUrl.slice(0, queryIndex);
+        const search = queryIndex === -1 ? '' : rawUrl.slice(queryIndex);
+        const normalized = posix.normalize(pathname);
+        if (
+          normalized.endsWith('/') &&
+          normalized.startsWith('/') &&
+          !normalized.includes('..') &&
+          normalized !== '/'
+        ) {
+          const filePath = new URL(`./public${normalized}index.html`, import.meta.url);
+          if (existsSync(filePath)) {
+            req.url = `${normalized}index.html${search}`;
+          }
+        }
+        next();
+      });
+    },
+  };
+}
 
 /**
  * Open external links and PDF downloads in a new tab, so a visitor never loses
@@ -37,6 +76,6 @@ export default defineConfig({
     rehypePlugins: [rehypeNewTabLinks],
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), publicDirectoryIndex()],
   },
 });
