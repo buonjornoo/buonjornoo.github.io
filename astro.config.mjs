@@ -1,10 +1,13 @@
 // @ts-check
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { posix } from 'node:path';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { rehypePageLinks } from './src/lib/rehype-page-links.ts';
+
+const pageRoutes = JSON.parse(readFileSync(new URL('./src/data/pageRoutes.json', import.meta.url), 'utf-8'));
 
 /**
  * Dev parity for public/ directory URLs: `astro dev` serves public/ files by
@@ -73,7 +76,7 @@ export default defineConfig({
     '/projects/pingpong-map/': '/projects/table-hunter/',
   },
   markdown: {
-    rehypePlugins: [rehypeNewTabLinks],
+    rehypePlugins: [rehypeNewTabLinks, rehypePageLinks(pageRoutes)],
   },
   vite: {
     plugins: [tailwindcss(), publicDirectoryIndex()],
