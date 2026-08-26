@@ -58,8 +58,24 @@ describe('directory listing — one component, two mounts', () => {
   function listingBlock(html: string): string {
     const start = html.indexOf('id="page-directory"');
     const openTagStart = html.lastIndexOf('<div', start);
-    // naive but sufficient: the listing has no nested <div>, so match to the next </div>
-    const end = html.indexOf('</div>', start) + '</div>'.length;
+    // Balanced-tag scan rather than "next </div>": correct even if the
+    // listing's markup grows nested <div>s later.
+    const tagPattern = /<div\b[^>]*>|<\/div>/g;
+    tagPattern.lastIndex = openTagStart;
+    let depth = 0;
+    let end = -1;
+    let match: RegExpExecArray | null;
+    while ((match = tagPattern.exec(html))) {
+      if (match[0].startsWith('</')) {
+        depth--;
+        if (depth === 0) {
+          end = match.index + match[0].length;
+          break;
+        }
+      } else {
+        depth++;
+      }
+    }
     return html.slice(openTagStart, end);
   }
 
@@ -141,5 +157,9 @@ describe('404 page otherwise unchanged', () => {
 
   it('keeps the "Available pages:" label', () => {
     expect(html).toContain('Available pages:');
+  });
+
+  it('keeps page 100 labeled "Home + About", not just "Home"', () => {
+    expect(html).toContain('Home + About');
   });
 });

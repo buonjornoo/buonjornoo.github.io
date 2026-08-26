@@ -37,4 +37,9 @@ One directory component listing every page number with its title, derived from `
 - QA: PASS (18 anchors, byte-identical `#page-directory` blocks on both mounts, all hrefs resolve, 404 copy untouched).
 - Designer: initial pass flagged the new listing dropped the old 404 list's dot-leader alignment (a Ceefax contents-page convention). Fixed — rows now use a flex layout with a `border-dotted border-teletext-white` leader between label and number, no new colors.
 - 99/99 tests green (`tests/integration/directory-page.test.ts` new; `experience-page.test.ts`'s route-count assertion updated to account for 101 alongside 102).
+- **Code review (Standards + Spec, run against `main...HEAD`) — fixed:**
+  - Spec: page 100's label had silently shortened from the old 404 list's "Home + About" to "Home" — a content wording change riding along with the structural swap, unflagged for `@content`/designer review despite the spec's note to flag treatment decisions. Restored to "Home + About" in `STATIC_LABELS`; added a regression test locking the string on `/404`.
+  - Standards: `listingBlock()` in the test suite was self-flagged brittle (sliced to the "next `</div>`", assuming no nesting). Replaced with a balanced-tag depth scan so it stays correct if the listing's markup grows nested `<div>`s.
+  - Standards, left as-is (judgement calls, not hard violations, low severity at current scale): page numbers as strings threaded through three lookup sources (`STATIC_LABELS`/`collectionLabels`/`pageRoutes.json`) — mild Primitive Obsession; the `{ number, url, label }` template-local triple — mild Data Clump; the `??`-chained label fallback — mild Repeated-Switches shape. None warrant restructuring at 7 static entries without a concrete second need.
+  - 100/100 tests green, `npm run check` clean, after fixes.
 - Committed locally only. Not pushed — awaiting user review and explicit push approval.
