@@ -9,6 +9,7 @@ npm run dev        # Start dev server
 npm run build      # Production build (output: dist/)
 npm run preview    # Serve built site locally
 npm run check      # Astro type check + TypeScript validation
+npm test           # Vitest (builds site first; unit + integration suites in tests/)
 ```
 
 ## Architecture

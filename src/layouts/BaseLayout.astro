@@ -40,7 +40,11 @@ const routesJson = JSON.stringify(pageRoutes);
     <!-- Preload font -->
     <link rel="preload" href="/fonts/bedstead.woff2" as="font" type="font/woff2" crossorigin />
   </head>
-  <body class="min-h-screen flex flex-col bg-teletext-black text-teletext-white font-teletext">
+  <body
+    class="min-h-screen flex flex-col bg-teletext-black text-teletext-white font-teletext"
+    data-routes={routesJson}
+    data-page-number={pageNumber}
+  >
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-[2ch] focus:py-2 focus:bg-teletext-yellow focus:text-teletext-black font-bold">
       Skip to content
     </a>
@@ -49,8 +53,12 @@ const routesJson = JSON.stringify(pageRoutes);
     <header class="ceefax-header">
       <a href="/" class="ceefax-service-name" aria-label="SIEBRANDS — go to home page">SIEBRANDS</a>
       <button id="page-number-btn" class="ceefax-page-number" aria-label="Enter page number">
-        P<span id="page-number-display">{pageNumber}</span>
+        <span class="ceefax-buffer">P<span id="page-number-display">{pageNumber}</span></span>
       </button>
+      <!-- Announced text lives in a passive wrapper beside the button (not
+           inside it): controls named via aria-label can swallow inner text
+           changes in some screen readers. Mirrors RemoteControl's pattern. -->
+      <span id="page-number-live" class="sr-only" aria-live="polite" aria-atomic="true">{pageNumber}</span>
       <span id="clock" class="ceefax-clock"></span>
     </header>
 
@@ -85,127 +93,15 @@ const routesJson = JSON.stringify(pageRoutes);
     <!-- Ceefax remote control (desktop rail + mobile/mid-width dialog) -->
     <RemoteControl pageNumber={pageNumber} />
 
-    <!-- Keyboard navigation + remote keypad + Clock -->
-    <script is:inline define:vars={{ routesJson, pageNumber }}>
-      var ROUTES = JSON.parse(routesJson);
-      var typed = '';
-      var typingTimeout;
-      var displays = document.querySelectorAll('#page-number-display, .remote-page-display');
-      var currentPage = pageNumber;
+    <!-- Keyboard navigation + remote keypad + Clock.
+         Bundled (not is:inline) so the decision core in src/lib/teletext-nav.ts
+         stays unit-testable; config rides in as body data attributes. -->
+    <script>
+      import { initTeletextNav } from '../lib/teletext-nav';
 
-      function setDisplays(text) {
-        displays.forEach(function(el) { el.textContent = text; });
-      }
-
-      function setDisplayClass(className, on) {
-        displays.forEach(function(el) {
-          el.classList.toggle(className, on);
-        });
-      }
-
-      // Shared digit-accumulation logic, used by keyboard input and every
-      // remote keypad button (rail + dialog).
-      function pressDigit(digit) {
-        typed += digit;
-        setDisplays(typed.padEnd(3, '_'));
-        setDisplayClass('typing', true);
-        clearTimeout(typingTimeout);
-
-        if (typed.length === 3) {
-          var target = typed;
-          typed = '';
-          setDisplayClass('typing', false);
-          setDisplayClass('navigating', true);
-          startRoll(target);
-        } else {
-          typingTimeout = setTimeout(function() {
-            typed = '';
-            setDisplays(currentPage);
-            setDisplayClass('typing', false);
-          }, 2000);
-        }
-      }
-
-      // Animate the page-number display(s) counting from the current page
-      // to the typed target over a fixed capped duration, then navigate.
-      function startRoll(targetStr) {
-        var url = ROUTES[targetStr] || '/404';
-        var target = parseInt(targetStr, 10);
-        var start = parseInt(currentPage, 10) || 0;
-
-        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduceMotion) {
-          setDisplays(String(target).padStart(3, '0'));
-          window.location.href = url;
-          return;
-        }
-
-        var duration = 400;
-        var startTime = null;
-        var lastRendered = null;
-
-        function frame(timestamp) {
-          if (startTime === null) startTime = timestamp;
-          var progress = Math.min((timestamp - startTime) / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var value = Math.round(start + (target - start) * eased);
-
-          if (value !== lastRendered) {
-            setDisplays(String(value).padStart(3, '0'));
-            lastRendered = value;
-          }
-
-          if (progress < 1) {
-            requestAnimationFrame(frame);
-          } else {
-            window.location.href = url;
-          }
-        }
-
-        requestAnimationFrame(frame);
-      }
-
-      // Keyboard number input
-      document.addEventListener('keydown', function(e) {
-        if (e.target.closest('input, textarea, [contenteditable]')) return;
-
-        if (e.key >= '0' && e.key <= '9') {
-          e.preventDefault();
-          pressDigit(e.key);
-        }
-      });
-
-      // Remote keypad buttons (rail + dialog) share the same digit logic
-      document.querySelectorAll('.remote-key').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          pressDigit(btn.dataset.digit);
-        });
-      });
-
-      // Live clock
-      function updateClock() {
-        var el = document.getElementById('clock');
-        if (!el) return;
-        var now = new Date();
-        var h = String(now.getHours()).padStart(2, '0');
-        var m = String(now.getMinutes()).padStart(2, '0');
-        var s = String(now.getSeconds()).padStart(2, '0');
-        el.textContent = h + ':' + m + ':' + s;
-      }
-      setInterval(updateClock, 1000);
-      updateClock();
-
-      // Tap page number: open the remote dialog if the rail isn't visible
-      // (rail is shown via CSS from 1100px up, so below that there's
-      // nothing to click through to and the dialog is the only entry point)
-      document.getElementById('page-number-btn').addEventListener('click', function() {
-        if (window.innerWidth >= 1100) return;
-        document.getElementById('remote-dialog').showModal();
-      });
-
-      // Dialog: close button
-      document.getElementById('remote-dialog-close').addEventListener('click', function() {
-        document.getElementById('remote-dialog').close();
+      initTeletextNav({
+        routes: JSON.parse(document.body.dataset.routes ?? '{}'),
+        currentPage: document.body.dataset.pageNumber ?? '100',
       });
     </script>
   </body>

@@ -166,6 +166,12 @@
   color: var(--color-teletext-yellow);
 }
 
+/* Unmapped page number: flash red, then JS resets to the current page */
+#page-number-display.invalid,
+.remote-page-display.invalid {
+  color: var(--color-teletext-red);
+}
+
 .ceefax-clock {
   color: var(--color-teletext-yellow);
   font-size: 1rem;

@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arin und der Drache</title>
     <style>
-        /* Seite komplett schwarz, kein Rand */
+        /* Ceefax-Chrome: gleiche Optik wie der Rest der Site (8 Farben,
+           Bedstead, kein Font-Smoothing), aber als eigenstaendige statische
+           Seite ohne das BaseLayout-Skript — die Tastatur bleibt beim Spiel
+           (issues/07, Defekt 2). */
+        @font-face {
+            font-family: 'Bedstead';
+            src: url('/fonts/bedstead.woff2') format('woff2');
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: none;
+            font-smooth: never;
         }
 
         body {
@@ -20,18 +31,113 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            /* Platz fuer die fixen Leisten oben/unten, damit das Canvas frei bleibt */
+            padding: 52px 0;
+            font-family: 'Bedstead', 'Courier New', Courier, monospace;
         }
 
-        /* Canvas soll die ganze Seite fuellen */
+        /* Canvas soll das Spielfeld fuellen (wird von Kaboom an <body>
+           angehaengt und bleibt unveraendert zentriert) */
         canvas {
             display: block;
             border-radius: 8px;
             /* Warmes Gold-Gluehen statt kaltem Cyan (siehe STYLEGUIDE.md Palette: gold) */
             box-shadow: 0 0 30px rgba(245, 197, 66, 0.25);
         }
+
+        :focus-visible {
+            outline: 2px solid #FF0;
+            outline-offset: 2px;
+        }
+
+        /* ===== CEEFAX HEADER (statisch, P210) ===== */
+        .ceefax-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.25rem 1ch;
+            background-color: #000;
+            border-bottom: 2px solid #FFF;
+            font-weight: 700;
+        }
+
+        .ceefax-service-name {
+            color: #0FF;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+        }
+
+        .ceefax-service-name:hover {
+            color: #FF0;
+        }
+
+        .ceefax-page-number {
+            color: #FFF;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            padding: 0 1ch;
+        }
+
+        .ceefax-clock {
+            color: #FF0;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== FASTEXT FUSSLEISTE ===== */
+        .ceefax-fastext {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            display: flex;
+        }
+
+        .fastext-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5ch;
+            padding: 0.3rem 0.5ch;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .fastext-btn:hover {
+            opacity: 0.85;
+            color: #000;
+        }
+
+        .fastext-red { background-color: #F00; }
+        .fastext-green { background-color: #0F0; }
+        .fastext-yellow { background-color: #FF0; }
+        .fastext-cyan { background-color: #0FF; }
+
+        @media (max-width: 480px) {
+            .fastext-number { display: none; }
+            .fastext-btn { font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>
+    <!-- Ceefax-Kopfzeile: SIEBRANDS / Seitennummer / Uhr — nur Links,
+         keine Tasteneingabe (das Spiel bindet up/space/r/escape via Kaboom) -->
+    <header class="ceefax-header">
+        <a href="/" class="ceefax-service-name" aria-label="SIEBRANDS — go to home page">SIEBRANDS</a>
+        <span class="ceefax-page-number">P210</span>
+        <span id="clock" class="ceefax-clock"></span>
+    </header>
+
     <!-- Kaboom.js von CDN laden (Version 3000 - stabil und gut dokumentiert) -->
     <script src="https://unpkg.com/kaboom@3000.1.17/dist/kaboom.js"></script>
     <!-- Styleguide: Farb-Tokens und Zeichen-Helfer (siehe STYLEGUIDE.md) -->
@@ -40,5 +146,41 @@
     <script src="figuren.js"></script>
     <!-- Spiellogik laden -->
     <script src="game.js"></script>
+
+    <!-- Fastext-Farbleiste: Rueckweg zu den Hauptseiten -->
+    <nav class="ceefax-fastext" aria-label="Quick navigation">
+        <a href="/" class="fastext-btn fastext-red">
+            <span class="fastext-label">Home</span>
+            <span class="fastext-number">100</span>
+        </a>
+        <a href="/projects/" class="fastext-btn fastext-green">
+            <span class="fastext-label">Projects</span>
+            <span class="fastext-number">200</span>
+        </a>
+        <a href="/blog/" class="fastext-btn fastext-yellow">
+            <span class="fastext-label">Blog</span>
+            <span class="fastext-number">300</span>
+        </a>
+        <a href="/contact/" class="fastext-btn fastext-cyan">
+            <span class="fastext-label">Contact</span>
+            <span class="fastext-number">400</span>
+        </a>
+    </nav>
+
+    <!-- Nur die Uhr tickt hier — bewusst KEIN Seitenzahl-Eingabeskript -->
+    <script>
+        (function () {
+            var el = document.getElementById('clock');
+            function tick() {
+                var now = new Date();
+                var h = String(now.getHours()).padStart(2, '0');
+                var m = String(now.getMinutes()).padStart(2, '0');
+                var s = String(now.getSeconds()).padStart(2, '0');
+                el.textContent = h + ':' + m + ':' + s;
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
 </body>
 </html>

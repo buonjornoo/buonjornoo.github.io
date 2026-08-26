@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check && tsc --noEmit",
+    "test": "vitest run",
     "astro": "astro"
   },
   "dependencies": {
@@ -22,5 +23,9 @@
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.11.6",
+    "vitest": "^4.1.11"
   }
 }
