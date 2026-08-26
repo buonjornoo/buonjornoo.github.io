@@ -6,7 +6,7 @@
 | **Blocked by** | 03 [file-lock: `src/pages/index.astro`] |
 | **Blocks** | 05 [go-live visibility] · provides settled insertion point for 01 Phase B |
 | **Target Modules** | front matter only (`archive`/`order`): `bikemap-route-planner.md`, `ar-city-exploration.md`, `do24-workflow-evolution.md`, `do24-teal-ui.md`, `this-site.md`, `cycling-coach.md`, `arin-und-der-drache.md` (+ no-op confirms in `bikemap-pause-mode.md`, `table-hunter.md`) · `src/pages/index.astro` lines 12–17 (`curatedSlugs`) |
-| **PRD source** | S3 (+ O1 slot reservation) |
+| **Source** | Shipped. Was PRD §S3 (+ O1 slot reservation); `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
 | **Status** | ready-for-human |
 
 ## Vertical slice
@@ -52,7 +52,7 @@ Exactly five cards, Workflow Evolution first with magenta FEATURED tag.
 
 This slice makes both ex-archive studies publicly visible — which is why 05 (AR's broken cover) is gated behind this merge and should follow immediately. Keep 04+05 as one reviewable unit if convenient.
 
-## TDD protocol — no test framework may be invented (PRD §4)
+## TDD protocol — no test framework may be invented (static site, no unit-test infra)
 
 RED — capture first (all verified against current build):
 

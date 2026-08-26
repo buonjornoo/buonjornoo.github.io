@@ -5,7 +5,7 @@
 | **Type** | AFK |
 | **Blocked by** | None. Holds the `index.astro` file-lock first in the 02→03→04 chain — do not start 03 until this merges. |
 | **Target Modules** | `src/pages/index.astro` (hero paragraph, lines 34–37). `src/data/pages/about.md` `description` field ONLY if the meta check below fails. |
-| **PRD source** | S1 |
+| **Source** | Shipped. Was PRD §S1; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
 | **Status** | ready-for-human |
 
 ## Vertical slice
@@ -30,7 +30,7 @@ Chain: `about.md` front matter `description` → `PageLayout` → `BaseLayout` �
 
 This already names both titles. **Expected outcome: no edit.** Edit only if the built meta diverges from dual-title; any edit shows before/after in the diff.
 
-## TDD protocol — no test framework may be invented (PRD §4)
+## TDD protocol — no test framework may be invented (static site, no unit-test infra)
 
 RED — capture first:
 

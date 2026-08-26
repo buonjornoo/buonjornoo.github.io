@@ -5,7 +5,7 @@
 | **Type** | AFK |
 | **Blocked by** | 02 [file-lock: `src/pages/index.astro`] |
 | **Target Modules** | `src/pages/index.astro` — one new `<section>` between the hero `Separator` and the About section |
-| **PRD source** | S2 |
+| **Source** | Shipped. Was PRD §S2; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
 | **Status** | ready-for-human |
 
 ## Vertical slice
@@ -31,7 +31,7 @@ The 5.1M→8.6M figures are publicly sourced (siliconcanals.com June 2021; thesp
 - Mobile-legible at 360px: labels and details wrap cleanly inside the 80ch container, no horizontal scroll.
 - No z-index/position games — sticky header/footer untouched.
 
-## TDD protocol — no test framework may be invented (PRD §4)
+## TDD protocol — no test framework may be invented (static site, no unit-test infra)
 
 RED — capture first:
 

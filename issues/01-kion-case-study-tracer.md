@@ -3,10 +3,12 @@
 | Field | Value |
 |---|---|
 | **Type** | Human-in-the-loop |
-| **Blocked by** | None for Phase A (draft — start immediately). Phase B (wiring) lands after 04 merges, restoring the PRD's S3→S6 edge (grid insertion needs settled order). If both run in one session, execute A → … → 04 → B. |
+| **Blocked by** | [08 — experience matrix](08-experience-matrix.md) — re-sequenced 2026-08-26 so the matrix names KION first, giving this study a home row on `/experience/` to link back to. Phase-A draft gate with Jorne proceeds meanwhile. Issues 02–06 are shipped and deployed (`8792f68`); grid order is settled and `order: 6` is free. |
 | **Target Modules** | `src/data/projects/kion-scanner.md` (create — slug tentative until O3 sign-off), `src/data/pageRoutes.json` (+1 line), own front-matter `order: 6` |
-| **PRD source** | S6 · Open Items O1, O3 |
+| **Source** | Self-contained. `docs/PRD-portfolio-overhaul.md` was deleted 2026-08-26 once its S1–S5 shipped; everything this issue needed from it (§S6, §4, N1–N9) is inlined below. |
 | **Status** | ready-for-human (draft gate) |
+
+> ⚠️ **Date correction (2026-08-26).** This issue says the scanner work was a "2021 internal exploration". `public/cv/jorne-siebrands-cv-en.pdf` places the role at **UX Designer, KION Group | Digital Campus, November 2019 – June 2021**. Re-date the framing before drafting. The CV bullet reads: *"Redesigned the incoming-goods process: my own field research showed a simple OCR scan into SAP could replace a planned robotic pallet-unpacking system at a fraction of the cost."*
 
 ## Why this is #1 — layers crossed
 
@@ -38,7 +40,7 @@ Draft requirements:
 
 **Gate: user approves draft + amendments before Phase B starts.**
 
-## TDD protocol — no test framework may be invented (PRD §4); gates are build-output inspection + QA checklist
+## TDD protocol — no test framework may be invented (static site, no unit-test infra); gates are build-output inspection + QA checklist
 
 RED — run first, capture output showing failure:
 
@@ -71,7 +73,29 @@ Known transient state: merged before 04, `order: 6` ties with `this-site.md`'s c
 ## Boundaries
 
 **In:** one new `.md`, one `pageRoutes.json` line, own `order` value.
-**Out (violations block merge):** any `content.config.ts` change (PRD §4) · editing the KION mention in homepage How-I-Work (N5) · renumbering other projects (04's job) · Cheil/Volksbanken content (N3) · testimonial UI (N1) · new colors/fonts/bezel (N7) · changing existing page numbers (N8).
+**Out (violations block merge):** any `content.config.ts` change · editing the KION mention in homepage How-I-Work (N5) · renumbering other projects · Cheil/Volksbanken content (N3) · testimonial UI (N1) · new colors/fonts/bezel (N7) · changing existing page numbers (N8).
+
+## Inherited constraints (inlined from the deleted PRD, verbatim)
+
+**Negative decisions — still binding on all work in this repo:**
+
+| # | Do NOT build | Reason |
+|---|---|---|
+| N1 | Any testimonial UI: no slot, no placeholder, no empty section | DO24 quote outreach is user-run; nothing visibly incomplete ships |
+| N2 | Availability date on site | Site keeps "Available now"; dated availability lives only in tailored CVs |
+| N3 | Cheil / Volksbanken case study | Backlogged pending user locating old assets/presentations |
+| N4 | Image galleries, annotated screenshots, Figma composites | Separate effort awaiting unsorted asset paths from user |
+| N5 | Rewriting case-study bodies or reordering narratives | Chronological decision-log structure is the differentiator |
+| N6 | Any CV or LinkedIn edits by the assistant | User-owned surfaces; assistant delivers copy only |
+| N7 | New colors, fonts, layout paradigms, TV bezel | Ceefax simulator constraints are absolute (8 colors, Bedstead, screen-is-viewport) |
+| N8 | Renumbering any existing page numbers | Existing numbers are shared URLs and keyboard shortcuts |
+| N9 | Dark mode, scanline/motion changes | Existing `prefers-reduced-motion` behavior preserved |
+
+**Testing posture (former PRD §4):** this is a static Astro content site with no unit-test infrastructure — **do not invent a test framework.** The gate is `npm run check` + `npm run build` + the behavioral checklist above + designer-agent review + content diff-check of locked strings verbatim.
+
+**Confidentiality posture (former PRD §4):** company named, zero confidential detail; story stays at problem-type → approach → recommendation level; the KION work framed honestly as internal exploration with unclear shipping status; second act covers the multibrand system (Linde MH, **Still GmbH** — never "Stiel" — Dematic et al.) pitched and driven to adoption, owned group-wide post-departure. Verify brand spellings before publication.
+
+**Content-config posture (former PRD §4):** the existing schema already supports every field used (`subtitle` optional, `archive` boolean, `order` number). **Do not extend it.**
 
 ## Global gates (every issue)
 

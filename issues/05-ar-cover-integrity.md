@@ -5,7 +5,7 @@
 | **Type** | AFK |
 | **Blocked by** | 04 [go-live visibility — the broken card becomes public only once the archive lifts] |
 | **Target Modules** | `src/data/projects/ar-city-exploration.md` front-matter `coverImage` only. `ProjectCard.astro` NOT expected to change. |
-| **PRD source** | S4 + Open Item O2 |
+| **Source** | Shipped. Was PRD §S4 + Open Item O2; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
 | **Status** | ready-for-human |
 
 ## Vertical slice
@@ -31,7 +31,7 @@ Present this choice with the size numbers in the diff review for explicit user c
 
 Explicitly out of scope: `heroImage` (`raubkunst_cover.gif`) on the detail page stays as-is. Flagging it as a future candidate is fine; changing it here is scope creep.
 
-## TDD protocol — no test framework may be invented (PRD §4)
+## TDD protocol — no test framework may be invented (static site, no unit-test infra)
 
 Probes are state-independent (valid before OR after 04 merges):
 

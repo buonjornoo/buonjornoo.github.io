@@ -10,11 +10,18 @@ Skills like `to-tickets`, `to-spec`, `triage`, and `implement` treat this repo's
 - One file per ticket: `issues/<NN>-<slug>.md`, numbered in dependency order (blockers first).
 - Each file carries a structured header: Title, Type (`AFK` / `Human-in-the-loop`), Blocked by (ticket numbers/titles or "None"), Target Modules, Status.
 - Triage roles are expressed in each ticket's `Status:` line using the label vocabulary in `triage-labels.md` (e.g. `Status: ready-for-agent`).
-- Work the frontier: any ticket whose blockers are all complete. Never close or modify parent documents (the PRD) when publishing tickets.
+- Work the frontier: any ticket whose blockers are all complete. Never close or modify the parent planning document when publishing tickets.
+- When a parent document's slices have all shipped, delete it and inline anything still binding into the tickets that need it — a spent plan left in `docs/` misleads later sessions.
 
 ## Current ticket set
 
-The active set is the portfolio-overhaul decomposition derived from `docs/PRD-portfolio-overhaul.md`: `01-kion-case-study-tracer` … `06-subtitle-payoffs`. Dependency edges live in each file's header.
+`01-kion-case-study-tracer` … `06-subtitle-payoffs`. **02–06 are shipped and deployed** (`8792f68`); only `01` is open, at its Phase-A draft gate with the user. Their parent, `docs/PRD-portfolio-overhaul.md`, was deleted 2026-08-26 — its binding negative decisions (N1–N9) and testing/confidentiality posture now live inside `issues/01`. Dependency edges live in each file's header.
+
+The teletext-system set **07–18** was filed 2026-08-26 from `docs/PLAN-teletext-system.md` (kept unmodified as parent reference). Numbers preserve the plan's own naming: plan-phase-1 was split three ways into **07** (live defects + CONCEPT.md/CONTEXT.md seed), **16** (dead code + React removal) and **17** (page-number drift guard); the plan's 08–15 kept their numbers; **18** (image weight/dimensions) was added later, so execution order follows each file's `Blocked by` header rather than numeric order. Existing issue 01 (KION) is now blocked by 08. Frontier at filing: 07, 08, 12, 13, 14, 15, 16, 17 can start immediately (13/14 honour the BaseLayout file-lock after 11); 09 and 01 wait on 08; 10 waits on 07+17; 11 waits on 10; 18 waits on 15.
+
+## Not Linear
+
+A Linear project named `siebrandsdotcom` exists (team JOR, created 2026-08-25) but is **empty and deliberately unused** — decided 2026-08-26. Local markdown under `issues/` is the only tracker. Do not file tickets there, do not mirror `issues/` into it, and do not treat its emptiness as a sign that work is untracked. (The sibling `table-hunter` project IS live in Linear; that's a different repo.)
 
 ## Hard process rule (unchanged)
 

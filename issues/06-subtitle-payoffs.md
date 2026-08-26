@@ -5,7 +5,7 @@
 | **Type** | AFK |
 | **Blocked by** | None — fully independent, ideal first parallel slice |
 | **Target Modules** | `subtitle` field only: `src/data/projects/do24-workflow-evolution.md`, `src/data/projects/bikemap-pause-mode.md`, `src/data/projects/table-hunter.md` |
-| **PRD source** | S5 |
+| **Source** | Shipped. Was PRD §S5; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
 | **Status** | ready-for-human |
 
 ## Vertical slice
@@ -44,7 +44,7 @@ First sentence stays untouched.
 
 Rendering: subtitles are the cyan `<p>` under the DoubleHeight title (`ProjectLayout.astro:29-31`). Cards render the separate `description` field — cards are unaffected; do not touch `description`.
 
-## TDD protocol — no test framework may be invented (PRD §4)
+## TDD protocol — no test framework may be invented (static site, no unit-test infra)
 
 RED — capture first (all expectations verified against current front matter):
 
