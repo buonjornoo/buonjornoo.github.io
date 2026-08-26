@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# raw source material for case-study images; the exported/shipped
+# versions live in public/img/ and are tracked
+docs/temp-images/
