@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import pageRoutes from '../../data/pageRoutes.json';
+
+/**
+ * Static labels for routes with no collection entry, or whose collection
+ * title isn't directory-appropriate (about.md's title is the hero tagline,
+ * not "Home"). pageRoutes.json stays the one number→URL map (CLAUDE.md);
+ * this map only supplies the label.
+ */
+const STATIC_LABELS: Record<string, string> = {
+  '100': 'Home',
+  '101': 'Directory',
+  '102': 'Experience',
+  '200': 'Projects',
+  '210': 'Play Arin und der Drache',
+  '300': 'Blog',
+  '400': 'Contact',
+};
+
+const projects = await getCollection('projects');
+const blog = await getCollection('blog');
+
+const collectionLabels: Record<string, string> = {};
+for (const entry of projects) {
+  collectionLabels[entry.data.pageNumber] = entry.data.title;
+}
+for (const entry of blog) {
+  if (entry.data.pageNumber) collectionLabels[entry.data.pageNumber] = entry.data.title;
+}
+
+const routes: Record<string, string> = pageRoutes;
+const entries = Object.keys(routes)
+  .sort((a, b) => Number(a) - Number(b))
+  .map((number) => ({
+    number,
+    url: routes[number],
+    label: STATIC_LABELS[number] ?? collectionLabels[number] ?? routes[number],
+  }));
+---
+
+<div id="page-directory" class="space-y-[0.5ch]">
+  {entries.map((entry) => (
+    <p>
+      <a href={entry.url} class="flex items-baseline gap-[1ch]">
+        <span class="text-teletext-white shrink-0">{entry.label}</span>
+        <span class="flex-1 border-b border-dotted border-teletext-white" aria-hidden="true"></span>
+        <span class="text-teletext-yellow shrink-0">{entry.number}</span>
+      </a>
+    </p>
+  ))}
+</div>

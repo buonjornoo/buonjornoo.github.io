@@ -44,9 +44,9 @@ describe('experience matrix route registration', () => {
     }
   });
 
-  it('adds no numbers beyond 102', () => {
+  it('adds no numbers beyond 102 and 101 (issue 09)', () => {
     const added = Object.keys(pageRoutes).filter((k) => !(k in PRE_EXISTING_ROUTES));
-    expect(added).toEqual(['102']);
+    expect(added.sort()).toEqual(['101', '102']);
   });
 });
 

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 import Separator from '../components/teletext/Separator.astro';
+import DirectoryListing from '../components/teletext/DirectoryListing.astro';
 ---
 
 <BaseLayout title="Page Not Found" description="The requested page could not be found." pageNumber="404">
@@ -23,12 +24,7 @@ import Separator from '../components/teletext/Separator.astro';
 
     <p class="text-teletext-cyan mb-[1ch] font-bold">Available pages:</p>
 
-    <div class="space-y-[0.5ch]">
-      <p><span class="text-teletext-white">Home + About</span><span class="text-teletext-yellow">...........100</span></p>
-      <p><span class="text-teletext-white">Projects</span><span class="text-teletext-yellow">...............200</span></p>
-      <p><span class="text-teletext-white">Blog</span><span class="text-teletext-yellow">...................300</span></p>
-      <p><span class="text-teletext-white">Contact</span><span class="text-teletext-yellow">................400</span></p>
-    </div>
+    <DirectoryListing />
 
     <p class="text-teletext-green mt-[2ch] text-teletext-sm">
       Type a 3-digit page number to navigate.

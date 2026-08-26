@@ -6,7 +6,7 @@
 | **Blocked by** | 08 (experience matrix) — so the listing is born complete including page 102. |
 | **Target Modules** | New directory component (under `src/components/teletext/`), `src/pages/directory.astro` (create), `src/pages/404.astro` (replace hardcoded list), `src/data/pageRoutes.json` (+`"101": "/directory/"`) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 2 (second half) |
-| **Status** | ready-for-agent |
+| **Status** | implemented, tests green, designer-reviewed — awaiting user diff review (not deployed) |
 
 ## What to build
 
@@ -16,12 +16,12 @@ One directory component listing every page number with its title, derived from `
 
 ## Acceptance criteria
 
-- [ ] `"101"` registered; typing `101` navigates to `/directory/`
-- [ ] `/directory/` and `/404` render identical listings (same component, both mounts)
-- [ ] Every listed number resolves — each entry's href equals its `pageRoutes.json` value; no dead entries
-- [ ] Listing covers all 18 entries (the existing 16 + 101 + 102)
-- [ ] 404 page otherwise unchanged (messaging, styling)
-- [ ] `npm run check` && `npm run build` green
+- [x] `"101"` registered; typing `101` navigates to `/directory/`
+- [x] `/directory/` and `/404` render identical listings (same component, both mounts)
+- [x] Every listed number resolves — each entry's href equals its `pageRoutes.json` value; no dead entries
+- [x] Listing covers all 18 entries (the existing 16 + 101 + 102)
+- [x] 404 page otherwise unchanged (messaging, styling)
+- [x] `npm run check` && `npm run build` green
 
 ## Boundaries
 
@@ -31,3 +31,10 @@ One directory component listing every page number with its title, derived from `
 ## Global gates
 
 `npm run check` + `npm run build` green · designer-agent review · user approves the diff · **user explicitly triggers any push to main.**
+
+## Implementation notes
+
+- QA: PASS (18 anchors, byte-identical `#page-directory` blocks on both mounts, all hrefs resolve, 404 copy untouched).
+- Designer: initial pass flagged the new listing dropped the old 404 list's dot-leader alignment (a Ceefax contents-page convention). Fixed — rows now use a flex layout with a `border-dotted border-teletext-white` leader between label and number, no new colors.
+- 99/99 tests green (`tests/integration/directory-page.test.ts` new; `experience-page.test.ts`'s route-count assertion updated to account for 101 alongside 102).
+- Committed locally only. Not pushed — awaiting user review and explicit push approval.
