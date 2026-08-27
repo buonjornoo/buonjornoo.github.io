@@ -349,7 +349,11 @@
   cursor: pointer;
   transition: background-color 0.1s, color 0.1s;
 }
-.remote-key:hover, .remote-key:focus-visible, .remote-key:active {
+/* .pressed (issues/14): key-sync flash from a real keyboard digit press,
+   toggled in JS since there's no native pseudo-class for "a key elsewhere
+   on the page was struck" — reuses the existing hover/active treatment
+   and transition rather than introducing a new color or animation. */
+.remote-key:hover, .remote-key:focus-visible, .remote-key:active, .remote-key.pressed {
   background-color: var(--color-teletext-yellow);
   color: var(--color-teletext-black);
 }

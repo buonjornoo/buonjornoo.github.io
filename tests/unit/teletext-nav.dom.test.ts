@@ -40,7 +40,15 @@ beforeEach(() => {
       <span id="page-number-live" class="sr-only" aria-live="polite" aria-atomic="true">${CURRENT_PAGE}</span>
       <span class="remote-page-display">${CURRENT_PAGE}</span>
       <span id="clock" class="ceefax-clock"></span>
-    </header>`;
+    </header>
+    <aside id="remote-rail" class="remote-rail">
+      <button type="button" class="remote-key" data-digit="2">2</button>
+      <button type="button" class="remote-key" data-digit="0">0</button>
+    </aside>
+    <dialog id="remote-dialog" class="remote-dialog">
+      <button type="button" class="remote-key" data-digit="2">2</button>
+      <button type="button" class="remote-key" data-digit="0">0</button>
+    </dialog>`;
   locationWrites = [];
   currentHref = ORIGINAL_HREF;
   currentPathname = '/projects/table-hunter/';
@@ -79,6 +87,10 @@ function pressKeys(keys: string[]): KeyboardEvent[] {
 
 function headerDisplay(): HTMLElement {
   return document.getElementById('page-number-display')!;
+}
+
+function remoteKeys(digit: string): HTMLElement[] {
+  return Array.from(document.querySelectorAll(`.remote-key[data-digit="${digit}"]`));
 }
 
 /** Dispatches an arrow-key press through the real keydown seam. */
@@ -342,5 +354,52 @@ describe('sequential paging (issues/10)', () => {
     swipe({ x: 100, y: 100 }, { x: 130, y: 400 }); // vertical scroll gesture
     vi.advanceTimersByTime(500);
     expect(locationWrites).toEqual([]);
+  });
+});
+
+/**
+ * Seam: rail/dialog button "pressed" sync driven by real keyboard digits.
+ * Spec source: issues/14 AC — "Typing digits visibly depresses the matching
+ * rail buttons"; "Mobile dialog keypad: same sync when open" (satisfied for
+ * free here since both surfaces share the same `.remote-key[data-digit]`
+ * selector, not by special-casing the dialog).
+ */
+describe('key-sync animation (issues/14)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+  });
+
+  it('depresses the matching digit on both the rail and dialog keypads', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    pressKeys(['2']);
+    const keys = remoteKeys('2');
+    expect(keys).toHaveLength(2);
+    expect(keys.every((el) => el.classList.contains('pressed'))).toBe(true);
+    // The other digit's buttons are untouched.
+    expect(remoteKeys('0').some((el) => el.classList.contains('pressed'))).toBe(false);
+  });
+
+  it('releases the pressed state after the flash duration', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    pressKeys(['2']);
+    vi.advanceTimersByTime(150);
+    expect(remoteKeys('2').every((el) => el.classList.contains('pressed'))).toBe(false);
+  });
+
+  it('restarts the flash on a repeated same digit instead of cutting it short (e.g. typing "200")', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    pressKeys(['2', '0']);
+    vi.advanceTimersByTime(100);
+    pressKeys(['0']); // second '0' — should restart its own flash timer
+    vi.advanceTimersByTime(100); // 200ms since the first '0', but only 100ms since the second
+    expect(remoteKeys('0').every((el) => el.classList.contains('pressed'))).toBe(true);
+    vi.advanceTimersByTime(50);
+    expect(remoteKeys('0').every((el) => el.classList.contains('pressed'))).toBe(false);
+  });
+
+  it('also depresses on a direct remote-key click (shared pressDigit path)', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    remoteKeys('2')[0].dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    expect(remoteKeys('2').every((el) => el.classList.contains('pressed'))).toBe(true);
   });
 });

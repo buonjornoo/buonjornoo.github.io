@@ -119,6 +119,9 @@ export interface TeletextNavConfig {
 /** How long an unmapped number stays red before the buffer resets. */
 const INVALID_RESET_MS = 800;
 
+/** How long a key-sync "pressed" flash lasts on the matching rail/dialog button. */
+const PRESS_FLASH_MS = 150;
+
 /**
  * Wires teletext navigation to the page: keyboard digits, remote keypad
  * buttons, the roll animation, the live clock and the remote dialog.
@@ -143,9 +146,30 @@ export function initTeletextNav({ routes, currentPage }: TeletextNavConfig): voi
     });
   }
 
+  // Key-sync animation (issues/14): depresses the matching digit on both
+  // the rail and dialog keypads, whichever surface fired the press — a
+  // single `.remote-key[data-digit]` selector covers both without
+  // special-casing the dialog. Per-digit timeout tracking means a
+  // repeated same digit (e.g. the double zero in page 100/200/300/400)
+  // restarts its own flash instead of an earlier press's timeout cutting
+  // a later one short.
+  const pressTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  function flashDigit(digit: string) {
+    const keys = document.querySelectorAll(`.remote-key[data-digit="${digit}"]`);
+    keys.forEach(function (el) { el.classList.add('pressed'); });
+    clearTimeout(pressTimeouts.get(digit));
+    pressTimeouts.set(
+      digit,
+      setTimeout(function () {
+        keys.forEach(function (el) { el.classList.remove('pressed'); });
+      }, PRESS_FLASH_MS),
+    );
+  }
+
   // Shared digit-accumulation logic, used by keyboard input and every
   // remote keypad button (rail + dialog).
   function pressDigit(digit: string) {
+    flashDigit(digit);
     typed += digit;
     setDisplays(typed.padEnd(3, '_'));
     setDisplayClass('typing', true);
