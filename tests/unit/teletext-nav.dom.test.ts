@@ -27,6 +27,8 @@ const ROUTES = { '206': '/projects/table-hunter/', '100': '/' };
 let locationWrites: string[];
 const ORIGINAL_HREF = 'https://siebrands.test/';
 let currentHref: string;
+/** Current pathname arrow/swipe paging reads via pageNumberForUrl. */
+let currentPathname: string;
 let originalLocation: PropertyDescriptor | undefined;
 
 beforeEach(() => {
@@ -41,6 +43,7 @@ beforeEach(() => {
     </header>`;
   locationWrites = [];
   currentHref = ORIGINAL_HREF;
+  currentPathname = '/projects/table-hunter/';
   originalLocation =
     Object.getOwnPropertyDescriptor(window, 'location') ??
     Object.getOwnPropertyDescriptor(Object.getPrototypeOf(window), 'location');
@@ -52,6 +55,10 @@ beforeEach(() => {
       locationWrites.push(value);
       currentHref = value;
     },
+  });
+  Object.defineProperty(locationStub, 'pathname', {
+    enumerable: true,
+    get: () => currentPathname,
   });
   Object.defineProperty(window, 'location', { value: locationStub, configurable: true });
 });
@@ -72,6 +79,24 @@ function pressKeys(keys: string[]): KeyboardEvent[] {
 
 function headerDisplay(): HTMLElement {
   return document.getElementById('page-number-display')!;
+}
+
+/** Dispatches an arrow-key press through the real keydown seam. */
+function pressArrow(key: 'ArrowLeft' | 'ArrowRight', modifiers: KeyboardEventInit = {}): KeyboardEvent {
+  const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...modifiers });
+  document.dispatchEvent(event);
+  return event;
+}
+
+/** Dispatches a touchstart -> touchend pair through the real swipe seam. */
+function swipe(start: { x: number; y: number }, end: { x: number; y: number }): void {
+  const touchStart = new Event('touchstart', { bubbles: true, cancelable: true });
+  Object.defineProperty(touchStart, 'touches', { value: [{ clientX: start.x, clientY: start.y }] });
+  document.dispatchEvent(touchStart);
+
+  const touchEnd = new Event('touchend', { bubbles: true, cancelable: true });
+  Object.defineProperty(touchEnd, 'changedTouches', { value: [{ clientX: end.x, clientY: end.y }] });
+  document.dispatchEvent(touchEnd);
 }
 
 describe('passive live region (F2)', () => {
@@ -179,5 +204,92 @@ describe('experience matrix, page 102 (issues/08)', () => {
     expect(locationWrites.length).toBeGreaterThanOrEqual(1);
     expect(locationWrites.every((url) => url === '/experience/')).toBe(true);
     expect(headerDisplay().classList.contains('invalid')).toBe(false);
+  });
+});
+
+/**
+ * Seam: sequential paging wired to real keyboard/touch events, against the
+ * real route map, through the same roll animation as digit-nav.
+ * Spec source: issues/10 AC.
+ */
+describe('sequential paging (issues/10)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({
+      toFake: ['setTimeout', 'clearTimeout', 'clearInterval', 'Date', 'requestAnimationFrame'],
+    });
+  });
+
+  it('ArrowRight from 209 reaches 210 (210 stays in the run)', () => {
+    currentPathname = '/projects/arin-und-der-drache/'; // 209
+    initTeletextNav({ routes: pageRoutes, currentPage: '209' });
+    pressArrow('ArrowRight');
+    vi.advanceTimersByTime(500);
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/game/arin-und-der-drache/')).toBe(true);
+  });
+
+  it('ArrowRight from 400 wraps to 100', () => {
+    currentPathname = '/contact/'; // 400
+    initTeletextNav({ routes: pageRoutes, currentPage: '400' });
+    pressArrow('ArrowRight');
+    vi.advanceTimersByTime(500);
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/')).toBe(true);
+  });
+
+  it('ArrowLeft walks the inverse direction', () => {
+    currentPathname = '/game/arin-und-der-drache/'; // 210
+    initTeletextNav({ routes: pageRoutes, currentPage: '210' });
+    pressArrow('ArrowLeft');
+    vi.advanceTimersByTime(500);
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/projects/arin-und-der-drache/')).toBe(true);
+  });
+
+  it('does nothing on a page absent from the route map — no navigation, no error', () => {
+    currentPathname = '/404/';
+    initTeletextNav({ routes: pageRoutes, currentPage: '100' }); // prop defaults to 100, must not be trusted
+    expect(() => pressArrow('ArrowRight')).not.toThrow();
+    vi.advanceTimersByTime(500);
+    expect(locationWrites).toEqual([]);
+  });
+
+  it.each([
+    ['Cmd', { metaKey: true }],
+    ['Ctrl', { ctrlKey: true }],
+    ['Alt', { altKey: true }],
+  ])('lets %s+ArrowRight reach the browser untouched', (_modifier, modifiers) => {
+    currentPathname = '/projects/arin-und-der-drache/';
+    initTeletextNav({ routes: pageRoutes, currentPage: '209' });
+    const event = pressArrow('ArrowRight', modifiers);
+    vi.advanceTimersByTime(500);
+    expect(locationWrites).toEqual([]);
+    expect(event.defaultPrevented).toBe(false);
+  });
+
+  it('swipe left mirrors ArrowRight (next)', () => {
+    currentPathname = '/projects/arin-und-der-drache/'; // 209
+    initTeletextNav({ routes: pageRoutes, currentPage: '209' });
+    swipe({ x: 300, y: 200 }, { x: 100, y: 205 });
+    vi.advanceTimersByTime(500);
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/game/arin-und-der-drache/')).toBe(true);
+  });
+
+  it('swipe right mirrors ArrowLeft (prev)', () => {
+    currentPathname = '/game/arin-und-der-drache/'; // 210
+    initTeletextNav({ routes: pageRoutes, currentPage: '210' });
+    swipe({ x: 100, y: 200 }, { x: 300, y: 195 });
+    vi.advanceTimersByTime(500);
+    expect(locationWrites.length).toBeGreaterThanOrEqual(1);
+    expect(locationWrites.every((url) => url === '/projects/arin-und-der-drache/')).toBe(true);
+  });
+
+  it('a short/vertical drag does not trigger navigation (does not fight scrolling)', () => {
+    currentPathname = '/projects/arin-und-der-drache/';
+    initTeletextNav({ routes: pageRoutes, currentPage: '209' });
+    swipe({ x: 100, y: 100 }, { x: 130, y: 400 }); // vertical scroll gesture
+    vi.advanceTimersByTime(500);
+    expect(locationWrites).toEqual([]);
   });
 });

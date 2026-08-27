@@ -34,6 +34,59 @@ export function resolveTarget(
   return Object.prototype.hasOwnProperty.call(routes, typed) ? routes[typed] : null;
 }
 
+/**
+ * Reverse lookup: URL -> page number. Deliberately independent of the
+ * `currentPage` prop, which defaults to '100' for unmapped pages (e.g.
+ * /404) — trusting that default would make arrow/swipe paging "navigate"
+ * from a page that was never really 100 (issues/10).
+ */
+export function pageNumberForUrl(routes: Record<string, string>, url: string): string | null {
+  const entry = Object.entries(routes).find(([, mappedUrl]) => mappedUrl === url);
+  return entry ? entry[0] : null;
+}
+
+export type NavDirection = 'next' | 'prev';
+
+/**
+ * Walks pageRoutes.json in ascending numeric order to find the sibling of
+ * `currentNumber`, wrapping 400 -> 100 (and 100 -> 400 going backward).
+ * Returns null when `currentNumber` isn't itself in the map.
+ */
+export function neighbourPageNumber(
+  routes: Record<string, string>,
+  currentNumber: string,
+  direction: NavDirection,
+): string | null {
+  const sorted = Object.keys(routes).sort((a, b) => Number(a) - Number(b));
+  const index = sorted.indexOf(currentNumber);
+  if (index === -1) return null;
+  const offset = direction === 'next' ? 1 : -1;
+  return sorted[(index + offset + sorted.length) % sorted.length];
+}
+
+export interface SwipePoint {
+  x: number;
+  y: number;
+}
+
+/** Minimum horizontal travel, in px, before a drag counts as a page swipe. */
+const SWIPE_THRESHOLD_PX = 50;
+
+/**
+ * Classifies a touch drag as horizontal paging (and its direction), or null
+ * when it's too short or too vertical to be one — so scrolling is left
+ * alone (issues/10 AC: swipe must not fight vertical scroll gestures).
+ * Swipe left (content moves left, like turning a page forward) -> next;
+ * swipe right -> prev, mirroring ArrowRight/ArrowLeft.
+ */
+export function classifySwipe(start: SwipePoint, end: SwipePoint): NavDirection | null {
+  const deltaX = end.x - start.x;
+  const deltaY = end.y - start.y;
+  if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return null;
+  if (Math.abs(deltaX) <= Math.abs(deltaY)) return null;
+  return deltaX < 0 ? 'next' : 'prev';
+}
+
 export interface TeletextNavConfig {
   routes: Record<string, string>;
   currentPage: string;
@@ -148,15 +201,70 @@ export function initTeletextNav({ routes, currentPage }: TeletextNavConfig): voi
     requestAnimationFrame(frame);
   }
 
-  // Keyboard number input
+  // Sequential paging (arrow keys + swipe): walks pageRoutes.json in
+  // ascending order via the current URL, not the currentPage prop — a page
+  // absent from the route map (e.g. /404) must no-op, not fall back to the
+  // prop's '100' default. Reuses startRoll so the buffer rolls exactly as
+  // it does for digit-nav (issues/10).
+  function navigateNeighbour(direction: NavDirection): boolean {
+    const currentNumber = pageNumberForUrl(routes, window.location.pathname);
+    if (currentNumber === null) return false;
+    const target = neighbourPageNumber(routes, currentNumber, direction);
+    if (target === null) return false;
+
+    typed = '';
+    clearTimeout(typingTimeout);
+    clearTimeout(invalidTimeout);
+    setDisplayClass('typing', false);
+    setDisplayClass('invalid', false);
+    setDisplayClass('navigating', true);
+    startRoll(target);
+    return true;
+  }
+
+  // Keyboard number input + sequential paging
   document.addEventListener('keydown', function (e) {
     if (e.target instanceof Element && e.target.closest('input, textarea, [contenteditable]')) return;
 
     if (capturesDigit(e)) {
       e.preventDefault();
       pressDigit(e.key);
+      return;
+    }
+
+    if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      const direction = e.key === 'ArrowRight' ? 'next' : 'prev';
+      if (navigateNeighbour(direction)) e.preventDefault();
     }
   });
+
+  // Sequential paging via swipe (mobile). Passive listeners never call
+  // preventDefault, so native scrolling — vertical or horizontal — is
+  // never fought; classifySwipe's threshold does the rest (issues/10).
+  let touchStart: SwipePoint | null = null;
+
+  document.addEventListener(
+    'touchstart',
+    function (e) {
+      const touch = e.touches[0];
+      touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+    },
+    { passive: true },
+  );
+
+  document.addEventListener(
+    'touchend',
+    function (e) {
+      if (!touchStart) return;
+      const touch = e.changedTouches[0];
+      const start = touchStart;
+      touchStart = null;
+      if (!touch) return;
+      const direction = classifySwipe(start, { x: touch.clientX, y: touch.clientY });
+      if (direction) navigateNeighbour(direction);
+    },
+    { passive: true },
+  );
 
   // Remote keypad buttons (rail + dialog) share the same digit logic
   document.querySelectorAll('.remote-key').forEach(function (btn) {

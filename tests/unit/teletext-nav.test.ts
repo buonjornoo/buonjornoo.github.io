@@ -1,6 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { capturesDigit, resolveTarget } from '../../src/lib/teletext-nav';
+import {
+  capturesDigit,
+  classifySwipe,
+  neighbourPageNumber,
+  pageNumberForUrl,
+  resolveTarget,
+} from '../../src/lib/teletext-nav';
 
 /**
  * Seam: the teletext nav decision core (src/lib/teletext-nav.ts).
@@ -66,6 +72,83 @@ describe('resolveTarget', () => {
 
   it('returns null for numbers that merely look routable (999)', () => {
     expect(resolveTarget(routes, '999')).toBeNull();
+  });
+});
+
+/**
+ * Seam: reverse URL -> page-number lookup, the piece that lets arrow/swipe
+ * paging know where it stands without trusting the `currentPage` prop
+ * (which defaults to '100' for unmapped pages like /404 — issues/10).
+ */
+describe('pageNumberForUrl', () => {
+  const routes = JSON.parse(readFileSync('src/data/pageRoutes.json', 'utf-8')) as Record<string, string>;
+
+  it('resolves the home URL to 100', () => {
+    expect(pageNumberForUrl(routes, '/')).toBe('100');
+  });
+
+  it('resolves a project URL to its page number', () => {
+    expect(pageNumberForUrl(routes, '/projects/table-hunter/')).toBe('206');
+  });
+
+  it('resolves the game page (210, which 07 gave chrome to)', () => {
+    expect(pageNumberForUrl(routes, '/game/arin-und-der-drache/')).toBe('210');
+  });
+
+  it('returns null for a URL absent from the route map — never guesses', () => {
+    expect(pageNumberForUrl(routes, '/404/')).toBeNull();
+  });
+});
+
+/**
+ * Seam: the ascending-order walk with 400 -> 100 wraparound.
+ * Spec source: issues/10 AC — "-> from page 209 reaches 210; from 400 wraps
+ * to 100; <- walks the inverse direction."
+ */
+describe('neighbourPageNumber', () => {
+  const routes = JSON.parse(readFileSync('src/data/pageRoutes.json', 'utf-8')) as Record<string, string>;
+
+  it('walks forward from 209 to 210 (210 stays in the run)', () => {
+    expect(neighbourPageNumber(routes, '209', 'next')).toBe('210');
+  });
+
+  it('walks backward from 210 to 209', () => {
+    expect(neighbourPageNumber(routes, '210', 'prev')).toBe('209');
+  });
+
+  it('wraps forward from the last entry (400) to the first (100)', () => {
+    expect(neighbourPageNumber(routes, '400', 'next')).toBe('100');
+  });
+
+  it('wraps backward from the first entry (100) to the last (400)', () => {
+    expect(neighbourPageNumber(routes, '100', 'prev')).toBe('400');
+  });
+
+  it('returns null when the current number is not itself in the map', () => {
+    expect(neighbourPageNumber(routes, '555', 'next')).toBeNull();
+  });
+});
+
+/**
+ * Seam: touch-gesture classification for mobile paging. Threshold-gated so
+ * small drags and vertical scrolling never get mistaken for a page swipe
+ * (issues/10 AC — "swipe doesn't fight ... vertical scroll gestures").
+ */
+describe('classifySwipe', () => {
+  it('classifies a leftward drag past the threshold as next', () => {
+    expect(classifySwipe({ x: 200, y: 100 }, { x: 100, y: 105 })).toBe('next');
+  });
+
+  it('classifies a rightward drag past the threshold as prev', () => {
+    expect(classifySwipe({ x: 100, y: 100 }, { x: 200, y: 95 })).toBe('prev');
+  });
+
+  it('ignores a drag shorter than the threshold', () => {
+    expect(classifySwipe({ x: 100, y: 100 }, { x: 120, y: 100 })).toBeNull();
+  });
+
+  it('ignores a vertical-dominant drag (scrolling)', () => {
+    expect(classifySwipe({ x: 100, y: 100 }, { x: 130, y: 300 })).toBeNull();
   });
 });
 
