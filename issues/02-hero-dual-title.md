@@ -6,7 +6,7 @@
 | **Blocked by** | None. Holds the `index.astro` file-lock first in the 02→03→04 chain — do not start 03 until this merges. |
 | **Target Modules** | `src/pages/index.astro` (hero paragraph, lines 34–37). `src/data/pages/about.md` `description` field ONLY if the meta check below fails. |
 | **Source** | Shipped. Was PRD §S1; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
-| **Status** | ready-for-human |
+| **Status** | **deployed/live** (portfolio overhaul, `8792f68`, confirmed ancestor of origin/main) |
 
 ## Vertical slice
 

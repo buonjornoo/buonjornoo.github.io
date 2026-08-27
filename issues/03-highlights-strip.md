@@ -6,7 +6,7 @@
 | **Blocked by** | 02 [file-lock: `src/pages/index.astro`] |
 | **Target Modules** | `src/pages/index.astro` — one new `<section>` between the hero `Separator` and the About section |
 | **Source** | Shipped. Was PRD §S2; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
-| **Status** | ready-for-human |
+| **Status** | **deployed/live** (portfolio overhaul, `8792f68`, confirmed ancestor of origin/main) |
 
 ## Vertical slice
 

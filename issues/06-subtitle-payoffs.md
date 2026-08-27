@@ -6,7 +6,7 @@
 | **Blocked by** | None — fully independent, ideal first parallel slice |
 | **Target Modules** | `subtitle` field only: `src/data/projects/do24-workflow-evolution.md`, `src/data/projects/bikemap-pause-mode.md`, `src/data/projects/table-hunter.md` |
 | **Source** | Shipped. Was PRD §S5; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
-| **Status** | ready-for-human |
+| **Status** | **deployed/live** (portfolio overhaul, `8792f68`; subtitle strings byte-verified against live front matter 2026-08-27, confirmed ancestor of origin/main) |
 
 ## Vertical slice
 

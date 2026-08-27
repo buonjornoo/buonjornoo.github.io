@@ -7,7 +7,7 @@
 | **Blocks** | 05 [go-live visibility] · provides settled insertion point for 01 Phase B |
 | **Target Modules** | front matter only (`archive`/`order`): `bikemap-route-planner.md`, `ar-city-exploration.md`, `do24-workflow-evolution.md`, `do24-teal-ui.md`, `this-site.md`, `cycling-coach.md`, `arin-und-der-drache.md` (+ no-op confirms in `bikemap-pause-mode.md`, `table-hunter.md`) · `src/pages/index.astro` lines 12–17 (`curatedSlugs`) |
 | **Source** | Shipped. Was PRD §S3 (+ O1 slot reservation); `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
-| **Status** | ready-for-human |
+| **Status** | **deployed/live** (portfolio overhaul, `8792f68`, confirmed ancestor of origin/main) |
 
 ## Vertical slice
 
