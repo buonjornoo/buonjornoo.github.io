@@ -11,9 +11,10 @@ interface Props {
     tags?: string[];
     pageNumber?: string;
   };
+  sectionCount: number;
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter, sectionCount } = Astro.props;
 const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString('en-GB', {
   day: '2-digit',
   month: 'short',
@@ -32,6 +33,7 @@ const formattedUpdated = frontmatter.updatedDate
   title={frontmatter.title}
   description={frontmatter.description}
   pageNumber={frontmatter.pageNumber ?? '300'}
+  sectionCount={sectionCount}
 >
   <article>
     <section class="mb-[2ch]">

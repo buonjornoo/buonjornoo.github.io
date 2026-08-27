@@ -11,9 +11,10 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
+const sectionCount = headings.filter((h) => h.depth === 2).length;
 ---
 
-<ProjectLayout frontmatter={project.data}>
+<ProjectLayout frontmatter={project.data} sectionCount={sectionCount}>
   <Content />
 </ProjectLayout>

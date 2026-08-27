@@ -178,6 +178,29 @@
   letter-spacing: 0.05em;
 }
 
+/* Reading-progress counter (issues/13): rides in the page-title slot, not
+   the clock. White per DESIGNSYSTEM.md's consolidated header-chrome
+   palette (page-number/clock/h1/h2 are all white) — deliberately not the
+   old yellow clock-slot treatment, which this ticket supersedes. */
+.ceefax-page-title {
+  color: var(--color-teletext-white);
+  font-family: var(--font-teletext);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.page-title-compact {
+  display: none;
+}
+@media (max-width: 480px) {
+  .page-title-full { display: none; }
+  .page-title-compact { display: inline; }
+}
+
 /* ===== FASTEXT FOOTER ===== */
 .ceefax-footer {
   position: sticky;

@@ -7,6 +7,7 @@ interface Props {
   pageNumber?: string;
   ogImage?: string;
   canonicalURL?: string;
+  sectionCount?: number;
 }
 
 const {
@@ -15,10 +16,11 @@ const {
   pageNumber,
   ogImage,
   canonicalURL,
+  sectionCount,
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} pageNumber={pageNumber} ogImage={ogImage} canonicalURL={canonicalURL}>
+<BaseLayout title={title} description={description} pageNumber={pageNumber} ogImage={ogImage} canonicalURL={canonicalURL} sectionCount={sectionCount}>
   <div class="w-full max-w-[80ch] mx-auto px-[2ch] py-[1ch]">
     <slot />
   </div>

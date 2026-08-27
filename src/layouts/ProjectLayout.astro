@@ -13,15 +13,17 @@ interface Props {
     archive?: boolean;
     url?: string;
   };
+  sectionCount: number;
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter, sectionCount } = Astro.props;
 ---
 
 <PageLayout
   title={frontmatter.title}
   description={frontmatter.description}
   pageNumber={frontmatter.pageNumber ?? '200'}
+  sectionCount={sectionCount}
 >
   <article>
     <section class="mb-[2ch]">

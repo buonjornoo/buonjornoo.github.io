@@ -12,9 +12,10 @@ interface Props {
   pageNumber?: string;
   ogImage?: string;
   canonicalURL?: string;
+  sectionCount?: number;
 }
 
-const { title, description, pageNumber = '100', ogImage, canonicalURL } = Astro.props;
+const { title, description, pageNumber = '100', ogImage, canonicalURL, sectionCount = 0 } = Astro.props;
 const routesJson = JSON.stringify(pageRoutes);
 
 // Contextual neighbour affordance (issues/11): reuses issue 10's own
@@ -62,6 +63,7 @@ const pageNeighbours =
     class="min-h-screen flex flex-col bg-teletext-black text-teletext-white font-teletext"
     data-routes={routesJson}
     data-page-number={pageNumber}
+    data-section-count={sectionCount}
   >
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-[2ch] focus:py-2 focus:bg-teletext-yellow focus:text-teletext-black font-bold">
       Skip to content
@@ -77,6 +79,12 @@ const pageNeighbours =
            inside it): controls named via aria-label can swallow inner text
            changes in some screen readers. Mirrors RemoteControl's pattern. -->
       <span id="page-number-live" class="sr-only" aria-live="polite" aria-atomic="true">{pageNumber}</span>
+      {sectionCount >= 1 && (
+        <div class="ceefax-page-title">
+          <span class="page-title-full">{title} <span class="section-counter-value">1/{sectionCount}</span></span>
+          <span class="page-title-compact section-counter-value">1/{sectionCount}</span>
+        </div>
+      )}
       <span id="clock" class="ceefax-clock"></span>
     </header>
 
@@ -129,10 +137,15 @@ const pageNeighbours =
          stays unit-testable; config rides in as body data attributes. -->
     <script>
       import { initTeletextNav } from '../lib/teletext-nav';
+      import { initSectionCounter } from '../lib/section-counter';
 
       initTeletextNav({
         routes: JSON.parse(document.body.dataset.routes ?? '{}'),
         currentPage: document.body.dataset.pageNumber ?? '100',
+      });
+
+      initSectionCounter({
+        count: Number(document.body.dataset.sectionCount ?? '0'),
       });
     </script>
   </body>
