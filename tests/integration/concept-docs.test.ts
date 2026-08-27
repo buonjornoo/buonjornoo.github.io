@@ -49,11 +49,16 @@ describe('CONTEXT.md glossary seed', () => {
     'roll',
   ] as const;
 
-  it('keeps the page-number entry current with the route map', () => {
+  it('lists 102 in the page-number entry', () => {
     const md = readFileSync(join(root, 'CONTEXT.md'), 'utf-8');
     const entry = md.split('\n').find((line) => line.includes('**Page number**')) ?? '';
-    // 102 (Experience) joined the map in issues/08; the glossary enumerates
-    // the site's landmark numbers and a gap here is a signal (docs/agents/domain.md).
+    // Landmark-number spot check only — not a mirror of pageRoutes.json (the
+    // glossary line is prose summarizing ranges like "201–210 individual
+    // projects", not a 1:1 enumeration, so a naive completeness check would
+    // false-positive on correct prose). Full front-matter<->map drift is
+    // issue 17's build-time assertion (src/lib/page-number-drift.ts); this
+    // test only guards the one landmark number that's easy to silently drop.
+    // 102 (Experience) joined the map in issues/08.
     expect(entry).toContain('102');
   });
 
