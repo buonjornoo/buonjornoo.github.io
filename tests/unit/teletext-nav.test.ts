@@ -5,6 +5,7 @@ import {
   classifySwipe,
   neighbourPageNumber,
   pageNumberForUrl,
+  resolveFastextHotkey,
   resolveTarget,
 } from '../../src/lib/teletext-nav';
 
@@ -126,6 +127,42 @@ describe('neighbourPageNumber', () => {
 
   it('returns null when the current number is not itself in the map', () => {
     expect(neighbourPageNumber(routes, '555', 'next')).toBeNull();
+  });
+});
+
+/**
+ * Seam: fixed Fastext keyboard mnemonics — bare r/g/y/c always resolve to
+ * Home/Projects/Blog/Contact, on every page, independent of context.
+ * Spec source: issues/11 AC — "r/g/y/c navigate to /, /projects/, /blog/,
+ * /contact/ from every BaseLayout page"; boundaries reject contextual
+ * Fastext destinations (see ADR 0002), so these four must never vary.
+ */
+describe('resolveFastextHotkey', () => {
+  it('resolves r to Home', () => {
+    expect(resolveFastextHotkey({ key: 'r' })).toBe('/');
+  });
+
+  it('resolves g to Projects', () => {
+    expect(resolveFastextHotkey({ key: 'g' })).toBe('/projects/');
+  });
+
+  it('resolves y to Blog', () => {
+    expect(resolveFastextHotkey({ key: 'y' })).toBe('/blog/');
+  });
+
+  it('resolves c to Contact', () => {
+    expect(resolveFastextHotkey({ key: 'c' })).toBe('/contact/');
+  });
+
+  it('ignores unrelated keys', () => {
+    expect(resolveFastextHotkey({ key: 'a' })).toBeNull();
+    expect(resolveFastextHotkey({ key: 'R' })).toBeNull();
+  });
+
+  it('never captures Cmd/Ctrl/Alt+letter — those belong to the browser', () => {
+    expect(resolveFastextHotkey({ key: 'r', metaKey: true })).toBeNull();
+    expect(resolveFastextHotkey({ key: 'g', ctrlKey: true })).toBeNull();
+    expect(resolveFastextHotkey({ key: 'c', altKey: true })).toBeNull();
   });
 });
 

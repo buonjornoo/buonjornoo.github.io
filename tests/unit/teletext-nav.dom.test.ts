@@ -208,6 +208,57 @@ describe('experience matrix, page 102 (issues/08)', () => {
 });
 
 /**
+ * Seam: fixed Fastext hotkeys (r/g/y/c) wired to real keydown events.
+ * Spec source: issues/11 AC — "r/g/y/c navigate to /, /projects/, /blog/,
+ * /contact/ from every BaseLayout page"; these are direct navigations (no
+ * roll animation), mirroring a plain click on the Fastext footer anchors.
+ */
+describe('fastext hotkeys (issues/11)', () => {
+  it('r navigates straight to Home', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    const event = new KeyboardEvent('keydown', { key: 'r', cancelable: true, bubbles: true });
+    const spy = vi.spyOn(event, 'preventDefault');
+    document.dispatchEvent(event);
+    expect(spy).toHaveBeenCalled();
+    expect(window.location.href).toBe('/');
+  });
+
+  it('g/y/c navigate to Projects/Blog/Contact', () => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'g', cancelable: true, bubbles: true }));
+    expect(window.location.href).toBe('/projects/');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'y', cancelable: true, bubbles: true }));
+    expect(window.location.href).toBe('/blog/');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'c', cancelable: true, bubbles: true }));
+    expect(window.location.href).toBe('/contact/');
+  });
+
+  it.each([
+    ['Cmd', { metaKey: true }],
+    ['Ctrl', { ctrlKey: true }],
+    ['Alt', { altKey: true }],
+  ])('lets %s+r reach the browser untouched', (_modifier, modifiers) => {
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    const event = new KeyboardEvent('keydown', { key: 'r', cancelable: true, bubbles: true, ...modifiers });
+    const spy = vi.spyOn(event, 'preventDefault');
+    document.dispatchEvent(event);
+    expect(spy).not.toHaveBeenCalled();
+    expect(window.location.href).toBe(ORIGINAL_HREF);
+  });
+
+  it('does not hijack r/g/y/c typed into a text field', () => {
+    document.body.insertAdjacentHTML('beforeend', '<input id="scratch" type="text" />');
+    initTeletextNav({ routes: ROUTES, currentPage: CURRENT_PAGE });
+    const input = document.getElementById('scratch') as HTMLInputElement;
+    input.focus();
+    const event = new KeyboardEvent('keydown', { key: 'r', cancelable: true, bubbles: true });
+    Object.defineProperty(event, 'target', { value: input });
+    document.dispatchEvent(event);
+    expect(window.location.href).toBe(ORIGINAL_HREF);
+  });
+});
+
+/**
  * Seam: sequential paging wired to real keyboard/touch events, against the
  * real route map, through the same roll animation as digit-nav.
  * Spec source: issues/10 AC.

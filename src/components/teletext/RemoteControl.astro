@@ -7,10 +7,12 @@ const { pageNumber } = Astro.props as Props;
 
 const digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
+// Letters match the r/g/y/c keyboard hotkeys (issues/11) — color-initial,
+// same as real Fastext hardware keys, not word-initial.
 const colors = [
-  { href: '/', label: 'Home, page 100', letter: 'H', color: 'red' },
-  { href: '/projects/', label: 'Projects, page 200', letter: 'P', color: 'green' },
-  { href: '/blog/', label: 'Blog, page 300', letter: 'B', color: 'yellow' },
+  { href: '/', label: 'Home, page 100', letter: 'R', color: 'red' },
+  { href: '/projects/', label: 'Projects, page 200', letter: 'G', color: 'green' },
+  { href: '/blog/', label: 'Blog, page 300', letter: 'Y', color: 'yellow' },
   { href: '/contact/', label: 'Contact, page 400', letter: 'C', color: 'cyan' },
 ];
 ---

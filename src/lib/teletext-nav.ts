@@ -45,6 +45,30 @@ export function pageNumberForUrl(routes: Record<string, string>, url: string): s
   return entry ? entry[0] : null;
 }
 
+/**
+ * Fixed Fastext keyboard mnemonics — the four colour destinations never
+ * vary by page (ADR 0002: contextual Fastext destinations were rejected;
+ * "Contact is one keystroke away" must hold everywhere).
+ */
+const FASTEXT_HOTKEYS: Record<string, string> = {
+  r: '/',
+  g: '/projects/',
+  y: '/blog/',
+  c: '/contact/',
+};
+
+/**
+ * Resolves a bare r/g/y/c keypress to its fixed Fastext destination, or
+ * null when the key isn't one of the four or a modifier is held (those
+ * reach the browser untouched, same rule as `capturesDigit`).
+ */
+export function resolveFastextHotkey(e: DigitKeyEvent): string | null {
+  if (e.metaKey || e.ctrlKey || e.altKey) return null;
+  return Object.prototype.hasOwnProperty.call(FASTEXT_HOTKEYS, e.key)
+    ? FASTEXT_HOTKEYS[e.key]
+    : null;
+}
+
 export type NavDirection = 'next' | 'prev';
 
 /**
@@ -235,6 +259,13 @@ export function initTeletextNav({ routes, currentPage }: TeletextNavConfig): voi
     if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !e.metaKey && !e.ctrlKey && !e.altKey) {
       const direction = e.key === 'ArrowRight' ? 'next' : 'prev';
       if (navigateNeighbour(direction)) e.preventDefault();
+      return;
+    }
+
+    const hotkeyTarget = resolveFastextHotkey(e);
+    if (hotkeyTarget !== null) {
+      e.preventDefault();
+      window.location.href = hotkeyTarget;
     }
   });
 

@@ -4,6 +4,7 @@ import SEOHead from '../components/seo/SEOHead.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import RemoteControl from '../components/teletext/RemoteControl.astro';
 import pageRoutes from '../data/pageRoutes.json';
+import { neighbourPageNumber } from '../lib/teletext-nav';
 
 interface Props {
   title: string;
@@ -15,6 +16,23 @@ interface Props {
 
 const { title, description, pageNumber = '100', ogImage, canonicalURL } = Astro.props;
 const routesJson = JSON.stringify(pageRoutes);
+
+// Contextual neighbour affordance (issues/11): reuses issue 10's own
+// ascending walk, keyed directly off this page's own pageNumber prop —
+// no reverse URL lookup needed, we already have the number. Omitted
+// entirely when pageNumber isn't itself in the route map (e.g. /404).
+const routes: Record<string, string> = pageRoutes;
+const prevNeighbour = neighbourPageNumber(routes, pageNumber, 'prev');
+const nextNeighbour = neighbourPageNumber(routes, pageNumber, 'next');
+const pageNeighbours =
+  prevNeighbour && nextNeighbour
+    ? {
+        prevNumber: prevNeighbour,
+        prevUrl: routes[prevNeighbour],
+        nextNumber: nextNeighbour,
+        nextUrl: routes[nextNeighbour],
+      }
+    : null;
 ---
 
 <!doctype html>
@@ -68,24 +86,37 @@ const routesJson = JSON.stringify(pageRoutes);
     </main>
 
     <!-- Fastext footer -->
-    <nav class="ceefax-fastext" aria-label="Quick navigation">
-      <a href="/" class="fastext-btn fastext-red">
-        <span class="fastext-label">Home</span>
-        <span class="fastext-number">100</span>
-      </a>
-      <a href="/projects/" class="fastext-btn fastext-green">
-        <span class="fastext-label">Projects</span>
-        <span class="fastext-number">200</span>
-      </a>
-      <a href="/blog/" class="fastext-btn fastext-yellow">
-        <span class="fastext-label">Blog</span>
-        <span class="fastext-number">300</span>
-      </a>
-      <a href="/contact/" class="fastext-btn fastext-cyan">
-        <span class="fastext-label">Contact</span>
-        <span class="fastext-number">400</span>
-      </a>
-    </nav>
+    <footer class="ceefax-footer">
+      {pageNeighbours && (
+        <div class="page-nav-neighbours" aria-label="Adjacent pages">
+          <a href={pageNeighbours.prevUrl} aria-label={`Previous page, ${pageNeighbours.prevNumber}`}>
+            ◀ {pageNeighbours.prevNumber}
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href={pageNeighbours.nextUrl} aria-label={`Next page, ${pageNeighbours.nextNumber}`}>
+            {pageNeighbours.nextNumber} ▶
+          </a>
+        </div>
+      )}
+      <nav class="ceefax-fastext" aria-label="Quick navigation">
+        <a href="/" class="fastext-btn fastext-red">
+          <span class="fastext-label">Home</span>
+          <span class="fastext-number">100</span>
+        </a>
+        <a href="/projects/" class="fastext-btn fastext-green">
+          <span class="fastext-label">Projects</span>
+          <span class="fastext-number">200</span>
+        </a>
+        <a href="/blog/" class="fastext-btn fastext-yellow">
+          <span class="fastext-label">Blog</span>
+          <span class="fastext-number">300</span>
+        </a>
+        <a href="/contact/" class="fastext-btn fastext-cyan">
+          <span class="fastext-label">Contact</span>
+          <span class="fastext-number">400</span>
+        </a>
+      </nav>
+    </footer>
 
     <!-- CRT scanline overlay -->
     <div class="crt-scanlines" aria-hidden="true"></div>
