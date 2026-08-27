@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import type { Root, Text } from 'hast';
 import { linkifyPageNumbers, rehypePageLinks } from '../../src/lib/rehype-page-links';
 
 /**
@@ -74,12 +75,12 @@ describe('rehypePageLinks (hast transform)', () => {
     string
   >;
 
-  function textNode(value: string) {
+  function textNode(value: string): Text {
     return { type: 'text', value };
   }
 
   it('replaces a matched text node with text + <a> + text', () => {
-    const tree = {
+    const tree: Root = {
       type: 'root',
       children: [
         {
@@ -104,7 +105,7 @@ describe('rehypePageLinks (hast transform)', () => {
   });
 
   it('leaves a paragraph with no page reference untouched', () => {
-    const tree = {
+    const tree: Root = {
       type: 'root',
       children: [
         {
@@ -121,7 +122,7 @@ describe('rehypePageLinks (hast transform)', () => {
   });
 
   it('does not linkify text already inside an <a>', () => {
-    const tree = {
+    const tree: Root = {
       type: 'root',
       children: [
         {
@@ -138,7 +139,7 @@ describe('rehypePageLinks (hast transform)', () => {
   });
 
   it('does not linkify text inside <code>', () => {
-    const tree = {
+    const tree: Root = {
       type: 'root',
       children: [
         {

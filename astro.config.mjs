@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { visit } from 'unist-util-visit';
 import { rehypePageLinks } from './src/lib/rehype-page-links.ts';
 
 const pageRoutes = JSON.parse(readFileSync(new URL('./src/data/pageRoutes.json', import.meta.url), 'utf-8'));
@@ -51,20 +52,16 @@ function publicDirectoryIndex() {
  * the portfolio page. Internal links and mailto: are left alone.
  */
 function rehypeNewTabLinks() {
-  /** @param {any} tree */
+  /** @param {import('hast').Root} tree */
   return (tree) => {
-    /** @param {any} node */
-    const walk = (node) => {
-      if (node.type === 'element' && node.tagName === 'a') {
-        const href = node.properties?.href;
-        if (typeof href === 'string' && (/^https?:\/\//i.test(href) || /\.pdf$/i.test(href))) {
-          node.properties.target = '_blank';
-          node.properties.rel = 'noopener noreferrer';
-        }
+    visit(tree, 'element', (node) => {
+      if (node.tagName !== 'a') return;
+      const href = node.properties?.href;
+      if (typeof href === 'string' && (/^https?:\/\//i.test(href) || /\.pdf$/i.test(href))) {
+        node.properties.target = '_blank';
+        node.properties.rel = 'noopener noreferrer';
       }
-      if (node.children) node.children.forEach(walk);
-    };
-    walk(tree);
+    });
   };
 }
 

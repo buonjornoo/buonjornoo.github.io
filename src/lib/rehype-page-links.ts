@@ -6,6 +6,9 @@
  * hast tree that Astro's markdown pipeline hands to rehype plugins.
  */
 
+import { SKIP, visit } from 'unist-util-visit';
+import type { Element, Root, RootContent, Text } from 'hast';
+
 export interface PageLinkSegment {
   type: 'text' | 'link';
   value: string;
@@ -24,14 +27,14 @@ export function linkifyPageNumbers(
 ): PageLinkSegment[] {
   const segments: PageLinkSegment[] = [];
   let lastIndex = 0;
-  let match: RegExpExecArray | null;
 
-  PAGE_REF_PATTERN.lastIndex = 0;
-  while ((match = PAGE_REF_PATTERN.exec(text)) !== null) {
+  // matchAll clones the regex internally, so it never touches a shared
+  // lastIndex — safe to call concurrently or re-enter, unlike an exec loop.
+  for (const match of text.matchAll(PAGE_REF_PATTERN)) {
     const number = match[1] ?? match[2];
     const href = routes[number];
     // Unregistered number (e.g. "page 999"): leave as plain text, keep
-    // scanning from the current position — do not advance lastIndex.
+    // scanning from the current position.
     if (!href) continue;
 
     if (match.index > lastIndex) {
@@ -54,45 +57,42 @@ const SKIP_TAGS = new Set(['a', 'code', 'pre']);
 
 /**
  * Turns validated "page NNN" / "PNNN" references in markdown-rendered
- * prose into real links, modelled on rehypeNewTabLinks in astro.config.mjs.
- * Applies only to content prose — chrome markup never runs through the
- * markdown rehype pipeline.
+ * prose into real links, modelled on rehypeNewTabLinks in astro.config.mjs
+ * — both walk the hast tree via unist-util-visit rather than a hand-rolled
+ * recursion. Applies only to content prose — chrome markup never runs
+ * through the markdown rehype pipeline.
  */
 export function rehypePageLinks(routes: Record<string, string>) {
-  /** @param {any} tree */
-  return (tree: any) => {
-    const walk = (node: any) => {
-      if (!node.children) return;
-      if (node.type === 'element' && SKIP_TAGS.has(node.tagName)) return;
+  return (tree: Root) => {
+    visit(tree, ['text', 'element'], (node, index, parent) => {
+      if (node.type === 'element') {
+        if (SKIP_TAGS.has(node.tagName)) return SKIP;
+        return;
+      }
 
-      const newChildren: any[] = [];
-      for (const child of node.children) {
-        if (child.type === 'text') {
-          const segments = linkifyPageNumbers(child.value, routes);
-          const hasLink = segments.some((s) => s.type === 'link');
-          if (!hasLink) {
-            newChildren.push(child);
-            continue;
-          }
-          for (const seg of segments) {
-            if (seg.type === 'text') {
-              if (seg.value) newChildren.push({ type: 'text', value: seg.value });
-            } else {
-              newChildren.push({
-                type: 'element',
-                tagName: 'a',
-                properties: { href: seg.href },
-                children: [{ type: 'text', value: seg.value }],
-              });
-            }
-          }
+      const textNode = node as Text;
+      if (!parent || index === undefined) return;
+
+      const segments = linkifyPageNumbers(textNode.value, routes);
+      if (!segments.some((s) => s.type === 'link')) return;
+
+      const replacement: RootContent[] = [];
+      for (const seg of segments) {
+        if (seg.type === 'text') {
+          if (seg.value) replacement.push({ type: 'text', value: seg.value });
         } else {
-          walk(child);
-          newChildren.push(child);
+          const link: Element = {
+            type: 'element',
+            tagName: 'a',
+            properties: { href: seg.href },
+            children: [{ type: 'text', value: seg.value }],
+          };
+          replacement.push(link);
         }
       }
-      node.children = newChildren;
-    };
-    walk(tree);
+
+      parent.children.splice(index, 1, ...replacement);
+      return index + replacement.length;
+    });
   };
 }
