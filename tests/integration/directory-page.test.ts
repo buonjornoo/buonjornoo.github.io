@@ -50,34 +50,65 @@ describe('directory route registration', () => {
   });
 });
 
+/**
+ * Extracts the #page-directory block via a balanced-tag scan, rather than
+ * "next </div>", so it stays correct if the listing's markup grows nested
+ * <div>s later. Regex-based, not a real parser — known, accepted gaps: it
+ * doesn't skip HTML comments or handle a literal `>` inside an attribute
+ * value (e.g. `title="a>b"`); neither case exists in this component today.
+ */
+function listingBlock(html: string): string {
+  const start = html.indexOf('id="page-directory"');
+  if (start === -1) {
+    throw new Error('listingBlock: no element with id="page-directory" found in the given HTML');
+  }
+  const openTagStart = html.lastIndexOf('<div', start);
+  const tagPattern = /<div\b[^>]*>|<\/div>/g;
+  tagPattern.lastIndex = openTagStart;
+  let depth = 0;
+  let end = -1;
+  let match: RegExpExecArray | null;
+  while ((match = tagPattern.exec(html))) {
+    if (match[0].startsWith('</')) {
+      depth--;
+      if (depth === 0) {
+        end = match.index + match[0].length;
+        break;
+      }
+    } else {
+      depth++;
+    }
+  }
+  if (end === -1) {
+    throw new Error(
+      'listingBlock: tag stream never rebalanced back to depth 0 — the #page-directory <div> is unclosed or the scan ran off the end of the document',
+    );
+  }
+  return html.slice(openTagStart, end);
+}
+
+describe('listingBlock (test helper)', () => {
+  it('throws a clear error when #page-directory is missing entirely', () => {
+    expect(() => listingBlock('<html><body><p>no directory here</p></body></html>')).toThrow(
+      /page-directory/,
+    );
+  });
+
+  it('throws a clear error when the div never closes (tag stream never rebalances)', () => {
+    const malformed = '<div id="page-directory"><div>unclosed</div>';
+    expect(() => listingBlock(malformed)).toThrow(/rebalanced/);
+  });
+
+  it('still extracts a well-formed block correctly (regression check)', () => {
+    const html = '<div id="page-directory"><div>nested</div><p>text</p></div><footer>after</footer>';
+    expect(listingBlock(html)).toBe('<div id="page-directory"><div>nested</div><p>text</p></div>');
+  });
+});
+
 describe('directory listing — one component, two mounts', () => {
   const routes = pageRoutes as Record<string, string>;
   const directoryHtml = readFileSync(join(dist, 'directory', 'index.html'), 'utf-8');
   const notFoundHtml = readFileSync(join(dist, '404.html'), 'utf-8');
-
-  function listingBlock(html: string): string {
-    const start = html.indexOf('id="page-directory"');
-    const openTagStart = html.lastIndexOf('<div', start);
-    // Balanced-tag scan rather than "next </div>": correct even if the
-    // listing's markup grows nested <div>s later.
-    const tagPattern = /<div\b[^>]*>|<\/div>/g;
-    tagPattern.lastIndex = openTagStart;
-    let depth = 0;
-    let end = -1;
-    let match: RegExpExecArray | null;
-    while ((match = tagPattern.exec(html))) {
-      if (match[0].startsWith('</')) {
-        depth--;
-        if (depth === 0) {
-          end = match.index + match[0].length;
-          break;
-        }
-      } else {
-        depth++;
-      }
-    }
-    return html.slice(openTagStart, end);
-  }
 
   it('renders a #page-directory block on /directory/', () => {
     expect(directoryHtml).toContain('id="page-directory"');
@@ -159,7 +190,11 @@ describe('404 page otherwise unchanged', () => {
     expect(html).toContain('Available pages:');
   });
 
-  it('keeps page 100 labeled "Home + About", not just "Home"', () => {
-    expect(html).toContain('Home + About');
+  it('keeps page 100 labeled "Home + About", not just "Home" — bound to row 100, not just present anywhere on the page', () => {
+    const block = listingBlock(html);
+    const anchors = block.match(/<a\b[^>]*>[\s\S]*?<\/a>/g) ?? [];
+    const row100 = anchors.find((anchor) => anchor.replace(/<[^>]+>/g, '').match(/\b100\b/));
+    expect(row100, 'no directory row found for page 100').toBeTruthy();
+    expect(row100).toContain('Home + About');
   });
 });
