@@ -2,7 +2,7 @@
 title: "Workflow Evolution"
 description: "Two years from a design insight to a task-based architecture. Started as a designer, ended owning the product."
 subtitle: "digital office 24, 2024–2026. Started as the designer, ended owning the product: how a conversation with an assistant became a new task architecture."
-techStack: ["Product Management", "UX Design", "Research", "Fintech", "B2B"]
+tags: ["Product Management", "UX Design", "Research", "Fintech", "B2B"]
 coverImage: "/img/projects/workflowEvolutionCover.png"
 slug: "do24-workflow-evolution"
 featured: true

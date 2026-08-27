@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   description: string;
-  techStack: string[];
+  tags: string[];
   coverImage?: string;
   slug: string;
   pageNumber: string;
@@ -13,7 +13,7 @@ interface Props {
 const {
   title,
   description,
-  techStack,
+  tags,
   coverImage,
   slug,
   pageNumber,
@@ -70,7 +70,7 @@ const isHorizontal = layout === 'horizontal';
         {description}
       </p>
       <div class:list={['flex flex-wrap gap-[1ch]', isHorizontal ? 'mt-[1ch]' : 'mt-auto pt-[1ch]']}>
-        {techStack.map((tech) => <span class="text-teletext-magenta text-teletext-sm">[{tech}]</span>)}
+        {tags.map((tag) => <span class="text-teletext-magenta text-teletext-sm">[{tag}]</span>)}
       </div>
     </div>
   </article>

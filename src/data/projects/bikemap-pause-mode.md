@@ -2,7 +2,7 @@
 title: "Bikemap Pause Mode"
 description: "Bikemap's most requested feature. Shipped in ten weeks with a limitation we chose on purpose."
 subtitle: "The bike computer had no pause button, and 1.7 million recordings a year never became a route anyone kept. Shipped in ten weeks as a deliberate tradeoff: recording got pause first, navigation later."
-techStack: ["Product Management", "UX Design", "User Research", "iOS", "Android"]
+tags: ["Product Management", "UX Design", "User Research", "iOS", "Android"]
 coverImage: "/img/projects/pauseModeCover.png"
 heroImage: "/img/pauseMode/pauseModeHero.png"
 slug: "bikemap-pause-mode"

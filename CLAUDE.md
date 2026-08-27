@@ -38,7 +38,7 @@ npm test           # Vitest (builds site first; unit + integration suites in tes
 **Content**: All content lives in `src/data/` as Markdown or JSON, loaded via Astro content collections defined in `src/content.config.ts`:
 
 - `src/data/blog/*.md` — blog posts (schema: title, pubDate, tags, draft)
-- `src/data/projects/*.md` — projects (schema: title, slug, pageNumber, techStack, order, featured, archive)
+- `src/data/projects/*.md` — projects (schema: title, slug, pageNumber, tags, order, featured, archive)
 - `src/data/pages/*.md` — standalone pages (e.g. about)
 - `src/data/contact.json` — contact info
 - `src/data/pageRoutes.json` — maps 3-digit numbers to URLs for keyboard nav

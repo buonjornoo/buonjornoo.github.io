@@ -2,7 +2,7 @@
 title: "Bikemap Route Planner"
 description: "Two overlapping web tools, one third-party dependency, and one accidental production shutdown that taught us more than the research did."
 subtitle: "Merging the AB Planner and the Route Editor into one web app, and cutting the provider underneath both."
-techStack: ["UX Design", "Product Management", "User Research", "Maps"]
+tags: ["UX Design", "Product Management", "User Research", "Maps"]
 coverImage: "/img/projects/routePlannerCover.png"
 heroImage: "/img/routePlanner/Route Planner Hero.png"
 url: "https://web.bikemap.net/plan"

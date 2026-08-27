@@ -2,7 +2,7 @@
 title: "Cycling Coach"
 description: "Building, iterating on, and learning from my personal AI cycling coach."
 subtitle: "An evidence standard for an AI's inputs, written after my own coaching system reasoned confidently from five wrong numbers."
-techStack: ["AI Systems", "Product Design", "Claude Code", "Personal Project"]
+tags: ["AI Systems", "Product Design", "Claude Code", "Personal Project"]
 coverImage: "/img/projects/cyclingCoachCover.png"
 slug: "cycling-coach"
 order: 9

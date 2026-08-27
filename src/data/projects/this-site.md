@@ -2,7 +2,7 @@
 title: "This Site"
 description: "A portfolio inspired by Ceefax/Teletext."
 subtitle: "Testing agent workflows by letting them build this site. My art direction, my content."
-techStack: ["AI Agents", "Design Systems", "Astro", "Constraint Design"]
+tags: ["AI Agents", "Design Systems", "Astro", "Constraint Design"]
 coverImage: "/img/projects/thisSiteCover.png"
 url: "https://github.com/buonjornoo/buonjornoo.github.io"
 slug: "this-site"

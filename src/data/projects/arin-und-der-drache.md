@@ -2,7 +2,7 @@
 title: "Arin und der Drache"
 description: "Letting my six-year-old be the CEO of an agent team that builds his dream game."
 subtitle: "The rule that made it work: the agent that diagnoses must not be the agent that repairs."
-techStack:
+tags:
   [
     "AI Agents",
     "Product Management",

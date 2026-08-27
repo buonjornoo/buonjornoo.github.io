@@ -2,7 +2,7 @@
 title: "Table Hunter"
 description: "A three-person test removed the primary button from my own shipped product. It's since grown to five cities, on a roadmap I checked against the code before building it."
 subtitle: "A consumer map of public table-tennis tables across Frankfurt and four Rhein-Main neighbours. Built solo with an agent team and my maps experience from Bikemap."
-techStack: ["Product Design", "User Research", "Maps", "React", "Cloudflare"]
+tags: ["Product Design", "User Research", "Maps", "React", "Cloudflare"]
 coverImage: "/img/projects/tableHunterCover.png"
 url: "https://table-hunter.pages.dev"
 slug: "table-hunter"

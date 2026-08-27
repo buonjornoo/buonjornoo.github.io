@@ -2,7 +2,7 @@
 title: "teal-ui Design System"
 description: "A Design System built from scratch, with the goal to unlock machine readability and faster prototyping and building."
 subtitle: "A two-tier token architecture at digital office, and the bridge to engineering."
-techStack: ["Design Systems", "Design Tokens", "Figma", "Storybook", "Tailwind"]
+tags: ["Design Systems", "Design Tokens", "Figma", "Storybook", "Tailwind"]
 coverImage: "/img/projects/tealUiCover.png"
 slug: "do24-teal-ui"
 featured: true
