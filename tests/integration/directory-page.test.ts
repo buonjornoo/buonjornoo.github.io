@@ -162,10 +162,10 @@ describe('rendered directory page (101)', () => {
     expect(headerBlock).toMatch(/id="page-number-display"[^>]*>\s*101\s*</);
   });
 
-  it('opens with a double-height yellow Directory heading', () => {
+  it('opens with a double-height white Directory heading (white since issues/22)', () => {
     const heading = html.match(/<h1[^>]*>[\s\S]*?<\/h1>/)?.[0] ?? '';
     expect(heading).toContain('teletext-double-height');
-    expect(heading).toContain('text-teletext-yellow');
+    expect(heading).toContain('text-teletext-white');
     expect(heading).toContain('Directory');
   });
 });

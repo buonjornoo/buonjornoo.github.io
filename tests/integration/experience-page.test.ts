@@ -71,10 +71,10 @@ describe('rendered experience page (102)', () => {
     expect(headerBlock).toMatch(/id="page-number-display"[^>]*>\s*102\s*</);
   });
 
-  it('opens with a double-height yellow Experience heading', () => {
+  it('opens with a double-height white Experience heading (white since issues/22)', () => {
     const heading = html.match(/<h1[^>]*>[\s\S]*?<\/h1>/)?.[0] ?? '';
     expect(heading).toContain('teletext-double-height');
-    expect(heading).toContain('text-teletext-yellow');
+    expect(heading).toContain('text-teletext-white');
     expect(heading).toContain('Experience');
   });
 });

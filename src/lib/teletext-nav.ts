@@ -69,6 +69,18 @@ export function resolveFastextHotkey(e: DigitKeyEvent): string | null {
     : null;
 }
 
+/**
+ * Header date format (issues/22): "THU 27 AUG" — 3-letter weekday, 2-digit
+ * day, 3-letter month, all caps, no comma, no year. Matches the clock's own
+ * live-updating chrome treatment rather than a page-load snapshot.
+ */
+export function formatHeaderDate(date: Date): string {
+  const weekday = date.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = date.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
+  return `${weekday} ${day} ${month}`;
+}
+
 export type NavDirection = 'next' | 'prev';
 
 /**
@@ -328,15 +340,23 @@ export function initTeletextNav({ routes, currentPage }: TeletextNavConfig): voi
     });
   });
 
-  // Live clock
+  // Live clock + header date (issues/22) — the date is recomputed on the
+  // same tick as the clock so it never goes stale across a midnight
+  // rollover on a long-open tab, matching the clock's own live treatment
+  // rather than a page-load snapshot.
   function updateClock() {
-    const el = document.getElementById('clock');
-    if (!el) return;
     const now = new Date();
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    el.textContent = h + ':' + m + ':' + s;
+
+    const el = document.getElementById('clock');
+    if (el) {
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      el.textContent = h + ':' + m + ':' + s;
+    }
+
+    const dateEl = document.getElementById('header-date');
+    if (dateEl) dateEl.textContent = formatHeaderDate(now);
   }
   setInterval(updateClock, 1000);
   updateClock();

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   capturesDigit,
   classifySwipe,
+  formatHeaderDate,
   neighbourPageNumber,
   pageNumberForUrl,
   resolveFastextHotkey,
@@ -163,6 +164,28 @@ describe('resolveFastextHotkey', () => {
     expect(resolveFastextHotkey({ key: 'r', metaKey: true })).toBeNull();
     expect(resolveFastextHotkey({ key: 'g', ctrlKey: true })).toBeNull();
     expect(resolveFastextHotkey({ key: 'c', altKey: true })).toBeNull();
+  });
+});
+
+/**
+ * Seam: the header date format (issues/22 — DESIGNSYSTEM.md header table).
+ * Spec: "THU 27 AUG" — 3-letter weekday, 2-digit day, 3-letter month, all
+ * caps, space-separated, no comma, no year.
+ */
+describe('formatHeaderDate', () => {
+  it('formats a Thursday as "THU 27 AUG"', () => {
+    // 2026-08-27 is a Thursday.
+    expect(formatHeaderDate(new Date(2026, 7, 27))).toBe('THU 27 AUG');
+  });
+
+  it('pads a single-digit day to two digits', () => {
+    // 2026-08-02 is a Sunday.
+    expect(formatHeaderDate(new Date(2026, 7, 2))).toBe('SUN 02 AUG');
+  });
+
+  it('formats a different month correctly', () => {
+    // 2026-01-01 is a Thursday.
+    expect(formatHeaderDate(new Date(2026, 0, 1))).toBe('THU 01 JAN');
   });
 });
 

@@ -26,7 +26,7 @@ function urlFor(pageNumber: string): string {
   pageNumber="102"
 >
   <section class="mb-[2ch]">
-    <DoubleHeight as="h1" color="text-teletext-yellow">Experience</DoubleHeight>
+    <DoubleHeight as="h1" color="text-teletext-white">Experience</DoubleHeight>
     <p class="text-teletext-cyan mt-[1ch]">
       {experienceData.intro}
     </p>
@@ -35,7 +35,7 @@ function urlFor(pageNumber: string): string {
   <Separator color="text-teletext-cyan" char="─" />
 
   <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.employment}</h2>
+    <h2 class="text-teletext-white mb-[1ch]">{experienceData.headings.employment}</h2>
     <ul class="list-none space-y-[1ch]">
       {experienceData.employers.map((job) => (
         <li>
@@ -43,7 +43,7 @@ function urlFor(pageNumber: string): string {
           <br />
           <span class="text-teletext-cyan">{job.role}</span>
           <br />
-          <span class="text-teletext-green">{job.years}</span>
+          <span class="text-teletext-grey">{job.years}</span>
         </li>
       ))}
     </ul>
@@ -52,7 +52,7 @@ function urlFor(pageNumber: string): string {
   <Separator color="text-teletext-cyan" char="─" />
 
   <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.personalProjects}</h2>
+    <h2 class="text-teletext-white mb-[1ch]">{experienceData.headings.personalProjects}</h2>
     <ul class="list-none space-y-[1ch]">
       {experienceData.personalProjects.map((project) => (
         <li>
@@ -67,7 +67,7 @@ function urlFor(pageNumber: string): string {
   <Separator color="text-teletext-cyan" char="─" />
 
   <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.education}</h2>
+    <h2 class="text-teletext-white mb-[1ch]">{experienceData.headings.education}</h2>
     <ul class="list-none space-y-[1ch]">
       {experienceData.education.map((edu) => (
         <li>
@@ -77,9 +77,9 @@ function urlFor(pageNumber: string): string {
           <br />
           <span class="text-teletext-cyan">{edu.school}</span>
           <br />
-          <span class="text-teletext-green">{edu.years}</span>
+          <span class="text-teletext-grey">{edu.years}</span>
           {edu.thesis && (
-            <span class="block text-teletext-white/80 mt-[0.5ch]">
+            <span class="block text-teletext-grey mt-[0.5ch]">
               {copy.thesisLabel}{' '}
               <a href={urlFor(edu.thesis.number)}>{edu.thesis.title}</a>{' '}
               {copy.thesisRefLead} {edu.thesis.number}
@@ -93,12 +93,12 @@ function urlFor(pageNumber: string): string {
   <Separator color="text-teletext-cyan" char="─" />
 
   <section class="my-[2ch]">
-    <h2 class="text-teletext-yellow mb-[1ch]">{experienceData.headings.skills}</h2>
+    <h2 class="text-teletext-white mb-[1ch]">{experienceData.headings.skills}</h2>
     <dl class="space-y-[1ch]">
       {experienceData.skills.map((skill) => (
         <div>
-          <dt class="text-teletext-green font-bold">{skill.label}</dt>
-          <dd class="text-teletext-white/80">{skill.value}</dd>
+          <dt class="text-teletext-grey font-bold">{skill.label}</dt>
+          <dd class="text-teletext-white">{skill.value}</dd>
         </div>
       ))}
     </dl>

@@ -11,7 +11,7 @@ import contactData from '../data/contact.json';
   pageNumber="400"
 >
   <section class="mb-[2ch]">
-    <DoubleHeight as="h1" color="text-teletext-yellow">Contact</DoubleHeight>
+    <DoubleHeight as="h1" color="text-teletext-white">Contact</DoubleHeight>
     <p class="text-teletext-cyan mt-[1ch]">
       {contactData.intro}
     </p>
@@ -23,7 +23,7 @@ import contactData from '../data/contact.json';
     <ul class="list-none space-y-[1ch]">
       {contactData.links.map((link) => (
         <li>
-          <span class="text-teletext-green font-bold">{link.label}</span>
+          <span class="text-teletext-grey font-bold">{link.label}</span>
           <br />
           <a href={link.url} target={link.url.startsWith('mailto:') ? undefined : '_blank'} rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}>
             {link.value}
@@ -36,7 +36,7 @@ import contactData from '../data/contact.json';
   <Separator color="text-teletext-cyan" char="─" />
 
   <section class="my-[2ch]">
-    <p class="text-teletext-white/80">
+    <p class="text-teletext-white">
       {contactData.footer}
     </p>
   </section>

@@ -37,11 +37,11 @@ const formattedUpdated = frontmatter.updatedDate
 >
   <article>
     <section class="mb-[2ch]">
-      <DoubleHeight as="h1" color="text-teletext-yellow">{frontmatter.title}</DoubleHeight>
+      <DoubleHeight as="h1" color="text-teletext-white">{frontmatter.title}</DoubleHeight>
       <div class="mt-[1ch]">
-        <p class="text-teletext-green text-teletext-sm">{formattedDate}</p>
+        <p class="text-teletext-grey text-teletext-sm">{formattedDate}</p>
         {formattedUpdated && (
-          <p class="text-teletext-green text-teletext-sm">Updated: {formattedUpdated}</p>
+          <p class="text-teletext-grey text-teletext-sm">Updated: {formattedUpdated}</p>
         )}
         {frontmatter.tags && frontmatter.tags.length > 0 && (
           <div class="flex flex-wrap gap-[1ch] mt-[0.5ch]">
@@ -61,7 +61,7 @@ const formattedUpdated = frontmatter.updatedDate
 
 <style>
   .prose-teletext :global(h2) {
-    color: var(--color-teletext-yellow);
+    color: var(--color-teletext-white);
     font-size: 1.25rem;
     font-weight: 700;
     margin-top: 2em;
@@ -87,7 +87,7 @@ const formattedUpdated = frontmatter.updatedDate
     margin-bottom: 0.25em;
   }
   .prose-teletext :global(li::marker) {
-    color: var(--color-teletext-green);
+    color: var(--color-teletext-grey);
   }
   .prose-teletext :global(code) {
     color: var(--color-teletext-green);
@@ -100,14 +100,25 @@ const formattedUpdated = frontmatter.updatedDate
     margin-bottom: 1em;
     overflow-x: auto;
   }
-  .prose-teletext :global(blockquote) {
-    border-left: 2px solid var(--color-teletext-yellow);
+  .prose-teletext :global(blockquote.bq-interview) {
+    border-left: 2px solid var(--color-teletext-cyan);
     padding-left: 2ch;
     color: var(--color-teletext-cyan);
     margin-bottom: 1em;
   }
+  .prose-teletext :global(blockquote.bq-interview > p:last-child) {
+    color: var(--color-teletext-grey);
+    font-size: 0.875rem;
+    margin-top: 0.5em;
+  }
+  .prose-teletext :global(blockquote.bq-callout) {
+    border: none;
+    padding-left: 0;
+    color: var(--color-teletext-white);
+    margin-bottom: 1em;
+  }
   .prose-teletext :global(strong) {
-    color: var(--color-teletext-yellow);
+    color: var(--color-teletext-cyan);
     font-weight: 700;
   }
   .prose-teletext :global(img) {
@@ -116,7 +127,7 @@ const formattedUpdated = frontmatter.updatedDate
     margin: 1em 0;
   }
   .prose-teletext :global(figcaption) {
-    color: var(--color-teletext-green);
+    color: var(--color-teletext-grey);
     font-size: 0.875rem;
     margin-top: 0.5em;
   }

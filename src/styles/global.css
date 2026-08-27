@@ -19,7 +19,7 @@
 
 /* ===== TAILWIND v4 THEME ===== */
 @theme {
-  --color-teletext-black: #000000;
+  --color-teletext-black: #121212;
   --color-teletext-red: #FF0000;
   --color-teletext-green: #00FF00;
   --color-teletext-yellow: #FFFF00;
@@ -27,6 +27,7 @@
   --color-teletext-magenta: #FF00FF;
   --color-teletext-cyan: #00FFFF;
   --color-teletext-white: #FFFFFF;
+  --color-teletext-grey: #A0A0A0;
 
   --font-teletext: "Bedstead", "Courier New", "Courier", monospace;
 
@@ -156,16 +157,41 @@
   color: var(--color-teletext-red);
 }
 
+/* Clock: white, not yellow (issues/22 — yellow is transient-feedback-only,
+   never static content, and a clock ticking in the header the whole time
+   is as static as content gets). */
 .ceefax-clock {
-  color: var(--color-teletext-yellow);
+  color: var(--color-teletext-white);
   font-size: 1rem;
   letter-spacing: 0.05em;
+}
+
+/* Identity line + date (issues/22 header restructure): desktop-only chrome,
+   same 1100px threshold RemoteControl.astro already uses for its rail —
+   the one desktop/mobile split that already exists site-wide. White,
+   matching the rest of header chrome; cyan is reserved for the masthead. */
+.ceefax-identity,
+.ceefax-date {
+  color: var(--color-teletext-white);
+  font-family: var(--font-teletext);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+@media (max-width: 1099px) {
+  .ceefax-identity,
+  .ceefax-date {
+    display: none;
+  }
 }
 
 /* Reading-progress counter (issues/13): rides in the page-title slot, not
    the clock. White per DESIGNSYSTEM.md's consolidated header-chrome
    palette (page-number/clock/h1/h2 are all white) — deliberately not the
-   old yellow clock-slot treatment, which this ticket supersedes. */
+   old yellow clock-slot treatment, which this ticket supersedes. The
+   title itself (issues/22) shows on every page, desktop-only; on mobile
+   it's replaced by a compact k/N fallback only where a counter applies —
+   otherwise mobile shows nothing in this slot. */
 .ceefax-page-title {
   color: var(--color-teletext-white);
   font-family: var(--font-teletext);
@@ -180,7 +206,7 @@
 .page-title-compact {
   display: none;
 }
-@media (max-width: 480px) {
+@media (max-width: 1099px) {
   .page-title-full { display: none; }
   .page-title-compact { display: inline; }
 }

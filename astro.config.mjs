@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { visit } from 'unist-util-visit';
 import { rehypePageLinks } from './src/lib/rehype-page-links.ts';
+import { rehypeBlockquoteType } from './src/lib/rehype-blockquote-type.ts';
 import { findPageNumberDrift, parseFrontmatterString } from './src/lib/page-number-drift.ts';
 
 const pageRoutes = JSON.parse(readFileSync(new URL('./src/data/pageRoutes.json', import.meta.url), 'utf-8'));
@@ -124,7 +125,7 @@ export default defineConfig({
     '/projects/pingpong-map/': '/projects/table-hunter/',
   },
   markdown: {
-    rehypePlugins: [rehypeNewTabLinks, rehypePageLinks(pageRoutes)],
+    rehypePlugins: [rehypeNewTabLinks, rehypePageLinks(pageRoutes), rehypeBlockquoteType()],
   },
   vite: {
     plugins: [tailwindcss(), publicDirectoryIndex()],

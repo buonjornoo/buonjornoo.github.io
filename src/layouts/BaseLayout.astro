@@ -72,6 +72,7 @@ const pageNeighbours =
     <!-- Ceefax header row -->
     <header class="ceefax-header">
       <a href="/" class="ceefax-service-name" aria-label="SIEBRANDS — go to home page">SIEBRANDS</a>
+      <span class="ceefax-identity">Product Designer · PM</span>
       <button id="page-number-btn" class="ceefax-page-number" aria-label="Enter page number">
         <span class="ceefax-buffer">P<span id="page-number-display">{pageNumber}</span></span>
       </button>
@@ -79,12 +80,16 @@ const pageNeighbours =
            inside it): controls named via aria-label can swallow inner text
            changes in some screen readers. Mirrors RemoteControl's pattern. -->
       <span id="page-number-live" class="sr-only" aria-live="polite" aria-atomic="true">{pageNumber}</span>
-      {sectionCount >= 1 && (
-        <div class="ceefax-page-title">
-          <span class="page-title-full">{title} <span class="section-counter-value">1/{sectionCount}</span></span>
+      <div class="ceefax-page-title">
+        <span class="page-title-full">
+          {title}
+          {sectionCount >= 1 && <> <span class="section-counter-value">1/{sectionCount}</span></>}
+        </span>
+        {sectionCount >= 1 && (
           <span class="page-title-compact section-counter-value">1/{sectionCount}</span>
-        </div>
-      )}
+        )}
+      </div>
+      <span id="header-date" class="ceefax-date"></span>
       <span id="clock" class="ceefax-clock"></span>
     </header>
 
