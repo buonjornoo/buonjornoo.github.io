@@ -37,6 +37,20 @@ The break is written down here, in an ADR, specifically because it is a break �
 - Grey is the kind of color that's easy to reach for informally once it exists ("just grey it out a bit"). The next request to mute something that isn't a quote attribution, list marker, date, or caption should be **blocked** by `@designer`, not waved through because the hex already exists in `global.css`. Grey having exactly one documented role is the whole point of this decision; scope creep on that role quietly re-breaks the thing it fixed.
 - Jorne, flagged but not fully resolved at time of writing: *"I don't fully know the impact of having grey for all dates. Might look weird."* A visual check of `/projects/` (a grid of dates) and a blog post — the highest-repetition uses of the old green-for-dates role — is a precondition for calling this done, not optional follow-up.
 
+## Amendment (2026-08-27, same day)
+
+- Status: Accepted
+
+During JOR-67's implementation, `@designer` was consulted on two spots that aren't literally dates/captions/markers but function the same way: `experience.astro`'s `<dt>` skill label and `contact.astro`'s field label. Both are short, static category labels sitting beside the value they name — the same key/value job as the already-approved frontmatter-readout's `fr-key`/`fr-value` pattern (`DESIGNSYSTEM.md` §Frontmatter readout). That pattern already specified grey for exactly this purpose — but only on paper: the frontmatter readout itself hasn't shipped (JOR-69 is the ticket that will build it), so `fr-key` is a doc-only precedent, not prior art running in production.
+
+**Why this isn't the scope creep the Consequences section above warned against.** That warning targets a specific failure mode: an informal request to mute *something that isn't already a quote attribution, list marker, date, or caption* — a genuinely new category, judged case-by-case, waved through because the hex already exists. A `dt`/`dd` skill label and a contact field label don't clear that bar. A key naming the value beside it is exactly what `fr-key` already was by specification — grey wasn't being reasoned about role-by-role for `dt`, `dd`, and a form label separately; it was extended to a role this ADR's own author had already scoped and approved in writing, just hadn't shipped anywhere yet. Turning an approved-but-unshipped role into its first two shipped instances is a different act from inventing a new role for grey. The bar this ADR still holds: the next request for something that isn't a caption, marker, date, attribution, or key/value label — a status badge, a nav item, anything genuinely new — is the one `@designer` is committed to blocking.
+
+`@designer` ruled these in scope for grey during implementation. This amendment records that ruling and supersedes the Decision's role list going forward — the original Decision text above is left as written, per standard append-only ADR practice, not rewritten in place:
+
+**Grey's role, as amended**: de-emphasized text — quote attributions, list markers, dates, captions, **and key/value field labels** (a label naming the value beside it: `dt`/`dd` pairs, form-style field labels, the frontmatter-readout's `fr-key`). Nothing else may use it.
+
+This was a verbal ruling made during implementation; the amendment exists so the carve-out is findable in this ADR instead of only asserted in a Linear ticket's implementation notes, per this document's own requirement (see Decision, above: "needs to be explained here, not just asserted").
+
 ## Alternatives considered
 
 1. **Move dates/captions/markers to blue instead of a new color.** Blue's documented role is "sparingly, decorative only" — reassigning it to a high-repetition role (every date, every caption, every list bullet) is the exact overloading problem this ADR exists to fix, just relocated. Rejected.

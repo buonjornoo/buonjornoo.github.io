@@ -16,7 +16,7 @@ Real Ceefax/teletext hardware produced exactly 8 colors — 3-bit RGB, full-on o
 | Magenta | #FF00FF | Tags, categories, accents                                                                                                  |
 | Cyan    | #00FFFF | Service name, links, subtitles, h3 headings, strong/emphasis text, interview-quote text + border, fastext Contact (400)    |
 | White   | #FFFFFF | Body text, borders, static page-number display, h2 headings (double-height), clock                                        |
-| Grey    | #A0A0A0 | De-emphasized text: quote attributions, list markers, dates, captions                                                      |
+| Grey    | #A0A0A0 | De-emphasized text: quote attributions, list markers, dates, captions, key/value field labels (e.g. `experience.astro`'s skill `dt`, `contact.astro`'s field label — same job as the frontmatter-readout's `fr-key`) |
 
 Defined as CSS variables in `global.css` (`--color-teletext-black` updates from `#000000` to `#121212`; `--color-teletext-grey: #A0A0A0` is added alongside the other eight — Tailwind v4 exposes both automatically). `--color-teletext-black` is the single source of truth for background black — every component reference goes through it, not a hardcoded hex.
 
@@ -59,8 +59,6 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/components/teletext/Separator.astro` — horizontal line separator
 - `src/components/teletext/ColorBar.astro` — colored bar
 - `src/components/teletext/BlockGraphic.astro` — decorative block characters
-- `src/components/teletext/BlinkingText.tsx` — blink with reduced-motion support
-- `src/components/teletext/PageNumber.astro` — page number display. Currently unused anywhere in the codebase, and currently colored yellow, which was already wrong under the *prior* rule too (page-number display has always been documented White). Flagged for cleanup — delete it or fix its color before it gets copied somewhere and ships wrong.
 
 The frontmatter readout (below) is deliberately **not** a component — it's plain body text inline in `ProjectLayout.astro`.
 
