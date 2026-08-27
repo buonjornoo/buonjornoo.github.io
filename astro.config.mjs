@@ -1,5 +1,5 @@
 // @ts-check
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { posix } from 'node:path';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
@@ -7,8 +7,60 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { visit } from 'unist-util-visit';
 import { rehypePageLinks } from './src/lib/rehype-page-links.ts';
+import { findPageNumberDrift, parseFrontmatterString } from './src/lib/page-number-drift.ts';
 
 const pageRoutes = JSON.parse(readFileSync(new URL('./src/data/pageRoutes.json', import.meta.url), 'utf-8'));
+
+/**
+ * pageNumber is hand-written in front matter across the content collections
+ * *and* independently maintained in pageRoutes.json, with nothing checking
+ * they agree (issues/17). Fails the build — not just dev — the moment a
+ * document's declared number stops matching the URL pageRoutes.json says it
+ * owns, naming both sides of the disagreement.
+ * @returns {import('astro').AstroIntegration}
+ */
+function pageNumberDriftGuard() {
+  const collectionDirs = /** @type {const} */ ([
+    ['blog', './src/data/blog'],
+    ['projects', './src/data/projects'],
+    ['pages', './src/data/pages'],
+  ]);
+
+  return {
+    name: 'page-number-drift-guard',
+    hooks: {
+      'astro:build:start': () => {
+        const docs = collectionDirs.flatMap(([collection, dir]) =>
+          readdirSync(new URL(dir, import.meta.url))
+            .filter((name) => name.endsWith('.md'))
+            .map((name) => {
+              const raw = readFileSync(new URL(`${dir}/${name}`, import.meta.url), 'utf-8');
+              return {
+                collection,
+                id: name.replace(/\.md$/, ''),
+                slug: parseFrontmatterString(raw, 'slug') ?? undefined,
+                pageNumber: parseFrontmatterString(raw, 'pageNumber'),
+              };
+            }),
+        );
+
+        const drift = findPageNumberDrift(docs, pageRoutes);
+        if (drift.length === 0) return;
+
+        const details = drift
+          .map(
+            (entry) =>
+              `  ${entry.doc}: declares pageNumber "${entry.declaredNumber}" (→ ${entry.expectedUrl}), ` +
+              `but pageRoutes.json["${entry.declaredNumber}"] is ${
+                entry.routeEntry ? `"${entry.routeEntry}"` : 'undefined'
+              }`,
+          )
+          .join('\n');
+        throw new Error(`Page-number drift detected between front matter and pageRoutes.json:\n${details}`);
+      },
+    },
+  };
+}
 
 /**
  * Dev parity for public/ directory URLs: `astro dev` serves public/ files by
@@ -68,7 +120,7 @@ function rehypeNewTabLinks() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://siebrands.com',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), pageNumberDriftGuard()],
   redirects: {
     '/projects/pingpong-map/': '/projects/table-hunter/',
   },
