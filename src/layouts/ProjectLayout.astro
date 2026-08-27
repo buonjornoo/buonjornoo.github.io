@@ -8,6 +8,8 @@ interface Props {
     title: string;
     description: string;
     subtitle?: string;
+    tags: string[];
+    context?: string;
     heroImage?: string;
     pageNumber?: string;
     archive?: boolean;
@@ -17,20 +19,29 @@ interface Props {
 }
 
 const { frontmatter, sectionCount } = Astro.props;
+
+const pageNumber = frontmatter.pageNumber ?? '200';
+const readoutLines = [
+  { key: 'title', value: JSON.stringify(frontmatter.title) },
+  { key: 'subtitle', value: JSON.stringify(frontmatter.subtitle ?? '') },
+  { key: 'tags', value: `[${frontmatter.tags.map((tag) => JSON.stringify(tag)).join(', ')}]` },
+  { key: 'pageNumber', value: JSON.stringify(pageNumber) },
+  ...(frontmatter.context ? [{ key: 'context', value: JSON.stringify(frontmatter.context) }] : []),
+];
 ---
 
 <PageLayout
   title={frontmatter.title}
   description={frontmatter.description}
-  pageNumber={frontmatter.pageNumber ?? '200'}
+  pageNumber={pageNumber}
   sectionCount={sectionCount}
 >
   <article>
     <section class="mb-[2ch]">
       <DoubleHeight as="h1" color="text-teletext-white">{frontmatter.title}</DoubleHeight>
-      {frontmatter.subtitle && (
-        <p class="text-teletext-cyan mt-[1ch]">{frontmatter.subtitle}</p>
-      )}
+      <div class="frontmatter-readout">{readoutLines.map((line, i) => (
+        <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
+      ))}</div>
       {frontmatter.url && (
         <p class="mt-[1ch]">
           <a
@@ -61,6 +72,19 @@ const { frontmatter, sectionCount } = Astro.props;
 </PageLayout>
 
 <style>
+  .frontmatter-readout {
+    font-family: var(--font-teletext);
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+  }
+  .frontmatter-readout .fr-key {
+    color: var(--color-teletext-grey);
+  }
+  .frontmatter-readout .fr-value {
+    color: var(--color-teletext-white);
+  }
   .prose-teletext :global(h2) {
     color: var(--color-teletext-white);
     font-size: 1.25rem;
