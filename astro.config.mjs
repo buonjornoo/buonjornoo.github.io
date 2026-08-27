@@ -2,7 +2,6 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { posix } from 'node:path';
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { visit } from 'unist-util-visit';
@@ -111,7 +110,7 @@ function rehypeNewTabLinks() {
       const href = node.properties?.href;
       if (typeof href === 'string' && (/^https?:\/\//i.test(href) || /\.pdf$/i.test(href))) {
         node.properties.target = '_blank';
-        node.properties.rel = 'noopener noreferrer';
+        node.properties.rel = ['noopener', 'noreferrer'];
       }
     });
   };
@@ -120,7 +119,7 @@ function rehypeNewTabLinks() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://siebrands.com',
-  integrations: [react(), sitemap(), pageNumberDriftGuard()],
+  integrations: [sitemap(), pageNumberDriftGuard()],
   redirects: {
     '/projects/pingpong-map/': '/projects/table-hunter/',
   },

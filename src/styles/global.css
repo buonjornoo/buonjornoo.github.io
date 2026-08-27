@@ -35,15 +35,10 @@
   --font-size-teletext-lg: 1.25rem;
   --font-size-teletext-double: 2rem;
 
-  --animate-blink: blink 1s step-start infinite;
   --animate-page-in: page-in 0.3s steps(4) forwards;
 }
 
 /* ===== KEYFRAMES ===== */
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
 @keyframes page-in {
   from { clip-path: inset(0 0 100% 0); }
   to { clip-path: inset(0); }
@@ -103,17 +98,6 @@
 @utility teletext-pixelated {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-}
-
-@utility teletext-scanline {
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 1px,
-    rgba(0, 0, 0, 0.15) 1px,
-    rgba(0, 0, 0, 0.15) 2px
-  );
-  pointer-events: none;
 }
 
 /* ===== CEEFAX HEADER ===== */

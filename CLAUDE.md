@@ -1,6 +1,25 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to everyone (including Claude Code (claude.ai/code)) when working in this repository.
+This repository is a website hosted on Github Pages. It is a portfolio website of Jorne, a Senior Product Designer. It showcases his craft, thinking, and skills.
+
+## Output style
+
+Always follow the rules in the `i-have-adhd` skill when talking to me (Jorne, Claude Code user).
+
+## Non-Negotiable Constraints & Rules
+
+- Never commit direct API keys or other tokens.
+- Don't ask for API keys or other tokens in chat. Find other ways for me to make them accessible to you.
+
+## Routing Table - What to read when
+
+| When                                                                                  | What to read                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Working on the concept of this online portfolio                                       | 'CONCEPT.md'                                             |
+| Domain vocabulary                                                                      | 'CONTEXT.md'                                             |
+| Creating user facing assets, code, frontend, visuals                                  | 'DESIGNSYSTEM.md'                                         |
+| Backlog / open work / issue status ("what's next", "check issues", "what do we have to do") | Linear project `siebrandsdotcom` — see `docs/agents/issue-tracker.md`. Query it live; don't answer from memory. |
 
 ## Commands
 
@@ -14,9 +33,10 @@ npm test           # Vitest (builds site first; unit + integration suites in tes
 
 ## Architecture
 
-**Stack**: Astro 5 (static site) + React 19 (interactive components only) + Tailwind CSS v4 (no config file — theme defined in `src/styles/global.css` via `@theme`)
+**Stack**: Astro 5 (static site) + Tailwind CSS v4 (no config file — theme defined in `src/styles/global.css` via `@theme`)
 
 **Content**: All content lives in `src/data/` as Markdown or JSON, loaded via Astro content collections defined in `src/content.config.ts`:
+
 - `src/data/blog/*.md` — blog posts (schema: title, pubDate, tags, draft)
 - `src/data/projects/*.md` — projects (schema: title, slug, pageNumber, techStack, order, featured, archive)
 - `src/data/pages/*.md` — standalone pages (e.g. about)
@@ -27,25 +47,7 @@ npm test           # Vitest (builds site first; unit + integration suites in tes
 
 **Layout hierarchy**: `BaseLayout.astro` (HTML shell, Ceefax header/footer, keyboard nav JS) → `PageLayout.astro` (max-width container) → `BlogPostLayout.astro` / `ProjectLayout.astro` (prose styles).
 
-**Teletext page number system**: Each page has a `pageNumber` in its front matter (e.g. 100=Home, 200=Projects, 300=Blog, 400=Contact, 201-203=individual projects). `pageRoutes.json` maps numbers to URLs. `BaseLayout` listens for keyboard input — typing a 3-digit number navigates to the corresponding page. On mobile, tapping the page number opens a dialog.
-
-**React components**: Used only for interactive elements that need client-side state (e.g. `BlinkingText.tsx`). All other components are `.astro`.
-
-## Design System
-
-**8 colors only** — no exceptions. Defined as CSS variables in `global.css`:
-`#000` (black), `#F00` (red), `#0F0` (green), `#FF0` (yellow), `#00F` (blue), `#F0F` (magenta), `#0FF` (cyan), `#FFF` (white).
-
-**Font**: Bedstead (WOFF2 in `public/fonts/`), preloaded in BaseLayout, fallback to Courier. Font smoothing is explicitly disabled for pixel-perfect rendering.
-
-**Ceefax UI rules**:
-- Sticky header: "SIEBRANDS" (cyan) + page number (white) + clock (yellow)
-- Sticky Fastext footer: Red=Home 100, Green=Projects 200, Yellow=Blog 300, Cyan=Contact 400
-- No traditional nav bar, no TV bezel — the screen IS the viewport
-- CRT scanline overlay (suppressed with `prefers-reduced-motion`)
-- Content max-width: 80ch
-
-**Prose styles** (`.prose-teletext`): h2=yellow, h3=cyan, links=cyan→yellow on hover, code=green on dark bg, blockquotes=yellow left border + cyan text. Defined inline in `ProjectLayout.astro` and `BlogPostLayout.astro`.
+**Teletext page number system**: Each page has a `pageNumber` in its front matter (e.g. 100=Home, 200=Projects, 300=Blog, 400=Contact, 201-203=individual projects). `pageRoutes.json` maps numbers to URLs. `BaseLayout` listens for keyboard input — typing a 3-digit number navigates to the corresponding page. On mobile, tapping the page number opens a dialog with a 10-button keypad — there is no `<input>` anywhere on the site; soft-keyboard suppression is structural.
 
 ## Deployment
 
@@ -57,7 +59,7 @@ GA tracking ID: `G-9T9M59GHTP` (in BaseLayout).
 
 ### Issue tracker
 
-Local markdown under `issues/` (one file per ticket, dependency-numbered). See `docs/agents/issue-tracker.md`.
+Linear — project `siebrandsdotcom`, team Jorne (JOR). Don't mix with the sibling `table-hunter` project on the same team. Local markdown under `issues/` is kept as historical narrative only, not authoritative. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
