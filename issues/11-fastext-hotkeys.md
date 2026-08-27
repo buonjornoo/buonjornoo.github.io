@@ -6,6 +6,7 @@
 | **Blocked by** | 10 (the `◀ n · n ▶` affordance reads its neighbours from 10's sequence walk) |
 | **Target Modules** | `src/layouts/BaseLayout.astro` inline script, `src/components/teletext/RemoteControl.astro` (mnemonic reconciliation), Fastext footer affordance, `docs/adr/0002-fastext-stays-fixed.md` (create) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 4 item 11 + Documentation section |
+| **Linear** | [JOR-55](https://linear.app/jornesiebrands/issue/JOR-55) |
 | **Status** | ready-for-agent |
 
 ## What to build

@@ -1,45 +1,33 @@
 # Issue Tracker
 
-**Tracker:** Local markdown — **`issues/`** in the repo root
-**Decided:** 2026-08-25 (Linear considered; deferred — see "Linear mirror" below)
+**Tracker:** Linear — project **`siebrandsdotcom`**, team **Jorne (JOR)**
+**Decided:** 2026-08-25 (Linear considered, deferred); flipped to tracker-of-record 2026-08-27 once the account-level Linear MCP connection was available (no `.mcp.json` needed — see "History" below).
 
 ## How skills use it
 
-Skills like `to-tickets`, `to-spec`, `triage`, and `implement` treat this repo's `issues/` folder as the tracker:
+Skills like `to-tickets`, `to-spec`, `triage`, and `implement` should treat the Linear `siebrandsdotcom` project as the tracker going forward:
 
-- One file per ticket: `issues/<NN>-<slug>.md`, numbered in dependency order (blockers first).
-- Each file carries a structured header: Title, Type (`AFK` / `Human-in-the-loop`), Blocked by (ticket numbers/titles or "None"), Target Modules, Status.
-- Triage roles are expressed in each ticket's `Status:` line using the label vocabulary in `triage-labels.md` (e.g. `Status: ready-for-agent`).
-- Work the frontier: any ticket whose blockers are all complete. Never close or modify the parent planning document when publishing tickets.
-- When a parent document's slices have all shipped, delete it and inline anything still binding into the tickets that need it — a spent plan left in `docs/` misleads later sessions.
+- One Linear issue per ticket, titled `NN — <slug title>` (numbering preserved from the local-markdown era for continuity, not required for new tickets).
+- Triage roles are expressed as Linear labels using the vocabulary in `triage-labels.md` (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) — all five already exist as team-scoped labels on **Jorne**.
+- State maps: shipped/deployed → `Done`; open/actionable → `Todo` (blocking is expressed via native Linear `blockedBy` relations, not by parking blocked tickets in `Backlog`).
+- Work the frontier: any issue whose blockers are all `Done`.
+- **Do not mix projects.** The `Jorne` team also holds the unrelated `table-hunter` project — always filter/create against `project: siebrandsdotcom` explicitly, never rely on team scope alone.
 
-## Current ticket set
+## Local markdown (`issues/*.md`) — historical record, not authoritative
 
-`01-kion-case-study-tracer` … `06-subtitle-payoffs`. **02–06 are shipped and deployed** (`8792f68`); only `01` is open, at its Phase-A draft gate with the user. Their parent, `docs/PRD-portfolio-overhaul.md`, was deleted 2026-08-26 — its binding negative decisions (N1–N9) and testing/confidentiality posture now live inside `issues/01`. Dependency edges live in each file's header.
+The 20 tickets filed 2026-08-25/26 (`01-kion-case-study-tracer` … `20-directory-listing-test-hardening`) still live under `issues/` and each file now carries a `**Linear**` row in its header table linking to its mirrored issue (`JOR-45` … `JOR-64`). Keep these files as the detailed narrative record (review findings, locked copy, TDD logs) — Linear's description on each issue is a compressed summary, not a replacement. **Do not file new tickets as markdown files** — create them directly in Linear from now on. If a markdown file and its Linear issue ever disagree on state, Linear wins.
 
-The teletext-system set **07–18** was filed 2026-08-26 from `docs/PLAN-teletext-system.md` (kept unmodified as parent reference). Numbers preserve the plan's own naming: plan-phase-1 was split three ways into **07** (live defects + CONCEPT.md/CONTEXT.md seed), **16** (dead code + React removal) and **17** (page-number drift guard); the plan's 08–15 kept their numbers; **18** (image weight/dimensions) was added later, so execution order follows each file's `Blocked by` header rather than numeric order. Existing issue 01 (KION) is now blocked by 08. **19** (glossary drift-guard honesty) was filed 2026-08-26 from the `/code-review` re-review of 08's fixes; it is blocked by 08 and related to 17. Frontier at filing: 07, 08, 12, 13, 14, 15, 16, 17 can start immediately (13/14 honour the BaseLayout file-lock after 11); 09 and 01 wait on 08; 10 waits on 07+17; 11 waits on 10; 18 waits on 15.
+Dependency graph (native Linear `blockedBy`, mirrored from each file's old `Blocked by` header): 01←08, 03←02, 04←03, 05←04, 09←08, 10←07+17, 11←10, 13←11, 14←11, 18←15, 19←08 (related: 19↔17).
 
-## Not Linear
+## Status at migration (2026-08-27)
 
-A Linear project named `siebrandsdotcom` exists (team JOR, created 2026-08-25) but is **empty and deliberately unused** — decided 2026-08-26. Local markdown under `issues/` is the only tracker. Do not file tickets there, do not mirror `issues/` into it, and do not treat its emptiness as a sign that work is untracked. (The sibling `table-hunter` project IS live in Linear; that's a different repo.)
+Shipped/`Done`: 02, 03, 04, 05, 06, 07, 08, 09, 10, 12, 17 (all confirmed ancestors of `origin/main` via `git merge-base --is-ancestor` — several local files had stale "not deployed" status text that this migration corrected against actual git history, not against the files' own claims).
+Open/`Todo`: 01 (`ready-for-human`, draft gate), 11, 13, 14, 15, 16, 18, 19, 20 (all `ready-for-agent`).
 
 ## Hard process rule (unchanged)
 
 Tracker state never authorizes a deploy. Nothing merges or deploys without the user's explicit approval.
 
----
+## History
 
-## Linear mirror (optional, not active)
-
-If native Linear tracking is wanted later:
-
-1. Create `.mcp.json` at repo root:
-   ```json
-   { "mcpServers": { "linear": { "type": "http", "url": "https://mcp.linear.app/mcp" } } }
-   ```
-2. Restart Claude Code; approve the server-trust prompt; complete OAuth.
-3. Target project already exists in the workspace: **"siebrandsdotcom"** (empty).
-4. Publish one Linear issue per ticket in dependency order, wire native blocking relations, apply `ready-for-agent`, then add each Linear ID back into the matching file's header (`Linear: SIE-…`) so both surfaces stay reconcilable.
-5. Update this file to flip the tracker-of-record to Linear.
-
-Until then this section stays dormant and `issues/` remains authoritative.
+A Linear project named `siebrandsdotcom` (team JOR) existed empty from 2026-08-25 pending a `.mcp.json` setup that was never done. On 2026-08-27 the account-level Linear MCP connection (`mcp__claude_ai_Linear__*`) turned out to already be authenticated, making the planned manual OAuth setup unnecessary — all 20 tickets were published directly, blocking relations wired, and Linear IDs written back into the local files' headers.

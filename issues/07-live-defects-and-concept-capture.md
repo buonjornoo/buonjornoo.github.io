@@ -6,6 +6,7 @@
 | **Blocked by** | None (can start immediately). Holds the `BaseLayout.astro` file-lock first in the 07 → 10 → 11 chain; 13/14 join the lock after 11 merges — never run concurrently. |
 | **Target Modules** | `src/layouts/BaseLayout.astro` (keydown handler, `startRoll`, header buffer display), `public/game/arin-und-der-drache/index.html`, `CONCEPT.md` (create), `CONTEXT.md` (create, seed) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 1 items 1–4 + Documentation section |
+| **Linear** | [JOR-51](https://linear.app/jornesiebrands/issue/JOR-51) |
 | **Status** | **deployed/live** (2026-08-26: user approved the diff and triggered the push; commits `bcc899c`/`8b501da`/`8c70847` on main; GitHub Actions deploy green; 38 vitest tests across 5 files; production smoke test passed all six checks — 555 red-flash reset, 206 roll to Table Hunter, Cmd+digit pass-through, 210 chrome + game boot, <1100px remote dialog). History: F1–F5 fixed 2026-08-26 via TDD red→green with mutation checks — see "Fixes applied". Designer agent errored (API 402 credits, same outage hit the QA subagent at go-live) — chrome parity self-checked: no colour/font/layout deltas |
 
 ## What to build

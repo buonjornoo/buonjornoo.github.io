@@ -6,6 +6,7 @@
 | **Blocked by** | None (09 is shipped) |
 | **Target Modules** | `tests/integration/directory-page.test.ts` |
 | **Source** | `/code-review` on issue 09's fix commit (`e60a215`), 2026-08-26 — re-review of the label-drift + brittle-helper findings from the first pass. |
+| **Linear** | [JOR-64](https://linear.app/jornesiebrands/issue/JOR-64) |
 | **Status** | ready-for-agent |
 
 ## What to build

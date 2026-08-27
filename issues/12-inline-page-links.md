@@ -6,6 +6,7 @@
 | **Blocked by** | None as a hard gate (soft: after 09 so references to pages 101/102 resolve too). |
 | **Target Modules** | `astro.config.mjs` (new rehype plugin, modelled on the existing `rehypeNewTabLinks` at lines 9–27) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 4 item 12 |
+| **Linear** | [JOR-56](https://linear.app/jornesiebrands/issue/JOR-56) |
 | **Status** | **implemented, tests green — awaiting user diff review (not deployed)** (2026-08-26, branch `issue-12-inline-page-links`: TDD red→green — `src/lib/rehype-page-links.ts` holds the pure `linkifyPageNumbers` matcher + `rehypePageLinks` hast transform (same pattern as `teletext-nav.ts`), wired into `astro.config.mjs`'s `rehypePlugins` alongside `rehypeNewTabLinks`. 12 new unit tests (`tests/unit/rehype-page-links.test.ts`) cover "page 205"/"Page 205"/"P205" linking, "page 999" (unregistered) and bare "100"/"p205" staying plain text, multi-match text nodes, and skipping `<a>`/`<code>`/`<pre>`. 1 integration test (`tests/integration/rehype-page-links.test.ts`) verifies against the real build that `this-site.md`'s live "Type 100 anywhere" bare number stays unlinked. Grep confirmed no content currently contains an explicit "page NNN"/"PNNN" reference, so no prose was added or changed (boundaries: content stays as authored). `npm run check`: 0 errors/0 warnings. Full suite: 9 files / 113 tests green (was 99). Not pushed.) |
 
 ## What to build

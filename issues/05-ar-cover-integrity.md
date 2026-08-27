@@ -6,6 +6,7 @@
 | **Blocked by** | 04 [go-live visibility — the broken card becomes public only once the archive lifts] |
 | **Target Modules** | `src/data/projects/ar-city-exploration.md` front-matter `coverImage` only. `ProjectCard.astro` NOT expected to change. |
 | **Source** | Shipped. Was PRD §S4 + Open Item O2; `docs/PRD-portfolio-overhaul.md` deleted 2026-08-26. Binding constraints N1–N9 now live in `issues/01`. |
+| **Linear** | [JOR-49](https://linear.app/jornesiebrands/issue/JOR-49) |
 | **Status** | **deployed/live** (portfolio overhaul, `8792f68`, confirmed ancestor of origin/main) |
 
 ## Vertical slice

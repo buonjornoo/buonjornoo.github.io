@@ -6,6 +6,7 @@
 | **Blocked by** | 08 (experience matrix) — so the listing is born complete including page 102. |
 | **Target Modules** | New directory component (under `src/components/teletext/`), `src/pages/directory.astro` (create), `src/pages/404.astro` (replace hardcoded list), `src/data/pageRoutes.json` (+`"101": "/directory/"`) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 2 (second half) |
+| **Linear** | [JOR-53](https://linear.app/jornesiebrands/issue/JOR-53) |
 | **Status** | implemented, tests green, designer-reviewed — awaiting user diff review (not deployed) |
 
 ## What to build

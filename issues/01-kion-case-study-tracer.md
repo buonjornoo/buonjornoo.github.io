@@ -6,6 +6,7 @@
 | **Blocked by** | [08 — experience matrix](08-experience-matrix.md) — re-sequenced 2026-08-26 so the matrix names KION first, giving this study a home row on `/experience/` to link back to. Phase-A draft gate with Jorne proceeds meanwhile. Issues 02–06 are shipped and deployed (`8792f68`); grid order is settled and `order: 6` is free. |
 | **Target Modules** | `src/data/projects/kion-scanner.md` (create — slug tentative until O3 sign-off), `src/data/pageRoutes.json` (+1 line), own front-matter `order: 6` |
 | **Source** | Self-contained. `docs/PRD-portfolio-overhaul.md` was deleted 2026-08-26 once its S1–S5 shipped; everything this issue needed from it (§S6, §4, N1–N9) is inlined below. |
+| **Linear** | [JOR-45](https://linear.app/jornesiebrands/issue/JOR-45) |
 | **Status** | ready-for-human (draft gate) |
 
 > ⚠️ **Date correction (2026-08-26).** This issue says the scanner work was a "2021 internal exploration". `public/cv/jorne-siebrands-cv-en.pdf` places the role at **UX Designer, KION Group | Digital Campus, November 2019 – June 2021**. Re-date the framing before drafting. The CV bullet reads: *"Redesigned the incoming-goods process: my own field research showed a simple OCR scan into SAP could replace a planned robotic pallet-unpacking system at a fraction of the cost."*

@@ -6,6 +6,7 @@
 | **Blocked by** | None as a hard gate (sequence after 07 merges per plan priority — two of its defects are live bugs). Shares the `pageRoutes.json` lock with 09 — never run 08/09 concurrently. |
 | **Target Modules** | `src/data/experience.json` (create), `src/pages/experience.astro` (create), `src/data/pageRoutes.json` (+`"102": "/experience/"`) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 2 (first half). Data verified against `public/cv/jorne-siebrands-cv-en.pdf`. |
+| **Linear** | [JOR-52](https://linear.app/jornesiebrands/issue/JOR-52) |
 | **Status** | **reworked — F1–F9 fixed, all automated + designer gates green, awaiting user diff approval** (2026-08-26, follow-up session: all nine review findings addressed TDD-first — each fix landed red→green at an agreed seam; suite now 84 passed across 6 files (was 60), `npm run check` 0 errors / 0 warnings, `npm run build` clean, 17 pages. Rendered `dist/experience/index.html` read back and diff-checked line by line against `pdftotext` output of `public/cv/jorne-siebrands-cv-en.pdf` — every education and skills string now traces to a CV line. Designer-agent gate run and PASSED 2026-08-26. The `.gitignore` hunk is out of this ticket's diff (commit `1e88c3b`). Ticket work remains **uncommitted and not pushed**. See "Rework" below.) |
 
 ## What to build

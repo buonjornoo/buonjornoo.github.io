@@ -6,6 +6,7 @@
 | **Blocked by** | None as a hard gate. Shares the `BaseLayout.astro` file-lock with the 07 → 10 → 11 chain — start only after 11 merges, and never concurrently with 13. |
 | **Target Modules** | `src/layouts/BaseLayout.astro` (`pressDigit`, ~lines 108–127), `src/components/teletext/RemoteControl.astro` (button pressed state) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 4 item 14 |
+| **Linear** | [JOR-58](https://linear.app/jornesiebrands/issue/JOR-58) |
 | **Status** | ready-for-agent |
 
 ## What to build

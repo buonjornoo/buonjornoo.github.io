@@ -6,6 +6,7 @@
 | **Blocked by** | **08** (the test this ticket corrects is introduced in 08's diff and is not yet committed — never run 19 while 08 is unmerged). Related to **17**, which owns the real map-vs-content drift guard. |
 | **Target Modules** | `tests/integration/concept-docs.test.ts` (one test title; optionally its assertion) |
 | **Source** | `/code-review` on issue 08 fixes, 2026-08-26 — Spec axis finding (a)2, raised against F8's resolution. |
+| **Linear** | [JOR-63](https://linear.app/jornesiebrands/issue/JOR-63) |
 | **Status** | ready-for-agent |
 
 ## What to build

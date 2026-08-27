@@ -6,6 +6,7 @@
 | **Blocked by** | None as a hard gate. Shares the `BaseLayout.astro` file-lock with the 07 → 10 → 11 chain — start only after 11 merges, and never concurrently with 14. |
 | **Target Modules** | Header slot logic (`BaseLayout.astro`), scroll observer script, `docs/adr/0003-chrome-content-split.md` (create), `CLAUDE.md` (one amended line) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 4 item 13 + Documentation section |
+| **Linear** | [JOR-57](https://linear.app/jornesiebrands/issue/JOR-57) |
 | **Status** | ready-for-agent |
 
 ## What to build

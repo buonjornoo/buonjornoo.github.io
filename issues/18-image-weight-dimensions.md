@@ -6,6 +6,7 @@
 | **Blocked by** | 15 (full-bleed figures) — both tickets edit the same hand-written `<figure>` markup across the same case studies; land 15 first, then this touches those lines once. |
 | **Target Modules** | `public/img/` route-planner assets, markdown `<figure>`/`<img>` blocks across `src/data/projects/*.md`, possibly `ProjectLayout.astro` figure defaults |
 | **Source** | Flagged-but-unscoped concern raised in `docs/PLAN-teletext-system.md` Phase 4 item 15; filed as its own ticket 2026-08-26 |
+| **Linear** | [JOR-62](https://linear.app/jornesiebrands/issue/JOR-62) |
 | **Status** | ready-for-agent |
 
 ## What to build

@@ -6,6 +6,7 @@
 | **Blocked by** | None (can start immediately). |
 | **Target Modules** | `.prose-teletext` figure styles (defined inline in `ProjectLayout.astro` / `BlogPostLayout.astro`), 3–4 hand-written `<figure>` blocks in case-study markdown, `docs/adr/0001-80ch-prose-column.md` (create) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 4 item 15 + Documentation section |
+| **Linear** | [JOR-59](https://linear.app/jornesiebrands/issue/JOR-59) |
 | **Status** | ready-for-agent |
 
 ## What to build

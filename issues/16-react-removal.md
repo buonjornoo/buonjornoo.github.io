@@ -6,6 +6,7 @@
 | **Blocked by** | None as a hard gate (zero file overlap with 07). Sequenced after 07 merges so defect QA runs on the un-refactored tree. |
 | **Target Modules** | Delete `src/components/teletext/BlinkingText.tsx` + `src/components/teletext/PageNumber.astro`; remove unused `@utility teletext-scanline` (`src/styles/global.css` ~108–116); `astro.config.mjs` (drop react integration); `package.json` (uninstall `@astrojs/react`, `react`, `react-dom`); `CLAUDE.md` (stack description) |
 | **Source** | `docs/PLAN-teletext-system.md` Phase 1 "dead code" + React removal paragraphs |
+| **Linear** | [JOR-60](https://linear.app/jornesiebrands/issue/JOR-60) |
 | **Status** | ready-for-agent |
 
 ## What to build
