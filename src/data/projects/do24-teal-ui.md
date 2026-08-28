@@ -35,7 +35,7 @@ variants. From there I could argue about what should change while the product ke
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/component-library.png" alt="The navigation component set in the teal-ui library: seven menu states across four breakpoints" width="1600" height="251" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The navigation set as it sits in the library: seven menu states across four breakpoints, built
     from the bar the product already had rather than the one a design system would prescribe.
   </figcaption>
@@ -64,7 +64,7 @@ raw red for a danger button and somebody has to find and edit every usage again 
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/primitives.png" alt="The primitive token layer: 136 variables in one Figma collection" width="1060" height="1600" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The primitive layer. 136 variables in one collection, 109 colours, 15 spacing steps, 6 radii and
     6 breakpoints, and nothing in the product refers to any of them directly.
   </figcaption>
@@ -82,7 +82,7 @@ more characters.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/semantic-tokens.png" alt="The 54 semantic tokens, each resolving to a primitive rather than a literal colour" width="1600" height="1598" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The 54 semantic tokens, each resolving to a primitive rather than a literal colour. The three
     marked camelCase are a naming inconsistency I logged and never fixed.
   </figcaption>
@@ -100,7 +100,7 @@ form an agent can apply directly.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/design-context-skill.png" alt="The design-context skill and the token JSON an agent reads" width="1600" height="787" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The AI-access layer: a skill an agent loads by description, and the token JSON it reads. The
     highlighted <code>generall</code> is a typo of mine that makes nine references resolve to nothing.
   </figcaption>
@@ -122,7 +122,7 @@ Dark mode was designed end to end and never shipped.
 
 <figure class="my-[2ch]">
   <img src="/img/do24-teal-ui/light-dark-mapping.png" alt="The light and dark mode token mapping, specified end to end" width="1443" height="1600" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Dark mode, specified and never built. Every value in the hatched column was designed; none
     of it was ever bound to a Figma variable.
   </figcaption>

@@ -45,7 +45,7 @@ itself and the concept it selected.
 
 <figure class="my-[2ch]">
   <img src="/img/arCityExploration/raubkunst_feasibilityMatrix.jpg" alt="Feasibility matrix for design decisions" width="5614" height="4216" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The feasibility matrix that turned research into a build decision.
   </figcaption>
 </figure>
@@ -58,7 +58,7 @@ itself, and built in reminders to take a break at local stores along the way.
 
 <figure class="my-[2ch]">
   <img src="/img/arCityExploration/raubkunst_experience_design_principles.webp" alt="Experience Design Principles" width="2090" height="602" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The experience design principles behind the walk.
   </figcaption>
 </figure>
@@ -86,7 +86,7 @@ finishes it.
 
 <figure class="my-[2ch]">
   <img src="/img/arCityExploration/raubkunst_memorama.png" alt="Memorama Framework diagram" width="1860" height="1396" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The Memorama framework: Navigation, Discovery and Home spaces.
   </figcaption>
 </figure>
@@ -103,7 +103,7 @@ a friend to voice the narrator, recorded it in Cologne, and processed it in Stei
 
 <figure class="my-[2ch]">
   <img src="/img/arCityExploration/raubkunst_appscreens.webp" alt="Raubkunst app screens" width="4000" height="3000" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     App screens for the Raubkunst prototype.
   </figcaption>
 </figure>
@@ -121,7 +121,7 @@ a friend to voice the narrator, recorded it in Cologne, and processed it in Stei
       class="border border-teletext-white/20"
     ></iframe>
   </div>
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     AR installation that can be triggered anywhere.
   </figcaption>
 </figure>
@@ -139,7 +139,7 @@ a friend to voice the narrator, recorded it in Cologne, and processed it in Stei
       class="border border-teletext-white/20"
     ></iframe>
   </div>
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Navigation experience prototype.
   </figcaption>
 </figure>
@@ -153,7 +153,7 @@ it all, script, audio, video, photos, pre- and post-interviews.
 
 <figure class="my-[2ch]">
   <img src="/img/arCityExploration/raubkunst_guerilla_testing.jpg" alt="User testing AR at a Frankfurt monument" width="1280" height="853" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Guerrilla testing: a participant triggers an AR installation at a Frankfurt monument.
   </figcaption>
 </figure>

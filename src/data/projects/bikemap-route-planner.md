@@ -54,7 +54,7 @@ actively thought about our target audiences for each feature and platform.
 
 <figure class="my-[2ch]">
   <img src="/img/routePlanner/persona-example.png" alt="Example persona from the Bikemap persona set" width="842" height="595" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Example persona from the set, not built for this project specifically. Personas like this helped
     new hires get oriented, but the team rarely returned to them in day-to-day conversations or
     presentations once everyone understood the main user types. We didn't invest much in customising
@@ -68,7 +68,7 @@ used ours.
 
 <figure class="my-[2ch]">
   <img src="/img/routePlanner/map-styles.png" alt="Map style selector in the legacy Route Editor" width="678" height="600" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Map style selector in the legacy Route Editor. The styles differ from the AB Planner's: these
     are the ones also available in the mobile apps, created and hosted by us. The Editor's own
     weaknesses were unlabelled toolbar icons, a search field that moved the map instead of creating
@@ -86,14 +86,14 @@ ourselves and riders already knew from the mobile apps.
 
 <figure class="my-[2ch]">
   <img src="/img/routePlanner/initial-design-1.png" alt="Initial wireframe of the unified route planner" width="1600" height="953" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Initial wireframe of a route planner combining every feature of the Editor and the AB Planner.
   </figcaption>
 </figure>
 
 <figure class="my-[2ch]">
   <img src="/img/routePlanner/initial-design-2.png" alt="Initial wireframe with expanded sidebar sections" width="1600" height="953" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The same wireframe with the sidebar sections expanded. These first wireframes tested whether
     merging every feature into one tool was feasible at all. Routing profiles were the significant
     new addition, and the one users would later pay for.

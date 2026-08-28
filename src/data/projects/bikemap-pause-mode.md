@@ -26,7 +26,7 @@ feature in Canny, the tool we used to collect user requests.
 
 <figure class="my-[2ch]">
   <img src="/img/pauseMode/legacy-bike-computer.png" alt="The legacy Bikemap bike computer before Pause Mode" width="390" height="844" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The legacy bike computer before Pause Mode: speed top left, duration top centre, elevation top
     right, customise bottom left, SharePlay bottom centre (iOS only), and end bottom right.
   </figcaption>
@@ -65,7 +65,7 @@ feature past the riding season, on something users were asking for every week.
 
 <figure class="my-[2ch]">
   <img src="/img/pauseMode/pause-mode-wireframes.png" alt="Early wireframes of the bike computer with a pause button at different sizes" width="3026" height="1884" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     Very early wireframes of the bike computer component with a pause button at several sizes.
   </figcaption>
 </figure>
@@ -93,7 +93,7 @@ to tick, and auto-pause moved to the roadmap.
 
 <figure class="my-[2ch]">
   <img src="/img/pauseMode/pause-mode-prototype.gif" alt="Animated prototype of the complete Pause Mode flow" width="444" height="960" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The complete flow: pausing, resuming, and ending the recording.
   </figcaption>
 </figure>

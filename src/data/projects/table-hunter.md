@@ -60,7 +60,7 @@ both ingredients.
 
 <figure class="my-[2ch]">
   <img src="/img/table-hunter/live-map.png" alt="The live Table Hunter map showing the custom map style with clustered table pins across a Frankfurt neighbourhood" width="1600" height="1000" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     The live map. Custom MapLibre style, clustered pins, and the corner-cluster convention:
     contributor actions top right, spatial action bottom left, bottom right deliberately empty.
   </figcaption>
@@ -148,7 +148,7 @@ capture pipeline of my own, so nothing I notice mid-build gets lost.
 
 <figure class="my-[2ch]">
   <img src="/img/table-hunter/table-detail.png" alt="A table detail popup on Table Hunter showing a NEU badge, unbekannt fields, and the favourite star" width="1600" height="1000" class="w-full" loading="lazy" />
-  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+  <figcaption class="text-teletext-grey text-teletext-sm mt-[0.5ch]">
     A single table's detail popup: the "NEU" badge fed by the durable identity system, "unbekannt"
     on every unmapped field, and the on-device favourite star that needed no account after all.
   </figcaption>
