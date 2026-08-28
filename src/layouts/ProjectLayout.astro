@@ -126,6 +126,11 @@ const readoutLines = [
   .prose-teletext :global(figure) {
     margin: 2em 0;
   }
+  .prose-teletext :global(figure.full-bleed) {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
   .prose-teletext :global(figcaption) {
     color: var(--color-teletext-grey);
     font-size: 0.875rem;

@@ -42,7 +42,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - Character units (`ch`) for horizontal spacing
 - Sections separated by `<Separator>` component (repeated "━" characters)
 - Content padding: `2ch` horizontal, `1ch` vertical
-- Max content width: `80ch`
+- Max content width: `80ch` — see `docs/adr/0001-80ch-prose-column.md` for why this and not teletext's true 40ch, and for the opt-in full-bleed escape hatch (see Prose styles, below)
 
 ## Layout files
 
@@ -130,6 +130,22 @@ Each line renders as `<span class="fr-key">key:</span> <span class="fr-value">"v
 - list markers (`li::marker`) = grey (changed from green)
 - figcaption = grey (changed from green)
 - dates (blog pub/updated date) = grey (changed from green) — accepted deliberately without a pre-ship visual check ("let's just use grey and see how it turns out"); if it reads poorly at high repetition on `/projects/` or a blog post once live, that's a follow-up fix, not a blocker
+
+### Full-bleed figures (opt-in)
+
+Case-study figures live inside the 80ch prose column by default (see `docs/adr/0001-80ch-prose-column.md` for why 80ch and not teletext's true 40ch). A small, hand-picked set of screen-flow figures — genuine full application screenshots, not diagrams — earns an escape hatch: add `full-bleed` alongside the figure's existing classes and it renders edge-to-edge instead.
+
+```css
+.prose-teletext :global(figure.full-bleed) {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+```
+
+- Opt-in only, applied by hand per figure in the markdown (`<figure class="my-[2ch] full-bleed">`) — never a default for a figure type or project.
+- Reserve it for figures where shrinking to 80ch loses legibility a caption can't recover (dense UI screenshots), not for every screenshot.
+- Currently used on 4 figures in Workflow Evolution (`legacy-workflow`, `speedflow-modal`, `open-tasks-per-document`, `pipeline-shipped`). The AR City Exploration cover/hero GIFs stay untouched by this mechanism — their problem is file weight, not column width.
 
 ### Blockquote types
 

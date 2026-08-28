@@ -18,7 +18,7 @@ assistants, the app's highest-volume and most active users, and the ones with no
 training. On the other side sat the accountants, who reviewed and corrected whatever was submitted
 regardless of how carefully it had been done.
 
-<figure class="my-[2ch]">
+<figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/legacy-workflow.png" alt="The legacy digital office workflow: table view with a selected document and the input form" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The legacy workflow showing the table with a selected document and the input form. One linear
@@ -65,7 +65,7 @@ the invoice number. The system filled in the rest. Behind it sat custom intermed
 accounts, assigned automatically per document category, so the assistant never met the chart of
 accounts at all.
 
-<figure class="my-[2ch]">
+<figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/speedflow-modal.png" alt="The Speedflow modal, a short path laid over the legacy workflow" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Speedflow (2026-03 UI): the short path laid over the legacy workflow. The accounting account
@@ -140,7 +140,7 @@ costs more than it delivers.
 > definitions in the backend rather than the frontend is a governance decision more than a UX one,
 > and it is the piece I would defend hardest.
 
-<figure class="my-[2ch]">
+<figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/open-tasks-per-document.png" alt="Open tasks per document across the workflow queue" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     After the rebuild (2026-07 UI): open tasks per document across the queue. What used to be one
@@ -176,7 +176,7 @@ as independent chips, and the document view carries an accordion where SmartFill
 payment preparation, payment approval, execution and accounting each hold their own status.
 Speedflow's modal is gone, replaced by the pipeline it existed to make possible.
 
-<figure class="my-[2ch]">
+<figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/pipeline-shipped.png" alt="The shipped task pipeline: one document as a set of independent tasks" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The shipped architecture (2026-07 UI): the same document as a set of independent tasks, each
