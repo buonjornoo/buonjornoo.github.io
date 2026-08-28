@@ -6,12 +6,21 @@ import { getEntry } from 'astro:content';
 
 const about = await getEntry('pages', 'about');
 if (!about) throw new Error('About page content not found');
+
+const readoutLines = [
+  { key: 'title', value: JSON.stringify(about.data.title) },
+  { key: 'description', value: JSON.stringify(about.data.description) },
+  { key: 'pageNumber', value: JSON.stringify(about.data.pageNumber) },
+];
 ---
 
 <PageLayout title={about.data.title} description={about.data.description} pageNumber={about.data.pageNumber}>
   <!-- Hero -->
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Jorne</DoubleHeight>
+    <div class="frontmatter-readout">{readoutLines.map((line, i) => (
+      <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
+    ))}</div>
     <p class="text-teletext-cyan mt-[0.5ch]">
       Senior Product Designer &amp; Product Manager. I find the structural problem nobody has named,
       design the answer, and follow through past release. I work with AI in both directions: designing
@@ -146,3 +155,19 @@ if (!about) throw new Error('About page content not found');
     </div>
   </section>
 </PageLayout>
+
+<style>
+  .frontmatter-readout {
+    font-family: var(--font-teletext);
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+  }
+  .frontmatter-readout .fr-key {
+    color: var(--color-teletext-grey);
+  }
+  .frontmatter-readout .fr-value {
+    color: var(--color-teletext-white);
+  }
+</style>

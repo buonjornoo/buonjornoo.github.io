@@ -3,15 +3,24 @@ import PageLayout from '../layouts/PageLayout.astro';
 import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 import Separator from '../components/teletext/Separator.astro';
 import contactData from '../data/contact.json';
+
+const title = 'Contact';
+const description =
+  'Get in touch with Jorne Marc Siebrands — Senior Product Designer and Product Manager based in Frankfurt.';
+const pageNumber = '400';
+const readoutLines = [
+  { key: 'title', value: JSON.stringify(title) },
+  { key: 'description', value: JSON.stringify(description) },
+  { key: 'pageNumber', value: JSON.stringify(pageNumber) },
+];
 ---
 
-<PageLayout
-  title="Contact"
-  description="Get in touch with Jorne Marc Siebrands — Senior Product Designer and Product Manager based in Frankfurt."
-  pageNumber="400"
->
+<PageLayout title={title} description={description} pageNumber={pageNumber}>
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Contact</DoubleHeight>
+    <div class="frontmatter-readout">{readoutLines.map((line, i) => (
+      <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
+    ))}</div>
     <p class="text-teletext-cyan mt-[1ch]">
       {contactData.intro}
     </p>
@@ -41,3 +50,19 @@ import contactData from '../data/contact.json';
     </p>
   </section>
 </PageLayout>
+
+<style>
+  .frontmatter-readout {
+    font-family: var(--font-teletext);
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+  }
+  .frontmatter-readout .fr-key {
+    color: var(--color-teletext-grey);
+  }
+  .frontmatter-readout .fr-value {
+    color: var(--color-teletext-white);
+  }
+</style>

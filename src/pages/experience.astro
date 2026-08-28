@@ -18,15 +18,24 @@ function urlFor(pageNumber: string): string {
   if (!url) throw new Error(`experience.json references unmapped page ${pageNumber}`);
   return url;
 }
+
+const title = 'Experience';
+const description =
+  "Jorne Siebrands' career at a glance — product design and product management across digital office 24, Bikemap, KION Group and Cheil Germany.";
+const pageNumber = '102';
+const readoutLines = [
+  { key: 'title', value: JSON.stringify(title) },
+  { key: 'description', value: JSON.stringify(description) },
+  { key: 'pageNumber', value: JSON.stringify(pageNumber) },
+];
 ---
 
-<PageLayout
-  title="Experience"
-  description="Jorne Siebrands' career at a glance — product design and product management across digital office 24, Bikemap, KION Group and Cheil Germany."
-  pageNumber="102"
->
+<PageLayout title={title} description={description} pageNumber={pageNumber}>
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Experience</DoubleHeight>
+    <div class="frontmatter-readout">{readoutLines.map((line, i) => (
+      <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
+    ))}</div>
     <p class="text-teletext-cyan mt-[1ch]">
       {experienceData.intro}
     </p>
@@ -105,3 +114,19 @@ function urlFor(pageNumber: string): string {
   </section>
 
 </PageLayout>
+
+<style>
+  .frontmatter-readout {
+    font-family: var(--font-teletext);
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+  }
+  .frontmatter-readout .fr-key {
+    color: var(--color-teletext-grey);
+  }
+  .frontmatter-readout .fr-value {
+    color: var(--color-teletext-white);
+  }
+</style>

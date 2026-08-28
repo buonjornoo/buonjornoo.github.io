@@ -50,7 +50,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/layouts/BaseLayout.astro` — TV shell (header, footer, scanlines, keyboard script)
 - `src/layouts/PageLayout.astro` — content wrapper (80ch centered)
 - `src/layouts/ProjectLayout.astro` — project pages with prose styles + frontmatter readout (see below)
-- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles (no frontmatter readout — project pages and the homepage only; blog posts still don't get one)
+- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles + frontmatter readout (`title`/`pubDate`/`tags`/`pageNumber`, since JOR-83; see below)
 - `src/lib/rehype-blockquote-type.ts` — classifies each markdown blockquote as interview-quote or callout (see Blockquote types, below); same pattern as `src/lib/rehype-page-links.ts`, wired the same way in `astro.config.mjs`
 
 ## Component files
@@ -60,7 +60,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/components/teletext/ColorBar.astro` — colored bar
 - `src/components/teletext/BlockGraphic.astro` — decorative block characters
 
-The frontmatter readout (below) is deliberately **not** a component — it's plain body text, duplicated inline in both `ProjectLayout.astro` and `src/pages/index.astro` (see "Frontmatter readout," below, for why it's a second inline copy rather than a shared component).
+The frontmatter readout (below) is deliberately **not** a component — it's plain body text, duplicated inline across every layout/page that renders one (see "Frontmatter readout," below, for why it stays inline copies rather than a shared component).
 
 ## Ceefax header (site-wide)
 
@@ -87,11 +87,13 @@ Mobile hides, all in one place: identity line, page title, date. Mobile keeps: m
 - CRT scanline overlay (suppressed with `prefers-reduced-motion`)
 - Content max-width: 80ch
 
-## Frontmatter readout (project pages, and the homepage)
+## Frontmatter readout (every page except Home)
 
-New content block, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component. Renders directly under the h1 on project pages.
+New content block, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component. Renders directly under the h1 on every page that has one (see below for Home, the one exception).
 
-**Reused on the homepage (page 100, since 2026-08-28, JOR-75)**: the homepage isn't a project page, but its own front matter (`title`, `description`, `pageNumber` — the full `pages` schema) is rendered the same way, near the top of the page. This is a deliberate second use of the pattern outside project pages, not an accidental one — the homepage is a Ceefax service-index page, and a raw frontmatter readout fits that register better than prose. It reuses the exact same `fr-key`/`fr-value` CSS (duplicated into `src/pages/index.astro`'s scoped `<style>`, same as `ProjectLayout.astro` — the pattern is still not a shared component, see below). Blog posts still don't get one.
+**Reused on the homepage (page 100, since 2026-08-28, JOR-75)**: the homepage isn't a project page, but its own front matter (`title`, `description`, `pageNumber` — the full `pages` schema) is rendered the same way, near the top of the page. This is a deliberate second use of the pattern outside project pages, not an accidental one — the homepage is a Ceefax service-index page, and a raw frontmatter readout fits that register better than prose. It reuses the exact same `fr-key`/`fr-value` CSS (duplicated into `src/pages/index.astro`'s scoped `<style>`, same as `ProjectLayout.astro` — the pattern is still not a shared component, see below). **Home is also the one page that stays readout-only** — it deliberately has no big `<h1>` title (metadata readout instead of a personal photo/big title, decided in the JOR-75 interview).
+
+**Extended to every other page (JOR-83, 2026-08-28)**: hero structure is now consistent site-wide — every page gets both a big double-height `<h1>` title and a frontmatter-readout underneath, Home being the sole intentional exception above. `BlogPostLayout.astro` renders `title`/`pubDate`/`tags`/`pageNumber` (no `subtitle`/`context` — blog posts don't have those fields; `pubDate` renders as an unquoted ISO date, `YYYY-MM-DD`, matching how it's actually written in blog frontmatter). `about.astro` renders the same three fields as Home (`title`/`description`/`pageNumber`), sourced from the real `pages` collection entry. The five structural pages that aren't content-collection-backed — `directory.astro`, `experience.astro`, `contact.astro`, `projects/index.astro`, `blog/index.astro` — get a literal `readoutLines` array hardcoded in each `.astro` file, built from the same `title`/`description`/`pageNumber` values already passed to `PageLayout` (no new `pages`-collection entries invented for what are structural/utility pages, not authored content). All of these add the readout alongside their existing intro paragraph rather than replacing it — only `ProjectLayout.astro`'s pre-existing subtitle-into-readout replacement (below) stays a special case.
 
 ```
 title: "Workflow Evolution"
@@ -120,7 +122,7 @@ Spec:
 .frontmatter-readout .fr-value { color: var(--color-teletext-white); }
 ```
 
-Each line renders as `<span class="fr-key">key:</span> <span class="fr-value">"value"</span>` — key in grey, value in white, one per line, quoted/bracketed exactly as shown above. Don't reuse the magenta tag-chip styling here — the point is that it reads as raw frontmatter text, not the rendered `ProjectCard` UI.
+Each line renders as `<span class="fr-key">key:</span> <span class="fr-value">"value"</span>` — key in grey, value in white, one per line, quoted/bracketed exactly as shown above and matching the field's real YAML syntax. **Exception: `pubDate`** (`BlogPostLayout.astro` only) renders unquoted (`2026-08-06`, not `"2026-08-06"`) because that's how it's actually written in blog frontmatter — every other field is a quoted string or bracketed array in real frontmatter, so stays quoted/bracketed here too. Don't reuse the magenta tag-chip styling here — the point is that it reads as raw frontmatter text, not the rendered `ProjectCard` UI.
 
 ## Prose styles (`.prose-teletext`)
 

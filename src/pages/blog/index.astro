@@ -8,15 +8,23 @@ const posts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = posts.sort(
   (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
+
+const title = 'Blog';
+const description = 'Thoughts on UX design, product management, and technology by Jorne Marc Siebrands.';
+const pageNumber = '300';
+const readoutLines = [
+  { key: 'title', value: JSON.stringify(title) },
+  { key: 'description', value: JSON.stringify(description) },
+  { key: 'pageNumber', value: JSON.stringify(pageNumber) },
+];
 ---
 
-<PageLayout
-  title="Blog"
-  description="Thoughts on UX design, product management, and technology by Jorne Marc Siebrands."
-  pageNumber="300"
->
+<PageLayout title={title} description={description} pageNumber={pageNumber}>
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Blog</DoubleHeight>
+    <div class="frontmatter-readout">{readoutLines.map((line, i) => (
+      <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
+    ))}</div>
     <p class="text-teletext-cyan mt-[1ch]">
       Thoughts on design, product, and technology.
     </p>
@@ -39,3 +47,19 @@ const sortedPosts = posts.sort(
     <p class="text-teletext-white">No posts yet. Check back soon.</p>
   )}
 </PageLayout>
+
+<style>
+  .frontmatter-readout {
+    font-family: var(--font-teletext);
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+  }
+  .frontmatter-readout .fr-key {
+    color: var(--color-teletext-grey);
+  }
+  .frontmatter-readout .fr-value {
+    color: var(--color-teletext-white);
+  }
+</style>

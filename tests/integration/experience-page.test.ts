@@ -221,7 +221,10 @@ describe('experience matrix — pageRoutes.json is the one number→URL map (F7)
   const routes = pageRoutes as Record<string, string>;
 
   it('hardcodes no page number in the template beyond its own', () => {
-    const withoutOwnNumber = source.replace(/pageNumber="\d{3}"/, '');
+    // Matches both the JSX prop form (pageNumber="102") and the JOR-83
+    // readout-reuse const form (const pageNumber = '102') — same single
+    // literal, different syntax.
+    const withoutOwnNumber = source.replace(/pageNumber\s*[=:]\s*['"]\d{3}['"]/, '');
     expect(withoutOwnNumber).not.toMatch(/\b\d{3}\b/);
   });
 
