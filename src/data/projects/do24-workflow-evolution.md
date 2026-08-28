@@ -19,10 +19,10 @@ training. On the other side sat the accountants, who reviewed and corrected what
 regardless of how carefully it had been done.
 
 <figure class="my-[2ch]">
-  <img src="/img/do24-workflow-evolution/legacy-workflow.png" alt="The legacy digital office workflow: one linear four-step wizard" class="w-full" loading="lazy" />
+  <img src="/img/do24-workflow-evolution/legacy-workflow.png" alt="The legacy digital office workflow: table view with a selected document and the input form" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
-    The workflow before the redesign (2026-03 UI): one linear wizard, four steps, every document
-    through the same gate.
+    The legacy workflow showing the table with a selected document and the input form. One linear
+    wizard, four steps (with sub-steps), every document through the same gate.
   </figcaption>
 </figure>
 
@@ -33,6 +33,13 @@ because of it." An accountant told me, "I have to repair everything every time. 
 just did it from scratch."
 
 Two groups of people were frustrated by the same product. The wrong person was doing the work.
+
+<figure class="my-[2ch]">
+  <img src="/img/do24-workflow-evolution/legacy-workflow-document-preview.png" alt="The legacy digital office workflow: a document preview alongside the input form" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    The legacy workflow showing a document preview and the input form.
+  </figcaption>
+</figure>
 
 ## The team and my role
 
@@ -90,6 +97,13 @@ Speedflow solved the assistant's pain while leaving the process underneath exact
 Payment was still blocked by accounting classification, so an assistant wanting to pay an invoice
 waited on an accountant with no reason to hurry.
 
+<figure class="my-[2ch]">
+  <img src="/img/do24-workflow-evolution/legacy-flow-map.png" alt="Map of the legacy flow: a strict linear path with payment via the app as optional" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    Map of the legacy flow: strict linear path. Payment via the app as optional.
+  </figcaption>
+</figure>
+
 That dependency was invented rather than inevitable, and the redesign removed it. The workflow broke
 into independent tasks running in parallel, each status-driven rather than sequentially chained,
 with task definitions held in the backend so the frontend renders whatever tasks exist without
@@ -97,10 +111,10 @@ knowing what they are. An assistant opens a queue and sees discrete jobs, such a
 payment or classifying a document, each completable on its own.
 
 <figure class="my-[2ch]">
-  <img src="/img/do24-workflow-evolution/open-tasks-per-document.png" alt="Open tasks per document across the workflow queue" class="w-full" loading="lazy" />
+  <img src="/img/do24-workflow-evolution/task-architecture-map.png" alt="Map of the initial task architecture: independent, self-contained tasks" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
-    After the rebuild (2026-07 UI): open tasks per document across the queue. What used to be one
-    blocking sequence is parallel work anyone can pick up.
+    Map of our initial task architecture: every task is self-contained and can be done
+    independently as long as some preconditions are met.
   </figcaption>
 </figure>
 
@@ -110,6 +124,14 @@ alongside the old one instead of replacing it in a single cut. Through the rebui
 engineers on live user-facing bugs, because a foundational change that degrades the running product
 costs more than it delivers.
 
+<figure class="my-[2ch]">
+  <img src="/img/do24-workflow-evolution/task-definition-map.png" alt="Task definition map: initial definitions for individual tasks" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    Task definition map: initial definitions for individual tasks. Defined collaboratively with
+    experts, stakeholders, and users.
+  </figcaption>
+</figure>
+
 > **Key learning: small enough tasks gave us three service models we had not designed for.**
 > The team had wanted AI in the product for a year and could not find a way in, because no single
 > agent could take on the full workflow. Once each task was small and self-contained, a user, an AI
@@ -117,6 +139,14 @@ costs more than it delivers.
 > of one architecture, from a decomposition I had made for user-experience reasons. Putting task
 > definitions in the backend rather than the frontend is a governance decision more than a UX one,
 > and it is the piece I would defend hardest.
+
+<figure class="my-[2ch]">
+  <img src="/img/do24-workflow-evolution/open-tasks-per-document.png" alt="Open tasks per document across the workflow queue" class="w-full" loading="lazy" />
+  <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
+    After the rebuild (2026-07 UI): open tasks per document across the queue. What used to be one
+    blocking sequence is parallel work anyone can pick up.
+  </figcaption>
+</figure>
 
 ## Where AI fit into the process
 
