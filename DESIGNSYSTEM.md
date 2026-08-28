@@ -50,7 +50,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/layouts/BaseLayout.astro` — TV shell (header, footer, scanlines, keyboard script)
 - `src/layouts/PageLayout.astro` — content wrapper (80ch centered)
 - `src/layouts/ProjectLayout.astro` — project pages with prose styles + frontmatter readout (see below)
-- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles (no frontmatter readout — project pages only)
+- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles (no frontmatter readout — project pages and the homepage only; blog posts still don't get one)
 - `src/lib/rehype-blockquote-type.ts` — classifies each markdown blockquote as interview-quote or callout (see Blockquote types, below); same pattern as `src/lib/rehype-page-links.ts`, wired the same way in `astro.config.mjs`
 
 ## Component files
@@ -60,7 +60,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/components/teletext/ColorBar.astro` — colored bar
 - `src/components/teletext/BlockGraphic.astro` — decorative block characters
 
-The frontmatter readout (below) is deliberately **not** a component — it's plain body text inline in `ProjectLayout.astro`.
+The frontmatter readout (below) is deliberately **not** a component — it's plain body text, duplicated inline in both `ProjectLayout.astro` and `src/pages/index.astro` (see "Frontmatter readout," below, for why it's a second inline copy rather than a shared component).
 
 ## Ceefax header (site-wide)
 
