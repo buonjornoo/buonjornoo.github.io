@@ -13,9 +13,19 @@ interface Props {
   ogImage?: string;
   canonicalURL?: string;
   sectionCount?: number;
+  /** On-page Ceefax header text only — SEO <title>/meta stay driven by `title`. Falls back to `title` when omitted (JOR-75). */
+  headerLabel?: string;
 }
 
-const { title, description, pageNumber = '100', ogImage, canonicalURL, sectionCount = 0 } = Astro.props;
+const {
+  title,
+  description,
+  pageNumber = '100',
+  ogImage,
+  canonicalURL,
+  sectionCount = 0,
+  headerLabel = title,
+} = Astro.props;
 const routesJson = JSON.stringify(pageRoutes);
 
 // Contextual neighbour affordance (issues/11): reuses issue 10's own
@@ -82,7 +92,7 @@ const pageNeighbours =
       <span id="page-number-live" class="sr-only" aria-live="polite" aria-atomic="true">{pageNumber}</span>
       <div class="ceefax-page-title">
         <span class="page-title-full">
-          {title}
+          {headerLabel}
           {sectionCount >= 1 && <> <span class="section-counter-value">1/{sectionCount}</span></>}
         </span>
         {sectionCount >= 1 && (
@@ -96,6 +106,7 @@ const pageNeighbours =
     <!-- Page content -->
     <main id="main-content" class="flex-1">
       <slot />
+      <p class="end-of-page" aria-hidden="true">— END OF PAGE —</p>
     </main>
 
     <!-- Fastext footer -->

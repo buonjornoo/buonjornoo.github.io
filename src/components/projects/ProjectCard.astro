@@ -28,9 +28,8 @@ const isHorizontal = layout === 'horizontal';
   <article
     class:list={[
       'flex flex-col border p-[1ch] hover:border-teletext-yellow transition-colors',
-      isHorizontal
-        ? 'md:flex-row md:gap-[2ch] border-2 border-teletext-white/30'
-        : 'h-full border-teletext-white/30',
+      isHorizontal ? 'md:flex-row md:gap-[2ch] border-2' : 'h-full',
+      featured ? 'border-teletext-magenta' : 'border-teletext-white/30',
     ]}
   >
     {coverImage && (

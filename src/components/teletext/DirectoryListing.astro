@@ -4,14 +4,15 @@ import pageRoutes from '../../data/pageRoutes.json';
 
 /**
  * Static labels for routes with no collection entry, or whose collection
- * title isn't directory-appropriate (about.md's title is the hero tagline,
- * not "Home"). pageRoutes.json stays the one number→URL map (CLAUDE.md);
- * this map only supplies the label.
+ * title isn't directory-appropriate (home.md/about.md's titles are SEO
+ * copy, not short directory labels). pageRoutes.json stays the one
+ * number→URL map (CLAUDE.md); this map only supplies the label.
  */
 const STATIC_LABELS: Record<string, string> = {
-  '100': 'Home + About',
+  '100': 'Home',
   '101': 'Directory',
   '102': 'Experience',
+  '103': 'About',
   '200': 'Projects',
   '210': 'Play Arin und der Drache',
   '300': 'Blog',

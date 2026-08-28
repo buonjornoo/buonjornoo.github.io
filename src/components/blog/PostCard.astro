@@ -5,9 +5,10 @@ interface Props {
   pubDate: Date;
   tags?: string[];
   slug: string;
+  featured?: boolean;
 }
 
-const { title, description, pubDate, tags = [], slug } = Astro.props;
+const { title, description, pubDate, tags = [], slug, featured = false } = Astro.props;
 const formattedDate = new Date(pubDate).toLocaleDateString('en-GB', {
   day: '2-digit',
   month: 'short',
@@ -16,7 +17,15 @@ const formattedDate = new Date(pubDate).toLocaleDateString('en-GB', {
 ---
 
 <a href={`/blog/${slug}/`} class="block group">
-  <article class="border-b border-teletext-white/20 py-[1ch]">
+  <article
+    class:list={[
+      'py-[1ch]',
+      featured ? 'border-2 border-teletext-magenta p-[1ch]' : 'border-b border-teletext-white/20',
+    ]}
+  >
+    {featured && (
+      <span class="text-teletext-magenta text-teletext-sm font-bold block mb-[0.5ch]">FEATURED</span>
+    )}
     <div class="flex items-baseline gap-[2ch]">
       <span class="text-teletext-grey text-teletext-sm shrink-0">{formattedDate}</span>
       <h3 class="text-teletext-cyan font-bold group-hover:text-teletext-yellow transition-colors">

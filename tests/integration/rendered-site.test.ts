@@ -41,6 +41,72 @@ describe('rendered home page', () => {
 });
 
 /**
+ * Seam: the rendered home page (dist/index.html) — homepage/About split.
+ * Spec source: JOR-75 acceptance criteria.
+ */
+describe('rendered home page — homepage/About split (JOR-75)', () => {
+  const html = readFileSync(join(dist, 'index.html'), 'utf-8');
+  const headerBlock = html.slice(html.indexOf('id="page-number-btn"'), html.indexOf('</header>'));
+
+  it('shows "Home" as the on-page header label, not the full SEO title', () => {
+    const pageTitle = html.match(/<div class="ceefax-page-title">[\s\S]*?<\/div>/)?.[0] ?? '';
+    expect(pageTitle).toContain('Home');
+    expect(pageTitle).not.toContain('Senior Product Designer');
+  });
+
+  it('keeps the full descriptive SEO <title>, unaffected by the header-label split', () => {
+    expect(html).toMatch(/<title>[^<]*Senior Product Designer[^<]*<\/title>/);
+  });
+
+  it('shows page number 100 in the header', () => {
+    expect(headerBlock).toMatch(/id="page-number-display"[^>]*>\s*100\s*</);
+  });
+
+  it('renders no avatar image — removed entirely, not just hidden', () => {
+    expect(html).not.toContain('Avatar.png');
+    expect(html).not.toContain('Jorne Marc Siebrands" width="420"');
+  });
+
+  it('renders a metadata-readout block with title/description/pageNumber only', () => {
+    expect(html).toContain('frontmatter-readout');
+    expect(html).toMatch(/fr-key[^>]*>title:/);
+    expect(html).toMatch(/fr-key[^>]*>description:/);
+    expect(html).toMatch(/fr-key[^>]*>pageNumber:/);
+    expect(html).not.toMatch(/fr-key[^>]*>tags:/);
+    expect(html).not.toMatch(/fr-key[^>]*>context:/);
+  });
+
+  it('carries a "How to use" section explaining page-number navigation', () => {
+    expect(html).toContain('How to use this site');
+    expect(html).toMatch(/3-digit/);
+  });
+
+  it('carries no bio content moved to the About page (highlights, How I Work, testimonials)', () => {
+    expect(html).not.toContain('ONE PERSON, MANY HATS');
+    expect(html).not.toContain('How I Work');
+    expect(html).not.toContain('What my colleagues say about me');
+  });
+
+  it('still renders the Curated Case Studies section', () => {
+    expect(html).toContain('Curated Case Studies');
+  });
+
+  it('still renders Get in Touch', () => {
+    expect(html).toContain('Get in Touch');
+  });
+
+  it('gives the featured curated case study a solid magenta border, not opacity-based white', () => {
+    const section = html.slice(html.indexOf('Curated Case Studies'), html.indexOf('Get in Touch'));
+    expect(section).toContain('border-teletext-magenta');
+  });
+
+  it('carries a broadcast-plausible end-of-page marker, never the Unix "EOF"', () => {
+    expect(html).toContain('END OF PAGE');
+    expect(html).not.toMatch(/\bEOF\b/);
+  });
+});
+
+/**
  * Seam: the game page at /game/arin-und-der-drache/ (public/, copied
  * verbatim into dist/). Spec source: issues/07 defect 2 — Ceefax chrome
  * with working links back, and NO digit-nav listener: the keyboard stays

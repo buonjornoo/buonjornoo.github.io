@@ -48,8 +48,12 @@ describe('expectedUrlFor', () => {
     expect(() => expectedUrlFor({ collection: 'projects', id: 'no-slug' })).toThrow();
   });
 
-  it('resolves the known "pages" collection mapping (about -> home)', () => {
-    expect(expectedUrlFor({ collection: 'pages', id: 'about' })).toBe('/');
+  it('resolves the known "pages" collection mapping (home -> /)', () => {
+    expect(expectedUrlFor({ collection: 'pages', id: 'home' })).toBe('/');
+  });
+
+  it('resolves the known "pages" collection mapping (about -> /about/, JOR-75)', () => {
+    expect(expectedUrlFor({ collection: 'pages', id: 'about' })).toBe('/about/');
   });
 
   it('throws for an unmapped "pages" collection id', () => {
@@ -62,7 +66,7 @@ describe('findPageNumberDrift', () => {
 
   it('reports no drift when every declared number matches its route URL', () => {
     const docs = [
-      { collection: 'pages' as const, id: 'about', pageNumber: '100' },
+      { collection: 'pages' as const, id: 'home', pageNumber: '100' },
       { collection: 'projects' as const, id: 'th', slug: 'table-hunter', pageNumber: '206' },
       { collection: 'blog' as const, id: 'hello-world', pageNumber: '301' },
     ];

@@ -11,10 +11,10 @@ Real Ceefax/teletext hardware produced exactly 8 colors — 3-bit RGB, full-on o
 | Black   | #121212 | Background everywhere                                                                                                      |
 | Red     | #FF0000 | Errors, fastext Home (100)                                                                                                 |
 | Green   | #00FF00 | Success states, fastext Projects (200)                                                                                     |
-| Yellow  | #FFFF00 | Transient/active-state feedback only: page-number buffer while navigating, hover states, focus-visible outline, fastext Blog (300) — never used for static content |
+| Yellow  | #FFFF00 | Transient/active-state feedback only: page-number buffer while navigating, hover states, focus-visible outline, fastext Blog (300) — never used for static content. The remote control's border moved off yellow to cyan (2026-08-28, `docs/adr/0005-remote-control-cyan-border.md`): it's permanent chrome on every page, not transient feedback, so it never belonged on this row |
 | Blue    | #0000FF | Sparingly — decorative only                                                                                                |
-| Magenta | #FF00FF | Tags, categories, accents                                                                                                  |
-| Cyan    | #00FFFF | Service name, links, subtitles, h3 headings, strong/emphasis text, interview-quote text + border, fastext Contact (400)    |
+| Magenta | #FF00FF | Tags, categories, accents, featured-state card border (`ProjectCard`, `PostCard`)                                          |
+| Cyan    | #00FFFF | Service name, links, subtitles, h3 headings, strong/emphasis text, interview-quote text + border, fastext Contact (400), remote-control border (moved from yellow, see above) |
 | White   | #FFFFFF | Body text, borders, static page-number display, h2 headings (double-height), clock                                        |
 | Grey    | #A0A0A0 | De-emphasized text: quote attributions, list markers, dates, captions, key/value field labels (e.g. `experience.astro`'s skill `dt`, `contact.astro`'s field label — same job as the frontmatter-readout's `fr-key`) |
 
@@ -87,9 +87,11 @@ Mobile hides, all in one place: identity line, page title, date. Mobile keeps: m
 - CRT scanline overlay (suppressed with `prefers-reduced-motion`)
 - Content max-width: 80ch
 
-## Frontmatter readout (project pages only)
+## Frontmatter readout (project pages, and the homepage)
 
-New content block, project pages only (not blog). Renders directly under the h1, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component:
+New content block, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component. Renders directly under the h1 on project pages.
+
+**Reused on the homepage (page 100, since 2026-08-28, JOR-75)**: the homepage isn't a project page, but its own front matter (`title`, `description`, `pageNumber` — the full `pages` schema) is rendered the same way, near the top of the page. This is a deliberate second use of the pattern outside project pages, not an accidental one — the homepage is a Ceefax service-index page, and a raw frontmatter readout fits that register better than prose. It reuses the exact same `fr-key`/`fr-value` CSS (duplicated into `src/pages/index.astro`'s scoped `<style>`, same as `ProjectLayout.astro` — the pattern is still not a shared component, see below). Blog posts still don't get one.
 
 ```
 title: "Workflow Evolution"
@@ -178,4 +180,4 @@ Two visual treatments, replacing the single yellow-border/cyan-text style:
 
 No new markdown authoring syntax — every interview quote already ends `— Attribution`; no callout does. The class is assigned by `src/lib/rehype-blockquote-type.ts`, inspecting each `blockquote` node's last child.
 
-As authored today, every markdown blockquote on the site is a callout — none of the current project files have an em-dash attribution. The only content matching the interview-quote pattern is the three hand-coded testimonial `<figure>` blocks on the homepage (`src/pages/index.astro`), which are plain Astro/HTML and never touch the rehype pipeline — those need a manual restyle to this same spec, tracked separately (not fixed by writing the plugin alone).
+As authored today, every markdown blockquote on the site is a callout — none of the current project files have an em-dash attribution. The three hand-coded testimonial `<figure>` blocks on the About page (`src/pages/about.astro`, moved off the homepage in JOR-75) are plain Astro/HTML and never touch the rehype pipeline, but were already hand-styled to this exact spec (2px cyan left border, cyan quote text, grey attribution) — no drift to fix.

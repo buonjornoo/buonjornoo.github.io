@@ -40,10 +40,11 @@ export function parseFrontmatterString(rawMarkdown: string, field: string): stri
 }
 
 // The "pages" collection has no dynamic route ([...slug].astro) — each entry
-// is hand-wired into a specific template. "about" is the only entry today,
-// inlined into src/pages/index.astro (page 100, the home page).
+// is hand-wired into a specific template: "home" into src/pages/index.astro
+// (page 100), "about" into src/pages/about.astro (page 103, JOR-75).
 const PAGES_COLLECTION_URLS: Record<string, string> = {
-  about: '/',
+  home: '/',
+  about: '/about/',
 };
 
 /**

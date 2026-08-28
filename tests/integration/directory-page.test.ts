@@ -44,9 +44,9 @@ describe('directory route registration', () => {
     }
   });
 
-  it('adds no numbers beyond 101', () => {
+  it('adds no numbers beyond 101 and 103 (103 added later, JOR-75)', () => {
     const added = Object.keys(pageRoutes).filter((k) => !(k in PRE_EXISTING_ROUTES));
-    expect(added).toEqual(['101']);
+    expect(added).toEqual(['101', '103']);
   });
 });
 
@@ -122,11 +122,11 @@ describe('directory listing — one component, two mounts', () => {
     expect(listingBlock(directoryHtml)).toBe(listingBlock(notFoundHtml));
   });
 
-  it('lists exactly 18 anchors, one per pageRoutes.json entry', () => {
+  it('lists exactly 19 anchors, one per pageRoutes.json entry (18 + 103, JOR-75)', () => {
     const block = listingBlock(directoryHtml);
     const anchors = block.match(/<a\b[^>]*>[\s\S]*?<\/a>/g) ?? [];
     expect(anchors).toHaveLength(Object.keys(routes).length);
-    expect(anchors).toHaveLength(18);
+    expect(anchors).toHaveLength(19);
   });
 
   it('resolves every anchor href through pageRoutes.json (no dead entries)', () => {
@@ -190,11 +190,20 @@ describe('404 page otherwise unchanged', () => {
     expect(html).toContain('Available pages:');
   });
 
-  it('keeps page 100 labeled "Home + About", not just "Home" — bound to row 100, not just present anywhere on the page', () => {
+  it('labels page 100 "Home" (JOR-75 split the bio out to page 103) — bound to row 100, not just present anywhere on the page', () => {
     const block = listingBlock(html);
     const anchors = block.match(/<a\b[^>]*>[\s\S]*?<\/a>/g) ?? [];
     const row100 = anchors.find((anchor) => anchor.replace(/<[^>]+>/g, '').match(/\b100\b/));
     expect(row100, 'no directory row found for page 100').toBeTruthy();
-    expect(row100).toContain('Home + About');
+    expect(row100).toContain('Home');
+    expect(row100).not.toContain('Home + About');
+  });
+
+  it('labels page 103 "About" — bound to row 103, not just present anywhere on the page', () => {
+    const block = listingBlock(html);
+    const anchors = block.match(/<a\b[^>]*>[\s\S]*?<\/a>/g) ?? [];
+    const row103 = anchors.find((anchor) => anchor.replace(/<[^>]+>/g, '').match(/\b103\b/));
+    expect(row103, 'no directory row found for page 103').toBeTruthy();
+    expect(row103).toContain('About');
   });
 });

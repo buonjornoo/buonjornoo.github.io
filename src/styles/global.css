@@ -316,6 +316,14 @@
   .crt-scanlines { display: none; }
 }
 
+/* ===== END OF PAGE MARKER (site-wide, JOR-75) ===== */
+.end-of-page {
+  text-align: center;
+  color: var(--color-teletext-white);
+  letter-spacing: 0.1em;
+  padding: 2ch 0 1ch;
+}
+
 /* ===== CEEFAX REMOTE CONTROL ===== */
 .remote-display {
   display: block;
@@ -343,7 +351,9 @@
   overflow-y: auto;
   padding: 1ch;
   background-color: var(--color-teletext-black);
-  border: 2px solid var(--color-teletext-yellow);
+  /* Cyan, not yellow — the remote is permanent chrome, not transient
+     feedback (JOR-75, ADR 0005). */
+  border: 2px solid var(--color-teletext-cyan);
   font-family: var(--font-teletext);
 }
 @media (min-width: 1100px) {
@@ -408,7 +418,8 @@
 /* Dialog variant — mobile + mid-width desktop (<1100px) */
 .remote-dialog {
   background-color: var(--color-teletext-black);
-  border: 2px solid var(--color-teletext-yellow);
+  /* Cyan, not yellow — matches the desktop rail (JOR-75, ADR 0005). */
+  border: 2px solid var(--color-teletext-cyan);
   color: var(--color-teletext-white);
   font-family: var(--font-teletext);
   padding: 2ch;
