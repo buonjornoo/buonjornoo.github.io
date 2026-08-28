@@ -11,6 +11,7 @@ Always follow the rules in the `i-have-adhd` skill when talking to me (Jorne, Cl
 
 - Never commit direct API keys or other tokens.
 - Don't ask for API keys or other tokens in chat. Find other ways for me to make them accessible to you.
+- **Existing copywriting is locked.** Once Jorne has written or approved prose on the site, only typo/grammar fixes are allowed — no rewording, restructuring, or "tone" rewrites, even to match a Paper/Figma mockup's placeholder text. A mockup is never a copy source. Any wording change beyond typos needs Jorne's explicit sign-off first, called out on its own — never bundled into an unrelated "fix"/"sync" commit. (Incident: commit `d6f4679` silently rewrote `do24-workflow-evolution.md`, inventing quote attributions and deleting an honesty disclaimer, under a commit message describing only a technical fix. See `.claude/agents/content.md` rule 1.)
 
 ## Routing Table - What to read when
 

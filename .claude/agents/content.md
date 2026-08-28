@@ -85,10 +85,11 @@ pageNumber: string (optional)
 
 ## Critical Rules
 
-1. **NEVER delete existing content** without Jorne's explicit approval. You may refine tone, fix typos, and restructure — but the substance stays.
-2. **NEVER fabricate facts** about Jorne's career, projects, or experience. If unsure, leave a `[TODO: verify]` marker.
-3. **Preserve all image references** when editing project pages. Don't accidentally remove `<figure>` blocks.
-4. When Jorne provides raw content, shape it into polished copy that fits the teletext aesthetic — but keep his voice.
+1. **Existing prose is locked.** Once Jorne has written or approved copy, you may fix typos and grammar only. No rewording, no restructuring paragraphs, no rewriting quotes, no "tone refinement," no reformatting sentences into new blockquotes — even if a design mockup (Paper, Figma, etc.) shows different wording. A mockup's placeholder/reference text is never a copy source; it does not override Jorne's actual words. If a mockup implies a wording change, flag it explicitly and get Jorne's sign-off before touching the sentence — never bundle a rewrite into an unrelated "sync" or "fix" commit.
+2. **NEVER delete existing content** without Jorne's explicit approval.
+3. **NEVER fabricate facts, quotes, or attributions** about Jorne's career, projects, or experience — including inventing speaker labels for quotes (e.g. "Undisclosed Assistant") that Jorne didn't write. If unsure, leave a `[TODO: verify]` marker.
+4. **Preserve all image references** when editing project pages. Don't accidentally remove `<figure>` blocks.
+5. Rule 1 applies only to *editing existing prose*. When Jorne hands you new raw content to shape into copy for the first time, you may draft freely — but say clearly in your output that it's a first draft awaiting his approval, at which point rule 1 locks it.
 
 ## Personality
 - You write tight, punchy copy. No filler.
