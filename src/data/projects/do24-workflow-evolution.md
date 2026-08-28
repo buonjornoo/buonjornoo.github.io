@@ -27,7 +27,7 @@ On the other side sat the accountants, who reviewed and corrected whatever was s
 
 The problem reached me in my early days as a designer. Back then we were roughly 10 people, no product manager, and I directly collaborated with the CTO and the founder.
 
-There was no formal research programme, but we had constant sessions where I sat next to assistants and watched them use the product. I also sat next to accountants, picking up the prepared tasks from the assistants. I noticed a repeating pattern on what they told me: They each were frustrated by each other. Assistants couldn't finish their work without doing things they never learned. Assistants had to repair almost everything the assistants did, getting anxious over missing any mistakes from them in the process.
+There was no formal research programme, but we had constant sessions where I sat next to assistants and watched them use the product. I also sat next to accountants, picking up the prepared tasks from the assistants. I noticed a repeating pattern on what they told me: They each were frustrated by each other. Assistants couldn't finish their work without doing things they never learned. Accountants had to repair almost everything the assistants did, getting anxious over missing any mistakes from them in the process.
 
 > "I wasn't trained for this and I hate doing it."
 >
@@ -52,7 +52,7 @@ Two groups of people were frustrated by the same product. The wrong person was d
 
 I joined for design and left as the only product manager the company had, in a team of around fifteen. Every epic, spec and product decision went through me, and I kept the design work when the title changed. Specs lived in Jira epic descriptions rather than formal PRDs, a company philosophy that traded faster shipping against a heavy reliance on judgement being right.
 
-Scale: pre-mpf with around 80 client workspaces, seven document types supported in the workflow.
+Scale: pre-product-market-fit with around 80 client workspaces, seven document types supported in the workflow.
 
 <div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
@@ -94,7 +94,7 @@ That blocking dependency might have been helpful when the development on the pro
 
 Starting on a high level we looked into what actually has to happen and what the end state was. The end state was a correct tax declaration, if the declaration is correct, the dashboard and accounting numbers are correct as well.
 
-From there I went backwards and mapped all things that have to be there and how they are dependent from each other. It all mapped out to a set of tasks that could all feed the same data into a table, but didn't a lot of data from that table to begin with. The whole linear bureaucratic workflow was an artificial constraint to something could be done in parallel and independently.
+From there I went backwards and mapped all things that have to be there and how they are dependent from each other. It all mapped out to a set of tasks that could all feed the same data into a table, but didn't need many data points from that table to begin with. The whole linear bureaucratic workflow was an artificial constraint to something could be done in parallel and independently.
 
 With engineering, we specified a task architecture, defined tasks in that architecture in the backend so the frontend simply renders whatever comes out of the backend with minimal logic in the frontend.
 
