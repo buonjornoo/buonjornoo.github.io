@@ -125,7 +125,7 @@ export default defineConfig({
     '/projects/pingpong-map/': '/projects/table-hunter/',
   },
   markdown: {
-    rehypePlugins: [rehypeNewTabLinks, rehypePageLinks(pageRoutes), rehypeBlockquoteType()],
+    rehypePlugins: [rehypeNewTabLinks, [rehypePageLinks, pageRoutes], rehypeBlockquoteType],
   },
   vite: {
     plugins: [tailwindcss(), publicDirectoryIndex()],
