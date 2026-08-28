@@ -28,7 +28,7 @@ There were no hard constraints to this except my token limits. Of course it shou
 </p>
 
 <figure class="my-[2ch]">
-  <img src="/img/arin-und-der-drache/start-screen.png" alt="The Arin und der Drache start screen, showing the two playable characters and the keyboard controls" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/start-screen.png" alt="The Arin und der Drache start screen, showing the two playable characters and the keyboard controls" width="1280" height="800" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The start screen. Two playable characters, controls in German, and a title my son spelled
     himself. The character cards and the goal line were his calls, not mine.
@@ -132,14 +132,14 @@ and still land in the same world.
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-[2ch]">
   <figure class="my-[2ch]">
-    <img src="/img/arin-und-der-drache/start-screen.png" alt="The character-select screen in March, both characters drawn as flat coloured rectangles on a navy background" class="w-full" loading="lazy" />
+    <img src="/img/arin-und-der-drache/start-screen.png" alt="The character-select screen in March, both characters drawn as flat coloured rectangles on a navy background" width="1280" height="800" class="w-full" loading="lazy" />
     <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
       Before. March: the character-select screen the game opened with, one flat rectangle per
       character.
     </figcaption>
   </figure>
   <figure class="my-[2ch]">
-    <img src="/img/arin-und-der-drache/auswahl.png" alt="The same character-select screen repainted with mountains, parchment-style panels and a new title treatment" class="w-full" loading="lazy" />
+    <img src="/img/arin-und-der-drache/auswahl.png" alt="The same character-select screen repainted with mountains, parchment-style panels and a new title treatment" width="1200" height="683" class="w-full" loading="lazy" />
     <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
       After. The mountains, the parchment panels and the title are new. The choice between Arin,
       faster, and the dragon, which jumps higher, is not.
@@ -174,7 +174,7 @@ glance, then rebuilt every remaining screen, start, victory, defeat, on the same
 system as the game itself.
 
 <figure class="my-[2ch]">
-  <img src="/img/arin-und-der-drache/gameplay.png" alt="Mid-level gameplay with painted mountains, terrain and a glowing-eyed enemy" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/gameplay.png" alt="Mid-level gameplay with painted mountains, terrain and a glowing-eyed enemy" width="1200" height="683" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Mid-level. The enemy's eyes are the only new detail with a bug hiding inside them.
   </figcaption>
@@ -203,7 +203,7 @@ two pixels before the fix. Five repeated top-hits on an enemy, five clean kills.
 side-hits, five clean hits taken.
 
 <figure class="my-[2ch]">
-  <img src="/img/arin-und-der-drache/gewonnen.png" alt="The victory screen with falling petals over a painted background" class="w-full" loading="lazy" />
+  <img src="/img/arin-und-der-drache/gewonnen.png" alt="The victory screen with falling petals over a painted background" width="1200" height="683" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The victory screen. Petals now, coloured rectangles before.
   </figcaption>

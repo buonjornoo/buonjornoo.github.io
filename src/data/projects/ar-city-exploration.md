@@ -5,6 +5,8 @@ subtitle: "Location-based AR storytelling for Frankfurt's Raubkunst history, bui
 tags: ["Unity3D", "AR", "UX Design", "Experience Design", "Research"]
 coverImage: "/img/arCityExploration/raubkunst_cover-small.gif"
 heroImage: "/img/arCityExploration/raubkunst_cover.gif"
+heroImageWidth: 597
+heroImageHeight: 281
 slug: "ar-city-exploration"
 order: 7
 pageNumber: "203"
@@ -42,7 +44,7 @@ fixed thesis timeline. I don't have the specific rejected concepts anymore. What
 itself and the concept it selected.
 
 <figure class="my-[2ch]">
-  <img src="/img/arCityExploration/raubkunst_feasibilityMatrix.jpg" alt="Feasibility matrix for design decisions" class="w-full" loading="lazy" />
+  <img src="/img/arCityExploration/raubkunst_feasibilityMatrix.jpg" alt="Feasibility matrix for design decisions" width="5614" height="4216" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The feasibility matrix that turned research into a build decision.
   </figcaption>
@@ -55,7 +57,7 @@ for haptic feedback, kept the sound design blending into the environment rather 
 itself, and built in reminders to take a break at local stores along the way.
 
 <figure class="my-[2ch]">
-  <img src="/img/arCityExploration/raubkunst_experience_design_principles.webp" alt="Experience Design Principles" class="w-full" loading="lazy" />
+  <img src="/img/arCityExploration/raubkunst_experience_design_principles.webp" alt="Experience Design Principles" width="2090" height="602" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The experience design principles behind the walk.
   </figcaption>
@@ -83,7 +85,7 @@ from experience-design literature, tying the walk to onboarding and to what happ
 finishes it.
 
 <figure class="my-[2ch]">
-  <img src="/img/arCityExploration/raubkunst_memorama.png" alt="Memorama Framework diagram" class="w-full" loading="lazy" />
+  <img src="/img/arCityExploration/raubkunst_memorama.png" alt="Memorama Framework diagram" width="1860" height="1396" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The Memorama framework: Navigation, Discovery and Home spaces.
   </figcaption>
@@ -100,7 +102,7 @@ in early-20th-century Germany, threaded into the story's 1937 Degenerate Art exh
 a friend to voice the narrator, recorded it in Cologne, and processed it in Steinberg's Nuendo.
 
 <figure class="my-[2ch]">
-  <img src="/img/arCityExploration/raubkunst_appscreens.webp" alt="Raubkunst app screens" class="w-full" loading="lazy" />
+  <img src="/img/arCityExploration/raubkunst_appscreens.webp" alt="Raubkunst app screens" width="4000" height="3000" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     App screens for the Raubkunst prototype.
   </figcaption>
@@ -150,7 +152,7 @@ the Frankfurt area, most with little or no AR experience. Four sessions, solo, p
 it all, script, audio, video, photos, pre- and post-interviews.
 
 <figure class="my-[2ch]">
-  <img src="/img/arCityExploration/raubkunst_guerilla_testing.jpg" alt="User testing AR at a Frankfurt monument" class="w-full" loading="lazy" />
+  <img src="/img/arCityExploration/raubkunst_guerilla_testing.jpg" alt="User testing AR at a Frankfurt monument" width="1280" height="853" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Guerrilla testing: a participant triggers an AR installation at a Frankfurt monument.
   </figcaption>

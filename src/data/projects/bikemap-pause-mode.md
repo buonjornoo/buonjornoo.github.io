@@ -5,6 +5,8 @@ subtitle: "The bike computer had no pause button, and 1.7 million recordings a y
 tags: ["Product Management", "UX Design", "User Research", "iOS", "Android"]
 coverImage: "/img/projects/pauseModeCover.png"
 heroImage: "/img/pauseMode/pauseModeHero.png"
+heroImageWidth: 1792
+heroImageHeight: 1024
 slug: "bikemap-pause-mode"
 featured: true
 order: 3
@@ -23,7 +25,7 @@ recordings and uploading the fragments, or by not uploading at all. Pause was th
 feature in Canny, the tool we used to collect user requests.
 
 <figure class="my-[2ch]">
-  <img src="/img/pauseMode/Legacy Bike Computer.png" alt="The legacy Bikemap bike computer before Pause Mode" class="w-full" loading="lazy" />
+  <img src="/img/pauseMode/legacy-bike-computer.png" alt="The legacy Bikemap bike computer before Pause Mode" width="390" height="844" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The legacy bike computer before Pause Mode: speed top left, duration top centre, elevation top
     right, customise bottom left, SharePlay bottom centre (iOS only), and end bottom right.
@@ -62,7 +64,7 @@ feasible route to reliable stop detection. Building those foundations first woul
 feature past the riding season, on something users were asking for every week.
 
 <figure class="my-[2ch]">
-  <img src="/img/pauseMode/Pause Mode Wireframes.png" alt="Early wireframes of the bike computer with a pause button at different sizes" class="w-full" loading="lazy" />
+  <img src="/img/pauseMode/pause-mode-wireframes.png" alt="Early wireframes of the bike computer with a pause button at different sizes" width="3026" height="1884" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Very early wireframes of the bike computer component with a pause button at several sizes.
   </figcaption>
@@ -90,7 +92,7 @@ to tick, and auto-pause moved to the roadmap.
 > design was.
 
 <figure class="my-[2ch]">
-  <img src="/img/pauseMode/Pause Mode Prototype.gif" alt="Animated prototype of the complete Pause Mode flow" class="w-full" loading="lazy" />
+  <img src="/img/pauseMode/pause-mode-prototype.gif" alt="Animated prototype of the complete Pause Mode flow" width="444" height="960" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The complete flow: pausing, resuming, and ending the recording.
   </figcaption>

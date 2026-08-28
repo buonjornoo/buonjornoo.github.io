@@ -11,6 +11,8 @@ interface Props {
     tags: string[];
     context?: string;
     heroImage?: string;
+    heroImageWidth?: number;
+    heroImageHeight?: number;
     pageNumber?: string;
     archive?: boolean;
     url?: string;
@@ -60,7 +62,14 @@ const readoutLines = [
     </section>
 
     {frontmatter.heroImage && (
-      <img src={frontmatter.heroImage} alt={frontmatter.title} class="w-full mb-[2ch]" loading="lazy" />
+      <img
+        src={frontmatter.heroImage}
+        alt={frontmatter.title}
+        width={frontmatter.heroImageWidth}
+        height={frontmatter.heroImageHeight}
+        class="w-full mb-[2ch]"
+        loading="lazy"
+      />
     )}
 
     <Separator color="text-teletext-green" char="─" />

@@ -4,7 +4,9 @@ description: "Two overlapping web tools, one third-party dependency, and one acc
 subtitle: "Merging the AB Planner and the Route Editor into one web app, and cutting the provider underneath both."
 tags: ["UX Design", "Product Management", "User Research", "Maps"]
 coverImage: "/img/projects/routePlannerCover.png"
-heroImage: "/img/routePlanner/Route Planner Hero.png"
+heroImage: "/img/routePlanner/route-planner-hero.png"
+heroImageWidth: 1600
+heroImageHeight: 914
 url: "https://web.bikemap.net/plan"
 slug: "bikemap-route-planner"
 order: 2
@@ -51,7 +53,7 @@ Even though the persona below was not created for this project in particular, it
 actively thought about our target audiences for each feature and platform.
 
 <figure class="my-[2ch]">
-  <img src="/img/routePlanner/Persona Example.png" alt="Example persona from the Bikemap persona set" class="w-full" loading="lazy" />
+  <img src="/img/routePlanner/persona-example.png" alt="Example persona from the Bikemap persona set" width="842" height="595" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Example persona from the set, not built for this project specifically. Personas like this helped
     new hires get oriented, but the team rarely returned to them in day-to-day conversations or
@@ -65,7 +67,7 @@ current, which is where the "the data must be old" perception came from. The Rou
 used ours.
 
 <figure class="my-[2ch]">
-  <img src="/img/routePlanner/map styles.png" alt="Map style selector in the legacy Route Editor" class="w-full" loading="lazy" />
+  <img src="/img/routePlanner/map-styles.png" alt="Map style selector in the legacy Route Editor" width="678" height="600" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Map style selector in the legacy Route Editor. The styles differ from the AB Planner's: these
     are the ones also available in the mobile apps, created and hosted by us. The Editor's own
@@ -83,14 +85,14 @@ for distance, ETA, speed and elevation. We also brought the map styles home, usi
 ourselves and riders already knew from the mobile apps.
 
 <figure class="my-[2ch]">
-  <img src="/img/routePlanner/Initial Design 1.png" alt="Initial wireframe of the unified route planner" class="w-full" loading="lazy" />
+  <img src="/img/routePlanner/initial-design-1.png" alt="Initial wireframe of the unified route planner" width="1600" height="953" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     Initial wireframe of a route planner combining every feature of the Editor and the AB Planner.
   </figcaption>
 </figure>
 
 <figure class="my-[2ch]">
-  <img src="/img/routePlanner/Initial Design 2.png" alt="Initial wireframe with expanded sidebar sections" class="w-full" loading="lazy" />
+  <img src="/img/routePlanner/initial-design-2.png" alt="Initial wireframe with expanded sidebar sections" width="1600" height="953" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The same wireframe with the sidebar sections expanded. These first wireframes tested whether
     merging every feature into one tool was feasible at all. Routing profiles were the significant

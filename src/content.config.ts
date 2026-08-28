@@ -25,6 +25,8 @@ const projects = defineCollection({
     context: z.string().optional(),
     coverImage: z.string().optional(),
     heroImage: z.string().optional(),
+    heroImageWidth: z.number().optional(),
+    heroImageHeight: z.number().optional(),
     url: z.string().optional(),
     slug: z.string(),
     featured: z.boolean().default(false),

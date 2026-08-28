@@ -32,7 +32,7 @@ I designed all of it and I direct the agents that write the scripts. The design 
 deciding what the system is allowed to believe.
 
 <figure class="my-[2ch]">
-  <img src="/img/cycling-coach/strength-board.png" alt="The published Kraft und Mobility training board" class="w-full" loading="lazy" />
+  <img src="/img/cycling-coach/strength-board.png" alt="The published Kraft und Mobility training board" width="1248" height="1600" class="w-full" loading="lazy" />
   <figcaption class="text-teletext-green text-teletext-sm mt-[0.5ch]">
     The published Kraft &amp; Mobility board, rendered straight from the memory files. The injury
     constraint sits at the top as a hard rule, not a note.
