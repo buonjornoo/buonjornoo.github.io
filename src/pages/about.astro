@@ -8,7 +8,6 @@ const about = await getEntry('pages', 'about');
 if (!about) throw new Error('About page content not found');
 
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(about.data.title) },
   { key: 'description', value: JSON.stringify(about.data.description) },
   { key: 'pageNumber', value: JSON.stringify(about.data.pageNumber) },
 ];
@@ -16,17 +15,14 @@ const readoutLines = [
 
 <PageLayout title={about.data.title} description={about.data.description} pageNumber={about.data.pageNumber}>
   <!-- Hero -->
+  <Separator />
+
   <section class="mb-[2ch]">
-    <DoubleHeight as="h1" color="text-teletext-white">Jorne</DoubleHeight>
+    <DoubleHeight as="h1" color="text-teletext-white">About Jorne</DoubleHeight>
+    <Separator />
     <div class="frontmatter-readout">{readoutLines.map((line, i) => (
       <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
     ))}</div>
-    <p class="text-teletext-cyan mt-[0.5ch]">
-      Senior Product Designer &amp; Product Manager. I find the structural problem nobody has named,
-      design the answer, and follow through past release. I work with AI in both directions: designing
-      it into products, and building with it hands-on.
-    </p>
-    <p class="text-teletext-white mt-[0.5ch]">Frankfurt am Main, Germany and remote. Available now.</p>
   </section>
 
   <Separator />

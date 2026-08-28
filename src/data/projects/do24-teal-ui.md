@@ -21,10 +21,14 @@ I advocated for a Figma Team plan to get the room to build a design system. The 
 
 As more frontend engineers joined, I could get the team to move to Tailwind, build our own frontend library piece by piece rather than from scratch, and use Storybook for faster design QA.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 I started the system with a designer who joined at the same time. Neither of us had to convince the other. I took on more product responsibility while she kept improving the system; I stayed on it alongside the product-manager role, tokenising and replacing one-shot components whenever one turned up in a prioritised ticket. I set governance for another designer who came through the company later. Being both design lead and PM gave the rules teeth, but left the system with a single point
 of failure.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Building from what was already on screen
 
@@ -52,6 +56,8 @@ the actual component behind it.
 > implementation. Many teams never migrate onto one, because migration is a rewrite, and rewriting
 > for the sake of a design system is risky and expensive. Building from what was on screen made the
 > first version arguable rather than aspirational.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The token architecture
 
@@ -88,6 +94,8 @@ more characters.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Giving the machine access
 
 Tokenising also made the system readable to a language model. Claude Code could read the token JSON
@@ -106,6 +114,8 @@ form an agent can apply directly.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Governance, and what I left out
 
 Governance was four rules rather than a document. teal-ui components are mandatory for new UI, new
@@ -115,6 +125,8 @@ hover, active, disabled, loading, error and empty, plus keyboard navigation and 
 
 I specified the third tier of the token model, component-level tokens, then chose not to build it.
 We hadn't run into enough components with real edge cases to justify it.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What broke
 
@@ -139,6 +151,8 @@ Dark mode was designed end to end and never shipped.
 
 The library and the Storybook work are still in the product. The token architecture is good work
 that was never load-bearing, and when I left, the initiative lost the person driving it.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

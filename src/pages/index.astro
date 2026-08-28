@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Separator from '../components/teletext/Separator.astro';
+import DoubleHeight from '../components/teletext/DoubleHeight.astro';
 import ProjectCard from '../components/projects/ProjectCard.astro';
 import { getEntry, getCollection, render } from 'astro:content';
 
@@ -9,7 +10,6 @@ if (!home) throw new Error('Home page content not found');
 const { Content } = await render(home);
 
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(home.data.title) },
   { key: 'description', value: JSON.stringify(home.data.description) },
   { key: 'pageNumber', value: JSON.stringify(home.data.pageNumber) },
 ];
@@ -31,10 +31,15 @@ const caseStudies = curatedSlugs.map((s) => allProjects.find((p) => p.data.slug 
   pageNumber={home.data.pageNumber}
   headerLabel="Home"
 >
-  <!-- Metadata readout: reuses the frontmatter-readout pattern (DESIGNSYSTEM.md),
-       previously project-pages-only — the homepage is a Ceefax service page, not
-       a bio card, so it gets the same raw-frontmatter treatment (JOR-75). -->
+  <!-- Big title + frontmatter readout: every page gets both (visual QA,
+       2026-08-28) — Home's readout reuses the same fr-key/fr-value pattern
+       as project pages (DESIGNSYSTEM.md), title omitted since the <h1>
+       above already shows it. -->
+  <Separator />
+
   <section class="mb-[2ch]">
+    <DoubleHeight as="h1" color="text-teletext-white">Jorne Marc Siebrands</DoubleHeight>
+    <Separator />
     <div class="frontmatter-readout">{readoutLines.map((line, i) => (
       <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
     ))}</div>

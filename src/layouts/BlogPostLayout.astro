@@ -1,6 +1,7 @@
 ---
 import PageLayout from './PageLayout.astro';
 import DoubleHeight from '../components/teletext/DoubleHeight.astro';
+import Separator from '../components/teletext/Separator.astro';
 
 interface Props {
   frontmatter: {
@@ -30,7 +31,6 @@ const formattedUpdated = frontmatter.updatedDate
 
 const pageNumber = frontmatter.pageNumber ?? '300';
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(frontmatter.title) },
   { key: 'pubDate', value: new Date(frontmatter.pubDate).toISOString().slice(0, 10) },
   { key: 'tags', value: `[${(frontmatter.tags ?? []).map((tag) => JSON.stringify(tag)).join(', ')}]` },
   { key: 'pageNumber', value: JSON.stringify(pageNumber) },
@@ -44,8 +44,10 @@ const readoutLines = [
   sectionCount={sectionCount}
 >
   <article>
+    <Separator />
     <section class="mb-[2ch]">
       <DoubleHeight as="h1" color="text-teletext-white">{frontmatter.title}</DoubleHeight>
+      <Separator />
       <div class="frontmatter-readout">{readoutLines.map((line, i) => (
         <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
       ))}</div>
@@ -63,6 +65,8 @@ const readoutLines = [
         )}
       </div>
     </section>
+
+    <Separator />
 
     <div class="prose-teletext">
       <slot />

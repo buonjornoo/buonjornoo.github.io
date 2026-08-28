@@ -20,6 +20,8 @@ wanted to find out whether augmented reality could tell that kind of place-bound
 a plaque or a walking-tour app, and whether the prototype could hold up outside a classroom. It got
 tested at the Frankfurt Book Fair 2018, in front of the public rather than a thesis committee only.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 Five of us built this: Eve, Dori, Benji, Ramiro and me, all contributing to a shared concept. From
@@ -28,6 +30,8 @@ interaction design, Benji also handled engineering, and Ramiro and I wrote the s
 developing the characters. My own build work was in prototyping, across Figma and Unity3D, and I
 designed the sound myself, drawing on a background in sound and music production. The thesis was
 mine to write.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Discovery
 
@@ -50,6 +54,8 @@ itself and the concept it selected.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Designing the experience
 
 Every design decision was intentional. I chose a starting place with cafes nearby, used vibration
@@ -62,6 +68,8 @@ itself, and built in reminders to take a break at local stores along the way.
     The experience design principles behind the walk.
   </figcaption>
 </figure>
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The Memorama framework
 
@@ -90,6 +98,8 @@ finishes it.
     The Memorama framework: Navigation, Discovery and Home spaces.
   </figcaption>
 </figure>
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Prototype
 
@@ -144,6 +154,8 @@ a friend to voice the narrator, recorded it in Cologne, and processed it in Stei
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Testing
 
 We ran an Early Concept Test on May 17, 2018: seven participants, ages 19 to 30, mostly students from
@@ -179,6 +191,8 @@ My own sound design turned up a finding worth owning. Each sound worked fine on 
 people found the source easily, but layered together they felt overwhelming, and most participants
 couldn't follow the story audio while also examining the visual artifacts. There was no clear cue for
 which sound was active, so attention split instead of building.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

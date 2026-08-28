@@ -25,6 +25,8 @@ The AB Planner also looked its age, and that turned out to matter more than we e
 the dated interface as a signal that the *map data* behind it was stale. An outdated visual style
 was costing us trust in our own map data.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 The initiative started in Q3 2021 and ran through both roles I held at Bikemap. I designed it and,
@@ -33,6 +35,8 @@ components and got me unstuck when I had designed myself into a corner. Sebi, ou
 developer, built most of it and took over the parts I could not hold while firefighting as PM.
 Backend capacity was the binding constraint throughout, which shaped the sequencing more than any
 design decision did.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Two tools, two kinds of cyclist
 
@@ -76,6 +80,8 @@ used ours.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Designing the unified planner
 
 The new planner pulled the address inputs from the AB Planner and the direct manipulation from the
@@ -106,6 +112,8 @@ hover or click, reordering waypoints and switching a segment between "follow str
 line. They worried me in design and turned out fine, because people found them when the task called
 for them.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Sequencing around a busy backend
 
 The initiative ran as seven epics, and the ordering was the product decision. Anything that could
@@ -121,6 +129,8 @@ in the project was right and it did not feel like it.
 
 We also learned that users like route statistics and will not open a collapsed accordion to see
 them, which is a small finding with a large effect on the layout.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

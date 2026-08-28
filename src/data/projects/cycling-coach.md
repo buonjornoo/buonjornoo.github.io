@@ -23,6 +23,8 @@ out.
 This is a system I built to plan my own training toward a race. Its outputs are only as good as the
 numbers it reasons from, and it had spent months reasoning confidently from five that were wrong.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 Solo, and the system is a Claude Code workspace rather than an app: an always-loaded context file, a
@@ -39,6 +41,8 @@ deciding what the system is allowed to believe.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Diagnosing one mechanism, not five bugs
 
 The five failures looked unrelated: a threshold set too low, a model output, an averaging mistake, a
@@ -48,6 +52,8 @@ rides is a *lower bound*, and every one had been recorded as a measurement.
 
 That reframing made a rule possible. Five separate corrections would have produced five corrected
 numbers and the same failure again in September.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The standard
 
@@ -92,6 +98,8 @@ tagged as you use it.
 > fact. That fits in a sentence, which is why it survives contact with a real working session, where
 > a taxonomy of evidence grades would not.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Making it stick
 
 A rule that lives in a document gets followed for a week. This one sits at the top of the
@@ -109,6 +117,8 @@ The pattern that matters most is the athlete's own contradiction. A number that 
 the ride felt is *evidence*, not a feeling. Three of the five collapses surfaced because I said
 "that can't be right", and nothing in the data would have caught them. I was in the ride; the
 document was not.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

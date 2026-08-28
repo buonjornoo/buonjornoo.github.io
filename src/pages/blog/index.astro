@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import PostCard from '../../components/blog/PostCard.astro';
 import DoubleHeight from '../../components/teletext/DoubleHeight.astro';
+import Separator from '../../components/teletext/Separator.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -13,25 +14,26 @@ const title = 'Blog';
 const description = 'Thoughts on UX design, product management, and technology by Jorne Marc Siebrands.';
 const pageNumber = '300';
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(title) },
   { key: 'description', value: JSON.stringify(description) },
   { key: 'pageNumber', value: JSON.stringify(pageNumber) },
 ];
 ---
 
 <PageLayout title={title} description={description} pageNumber={pageNumber}>
+  <Separator />
+
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Blog</DoubleHeight>
+    <Separator />
     <div class="frontmatter-readout">{readoutLines.map((line, i) => (
       <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
     ))}</div>
-    <p class="text-teletext-cyan mt-[1ch]">
-      Thoughts on design, product, and technology.
-    </p>
   </section>
 
+  <Separator />
+
   {sortedPosts.length > 0 ? (
-    <div>
+    <div class="flex flex-col gap-[2ch] my-[2ch]">
       {sortedPosts.map((post) => (
         <PostCard
           title={post.data.title}

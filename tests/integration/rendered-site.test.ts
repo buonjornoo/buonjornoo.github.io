@@ -67,9 +67,9 @@ describe('rendered home page — homepage/About split (JOR-75)', () => {
     expect(html).not.toContain('Jorne Marc Siebrands" width="420"');
   });
 
-  it('renders a metadata-readout block with title/description/pageNumber only', () => {
+  it('renders a metadata-readout block with description/pageNumber only (title dropped, visual QA 2026-08-28 — redundant with the big <h1>)', () => {
     expect(html).toContain('frontmatter-readout');
-    expect(html).toMatch(/fr-key[^>]*>title:/);
+    expect(html).not.toMatch(/fr-key[^>]*>title:/);
     expect(html).toMatch(/fr-key[^>]*>description:/);
     expect(html).toMatch(/fr-key[^>]*>pageNumber:/);
     expect(html).not.toMatch(/fr-key[^>]*>tags:/);

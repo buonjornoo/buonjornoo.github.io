@@ -9,21 +9,20 @@ const description =
   'Get in touch with Jorne Marc Siebrands — Senior Product Designer and Product Manager based in Frankfurt.';
 const pageNumber = '400';
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(title) },
   { key: 'description', value: JSON.stringify(description) },
   { key: 'pageNumber', value: JSON.stringify(pageNumber) },
 ];
 ---
 
 <PageLayout title={title} description={description} pageNumber={pageNumber}>
+  <Separator />
+
   <section class="mb-[2ch]">
     <DoubleHeight as="h1" color="text-teletext-white">Contact</DoubleHeight>
+    <Separator />
     <div class="frontmatter-readout">{readoutLines.map((line, i) => (
       <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
     ))}</div>
-    <p class="text-teletext-cyan mt-[1ch]">
-      {contactData.intro}
-    </p>
   </section>
 
   <Separator />

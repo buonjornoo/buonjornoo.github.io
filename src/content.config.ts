@@ -21,6 +21,7 @@ const projects = defineCollection({
     heroImageWidth: z.number().optional(),
     heroImageHeight: z.number().optional(),
     url: z.string().optional(),
+    urlLabel: z.string().optional(),
     slug: z.string(),
     featured: z.boolean().default(false),
     order: z.number().default(0),

@@ -34,6 +34,8 @@ the wrong thing.
 
 The line in the document next to 163 read: **data-validated, do not fix the platform.**
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The label was doing the damage
 
 That note is the part I keep coming back to. It was not a lie. Somebody, and that somebody was me,
@@ -44,6 +46,8 @@ had been handled and there was nothing to check.
 The most confident label in the system marked the worst number in it. I now treat that as a signal
 rather than a coincidence. The more emphatically a document asserts something, the earlier it goes
 in the queue to be re-derived.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Why five separate fixes would have been the wrong fix
 
@@ -60,6 +64,8 @@ is a *lower bound* on what I can do, and every single one of them had been writt
 measurement.
 
 Correct the five and I would have had five better numbers and the same failure again in September.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The rule
 
@@ -88,6 +94,8 @@ figure I had from before June 2026 got reclassified as an estimate.
 retrospectively. Corrections get appended. But any number I read and use for a decision gets marked
 as I use it.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The part I did not expect
 
 I produced two of the five bad numbers myself. One of them I produced an hour *after* I had named
@@ -100,6 +108,8 @@ down as a thing to watch for.
 
 Naming a failure mode does not inoculate you against it. That is precisely why the fix had to be a
 written default rather than an intention to be careful. Intentions do not survive a Thursday.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What generalises
 

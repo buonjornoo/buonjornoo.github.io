@@ -40,7 +40,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 ## Spacing
 
 - Character units (`ch`) for horizontal spacing
-- Sections separated by `<Separator>` component (repeated "━" characters)
+- Sections separated by `<Separator>` component (repeated "━" characters). Inside markdown body content (project/blog prose, `src/data/{projects,blog}/*.md`) the component itself can't be used, so every `##` section boundary carries a literal copy of its rendered output instead — `<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">` + 80× "━" + `</div>` (visual QA, 2026-08-28; `do24-workflow-evolution.md` had this from JOR-83, extended to every other project/post)
 - Content padding: `2ch` horizontal, `1ch` vertical
 - Max content width: `80ch` — see `docs/adr/0001-80ch-prose-column.md` for why this and not teletext's true 40ch, and for the opt-in full-bleed escape hatch (see Prose styles, below)
 
@@ -50,7 +50,7 @@ h1 page titles move off yellow too, for the same reason as h2: yellow is documen
 - `src/layouts/BaseLayout.astro` — TV shell (header, footer, scanlines, keyboard script)
 - `src/layouts/PageLayout.astro` — content wrapper (80ch centered)
 - `src/layouts/ProjectLayout.astro` — project pages with prose styles + frontmatter readout (see below)
-- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles + frontmatter readout (`title`/`pubDate`/`tags`/`pageNumber`, since JOR-83; see below)
+- `src/layouts/BlogPostLayout.astro` — blog posts with prose styles + frontmatter readout (`pubDate`/`tags`/`pageNumber` — `title` omitted, see below; since JOR-83)
 - `src/lib/rehype-blockquote-type.ts` — classifies each markdown blockquote as interview-quote or callout (see Blockquote types, below); same pattern as `src/lib/rehype-page-links.ts`, wired the same way in `astro.config.mjs`
 
 ## Component files
@@ -86,24 +86,32 @@ Mobile hides, all in one place: identity line, page title, date. Mobile keeps: m
 - No traditional nav bar, no TV bezel — the screen IS the viewport
 - CRT scanline overlay (suppressed with `prefers-reduced-motion`)
 - Content max-width: 80ch
+- End-of-page marker (`— END OF PAGE —`): rendered once in `BaseLayout.astro`, after `<slot />`, so every page gets it without hand-copying. Sits between two `<Separator />`s (visual QA, 2026-08-28) — one before, one after — so it never runs directly into a page's own trailing content or footer chrome. The whole marker block is wrapped in its own `w-full max-w-[80ch] mx-auto px-[2ch]` div (visual QA follow-up, 2026-08-28) — it lives in `<main>`, outside `PageLayout`'s content column, so without that wrapper the `Separator`'s `w-full` stretched edge-to-edge instead of matching the page's own 80ch-centered separators.
 
-## Frontmatter readout (every page except Home)
+## Frontmatter readout (every page, Home included)
 
-New content block, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component. Renders directly under the h1 on every page that has one (see below for Home, the one exception).
+New content block, styled as plain body text — a literal key:value readout that looks like the page's own frontmatter, not a data-viz component. Renders directly under the h1, separated from it by a `<Separator />` — every page has both a big double-height `<h1>` title and a readout underneath it, no exceptions (Home included, see below).
 
-**Reused on the homepage (page 100, since 2026-08-28, JOR-75)**: the homepage isn't a project page, but its own front matter (`title`, `description`, `pageNumber` — the full `pages` schema) is rendered the same way, near the top of the page. This is a deliberate second use of the pattern outside project pages, not an accidental one — the homepage is a Ceefax service-index page, and a raw frontmatter readout fits that register better than prose. It reuses the exact same `fr-key`/`fr-value` CSS (duplicated into `src/pages/index.astro`'s scoped `<style>`, same as `ProjectLayout.astro` — the pattern is still not a shared component, see below). **Home is also the one page that stays readout-only** — it deliberately has no big `<h1>` title (metadata readout instead of a personal photo/big title, decided in the JOR-75 interview).
+**The title itself is also preceded by its own `<Separator />` (visual QA follow-up, 2026-08-28).** `ProjectLayout.astro` had this from JOR-83; every other hero-bearing page/layout (`index.astro`, `about.astro`, `directory.astro`, `experience.astro`, `contact.astro`, `projects/index.astro`, `blog/index.astro`, `BlogPostLayout.astro`) was missing the leading separator and got it added to match — the hero shape is now: `<Separator />` → `<h1>` → `<Separator />` → readout, everywhere.
 
-**Extended to every other page (JOR-83, 2026-08-28)**: hero structure is now consistent site-wide — every page gets both a big double-height `<h1>` title and a frontmatter-readout underneath, Home being the sole intentional exception above. `BlogPostLayout.astro` renders `title`/`pubDate`/`tags`/`pageNumber` (no `subtitle`/`context` — blog posts don't have those fields; `pubDate` renders as an unquoted ISO date, `YYYY-MM-DD`, matching how it's actually written in blog frontmatter). `about.astro` renders the same three fields as Home (`title`/`description`/`pageNumber`), sourced from the real `pages` collection entry. The five structural pages that aren't content-collection-backed — `directory.astro`, `experience.astro`, `contact.astro`, `projects/index.astro`, `blog/index.astro` — get a literal `readoutLines` array hardcoded in each `.astro` file, built from the same `title`/`description`/`pageNumber` values already passed to `PageLayout` (no new `pages`-collection entries invented for what are structural/utility pages, not authored content). All of these add the readout alongside their existing intro paragraph rather than replacing it — only `ProjectLayout.astro`'s pre-existing subtitle-into-readout replacement (below) stays a special case.
+**Projects index tagline is a heading below the hero, not a cyan paragraph inside it (visual QA follow-up, 2026-08-28).** "A selection of projects in Product Design and Product Management." used to render as a `text-teletext-cyan` `<p>` glued to the bottom of the frontmatter-readout section. It's now an `<h2>` (same `text-teletext-white font-bold text-teletext-lg` treatment as other section headers, e.g. Home's "Curated Case Studies") sitting after the hero section's closing `<Separator />`, immediately above `ProjectGrid` — it introduces the grid rather than reading as more frontmatter.
+
+**Contact's and Blog's cyan tagline paragraphs were removed (visual QA follow-up, 2026-08-28; explicit sign-off — content deletion, not a rewrite).** Contact's "Let's connect. I'm always happy to chat about design, product, or new opportunities." (`contact.json`'s `intro` field, now deleted) and Blog's "Thoughts on design, product, and technology." (`blog/index.astro`) both just restated their page's own readout `description` in different words — same redundant-paragraph pattern already fixed elsewhere in this pass (see below).
+
+**`title` is never shown in the readout, anywhere (visual QA, 2026-08-28).** The big `<h1>` already shows the title — repeating it a second time as a `title: "..."` readout line is pure duplication with no added information, and reads as filler. This applies to every layout that has a readout: `ProjectLayout.astro`, `BlogPostLayout.astro`, `about.astro`, `index.astro` (Home), and the five hardcoded structural pages below. The readout's job is to surface the *rest* of the page's real metadata — the title itself already has its own, bigger home.
+
+**Reused on the homepage (page 100, since 2026-08-28, JOR-75; big title added 2026-08-28 visual QA)**: the homepage isn't a project page, but its own front matter (`description`, `pageNumber` — title omitted per the rule above) is rendered the same way, under a big `<h1>` reading "Jorne Marc Siebrands". Earlier (JOR-75/JOR-83) Home was a deliberate readout-only exception with no big title; a direct visual-QA pass reversed that — every page, Home included, now gets the same big-title-then-separator-then-readout shape, no exceptions. It reuses the exact same `fr-key`/`fr-value` CSS (duplicated into `src/pages/index.astro`'s scoped `<style>`, same as `ProjectLayout.astro` — the pattern is still not a shared component, see below).
+
+**Extended to every other page (JOR-83, 2026-08-28)**: `BlogPostLayout.astro` renders `pubDate`/`tags`/`pageNumber` (no `subtitle`/`context` — blog posts don't have those fields; `pubDate` renders as an unquoted ISO date, `YYYY-MM-DD`, matching how it's actually written in blog frontmatter). `about.astro` renders `description`/`pageNumber`, sourced from the real `pages` collection entry. The five structural pages that aren't content-collection-backed — `directory.astro`, `experience.astro`, `contact.astro`, `projects/index.astro`, `blog/index.astro` — get a literal `readoutLines` array hardcoded in each `.astro` file, built from the same `description`/`pageNumber` values already passed to `PageLayout` (no new `pages`-collection entries invented for what are structural/utility pages, not authored content). `ProjectLayout.astro`'s pre-existing subtitle-into-readout replacement (below) stays a special case — subtitle only ever lived in the readout, never as separate prose.
 
 ```
-title: "Workflow Evolution"
 subtitle: "digital office 24, 2024–2026. Started as the designer, ended..."
 tags: ["Product Management", "UX Design", "Research", "Fintech", "B2B"]
 pageNumber: "204"
 context: "digital office is a platform for High Networth Individuals..."
 ```
 
-- `title`, `subtitle`, `tags`, `pageNumber` — always shown, sourced from real frontmatter.
+- `subtitle`, `tags`, `pageNumber` — always shown, sourced from real frontmatter. `title` is deliberately never shown (see above — it's already the `<h1>`).
 - `context` — optional (new field on the `projects` schema); the line is omitted entirely when not authored, never shown empty.
 - Keys must match real schema field names exactly — this is the whole point of the pattern (it has to actually be your frontmatter, not a look-alike).
 - **Replaces** the current standalone rendered-subtitle paragraph in `ProjectLayout.astro` — subtitle moves into the readout, it doesn't get a second, separate rendering.
@@ -123,6 +131,16 @@ Spec:
 ```
 
 Each line renders as `<span class="fr-key">key:</span> <span class="fr-value">"value"</span>` — key in grey, value in white, one per line, quoted/bracketed exactly as shown above and matching the field's real YAML syntax. **Exception: `pubDate`** (`BlogPostLayout.astro` only) renders unquoted (`2026-08-06`, not `"2026-08-06"`) because that's how it's actually written in blog frontmatter — every other field is a quoted string or bracketed array in real frontmatter, so stays quoted/bracketed here too. Don't reuse the magenta tag-chip styling here — the point is that it reads as raw frontmatter text, not the rendered `ProjectCard` UI.
+
+**Hero image sits below its own separator, not glued to the readout (visual QA, 2026-08-28).** `ProjectLayout.astro`'s optional `heroImage` renders after a `<Separator />` of its own, between the frontmatter-readout section and the section's trailing separator — so on pages that have one (e.g. p203, AR City Exploration's GIF), the image reads as its own block, not as part of the frontmatter. On pages without a `heroImage` this extra separator is skipped entirely (conditional, not unconditional) so there's never a double separator with nothing between them.
+
+**The optional `url` line gets the same treatment (visual QA follow-up, 2026-08-28).** It used to sit directly under the readout with no separator, reading as though it were part of the frontmatter block. It's now a sibling of the title `<section>`, preceded by its own `<Separator />`, same shape as `heroImage` — order is title-section, then `url` (if any), then `heroImage` (if any), then the section-closing separator, then prose. Label text defaults to "Live at" and can be overridden per-project via the optional `urlLabel` frontmatter field (e.g. `this-site.md` sets `urlLabel: "Check out the repo at"` since its `url` points at a GitHub repo, not a live product) — added rather than hardcoding new wording for one project, since the default "Live at ..." wording on every other project page is locked copy.
+
+## Cards (`ProjectCard`, `PostCard`)
+
+Both card components share one box treatment: `border` (white/30, 2px + magenta when `featured`) with `p-[1ch]` and a `hover:border-teletext-yellow` transition. **`PostCard`'s non-featured state used to be a bare bottom-border list row instead of a full box (visual QA follow-up, 2026-08-28)** — the Blog index read as visually inconsistent with every other listing page (Projects index, Home's Curated Case Studies), which all use bordered cards. `PostCard` now matches `ProjectCard`'s box treatment unconditionally; `blog/index.astro` wraps its post list in `flex flex-col gap-[2ch]` (same gap convention as `ProjectGrid`) instead of relying on the old border-bottom for separation.
+
+**`ProjectCard`'s horizontal-layout image is a fixed height, not `h-full` (visual QA follow-up, 2026-08-28).** `layout="horizontal"` is used only on Home's Curated Case Studies row. The image previously stretched to `md:h-full`, i.e. to match its own card's row height — so the featured card (longer description + a "FEATURED" badge line, taller row) rendered a visibly taller cover image than the other four. Fixed to `h-48 md:h-56` so every horizontal card's image is the same size regardless of how much text sits beside it.
 
 ## Prose styles (`.prose-teletext`)
 

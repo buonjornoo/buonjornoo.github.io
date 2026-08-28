@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SEOHead from '../components/seo/SEOHead.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import RemoteControl from '../components/teletext/RemoteControl.astro';
+import Separator from '../components/teletext/Separator.astro';
 import pageRoutes from '../data/pageRoutes.json';
 import { neighbourPageNumber } from '../lib/teletext-nav';
 
@@ -106,7 +107,11 @@ const pageNeighbours =
     <!-- Page content -->
     <main id="main-content" class="flex-1">
       <slot />
-      <p class="end-of-page" aria-hidden="true">— END OF PAGE —</p>
+      <div class="w-full max-w-[80ch] mx-auto px-[2ch]">
+        <Separator />
+        <p class="end-of-page" aria-hidden="true">— END OF PAGE —</p>
+        <Separator />
+      </div>
     </main>
 
     <!-- Fastext footer -->

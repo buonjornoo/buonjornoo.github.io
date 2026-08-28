@@ -19,8 +19,8 @@ const formattedDate = new Date(pubDate).toLocaleDateString('en-GB', {
 <a href={`/blog/${slug}/`} class="block group">
   <article
     class:list={[
-      'py-[1ch]',
-      featured ? 'border-2 border-teletext-magenta p-[1ch]' : 'border-b border-teletext-white/20',
+      'p-[1ch] border hover:border-teletext-yellow transition-colors',
+      featured ? 'border-2 border-teletext-magenta' : 'border-teletext-white/30',
     ]}
   >
     {featured && (

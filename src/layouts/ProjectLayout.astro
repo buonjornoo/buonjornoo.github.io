@@ -16,6 +16,7 @@ interface Props {
     pageNumber?: string;
     archive?: boolean;
     url?: string;
+    urlLabel?: string;
   };
   sectionCount: number;
 }
@@ -24,7 +25,6 @@ const { frontmatter, sectionCount } = Astro.props;
 
 const pageNumber = frontmatter.pageNumber ?? '200';
 const readoutLines = [
-  { key: 'title', value: JSON.stringify(frontmatter.title) },
   { key: 'subtitle', value: JSON.stringify(frontmatter.subtitle ?? '') },
   { key: 'tags', value: `[${frontmatter.tags.map((tag) => JSON.stringify(tag)).join(', ')}]` },
   { key: 'pageNumber', value: JSON.stringify(pageNumber) },
@@ -46,32 +46,39 @@ const readoutLines = [
       <div class="frontmatter-readout">{readoutLines.map((line, i) => (
         <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
       ))}</div>
-      {frontmatter.url && (
-        <p class="mt-[1ch]">
+      {frontmatter.archive && (
+        <p class="text-teletext-grey text-teletext-sm mt-[0.5ch]">(Archive)</p>
+      )}
+    </section>
+
+    {frontmatter.url && (
+      <Fragment>
+        <Separator />
+        <p class="mb-[2ch]">
           <a
             href={frontmatter.url}
             target="_blank"
             rel="noopener noreferrer"
             class="text-teletext-cyan hover:text-teletext-yellow"
           >
-            → Live at {frontmatter.url.replace(/^https?:\/\//, '')}
+            → {frontmatter.urlLabel ?? 'Live at'} {frontmatter.url.replace(/^https?:\/\//, '')}
           </a>
         </p>
-      )}
-      {frontmatter.archive && (
-        <p class="text-teletext-grey text-teletext-sm mt-[0.5ch]">(Archive)</p>
-      )}
-    </section>
+      </Fragment>
+    )}
 
     {frontmatter.heroImage && (
-      <img
-        src={frontmatter.heroImage}
-        alt={frontmatter.title}
-        width={frontmatter.heroImageWidth}
-        height={frontmatter.heroImageHeight}
-        class="w-full mb-[2ch]"
-        loading="lazy"
-      />
+      <Fragment>
+        <Separator />
+        <img
+          src={frontmatter.heroImage}
+          alt={frontmatter.title}
+          width={frontmatter.heroImageWidth}
+          height={frontmatter.heroImageHeight}
+          class="w-full mb-[2ch]"
+          loading="lazy"
+        />
+      </Fragment>
     )}
 
     <Separator />

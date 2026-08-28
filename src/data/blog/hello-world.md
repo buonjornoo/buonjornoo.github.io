@@ -10,11 +10,15 @@ pageNumber: "301"
 
 This is the first post on my new website. I rebuilt it from scratch with a modern teletext aesthetic — inspired by the BBC Ceefax pages I never got to experience first-hand, but find endlessly charming.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Why Teletext?
 
 There's something beautiful about constraints. Teletext had 8 colors, a 40-column grid, and blocky graphics. Yet people made art, news services, and even games with it.
 
 I wanted my portfolio to feel the same way — distinctive, focused, and a little playful.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What's Next
 

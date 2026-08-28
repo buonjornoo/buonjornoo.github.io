@@ -16,16 +16,16 @@ order: 10
 pageNumber: "209"
 ---
 
+<p>
+  <a href="/game/arin-und-der-drache/" target="_blank" rel="noopener noreferrer">Play Arin und der Drache</a>
+  — opens in a new tab, keyboard controls, desktop only.
+</p>
+
 ## Challenge
 
 Spending a rainy day inside with my six yearold son. He told me he wanted to play a computer game. He never played, he just heard from friends that this is a thing. I asked him what kind of game and he described something that sounded like a platformer. I thought: “What if we could quickly build this?”
 
 There were no hard constraints to this except my token limits. Of course it should be something a six yearold can understand, use, and have fun with. I wanted him to understand what is happening and see that his opinions change the outcome. I chose to set up three simple agents, I set up a quick interview with my son and we were able to start playing in the afternoon of March 6 2026.
-
-<p>
-  <a href="/game/arin-und-der-drache/" target="_blank" rel="noopener noreferrer">Play Arin und der Drache</a>
-  — opens in a new tab, keyboard controls, desktop only.
-</p>
 
 <figure class="my-[2ch]">
   <img src="/img/arin-und-der-drache/start-screen.png" alt="The Arin und der Drache start screen, showing the two playable characters and the keyboard controls" width="1280" height="800" class="w-full" loading="lazy" />
@@ -34,6 +34,8 @@ There were no hard constraints to this except my token limits. Of course it shou
     himself. The character cards and the goal line were his calls, not mine.
   </figcaption>
 </figure>
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The team and my role
 
@@ -55,6 +57,8 @@ requirement, and hunts for edge cases.
 I designed the three roles and ran the loop. My co-CEO had the ideas, tested the output, and decided
 when something was good.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The rule that makes the team a team
 
 > **Key learning: the agent that diagnoses must not be the agent that repairs.**
@@ -62,12 +66,16 @@ when something was good.
 > It was forced to write the diagnosis down as a report, with line numbers, a root cause and a proposed approach,
 > before any code moves. A human who is not reading the diff can review that report.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Two loops, deliberately different
 
 A new feature runs CEO idea, PM spec, developer, QA, CEO approval. A bug runs CEO report, QA
 analysis, developer fix, QA verification, CEO confirms. The bug loop puts QA _first_, before any
 code is touched, which is the same separation rule applied at the level of the process rather than
 the role.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## An escalation ladder as a cost control
 
@@ -82,12 +90,16 @@ meaning the Kaboom.js documentation or a human who knows.
 > point the process costs more than the work. Naming the levels up front made "this is a level one,
 > I'll just do it" an acceptable outcome rather than an admission that the system was overbuilt.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Templates to communicate with a six-year-old
 
 Bug reports and feature requests have templates: description, reproduction steps, expected versus
 actual, screenshot, priority. That sounds like process theatre for a project this size. In practice
 it is what let a child participate. "What did you expect to happen, and what happened instead" is a
 question a six-year-old can answer.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What I left out
 
@@ -99,6 +111,8 @@ The agents do the work that has a definition of done.
 The role prompts are also short. Each is a paragraph of purpose, a numbered list of what to do, and
 a line about what not to do. The instruction that did the most work in the whole setup is four words
 long: _do not fix it._
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 
@@ -116,6 +130,8 @@ down for somebody else is a better finding.
 
 The other thing travels smaller and I did not expect it. Explaining a spec to a six-year-old is the
 fastest test of whether the spec is any good.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Five months later
 
@@ -147,6 +163,8 @@ and still land in the same world.
   </figure>
 </div>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## A styleguide instead of a memory
 
 Five rules don't answer what colour grass is. A styleguide does, but only if a later phase can read
@@ -159,6 +177,8 @@ first draws mountains, glow and idle breathing the same way instead of reinventi
 > **Key learning: the point of writing a styleguide to disk isn't outliving the calendar.**
 > It's outliving the next context window. Each phase starts with no memory of the last one. The file
 > is what carries the direction forward, not the model.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The level only a six-year-old could approve
 
@@ -179,6 +199,8 @@ system as the game itself.
     Mid-level. The enemy's eyes are the only new detail with a bug hiding inside them.
   </figcaption>
 </figure>
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## The bug that needed a player, not a script
 
@@ -209,6 +231,8 @@ side-hits, five clean hits taken.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## What ran differently this time
 
 March ran on three role-played agents with a diagnose/repair split built into the roles on purpose:
@@ -226,6 +250,8 @@ level layout with my son before the next phase started, and I'm the one who play
 build and reported a jitter and an unfair-feeling fight in the same message. Those turned out to be
 one bug, not two. No line of the visual system or the fix is mine. Which four pictures said this and
 not that, and which of two symptoms were worth chasing as one cause: both of those were.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome, five months on
 

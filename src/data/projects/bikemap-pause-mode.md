@@ -32,6 +32,8 @@ feature in Canny, the tool we used to collect user requests.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 I ran this in both of the roles I held at Bikemap. I initiated the project, made the first
@@ -40,6 +42,8 @@ fidelity. iOS and Android developers built it on their own separate release sche
 developers solved saving and merging multiple route legs, and marketing planned the announcement in
 parallel so the feature would land with an audience. I pitched it in December 2022, and we built and
 shipped in February 2023.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Reading the request before designing the feature
 
@@ -51,6 +55,8 @@ tours.
 
 The first two are a data-quality problem. The third is power management, which would have taken us
 somewhere else entirely, so we built for the first two and said which reason we had left out.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Deciding what "pause" means
 
@@ -76,6 +82,8 @@ feature past the riding season, on something users were asking for every week.
 > button that was there. The instinct to hold a feature until it matches what competitors already do
 > is expensive, and here it would have cost us a season.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Prototype, test, cut
 
 We tested high-fidelity Figma prototypes with users, used Overflow to hand the flows to engineers
@@ -98,6 +106,8 @@ to tick, and auto-pause moved to the roadmap.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## What worked and what did not
 
 Splitting the "why do you want pause" question into three motives before designing anything was the
@@ -108,6 +118,8 @@ had already stopped using the app.
 Against that: I defined the success metric and did not get to measure it. The notification timeout
 was too short in the first prototype and only user testing caught it. And battery-conscious riders
 got nothing from this release, though they were a real third of the request.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

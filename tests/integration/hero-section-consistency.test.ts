@@ -7,8 +7,15 @@ const dist = join(import.meta.dirname, '..', '..', 'dist');
 /**
  * Seam: the rendered site (dist/) — the static site's public interface.
  * Spec source: JOR-83 acceptance criteria (every page gets a big title +
- * frontmatter-readout, except Home which stays readout-only, and project
- * pages which already had both).
+ * frontmatter-readout), plus a direct visual-QA follow-up pass (2026-08-28)
+ * that: (a) drops the redundant `title:` readout line everywhere since the
+ * big <h1> already shows it, (b) inserts a separator between the title and
+ * the readout on every page including Home (which also gained a big title,
+ * reversing JOR-75/JOR-83's readout-only exception), (c) removes a few
+ * paragraphs that duplicated their page's readout description word-for-word,
+ * (d) wraps the site-wide END OF PAGE marker in separators, and (e) fixes
+ * missing separators on the Projects index and a hero-image-glued-to-readout
+ * issue on project pages with a heroImage (p203).
  */
 function readoutBlock(html: string): string {
   const match = html.match(/<div class="frontmatter-readout"[^>]*>[\s\S]*?<\/div>/);
@@ -20,104 +27,167 @@ function h1Block(html: string): string {
   return html.match(/<h1[^>]*>[\s\S]*?<\/h1>/)?.[0] ?? '';
 }
 
-describe('Blog post hero: title + frontmatter-readout (JOR-83)', () => {
-  const html = readFileSync(join(dist, 'blog', 'hello-world', 'index.html'), 'utf-8');
+const SEPARATOR = /<div class="w-full overflow-hidden[^"]*"[^>]*role="separator"[^>]*>\s*[━]+\s*<\/div>/;
 
-  it('keeps the existing double-height white title', () => {
+function immediatelyPrecededBySeparator(html: string, needle: string): boolean {
+  const idx = html.indexOf(needle);
+  if (idx === -1) throw new Error(`immediatelyPrecededBySeparator: needle not found: ${needle}`);
+  return new RegExp(SEPARATOR.source + '\\s*$').test(html.slice(0, idx));
+}
+
+function immediatelyFollowedBySeparator(html: string, needle: string): boolean {
+  const idx = html.indexOf(needle);
+  if (idx === -1) throw new Error(`immediatelyFollowedBySeparator: needle not found: ${needle}`);
+  return new RegExp('^\\s*' + SEPARATOR.source).test(html.slice(idx + needle.length));
+}
+
+function countOccurrences(html: string, needle: string): number {
+  return html.split(needle).length - 1;
+}
+
+describe('Home (100): big title added, readout-only exception reversed', () => {
+  const html = readFileSync(join(dist, 'index.html'), 'utf-8');
+
+  it('now has a big double-height white "Jorne Marc Siebrands" title', () => {
     const heading = h1Block(html);
     expect(heading).toContain('teletext-double-height');
     expect(heading).toContain('text-teletext-white');
-    expect(heading).toContain('Hello World');
+    expect(heading).toContain('Jorne Marc Siebrands');
   });
 
-  it('adds a frontmatter-readout with title/pubDate/tags/pageNumber', () => {
+  it('separates the title from the readout', () => {
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
+  });
+
+  it('readout has description/pageNumber but no title line', () => {
     const readout = readoutBlock(html);
-    expect(readout).toMatch(/fr-key[^>]*>title:/);
-    expect(readout).toMatch(/fr-key[^>]*>pubDate:/);
-    expect(readout).toMatch(/fr-key[^>]*>tags:/);
+    expect(readout).toMatch(/fr-key[^>]*>description:/);
     expect(readout).toMatch(/fr-key[^>]*>pageNumber:/);
-  });
-
-  it('carries no subtitle/context lines (blog posts have neither field)', () => {
-    const readout = readoutBlock(html);
-    expect(readout).not.toMatch(/fr-key[^>]*>subtitle:/);
-    expect(readout).not.toMatch(/fr-key[^>]*>context:/);
-  });
-
-  it('renders real frontmatter values, not placeholders', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toContain('&quot;Hello World&quot;');
-    expect(readout).toContain('2026-02-14');
-    expect(readout).toContain('&quot;meta&quot;');
-    expect(readout).toContain('&quot;301&quot;');
+    expect(readout).not.toMatch(/fr-key[^>]*>title:/);
   });
 });
 
-describe('About page hero: frontmatter-readout added (JOR-83)', () => {
+describe('About page (103): retitled, redundant hero prose removed', () => {
   const html = readFileSync(join(dist, 'about', 'index.html'), 'utf-8');
 
-  it('adds a frontmatter-readout with title/description/pageNumber', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toMatch(/fr-key[^>]*>title:/);
-    expect(readout).toMatch(/fr-key[^>]*>description:/);
-    expect(readout).toMatch(/fr-key[^>]*>pageNumber:/);
-  });
-
-  it('renders the real About page frontmatter values', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toContain('&quot;About Jorne Marc Siebrands&quot;');
-    expect(readout).toContain('&quot;103&quot;');
-  });
-
-  it('keeps the existing "Jorne" hero heading unchanged', () => {
+  it('has the "About Jorne" heading (was just "Jorne")', () => {
     const heading = h1Block(html);
     expect(heading).toContain('teletext-double-height');
-    expect(heading).toContain('Jorne');
+    expect(heading).toContain('About Jorne');
+  });
+
+  it('separates the title from the readout', () => {
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
+  });
+
+  it('readout has the new short description and pageNumber, no title line', () => {
+    const readout = readoutBlock(html);
+    expect(readout).toContain('&quot;My background, career highlights, how I work, and what colleagues say.&quot;');
+    expect(readout).toContain('&quot;103&quot;');
+    expect(readout).not.toMatch(/fr-key[^>]*>title:/);
+  });
+
+  it('removes the redundant dual-title/location hero paragraphs entirely', () => {
+    expect(html).not.toContain('structural problem nobody has named');
+    expect(html).not.toContain('Frankfurt am Main, Germany and remote. Available now.');
   });
 });
 
 describe.each([
-  ['Directory', 'directory', '101', 'Every page on this site, by number.'],
-  ['Experience', 'experience', '102', 'career at a glance — product design'],
-  ['Contact', 'contact', '400', 'Get in touch with Jorne Marc Siebrands'],
-  ['Projects', 'projects', '200', 'Explore Product Design and Product Management projects'],
-  ['Blog', 'blog', '300', 'Thoughts on UX design, product management, and technology'],
-])('%s page hero: frontmatter-readout added (JOR-83)', (title, dir, pageNumber, descriptionSnippet) => {
+  ['directory', 'Directory'],
+  ['experience', 'Experience'],
+  ['contact', 'Contact'],
+  ['blog', 'Blog'],
+])('%s page (structural): title hidden from readout, separator added', (dir, headingText) => {
   const html = readFileSync(join(dist, dir, 'index.html'), 'utf-8');
+
+  it('separates the title from the readout', () => {
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
+  });
+
+  it('readout has description/pageNumber, no title line', () => {
+    const readout = readoutBlock(html);
+    expect(readout).toMatch(/fr-key[^>]*>description:/);
+    expect(readout).toMatch(/fr-key[^>]*>pageNumber:/);
+    expect(readout).not.toMatch(/fr-key[^>]*>title:/);
+  });
 
   it('keeps the existing double-height white title', () => {
     const heading = h1Block(html);
     expect(heading).toContain('teletext-double-height');
     expect(heading).toContain('text-teletext-white');
-  });
-
-  it('adds a frontmatter-readout with title/description/pageNumber', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toMatch(/fr-key[^>]*>title:/);
-    expect(readout).toMatch(/fr-key[^>]*>description:/);
-    expect(readout).toMatch(/fr-key[^>]*>pageNumber:/);
-  });
-
-  it('renders the real title/pageNumber values, not placeholders', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toContain(`&quot;${title}&quot;`);
-    expect(readout).toContain(`&quot;${pageNumber}&quot;`);
-  });
-
-  it('renders a description value matching the page\'s real meta description', () => {
-    const readout = readoutBlock(html);
-    expect(readout).toContain(descriptionSnippet);
+    expect(heading).toContain(headingText);
   });
 });
 
-describe('Home and project pages unaffected by JOR-83', () => {
-  it('Home (100) stays readout-only — no big title added', () => {
-    const html = readFileSync(join(dist, 'index.html'), 'utf-8');
-    expect(html.match(/<h1[^>]*>/)).toBeNull();
-    expect(readoutBlock(html)).toMatch(/fr-key[^>]*>title:/);
+describe('Directory page (101): redundant intro paragraph removed', () => {
+  const html = readFileSync(join(dist, 'directory', 'index.html'), 'utf-8');
+
+  it('drops the standalone <p> duplicating the readout description — the sentence survives only in <meta> tags and the readout', () => {
+    // Every occurrence is meta/og/twitter description tags (3) + the
+    // .frontmatter-readout's own fr-value (1) = 4. A 5th would mean the old
+    // standalone <p class="text-teletext-cyan..."> paragraph is still there.
+    expect(countOccurrences(html, 'Every page on this site, by number.')).toBe(4);
+    expect(html).not.toMatch(/<p class="text-teletext-cyan[^"]*">\s*Every page on this site, by number\./);
+  });
+});
+
+describe('Experience page (102): redundant intro paragraph removed entirely', () => {
+  const html = readFileSync(join(dist, 'experience', 'index.html'), 'utf-8');
+
+  it('no longer renders the old intro line anywhere (dropped from experience.json, not just hidden)', () => {
+    expect(html).not.toContain('The shape of a career in product');
+  });
+});
+
+describe('Contact page (400): intro paragraph removed (visual QA follow-up, 2026-08-28 — redundant with the readout description)', () => {
+  const html = readFileSync(join(dist, 'contact', 'index.html'), 'utf-8');
+
+  it('no longer renders the old intro paragraph', () => {
+    expect(html).not.toContain('always happy to chat about design');
+  });
+});
+
+describe('Projects index (200): was missing separators entirely', () => {
+  const html = readFileSync(join(dist, 'projects', 'index.html'), 'utf-8');
+
+  it('separates the title from the readout', () => {
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
   });
 
-  it('a project page (204) keeps its existing subtitle/tags readout untouched', () => {
+  it('readout has no title line', () => {
+    expect(readoutBlock(html)).not.toMatch(/fr-key[^>]*>title:/);
+  });
+
+  it('renders the tagline as a heading, below the frontmatter section, not as a cyan paragraph inside it (visual QA follow-up)', () => {
+    const tagline = 'A selection of projects in Product Design and Product Management.';
+    const taglineTag = html.match(new RegExp(`<h2[^>]*>\\s*${tagline}\\s*</h2>`))?.[0];
+    expect(taglineTag, 'expected the tagline to render as an <h2>').toBeTruthy();
+    expect(immediatelyPrecededBySeparator(html, taglineTag!)).toBe(true);
+
+    const readout = readoutBlock(html);
+    expect(html.indexOf(readout) + readout.length).toBeLessThan(html.indexOf(taglineTag!));
+  });
+});
+
+describe('Blog post hero (JOR-83, title line dropped in visual QA)', () => {
+  const html = readFileSync(join(dist, 'blog', 'hello-world', 'index.html'), 'utf-8');
+
+  it('separates the title from the readout', () => {
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
+  });
+
+  it('readout has pubDate/tags/pageNumber but no title line', () => {
+    const readout = readoutBlock(html);
+    expect(readout).toMatch(/fr-key[^>]*>pubDate:/);
+    expect(readout).toMatch(/fr-key[^>]*>tags:/);
+    expect(readout).toMatch(/fr-key[^>]*>pageNumber:/);
+    expect(readout).not.toMatch(/fr-key[^>]*>title:/);
+  });
+});
+
+describe('Project page readout: title line dropped in visual QA', () => {
+  it('a project page (204) keeps subtitle/tags, drops title', () => {
     const html = readFileSync(
       join(dist, 'projects', 'do24-workflow-evolution', 'index.html'),
       'utf-8',
@@ -125,5 +195,55 @@ describe('Home and project pages unaffected by JOR-83', () => {
     const readout = readoutBlock(html);
     expect(readout).toMatch(/fr-key[^>]*>subtitle:/);
     expect(readout).toMatch(/fr-key[^>]*>tags:/);
+    expect(readout).not.toMatch(/fr-key[^>]*>title:/);
+  });
+
+  it('still separates the title from the readout', () => {
+    const html = readFileSync(
+      join(dist, 'projects', 'do24-workflow-evolution', 'index.html'),
+      'utf-8',
+    );
+    expect(immediatelyFollowedBySeparator(html, h1Block(html))).toBe(true);
+  });
+});
+
+describe('Project page hero image: separated from the frontmatter block (visual QA, p203)', () => {
+  const html = readFileSync(join(dist, 'projects', 'ar-city-exploration', 'index.html'), 'utf-8');
+
+  it('renders the GIF preceded by its own separator, not glued to the readout', () => {
+    const imgTag = html.match(/<img[^>]*raubkunst_cover\.gif[^>]*>/)?.[0];
+    expect(imgTag, 'expected the AR City Exploration hero GIF <img> to be present').toBeTruthy();
+    expect(immediatelyPrecededBySeparator(html, imgTag!)).toBe(true);
+  });
+
+  it('the GIF is not inside the .frontmatter-readout block', () => {
+    expect(readoutBlock(html)).not.toContain('raubkunst_cover.gif');
+  });
+
+  it('a project page with no heroImage gets no extra/doubled separator (204 has none)', () => {
+    const noImageHtml = readFileSync(
+      join(dist, 'projects', 'do24-workflow-evolution', 'index.html'),
+      'utf-8',
+    );
+    // Two adjacent separators with nothing between them would mean the
+    // conditional heroImage separator leaked out even with no image.
+    expect(noImageHtml).not.toMatch(new RegExp(SEPARATOR.source + '\\s*' + SEPARATOR.source));
+  });
+});
+
+describe.each([
+  ['index.html', 'Home'],
+  ['about/index.html', 'About'],
+  ['directory/index.html', 'Directory'],
+])('End-of-page marker on %s: wrapped in separators (visual QA)', (relPath, _label) => {
+  const html = readFileSync(join(dist, relPath), 'utf-8');
+  const marker = '<p class="end-of-page" aria-hidden="true">— END OF PAGE —</p>';
+
+  it('has a separator immediately before the marker', () => {
+    expect(immediatelyPrecededBySeparator(html, marker)).toBe(true);
+  });
+
+  it('has a separator immediately after the marker', () => {
+    expect(immediatelyFollowedBySeparator(html, marker)).toBe(true);
   });
 });

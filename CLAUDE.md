@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 This file provides guidance to everyone (including Claude Code (claude.ai/code)) when working in this repository.
-This repository is a website hosted on Github Pages. It is a portfolio website of Jorne, a Senior Product Designer. It showcases his craft, thinking, and skills.
+This repository contains a website hosted on Github Pages and documents for admin, concept and claude code related. The website is an online portfolio of Jorne, a Senior Product Designer. It showcases his craft, thinking, and skills.
 
 ## Output style
 
@@ -15,11 +15,11 @@ Always follow the rules in the `i-have-adhd` skill when talking to me (Jorne, Cl
 
 ## Routing Table - What to read when
 
-| When                                                                                  | What to read                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Working on the concept of this online portfolio                                       | 'CONCEPT.md'                                             |
-| Domain vocabulary                                                                      | 'CONTEXT.md'                                             |
-| Creating user facing assets, code, frontend, visuals                                  | 'DESIGNSYSTEM.md'                                         |
+| When                                                                                        | What to read                                                                                                    |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Working on the concept of this online portfolio                                             | 'CONCEPT.md'                                                                                                    |
+| Domain vocabulary                                                                           | 'CONTEXT.md'                                                                                                    |
+| Creating user facing assets, code, frontend, visuals                                        | 'DESIGNSYSTEM.md'                                                                                               |
 | Backlog / open work / issue status ("what's next", "check issues", "what do we have to do") | Linear project `siebrandsdotcom` — see `docs/agents/issue-tracker.md`. Query it live; don't answer from memory. |
 
 ## Commands

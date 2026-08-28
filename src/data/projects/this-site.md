@@ -5,6 +5,7 @@ subtitle: "Testing agent workflows by letting them build this site. My art direc
 tags: ["AI Agents", "Design Systems", "Astro", "Constraint Design"]
 coverImage: "/img/projects/thisSiteCover.png"
 url: "https://github.com/buonjornoo/buonjornoo.github.io"
+urlLabel: "Check out the repo at"
 slug: "this-site"
 order: 8
 pageNumber: "208"
@@ -17,6 +18,8 @@ whether a team of agents with real authority produces better work than a single 
 instructions. Both questions have the same answer, and it is about constraint.
 
 You can check the repo for fun, or jump on a conversation with me.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Constraint as the design
 
@@ -42,6 +45,8 @@ page number opens the same input.
 None of these were chosen to be difficult. They were chosen because a set of hard limits removes the
 decisions that do not matter, and what is left is the ones that do.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Seven agents, and the authority each one holds
 
 The team lives in `.claude/agents/` as seven Markdown files. Each declares its purpose, the tools it
@@ -64,6 +69,8 @@ may use, the model it runs on, and a cap on how many turns it gets.
 > the agent as a written report, which is the only form a human can check. The permission
 > list is the governance; the prose in the role description is just a reminder of it.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## What I did and did not do
 
 I designed the constraint system, wrote the role definitions and the authority each role holds, and
@@ -81,6 +88,8 @@ everything the others need to stay accurate about.
 > a colour list, a max-width, a font name, gets enforced consistently. Every rule I left as taste
 > gets enforced only when I happen to look. That is the same finding as the token architecture in
 > the [teal-ui case](/projects/do24-teal-ui/), arrived at from the other direction.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 

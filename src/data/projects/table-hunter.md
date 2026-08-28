@@ -21,6 +21,8 @@ D1 behind. **I did not write the code. I directed the agents that wrote it**, wh
 architectural decision still had to be made and defended, and none of them could be delegated to a
 habit.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 I worked solo, which is why the decision log exists. With nobody to argue with, the only way to keep
@@ -28,6 +30,8 @@ myself honest was to write down each non-trivial decision, the reasoning behind 
 condition that would make me revisit it. That file is the real artefact of this project. It also let
 a three-person usability test overturn a decision I had already shipped, without the ego that
 attaches to a thing you built yourself.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What I ruled out
 
@@ -40,6 +44,8 @@ Directions link out to Google or Apple Maps rather than routing in-app, since a 
 is an operations commitment and people memorise the tables they like anyway. Crowd-verified
 freshness was deferred with three explicit triggers written down, because a verification system
 needs a crowd, and v0.1 would have low double-digit weekly users against a few hundred tables.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Making anonymous places findable
 
@@ -66,6 +72,8 @@ both ingredients.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The test that moved the furniture
 
 The whole study was three people in one round.
@@ -89,6 +97,8 @@ gesture, gets silently auto-denied by real browsers often enough that the denial
 later find-me button. In testing that read as "the locate me button stops working after a while, no
 prompt, no feedback." Removing the gesture-less call removed the failure mode. The map now opens on
 Frankfurt and centres on you when you ask, which describes what the app knows.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Checking a roadmap before building it
 
@@ -114,6 +124,8 @@ deletion path, submitter emails and geolocation sitting in the database indefini
 > that either without checking. I now treat "we already decided this" as a claim to verify against
 > the decision log, on every roadmap pass, mine included.
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Five cities, each held to the same bar
 
 The roadmap called for expanding into Rhein-Main: Mainz, Wiesbaden, Darmstadt, Offenbach. I did not
@@ -133,6 +145,8 @@ Zero were bugs.
 
 The map now covers 496 tables across five cities. Four of the five shipped only after they had
 individually earned it.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What shipped alongside it
 
@@ -154,6 +168,8 @@ capture pipeline of my own, so nothing I notice mid-build gets lost.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## What worked and what did not
 
 Writing the decision log before there was anything to decide between paid for itself twice: once
@@ -166,6 +182,8 @@ freshness display went through three revisions in two days because I specified h
 deciding what "missing" should mean. Multi-city expansion, designed for in principle from the start,
 still needed a real per-city check before I trusted it. Frankfurt's own numbers were never evidence
 that Mainz or Darmstadt would look the same.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 
