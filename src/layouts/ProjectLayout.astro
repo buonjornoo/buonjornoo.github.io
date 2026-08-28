@@ -39,8 +39,10 @@ const readoutLines = [
   sectionCount={sectionCount}
 >
   <article>
+    <Separator />
     <section class="mb-[2ch]">
       <DoubleHeight as="h1" color="text-teletext-white">{frontmatter.title}</DoubleHeight>
+      <Separator />
       <div class="frontmatter-readout">{readoutLines.map((line, i) => (
         <Fragment>{i > 0 ? '\n' : ''}<span class="fr-key">{line.key}:</span> <span class="fr-value">{line.value}</span></Fragment>
       ))}</div>
@@ -72,7 +74,7 @@ const readoutLines = [
       />
     )}
 
-    <Separator color="text-teletext-green" char="─" />
+    <Separator />
 
     <div class="prose-teletext my-[2ch]">
       <slot />

@@ -31,10 +31,19 @@
 
   --font-teletext: "Bedstead", "Courier New", "Courier", monospace;
 
-  --font-size-teletext-sm: 0.875rem;
-  --font-size-teletext-base: 1rem;
-  --font-size-teletext-lg: 1.25rem;
-  --font-size-teletext-double: 2rem;
+  --text-teletext-sm: 0.875rem;
+  --text-teletext-base: 1rem;
+  --text-teletext-lg: 1.25rem;
+  --text-teletext-double: 2rem;
+
+  --font-weight-teletext-regular: 400;
+  --font-weight-teletext-bold: 700;
+
+  --tracking-teletext-normal: 0.05em;
+  --tracking-teletext-wide: 0.1em;
+
+  --leading-teletext-tight: 100%;
+  --leading-teletext-base: 140%;
 
   --animate-page-in: page-in 0.3s steps(4) forwards;
 }

@@ -3,6 +3,7 @@ title: "Workflow Evolution"
 description: "Two years from a design insight to a task-based architecture. Started as a designer, ended owning the product."
 subtitle: "digital office 24, 2024–2026. Started as the designer, ended owning the product: how a conversation with an assistant became a new task architecture."
 tags: ["Product Management", "UX Design", "Research", "Fintech", "B2B"]
+context: "digital office is a platform for High Networth Individuals. They use it to keep the overview of their complex financial structures (businesses, real estate, stocks, family). While they keep the overview, their team works on the platform to process documents, do accounting, taxes and consulting."
 coverImage: "/img/projects/workflowEvolutionCover.png"
 slug: "do24-workflow-evolution"
 featured: true
@@ -14,9 +15,11 @@ pageNumber: "204"
 
 Every invoice position going through digital office required somebody to pick an accounting code
 from a chart of several hundred, built on the German SK04 standard. The people doing it were
-assistants, the app's highest-volume and most active users, and the ones with no accounting
-training. On the other side sat the accountants, who reviewed and corrected whatever was submitted
-regardless of how carefully it had been done.
+assistants with no accounting training. They also are the app's highest-volume and most active
+users.
+
+On the other side sat the accountants, who reviewed and corrected whatever was submitted regardless
+of how carefully it had been done.
 
 <figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/legacy-workflow.png" alt="The legacy digital office workflow: table view with a selected document and the input form" width="1552" height="916" class="w-full" loading="lazy" />
@@ -26,11 +29,23 @@ regardless of how carefully it had been done.
   </figcaption>
 </figure>
 
-The problem reached me in my early days as a designer, in a small team with no product manager. We
-had no research programme, but we had constant sessions where I sat next to assistants and watched
-them use the product. One told me, roughly, "I wasn't trained for this, and I'm unhappy in my job
-because of it." An accountant told me, "I have to repair everything every time. It'd be cleaner if I
-just did it from scratch."
+The problem reached me in my early days as a designer. Back then we were roughly 10 people, no
+product manager, and I directly collaborated with the CTO and the founder.
+
+There was no formal research programme, but we had constant sessions where I sat next to assistants
+and watched them use the product. I also sat next to accountants, picking up the prepared tasks from
+the assistants. I noticed a repeating pattern on what they told me: they each were frustrated by
+each other. Assistants couldn't finish their work without doing things they never learned.
+Accountants had to repair almost everything the assistants did, getting anxious over missing any
+mistakes from them in the process.
+
+> "I wasn't trained for this and I hate doing it."
+>
+> — Undisclosed Assistant
+
+> "I have to repair everything every time. It'd be cleaner if I just did it from scratch."
+>
+> — Undisclosed Accountant
 
 Two groups of people were frustrated by the same product. The wrong person was doing the work.
 
@@ -41,6 +56,8 @@ Two groups of people were frustrated by the same product. The wrong person was d
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## The team and my role
 
 I joined for design and left as the only product manager the company had, in a team of around
@@ -50,6 +67,8 @@ that traded faster shipping against a heavy reliance on judgement being right.
 
 Scale: around 80 client workspaces, seven document types in the workflow, and a Jira archive of 932
 tickets by the time I left in July 2026.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Milestone one: the modal that bought the mandate
 
@@ -78,7 +97,7 @@ nobody left the context they were in, and selection from a list rather than free
 a whole class of typo errors. The first version handled invoices only, one document at a time, with
 OCR deferred.
 
-> **Key learning: "correct enough" is a real standard when the correction already exists.**
+> Key learning: "correct enough" is a real standard when the correction already exists.
 > The intermediate accounts were not accounting-perfect and I knew it when I specified them. The
 > default booking account became both the most-used selection in the system and the most-corrected
 > one on the accountants' review page, which reads like a failure until you look at what it
@@ -90,6 +109,8 @@ Speedflow became the most-used feature in the app. I know that indirectly rather
 analytics, which we did not have: the new clearing accounts turned up everywhere, and our in-house
 tax advisors told me their job had got simpler, because instead of running through each invoice they
 could look straight at the clearing accounts.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Milestone two: breaking the dependency
 
@@ -132,7 +153,7 @@ costs more than it delivers.
   </figcaption>
 </figure>
 
-> **Key learning: small enough tasks gave us three service models we had not designed for.**
+> Key learning: small enough tasks gave us three service models we had not designed for.
 > The team had wanted AI in the product for a year and could not find a way in, because no single
 > agent could take on the full workflow. Once each task was small and self-contained, a user, an AI
 > agent or an operator working on a client's behalf could complete it. Three service models came out
@@ -148,33 +169,64 @@ costs more than it delivers.
   </figcaption>
 </figure>
 
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
 ## Where AI fit into the process
 
 AI played a role in a few different places, not in order of importance. Developers used Copilot,
-Claude Code and Codex during implementation — I didn't micromanage that, so I can't say exactly what
-each of them did with it. My designer used AI for copywriting passes and ideation. My own use was in
-prototyping and completing flows: we started ideating at a meta level with post-its on a wall, then I
-sketched one happy path as a rough wireframe to see how it would actually work in the product. From
-there I moved into Claude Code and Figma Make to get closer to high fidelity against our real design
-system. Figma Make was disappointing at holding onto that system; Claude Code came much closer,
-because the tokens were already in place from the teal-ui work. Google Stitch, used through its API
-alongside Claude Code, was useful for exploring flows and surfacing directions that hadn't occurred to
-me yet. As we committed more to a direction, Claude Code overtook Figma for design work outright —
-prototype to PR was faster with Figma out of the loop.
+Claude Code and Codex during implementation. My designer used Claude and Figma Make for copywriting
+passes and ideation.
+
+My own use was in prototyping and completing flows: we started ideating at a meta level with
+post-its on a wall, also sketching one happy path on the wall. I then translated it to a rough
+wireframe to see how it would actually work on screen. From there I moved into Claude Code and Figma
+Make to get closer to high fidelity against our real design system. Figma Make was disappointing at
+holding onto that system; Claude Code came much closer, because the tokens were already in place
+from the teal-ui work. Google Stitch, used through its API alongside Claude Code, was useful for
+exploring flows and surfacing directions that hadn't occurred to me yet. As we committed more to a
+direction, Claude Code overtook Figma for design work outright. My vision for the workflow was to
+get Figma out of the loop to bring make prototype to PR much faster.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## What I scoped it against
 
-The redesign epic states two targets: a 40% reduction in document processing time and a 90%
-reduction in permission-related support tickets. **Both are targets I wrote, not results I
-measured.** No measurement was taken while I was there and I have no way to check them now. They are
-here to show the practice of scoping a change against explicit numbers.
+I aimed at a 40% reduction in document processing time, a significant reduction in time-on-task and
+a 90% reduction in Workflow-related support tickets.
+
+I formulated these goals early, expecting that we would have set up our analytics platform until
+then. We didn't, so there are no measured numbers and you will have to trust me now.
+
+While our userbase grew and by that also our support ticket count, I noticed a massive reduction in
+support tickets about the Workflow. To be fair, there were bug reports in the beginning, but those
+reports came mostly from dedicated internal testing.
+
+The document processing time reduction was stated too vaguely and not really relevant anymore:
+users didn't care about the overall time from upload to finished document. They did their separate
+task and moved on to the next one. This means it now is okay for a document to stay at below 100%
+completion for months because nobody is blocked by it. If I would start over, I would measure
+time-on-task for each individual task and work from that baseline.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
 ## Outcome
 
-It shipped, after I left. The task architecture is live: the workflow list shows tasks per document
-as independent chips, and the document view carries an accordion where SmartFill, assignment,
-payment preparation, payment approval, execution and accounting each hold their own status.
-Speedflow's modal is gone, replaced by the pipeline it existed to make possible.
+The redesigned Workflow shipped in my last months at digital office. Everything is live and the team
+continues to iterate on it.
+
+The document list is an adaptable table with powerful filtering capabilities. It also allows users
+to only display the tasks they have to do, removing cognitive load.
+
+The task panel on the right focuses on the task at hand. Other tasks and finished jobs are minimized
+until users intervene. We also shipped "SmartFill," which utilizes a dedicated agent to get OCR data
+from the document and pre-fill basic fields like date, correspondent, line items, and banking
+information.
+
+Payment, payment preparation, accounting are all individual tasks that get and write data to the
+same document source. This means users who complete any of those tasks independently will add
+necessary data for other tasks at the same time: if an accountant happens to do the accounting on a
+given document before anyone else did their tasks, the others will greatly benefit from it because
+most of the information is already filled.
 
 <figure class="my-[2ch] full-bleed">
   <img src="/img/do24-workflow-evolution/pipeline-shipped.png" alt="The shipped task pipeline: one document as a set of independent tasks" width="2820" height="2270" class="w-full" loading="lazy" />
@@ -184,11 +236,25 @@ Speedflow's modal is gone, replaced by the pipeline it existed to make possible.
   </figcaption>
 </figure>
 
-> **Key learning: escalating a strategic misalignment is product work.**
-> The redesign served the founder's mission directly, which was to let tax consultancies take on
-> more clients as accountants become scarce. A different vision for the company was being pursued in
-> parallel, and I kept optimising the thing in front of me on the assumption that a good enough
-> product would settle the argument. Execution was strong and adoption was real, and neither saved
-> the work's position, because the two directions were never reconciled and I never forced them into
-> the open. Starting over, forcing the two clashing product directions between founder and CEO into
-> one room would be my first priority.
+> Key learning: escalating a strategic misalignment is priority 0 product work.
+
+The execution was strong and users adapted the new workflow already before we rolled it out
+everywhere.
+
+While this initiative unblocked development possibilities and improved velocity, it drew most of our
+resources during final implementation. During that time, I needed to deprioritize some efforts that
+the CEO pushed for. While the team and the founder were fully aligned on the vision and the angle of
+how we pursue it, the CEO changed to a different angle in parallel. Both were right to bring urgency
+to their priorities and I made the decision to pursue the one with the biggest validated impact
+(product stability, tech debt, resolving validated user pain for the most active user base). The
+reality is that whatever I would have done, it would be wrong for at least one of them.
+
+I quickly realised that I failed to address the strategic misalignment on day 1 and when I could
+start over, I would make it my first priority to force the two clashing product directions between
+founder and CEO into one room.
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+<div class="font-teletext font-teletext-regular tracking-teletext-normal text-center flex justify-center flex-wrap text-teletext-white text-teletext-double/teletext-base">EOF</div>
+
+<div class="w-full overflow-hidden text-teletext-white font-teletext select-none" role="separator" aria-hidden="true">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
